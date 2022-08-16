@@ -2,14 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dhammarstrom.github.io/quant-methods-workshops/about.html</loc>
-    <lastmod>2022-08-16T09:21:18.384Z</lastmod>
+    <lastmod>2022-08-16T09:25:54.726Z</lastmod>
   </url>
   <url>
     <loc>https://dhammarstrom.github.io/quant-methods-workshops/assignment-1.html</loc>
-    <lastmod>2022-08-16T09:21:21.457Z</lastmod>
+    <lastmod>2022-08-16T09:25:57.006Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/assignments.html</loc>
+    <lastmod>2022-08-16T09:25:57.383Z</lastmod>
   </url>
   <url>
     <loc>https://dhammarstrom.github.io/quant-methods-workshops/index.html</loc>
-    <lastmod>2022-08-16T09:21:21.821Z</lastmod>
+    <lastmod>2022-08-16T09:25:57.768Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/workshops.html</loc>
+    <lastmod>2022-08-16T09:25:58.100Z</lastmod>
   </url>
 </urlset>
