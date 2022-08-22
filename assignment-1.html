@@ -183,8 +183,6 @@ div.csl-indent {
   <li><a href="#elements-of-the-report" id="toc-elements-of-the-report" class="nav-link" data-scroll-target="#elements-of-the-report">Elements of the report</a></li>
   <li><a href="#the-format-of-the-report" id="toc-the-format-of-the-report" class="nav-link" data-scroll-target="#the-format-of-the-report">The format of the report</a></li>
   <li><a href="#how-to-hand-in-the-report." id="toc-how-to-hand-in-the-report." class="nav-link" data-scroll-target="#how-to-hand-in-the-report.">How to hand in the report.</a></li>
-  <li><a href="#quarto" id="toc-quarto" class="nav-link" data-scroll-target="#quarto">Quarto</a></li>
-  <li><a href="#running-code" id="toc-running-code" class="nav-link" data-scroll-target="#running-code">Running Code</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -199,13 +197,13 @@ div.csl-indent {
 <p>The purpose of this assignment is to present estimates of reliability of measures collected in the physiology lab. A second purpose is to use tools for reproducible data science. The report that you are expected to hand in therefore has some strict requirements in its format (see below). The assignment is a group assignment and at least three students are expected to contribute to each report.</p>
 <section id="elements-of-the-report" class="level2">
 <h2 class="anchored" data-anchor-id="elements-of-the-report">Elements of the report</h2>
-<p>The report should describe one test that you have performed in the physiology-lab. Select the test that is most interesting to you. The test should be described with a detailed protocol, including preparations of the participant (that is being tested), standardization of the test, and post-test data preparation. Post-test data preparation refferes to steps needed to get data from e.g.&nbsp;equipment used during the test. This section should take into account and reference <span class="citation" data-cites="RN1739 RN2511">(<a href="#ref-RN1739" role="doc-biblioref">Halperin, Pyne, and Martin 2015</a>; <a href="#ref-RN2511" role="doc-biblioref">Tanner and Gore 2012</a>)</span></p>
+<p>The report should describe one test that you have performed in the physiology-lab. Select the test that is most interesting to you. The test should be described with a detailed protocol, including preparations of the participant (that is being tested), standardization of the test, and post-test data preparation. Post-test data preparation refers to steps needed to get data from e.g.&nbsp;equipment used during the test. This section should take into account and reference <span class="citation" data-cites="RN1739 RN2511">(<a href="#ref-RN1739" role="doc-biblioref">Halperin, Pyne, and Martin 2015</a>; <a href="#ref-RN2511" role="doc-biblioref">Tanner and Gore 2012</a>)</span></p>
 <p>The next section should contain descriptive data from the test. This could be measures of central tendency and variability in the measures you have collected. If possible, try to find similar estimates in the scientific literature.</p>
 <p>Finally, we are interested in reliability. Here you need to calculate an estimate of reliability of the test. Use (and reference) <span class="citation" data-cites="RN130">(<a href="#ref-RN130" role="doc-biblioref">Hopkins 2000</a>)</span>. Try to be clear with what measure of reliability you are using and what it is telling you.</p>
 </section>
 <section id="the-format-of-the-report" class="level2">
 <h2 class="anchored" data-anchor-id="the-format-of-the-report">The format of the report</h2>
-<p>The report should be uploaded to github with both a raw .Rmd file and a .html file as output. The github folder should also contain the datset being used in the calculations. Contributions from members of the group can be made directly to the github directory. Follow this checklist on how to get started:</p>
+<p>The report should be uploaded to github with both a source file (<code>.Rmd</code> or <code>.qmd</code>) and report file as output (<code>html</code>, <code>pdf</code> or <code>docx</code>-file). The github folder should also contain the datset being used in the calculations. Work on your assignment as a R project. Contributions from members of the group can be made directly to the github repository. Follow this checklist on how to get started:</p>
 <p>(<a href="https://happygitwithr.com/install-intro.html">A nice introduction to github with R can be found here</a>)</p>
 <ul>
 <li>Create a <a href="http://www.github.com">github account</a>. All members of the group should have their own account.</li>
@@ -230,31 +228,11 @@ div.csl-indent {
 <ul>
 <li>You may encounter conflicts if pushing changes that overwrites changes made by other group members. These may be tricky but can be resolved… Have patience!</li>
 </ul>
+<p>If you are contributing to the project owned by another person in your group it is reccomended that you create a pull request with your changes.</p>
 </section>
 <section id="how-to-hand-in-the-report." class="level2">
 <h2 class="anchored" data-anchor-id="how-to-hand-in-the-report.">How to hand in the report.</h2>
 <p>Copy the link to your github folder into canvas.</p>
-</section>
-<section id="quarto" class="level2">
-<h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
-</section>
-<section id="running-code" class="level2">
-<h2 class="anchored" data-anchor-id="running-code">Running Code</h2>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
-<p>You can add options to executable code like this</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
-</div>
-<p>The <code>echo: false</code> option disables the printing of code (only output is displayed).</p>
 
 
 
