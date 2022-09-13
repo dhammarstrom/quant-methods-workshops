@@ -1,0 +1,363 @@
+---
+format: html
+bibliography: resources/bib-final.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+# Data wrangling and tables, part 2
+
+See [part 1 of this workshop here](ws4-data-wrangling-tables.html).
+
+## A file-type for reports
+
+Tables are generated in R in specific output formats. These formats are commonly `html`, `pdf` or `docx` files. The output format type determines how a table is coded. However, common to all outputs is the source file. Previously, reports with tables, figures and text were built from Rmarkdown files (`Rmd`). Recently^[[Quarto was released on the 28:th of July 2022](https://www.rstudio.com/blog/announcing-quarto-a-new-scientific-and-technical-publishing-system/)], a new publishing system was released enabling more flexible reporting of data. This system is called quarto.
+
+The transition between Rmarkdown-files and quarto is effortless as they use the same syntax but quarto has benefits when it comes to publishing.
+
+Quarto requires the installation of [plug-in software](https://quarto.org/docs/get-started/). The workshop is possible to follow using a Rmarkdown file also.
+
+We will talk more about publishing reports later. For now, we just need a source file to create our table. **Start a new quarto or Rmarkdown file and save it somewhere on your computer.**
+
+```{r}
+#| eval: false 
+---
+title: "Untitled"
+---
+
+        
+        
+        
+
+
+
+```
+
+
+
+
+
+## Table generators
+
+There are at least 15 commonly used packages in R used for tables.^[See the list at the bottom of the [gt package webpage](https://gt.rstudio.com/)] This really creates a jungle for the user.
+
+This course have previously been focusing on `knitr` and the `kable` function as well as `flextable`. Both has their benefits, however, both also has drawbacks. These tools were covered in [Chapter 6 of the course notes](https://dhammarstrom.github.io/quant-methods/wrangling-data-to-create-your-first-table.html#wrangling-data-to-create-your-first-table).
+
+During this workshop we will focus on the `gt` package. This package is promising in bridging gaps in previous packages.
+
+The `gt` package needs to be installed from CRAN.
+
+## A basic table
+
+We will produce a very basic table of group means at baseline from the `cyclingstudy` data set.
+
+First we load packages and data 
+
+```{r}
+#| message: false
+#| warning: false
+library(gt)
+library(exscidata)
+library(tidyverse)
+
+
+data("cyclingstudy")
+```
+
+The next step is to summarize the data of interest. We will use `VO2.max`, `sj.max` and `weight.T1` in our table, averaged over `group`
+
+```{r}
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, group, VO2.max, sj.max, weight.T1) %>%
+        group_by(group) %>%
+        summarise(VO2max = mean(VO2.max), 
+                  sj = mean(sj.max),
+                  weight = mean(weight.T1)) %>%
+        print()
+```
+
+The output from a code chunk without a table generator will display what your would typically see in the console. To format the output you will need the table generator.
+
+We will add the generator as the last part of our pipe.
+
+
+```{r}
+
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, group, VO2.max, sj.max, weight.T1) %>%
+        group_by(group) %>%
+        summarise(VO2max = mean(VO2.max), 
+                  sj = mean(sj.max),
+                  weight = mean(weight.T1)) %>%
+        gt()
+
+
+
+```
+
+If the code is executed without compiling the source-file you will see a table in the Viewer pane in RStudio.
+
+We proceed by formatting numbers. `gt` has many formatting functions created to make formatting of cell values easy. The function `fmt_numbers()` needs the columns to be formatted, otherwise defaults seems to give reasonable output. Be aware however of the `sep_mark = ","` option.
+
+
+:::{.callout-caution collapse="true"}
+## Review your understanding
+
+- Find documentation for the `fmt_number` function and find out what how you may format numeric columns, including separation of thousands.
+
+:::
+
+
+```{r}
+
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, group, VO2.max, sj.max, weight.T1) %>%
+        group_by(group) %>%
+        summarise(VO2max = mean(VO2.max), 
+                  sj = mean(sj.max),
+                  weight = mean(weight.T1)) %>%
+        gt() %>%
+        fmt_number(columns = VO2max:weight)
+
+
+
+```
+
+For our variables, VO<sub>2max</sub> may not need to have two decimal points. We can remove it from the first formatting and add another one.
+
+
+```{r}
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, group, VO2.max, sj.max, weight.T1) %>%
+        group_by(group) %>%
+        summarise(VO2max = mean(VO2.max), 
+                  sj = mean(sj.max),
+                  weight = mean(weight.T1)) %>%
+        gt() %>%
+        fmt_number(columns = sj:weight) %>%
+        fmt_number(columns = VO2max, 
+                   decimals = 0) 
+```
+
+Column names can be added with the `cols_label` function, added as the other as part of the pipe
+
+
+```{r}
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, group, VO2.max, sj.max, weight.T1) %>%
+        group_by(group) %>%
+        summarise(VO2max = mean(VO2.max), 
+                  sj = mean(sj.max),
+                  weight = mean(weight.T1)) %>%
+        gt() %>%
+        fmt_number(columns = sj:weight) %>%
+        fmt_number(columns = VO2max, 
+                   decimals = 0)  %>%
+        cols_label(group = "Group", 
+                   VO2max = md("VO<sub>2max</sub>"), 
+                   sj = "Squat jump", 
+                   weight = "Weight")
+```
+
+Notice that I've added the `md()` function around "VO2max" and added some additional code. This indicates with `html` tags that `2max` should be written in *subscript*.
+
+We can also add units to each column name and print them on a different row as long as we use the `md()` function to wrap formatted text.
+
+```{r}
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, group, VO2.max, sj.max, weight.T1) %>%
+        group_by(group) %>%
+        summarise(VO2max = mean(VO2.max), 
+                  sj = mean(sj.max),
+                  weight = mean(weight.T1)) %>%
+        gt() %>%
+        fmt_number(columns = sj:weight) %>%
+        fmt_number(columns = VO2max, 
+                   decimals = 0)  %>%
+        cols_label(group = "Group", 
+                   VO2max = md("VO<sub>2max</sub><br><small>(ml min<sup>-1</sup>)"), 
+                   sj = md("Squat jump<br><small>(cm)"), 
+                   weight = md("Weight<br><small>(kg)"))
+```
+
+In addition to html tags, we may use plain markdown inside the `md()` function. We will talk more about text formatting in coming workshops.
+
+
+Next we will add a caption. A caption may be added to the `gt` function directly.
+
+```{r}
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, group, VO2.max, sj.max, weight.T1) %>%
+        group_by(group) %>%
+        summarise(VO2max = mean(VO2.max), 
+                  sj = mean(sj.max),
+                  weight = mean(weight.T1)) %>%
+        gt(caption = "Group characteristics") %>%
+        fmt_number(columns = sj:weight) %>%
+        fmt_number(columns = VO2max, 
+                   decimals = 0)  %>%
+        cols_label(group = "Group", 
+                   VO2max = md("VO<sub>2max</sub><br><small>(ml min<sup>-1</sup>)"), 
+                   sj = md("Squat jump<br><small>(cm)"), 
+                   weight = md("Weight<br><small>(kg)"))
+```
+
+An alternative is to add a `tab_header` with a `title`. However, we can also add a caption as part of the code chunk. This will replace the caption used in `gt`. This comes with the additional benefit of being able to label tables. From the [quarto documentation](https://quarto.org/docs/authoring/cross-references.html) we can read that "for tables produced by executable code cells, include a label with a tbl- prefix to make them cross-referenceable". 
+
+The top of the code chunk should therefore look like this
+
+````markdown
+`r ''````{r}
+#| label: tbl-char
+#| tbl-cap: "Group characteristics (code chunk)"
+```
+````
+
+The label part must start with `tbl-` followed by a unique identifier. This identifier can be used to cross reference the table that will be auto numbered using the syntax `@tbl-char`, which will produce a link to the table: @tbl-char
+
+
+
+```{r}
+#| label: tbl-char
+#| tbl-cap: "Group characteristics (code chunk)"
+
+
+
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, group, VO2.max, sj.max, weight.T1) %>%
+        group_by(group) %>%
+        summarise(VO2max = mean(VO2.max), 
+                  sj = mean(sj.max),
+                  weight = mean(weight.T1)) %>%
+        gt(caption = "Group characteristics (Caption)") %>%
+        fmt_number(columns = sj:weight) %>%
+        fmt_number(columns = VO2max, 
+                   decimals = 0)  %>%
+        cols_label(group = "Group", 
+                   VO2max = md("VO<sub>2max</sub><br><small>(ml min<sup>-1</sup>)"), 
+                   sj = md("Squat jump<br><small>(cm)"), 
+                   weight = md("Weight<br><small>(kg)")) %>%
+        tab_header(title = "Group characteristics (Title)")
+```
+
+
+Finally we will add footnotes to the table. This is done using the `tab_footnote` function. 
+
+```{r}
+#| label: tbl-char2
+#| tbl-cap: "Group characteristics (code chunk)"
+
+
+
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, group, VO2.max, sj.max, weight.T1) %>%
+        group_by(group) %>%
+        summarise(VO2max = mean(VO2.max), 
+                  sj = mean(sj.max),
+                  weight = mean(weight.T1)) %>%
+        gt(caption = "Group characteristics (Caption)") %>%
+        fmt_number(columns = sj:weight) %>%
+        fmt_number(columns = VO2max, 
+                   decimals = 0)  %>%
+        cols_label(group = "Group", 
+                   VO2max = md("VO<sub>2max</sub><br><small>(ml min<sup>-1</sup>)"), 
+                   sj = md("Squat jump<br><small>(cm)"), 
+                   weight = md("Weight<br><small>(kg)")) %>%
+        tab_header(title = "Group characteristics (Title)") %>%
+        tab_footnote(footnote = "Values are means")
+```
+
+We can specify a location for a reference using the locations argument.
+
+
+```{r}
+#| label: tbl-char3
+#| tbl-cap: "Group characteristics (code chunk)"
+
+
+
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, group, VO2.max, sj.max, weight.T1) %>%
+        group_by(group) %>%
+        summarise(VO2max = mean(VO2.max), 
+                  sj = mean(sj.max),
+                  weight = mean(weight.T1)) %>%
+        gt(caption = "Group characteristics (Caption)") %>%
+        fmt_number(columns = sj:weight) %>%
+        fmt_number(columns = VO2max, 
+                   decimals = 0)  %>%
+        cols_label(group = "Group", 
+                   VO2max = md("VO<sub>2max</sub><br><small>(ml min<sup>-1</sup>)"), 
+                   sj = md("Squat jump<br><small>(cm)"), 
+                   weight = md("Weight<br><small>(kg)")) %>%
+        tab_header(title = "Group characteristics (Title)") %>%
+        tab_footnote(footnote = "Values are means for weight", 
+        locations = cells_column_labels(columns = weight))
+```
+
+## Exercise/Homework: Completing Table 1.
+
+Table 1 in experimental or observational studies often contains descriptive data on the sample. These tables may help readers to understand to what group/population a study may be generalized to and how key characteristics are distributed among experimental groups.
+
+We will prepare data from `cyclingstudy` to create a Table 1 with descriptive data:
+
+- Select a set of key variables that you want to describe (center, spread and/or range) from **baseline measurements**
+- Group the data set on `group` and perform summary calculations
+
+
+### Editing
+
+As we have seen, editing of text and cell values can be made before starting the table generator, or inside the table generator. Below are reminder of tips for pre-generator editing.
+
+To display numbers with the correct number of decimals R provides many options. A simple function (`round()`) provides rounding. The problem is that you will lose trailing zero, e.g., `2.0` will be displayed as `2`. To keep the trailing zero we must use the `sprintf()` function. Examples:
+
+```{r}
+
+# Rounding
+round(2.10, 2) 
+
+# Formatting to keep the trailing zero
+sprintf("%.2f", 2.10)
+
+```
+
+Combining vectors may be a good idea to make the table more attractive. The mean and standard deviation is commonly presented as mean (SD). Data from a column of means and a column of SD's can be combined to create a nice display using the `paste0()` function. Example:
+
+```{r}
+
+data.frame(m = c(46.7, 47.89, 43.5),  # A vector of means
+           s = c(4.21, 4.666, 3.1)) %>% # A vector of SD's
+        mutate(stat = paste0(round(m, 1), 
+                             " (",
+                             round(s, 1), 
+                             ")")) %>%
+        print()
+
+```
+
+A character vector of group names can be arranged and re-named using the `factor` function. In the `cyclingstudy` data set the groups (`INCR`, `DECR` and `MIX`) may be given more descriptive names, example:
+
+```{r}
+
+cyclingstudy %>%
+        mutate(group = factor(group, levels = c("INCR", "DECR", "MIX"), 
+                              labels = c("Increased intensity", 
+                                         "Decreased intensity", 
+                                         "Mixed intensity"))) %>%
+        distinct(group)
+        
+```
+
+
+
+

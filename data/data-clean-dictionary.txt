@@ -1,0 +1,18 @@
+variable	description
+subject	participant ID
+group	group ID (con, control; exp, experimental)
+time	time of data collection (Pre or Post intervention)
+weight	Body weight (kg)
+height	Stature (cm)
+hb	Hemoglobin (g dl-1)
+hct	Hematocrit (%)
+hbmass	Hemoglobin mass (g)
+rbcv	Red blood cell volume (ml)
+pv	Plasma volume (ml)
+bv	Blood volume (ml)
+hf_submax	Heart frequency at submaximal test
+la_submax	Lactate at submaximal (mmol L-1)
+borg_submax	Rating of percieved Excertion (Borg 6-20 scale)
+VO2_submax	VO2 at submaximal (ml min-1)
+lt	Lactate threshold (km h-1)
+lt_VO2	VO2 at lactate threshold (ml min-1)

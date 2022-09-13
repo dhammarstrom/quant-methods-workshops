@@ -1,0 +1,14 @@
+---
+title: "Workshops"
+format: html
+---
+
+|Workshop |Additional material|
+| --- | --- |
+|[Introduction to data science](ws1-data-science-intro.html) (Norwegian)| |
+|[Installing and starting R](ws2-installing-r.html)| |
+|[Creating your first graph](ws3-first-graph.html) | |
+|[Data wrangling and tables](ws4-data-wrangling-tables.html)| |
+|[Data wrangling and tables, part 2](ws4b-tables.html)| |
+|[Writing reports](ws5-writing-reports.html)| |
+|[Collaborative coding](ws6-collaborative-coding.html)| |

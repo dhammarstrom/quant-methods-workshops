@@ -1,7 +1,85 @@
 ---
-title: "quant-methods-workshops"
+title: "Quantitative methods and statistics (In Sport and Exercise Science)"
 ---
 
-This is a Quarto website.
+## Introduction
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Welcome to the course **Quantitative methods and Statistics (IDR4000)**. The course aims to give students an overview of methodological aspects within the field of sport and exercise-physiology. Specifically, planning, conducting and analysing research projects with human participants will be covered. The lecture notes for the course can [be found here](https://dhammarstrom.github.io/quant-methods/). This website will contain tutorials that we will work on in class, assignments and additional materials related to the course content.  
+
+
+## Practical information
+
+These notes were updated on **`r Sys.Date()`** and cover the course held during 2022 autumn semester. Contact [Daniel Hammarström](mailto:daniel.hammarstrom@inn.no) if you have any questions regarding this content.
+
+### Learning objectives
+Learning objectives can be read in Norwegian [here](https://www.inn.no/content/view/full/163709/language/nor-NO).
+
+### Learning strategies
+The course will include lectures, laboratory exercises, computer exercises and workshops, seminars and student presentations. Lectures will be held in-person and as pre-recorded published on these websites.
+
+Computer exercises will eventually require that you have special computer software installed on your computer. The software is free (see specific chapters in [lecture notes](https://dhammarstrom.github.io/quant-methods/installing-and-starting-up-r-and-r-studio.html#installing-and-starting-up-r-and-r-studio)).
+
+Assignments will be presented on this website with information on how to hand them in. The whole course is evaluated based on a portfolio exam (see below).
+
+### Course evaluation
+As a student you can contribute to the quality of the course by engaging in course evaluation throughout the course. You will be asked to answer a pre-course questionnaire about your *expectations* and a post-course questionnaire about your *experiences*. You are also welcomed to take part in systematic discussions during the course about the quality of teaching and course material. With these notes I want to underline the importance of student participation in the continuous development of the course (and program) teaching/learning quality.
+
+
+### Lecturers and course administration
+
+In order of appearance 
+
+- Daniel Hammarström (daniel.hammarstrom@inn.no), is responsible for course administration and will be teaching statistics.
+- Tomas Urianstad will organize laboratory work in the physiology lab.
+- Kristian Lian will be involved in molecular methods.
+- Prof. Carsten Lundby will cover aspects CO<sub>2</sub> re-breathing techniques (physiology).
+- Prof. Finnur Dellsén will cover philosophy of science. 
+- Prof. Stian Ellefsen will teach molecular methods. 
+
+### Updates, notifications and general communication
+
+These course notes **will be** updated during the course. General information and last minute changes will be posted on Canvas, make sure to check it as part of your daily study routine. 
+
+
+### Literature
+A full list of recommended literature can be found [here](https://www.inn.no/pensum). Literature will be referenced in specific sections in the lecture notes.
+
+### Grades
+The course is graded pass/fail.
+
+### Language 
+My (Daniel) first language is Swedish, I'm sure most of you will understand what I'm talking about. However, due to the fact that we accept international students to the program, most written communication and some lectures will be in English. You are not expected to write in English, it is however possible!
+
+
+## Assignments and Portfolio exam
+
+The course is based on several assignments. Some of these assignments are to be handed in as part of a portfolio exam upon which your grade is based. 
+
+Assignments that are due during the course (arbeidskrav) are expected to be further improved after feedback from fellow students and teachers before inclusion in your portfolio.
+
+The table below shows all assignments that are part of the course. Some are not to be included in the portfolio and some assignments are group assignments (see Table). In addition to these assignments, non-mandatory homework will be presented during the course.
+
+
+|Assignment |Due date |Included in portfolio |Group assignment|
+| :--- | :---: | ---:| ---:|
+|[Descriptive statistics, reliability and validity, tools for reproducible data science](assignment-1.html)| 2022-09-26 |Yes|Yes|
+|[Regression models and prediction from data](assignment-2.html)|2022-10-03|No|Yes|
+|Extraction and analysis of DNA |2022-11-25|Optional^a^|Yes|
+|Extraction of RNA and analysis of qPCR experiments|2022-11-25|Optional^a^|Yes|
+|Extraction and analysis of Protein|2022-11-25|Optional^a^|Yes|
+|Philosophy of science^b^ (See canvas)|2022-10-28|Yes|No|
+|[Drawing inference from statistical models and statistical power](assignment-3.html)|2022-11-07|No|Yes|
+|[Study designs](assignment-4.html)|2022-11-17|Yes|No|
+|[Analyzing repeated measures experiments](assignment-5.html)|2022-11-21|Yes|No|
+
+
+ <font size="2">^a^ Select one laboratory assignments for your portfolio exam. All groups presents one selected method on 2021-11-23. ^b^ This assignment is presented in connection with lectures. 
+ </font>
+
+In addition to arbeidskrav/assignments, you are **required to contribute to the course wiki**. The wiki page is hosted at [github.com/dhammarstrom/IDR4000-2022/](https://github.com/dhammarstrom/IDR4000-2022/wiki). In order to contribute you need to set up your own github account. The language of the wiki should be Norwegian.
+
+
+Smaller assignments and quizzes are presented as part of the course, but you are not required to do them to pass the course.
+
+## Other information
+

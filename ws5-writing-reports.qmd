@@ -1,0 +1,52 @@
+---
+title: "Writing reports"
+---
+
+## Quarto and Rmarkdown
+
+- Quarto and Rmarkdown a special kind of scripts where text and computer code can be combined to generate reports. 
+- Under the hood, a report generator is converting code and plain text to an output format such as *html*, *pdf* or *docx*.
+- Quarto is a new, [well documented](https://quarto.org/) format that gives extra flexibility, but also requires installation of extra software.
+
+
+## Code chunks
+
+- Code chunks are sections of your source file containing code. We primarily write R-code, but e.g., python is also possible.
+- The code chunk comes with several options specified in the top of the chunk using `#|`, such as:
+
+````markdown
+`r ''````{r}
+#| eval: true
+#| echo: true
+#| warning: false
+#| error: true
+#| include: false
+```
+````
+
+## Inline code
+
+- Code may be included inline to include code generated outputs
+
+## Code execution and the environment
+
+- From where do code execute?
+
+## Bibliographies
+
+- Add a bib file to your report
+- Export bibtex
+
+## Different formats
+
+- Word
+- pdf
+- html
+
+
+
+
+
+
+
+

@@ -1,0 +1,547 @@
+---
+format: html
+bibliography: resources/bib-final.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+
+# Your first "real" R plot
+
+In this workshop, many of us will create our first *real* plot. For this purpose we will use the `ggplot2` package. This choice of package is based on usage, many people use it and therefore you can easily find help online. `ggplot2` is also integrated or highly compatible with other commonly used packages in R.
+
+It is a good idea to write your code in a R script in this session. Be sure to comment your code *extensively*, this will help you explain to yourself what you are doing and make it easy to reuse parts of your code.
+
+A commented line in R code starts with `#`:
+
+```{r}
+#| eval: false
+
+# This is a comments
+a <- c("roses", "are", "red")
+# This is another comment
+
+#### Sections can be specified with several number/hash/pound signs ####
+
+# Sections in scripts and code chunks help you structure your work. 
+# In R studio, sections can be located from the editor.
+
+```
+
+It is also a good idea to use the comments to write a statement about the purpose of the script or analysis your are writing. Later we will talk about keeping files in a structured way in projects.
+
+
+## Installing packages
+
+We need to start by installing required packages. From the console we can type
+
+```{r}
+#| eval: false
+
+install.packages("tidyverse")
+
+```
+
+This will install the tidyverse package, a package containing many package. On the [tidyverse website](https://www.tidyverse.org/) you can read:
+
+> The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.
+
+By using the tidyverse you will adopt a special dialect of R. A dialect that is very efficient and fairly easy to read (as a human).
+
+Tidyverse will install `ggplot2` for you. Notice that you only need to install a package once. It is therefore not a good idea to have an unconditional `install.packages()` in your script.
+
+To get `ggplot2` to start working we need to use another command:
+
+```{r}
+#| eval: false
+
+library("ggplot2")
+
+
+```
+
+Notice that I've put `ggplot2` inside citation marks `"`. This is optional!
+
+The `library` function loads all function contained in the package to your R session. This means that you can access and use them.
+
+For these exercises we will use another package. The `exscidata` package contains data sets related to exercise physiology. To install it we need a bit more code. Since `exscidata` is not on CRAN, but on github we can use the `remotes` package.
+
+```{r}
+#| eval: false
+
+# Install package from cran
+if(!("remotes" %in% .packages(all.available = TRUE))) {
+        install.packages("remotes")
+}
+
+
+# Using remotes, install exscidata from github
+if(!("exscidata" %in% .packages(all.available = TRUE))) {
+        remotes::install_github("dhammarstrom/exscidata")
+}
+
+
+
+# Load the exscidata package
+library(exscidata)
+
+```
+
+:::{.callout-note}
+
+Above is a `if` statement. Ordinarily, the statement can be read as: "If the condition is `TRUE`, then do whatever is in the brackets". However, we also use a `!` around a parentheses containing the `%in%` operator. The `!` negates the test. If the package name is not contained in the vector of all packages created by the `.packages(all.available = TRUE)`, then we want to install the package.
+
+This is a way not having to install packages that are already installed when running your script.
+:::
+
+
+We are now set to load data into our session. 
+
+
+## Loading data
+
+The data set we will use in these exercises is called `cyclingstudy`. You can have a look at the variables by using the help command `?cyclingstudy`.
+
+To load data from a package we can use `data("cyclingstudy")`
+
+
+:::{.callout-caution collapse="true"}
+## Review your understanding
+
+- Explain the difference between `install.packages()` and `library()`
+- What is the `tidyverse`, what will we use `ggplot2` for?
+- What does it mean when a package is not on CRAN?
+- Identify at least one numeric variable in the help pages for `cyclingstudy`, identify at least one categorical variable.
+- What happens in your environment when you type `data("cyclingstudy")`?
+
+:::
+
+A data set can be accessed in multiple ways. We may want to *see* the data. We can do this by typing `View(cyclingstudy)` in the console (notice the capital V). Or we can show a couple of rows and columns in the console by typing `cyclingstudy`.
+
+
+## Mapping data into `aes()`
+
+The `ggplot` function (from the `ggplot2 package`) takes quite a lot of arguments. However, very few are needed to create a graph.
+
+The `ggplot2` system uses:
+
+- `data` &rarr; The dataset containing variables to plot
+- `aes`thetics &rarr; Scales where the data are mapped
+- `geom`etries &rarr; Geometric representations of the data
+- `facet` &rarr; A part of the dataset
+- `stat`istical transformations &rarr; Summaries of data
+- `coord`inates &rarr; The coordinate space
+- `theme`s &rarr; Plot components not linked to data
+
+We build a graph by *mapping* variables to different locations and visual characteristics of what is called **geoms**. This system makes it easy to build different types of graphs using similar syntax.
+
+We will start by mapping to continuous variables to the coordinate system. For this exercise, use the variables `weight.T1` and `sj.max`.
+
+`ggplot` needs to know were the variables can be found, we therefore have to specify the `data` argument first. Next we map the variables to the x and y coordinates of the graph. You can copy the code below to your R script.
+
+
+```{r}
+#| eval: false
+
+ggplot(data = cyclingstudy, aes(x = cmj.max, y = sj.max))
+
+```
+
+:::{.callout-caution collapse="true"}
+## Review your understanding
+
+- Explain to your friend what we have done so far. 
+- What is mapping in this context?
+- Define "continuous variables"
+
+:::
+
+
+
+## Adding geometric representations
+
+We have not yet added graphical representations of the data mapped to coordinates (x and y). These can be *added* to the plot using the `+` operator, as we will do below.
+
+Think about a `ggplot` as a *layered* construction. Layers can be added (`+`) to build the graph you want. Layers are added to the graph sequentially, this means it matters in which order you add them. 
+
+
+But what to add? 
+
+There are many *geoms*, for an overview go to **Help > Cheat Sheets > Data Visualization with ggplot2**
+
+:::{.callout-Practice}
+
+
+**Task 1:** Identify a geom suitable for two continuous variables, that will show individual data points on x- and y- coordinates.
+
+**Task 2:** Call up the help page of the selected *geom* and find out what you need to add as arguments to the *geom*
+
+:::
+
+
+
+:::{.callout-caution collapse="true"}
+## Review your understanding
+
+- Explain what the argument `inherit.aes = TRUE` means. 
+- Explain the sentence (from the help page): "If `NULL`, the default, the data is inherited from the plot data as specified in the call to `ggplot()`.
+
+:::
+
+By adding, for example, points to the plot, we will be able to *see* the data. How would you add the geom that creates points to your plot?
+
+
+```{r}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show the code for a possible solution"
+
+ggplot(data = cyclingstudy, aes(x = cmj.max, y = sj.max)) + geom_point()
+
+
+```
+
+
+
+
+:::{.callout-Practice}
+
+### Group work
+
+- **Task 1:** Using the cheat sheet, beside x and y. What other aesthetics (`aes`) may be added to the plot that will affect the appearance of the points?
+
+- **Task 2:** Using pen and paper, draw a figure of the `cyclingstudy` data using one categorical variable and one continuous variable and hand the figure to the next group. 
+
+- **Task 3:** Code the figure! Create the figure that the other group has drafted for you.
+
+:::
+
+
+
+## Changing colors and shapes outside mapping
+
+Characteristics such as shapes or colors can also be added to geoms outside the `aes()`. This means we will *override* any mapping already given in `aes()`. As we already have seen, mappings that are *inherited* from the `ggplot` function to *geoms*.
+
+
+### Group work
+
+:::{.callout-Practice}
+
+
+- **Task 1:** Change characteristics of your plot outside data mapping using `color` and `fill`, `linetype`, `size` and `shape`. What *geoms* are responsive to each change?
+
+
+:::
+
+
+
+:::{.callout-caution collapse="true"}
+## Review your understanding
+
+- Explain the what the code will produce, without running the code below (google "r shapes" to see what number each shape has.)
+
+```{r}
+#| eval: false
+
+# Example 1
+ggplot(data = cyclingstudy, aes(x = cmj.max, y = sj.max, color = group)) + geom_point(color = "blue")
+
+# Example 2
+ggplot(data = cyclingstudy, aes(x = cmj.max, y = sj.max, color = group)) + geom_point(shape = 8)
+
+# Example 3
+ggplot(data = cyclingstudy, aes(x = cmj.max, y = sj.max, color = weight.T1)) + geom_point(shape = 8)
+
+# Example 4
+ggplot(data = cyclingstudy, aes(x = cmj.max, y = sj.max, shape = timepoint)) + geom_point(color = "red")
+
+
+```
+
+
+:::
+
+## Scales
+
+In `ggplot2` there are pre-set palettes for colors, orders of shapes and line types etc. Often you would want to control such settings.
+
+There are many sources for informed selection of colors, one is [colorbrewer2](https://colorbrewer2.org/). We 
+
+
+To change color scales we use `scale_*_*` functions that will help you set, e.g., colors manually. In the example below we create a gradient from two colors  
+
+
+
+```{r}
+#| eval: false
+
+ggplot(data = cyclingstudy, 
+       aes(x = cmj.max, y = sj.max, color = weight.T1)) + 
+        geom_point() +
+        scale_colour_gradient(
+                low = "#e41a1c",  
+                high = "#4daf4a")
+
+```
+
+
+Discrete variables can also be set with colors using `scale_color_manual`
+
+```{r}
+#| eval: false
+
+ggplot(data = cyclingstudy, 
+       aes(x = cmj.max, y = sj.max, color = timepoint)) + 
+        geom_point() +
+        scale_color_manual(values = c("#66c2a5","#fc8d62","#8da0cb","#e78ac3"))
+
+
+```
+
+:::{.callout-caution collapse="true"}
+## Review your understanding
+
+- Explain to a friend what scales do
+
+:::
+
+
+
+## Grouping data
+
+Some aspects of a plot requires that data points are connected together. This essentially means that some a variable needs to group data points. In our example data set, `subject` gives the identity of each participant. We may use this information to group data points, or connect them with e.g. `geom_line()`. By adding `group = subject` to the `aes()` call in `ggplot` we will group all geoms that allow grouping.
+
+
+:::{.callout-caution collapse="true"}
+## Review your understanding
+
+- Before running the code below. Explain what you expect it will show.
+
+:::
+
+
+
+```{r}
+#| eval: false
+
+# Example 1
+ggplot(data = cyclingstudy, aes(x = cmj.max, 
+                                y = sj.max, 
+                                color = group,
+                                shape = timepoint,
+                                group = subject)) + 
+        geom_point() +
+        geom_line()
+
+
+```
+
+## Faceting plots
+
+A plot can be quite cluttered, and in this case, give a false impression of a lot of data. The design of this study results in a data set where each participant is tested at multiple time-points. We can therefore create facets based on some aspect of the data, such as time-point.
+
+The `facet_wrap()` and `facet_grid()` creates facets.
+
+```{r}
+#| eval: false
+
+# Example 1
+ggplot(data = cyclingstudy, aes(x = cmj.max, 
+                                y = sj.max, 
+                                color = group)) + 
+        geom_point() +
+        facet_wrap(~ timepoint)
+
+
+```
+
+As can be seen in the code above, `facet_wrap` takes a one-handed formula, the `~` (tilde), indicates a formula. We can read this as *"wrap by time-point"*. 
+
+In `facet_grid()` we will use a two-handed formula, meaning that both sides of the tilde needs information. If we want to group only by rows, we will use a `.` to indicate that nothing will be used to group by column.
+
+```{r}
+#| eval: false
+
+ggplot(data = cyclingstudy, aes(x = cmj.max, 
+                                y = sj.max, 
+                                color = group)) + 
+        geom_point() +
+        facet_grid( timepoint ~ .)
+
+
+```
+
+In `facet_grid` above, we could replace the `.` with another variable. How would you write the code to facet the graph by group in rows and time-point in columns? 
+
+
+```{r}
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show the code"
+
+ggplot(data = cyclingstudy, aes(x = cmj.max, 
+                                y = sj.max, 
+                                color = group)) + 
+        geom_point() +
+        facet_grid( group ~ timepoint)
+
+```
+
+
+:::{.callout-caution collapse="true"}
+
+### Review your understanding
+
+- Explain to a friend, what do the plot produced by the code above show? Include everything that is important to reproduce the plot in your description. Try to describe it without pointing at the plot!
+
+:::
+
+## Plot annotations
+
+Annotations can be added to plots, these are often user specified, such as labels and plot titles. 
+
+We specify labels with the `labs()` function and add annotations with the `annotate()` function.
+
+```{r}
+#| eval: false
+
+ggplot(data = cyclingstudy, aes(x = cmj.max, 
+                                y = sj.max, 
+                                color = group)) + 
+        geom_point() +
+        labs(x = "Maximal Counter movement jump height (cm)", 
+             y = "Maximal squat jump height (cm)", 
+             title = "This is the title", 
+             subtitle = "This is the subtitle", 
+             caption = "This is a caption", 
+             color = "This is the group aesthetics") +
+        
+        annotate(geom = "text", x = 25, y = 35, label = "This is a text annotation")
+
+
+```
+
+Notice that `labs()`makes use of all aesthetic mappings and `annotate` requires a *geom*.
+
+## Themes
+
+The `theme()` function is used for non-data layers in the plot.
+
+
+## Combine separate plots
+
+There are two commonly used system for combining individual plots, [`patchwork`, https://patchwork.data-imaginist.com/](https://patchwork.data-imaginist.com/) and [`cowplot`, https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html).
+
+The idea here is create figures with multiple individual figures.
+
+`patchwork` has a very simple syntax.
+
+
+```{r}
+#| eval: false
+
+library(patchwork)
+
+
+a <- ggplot(data = cyclingstudy, aes(x = cmj.max, 
+                                y = sj.max, 
+                                color = group)) + 
+        geom_point() 
+
+b <- ggplot(data = cyclingstudy, aes(y = sj.max, 
+                                x = group)) + 
+        geom_boxplot() 
+
+
+c <- ggplot(data = cyclingstudy, aes(x = timepoint, 
+                                y = sj.max, 
+                                group = subject)) + 
+        geom_line() 
+
+
+
+(a | b) / c
+
+
+
+
+```
+
+
+`cowplot` uses `plot_grid` to arrange plots
+
+```{r}
+#| eval: false
+
+library(cowplot)
+
+plot_grid(a, b, c, nrow = 2)
+
+
+```
+
+`plot_grid` can also use a "nested" structure.
+
+```{r}
+#| eval: false
+plot_grid(plot_grid(a, b, nrow = 1), 
+          c, nrow = 2)
+
+```
+
+In both frameworks, annotations can be added to plots to indicate panels/sub-plots. 
+
+
+
+## Saving output
+
+Output from ggplot2 can be saved from RStudio using the export buttom. However, a more reproducible manner is to save the output using `ggsave`
+
+
+
+
+
+
+
+### Group work
+
+:::{.callout-Practice}
+
+
+- **Task 1:** Create three separate plots from the `cycling` data set and save them as objects in your environment.
+
+- **Task 2:** Use `cowplot` and `patchwork` to group the plots together.
+
+- **Task 3:** Save the plot using `ggsave`, explore the help pages to find what arguments are needed!
+
+
+:::
+
+
+## Exercises
+
+- Reproduce figure 1.3 from Spiegelhalter (2019)
+
+```{r}
+#| eval: false
+
+# download data
+child_heart <- read_csv("https://raw.githubusercontent.com/dspiegel29/ArtofStatistics/master/01-1-2-3-child-heart-survival-times/01-1-child-heart-survival-x.csv")
+
+```
+
+- Reproduce figure 2.2 and 2.3
+
+```{r}
+
+beans <- read.csv("https://raw.githubusercontent.com/dspiegel29/ArtofStatistics/master/02-2-3-jelly-bean-counts/02-1-bean-data-full-x.csv", header = FALSE)
+
+
+```
+
+
+
+
+
+
+

@@ -1,0 +1,484 @@
+---
+format: html
+bibliography: resources/bib-final.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+# Data wrangling and tables
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+library(exscidata); library(tidyverse); data(cyclingstudy)
+```
+
+
+The `tidyverse` contains two packages with functions used to wrangle data, `dplyr` and `tidyr`. On [wikipedia](https://en.wikipedia.org/wiki/Data_wrangling) we can read that:
+
+> Data analysts typically spend the majority of their time in the process of data wrangling compared to the actual analysis of the data. 
+
+In the age of data we would be ignorant to teach data analysis without *data wrangling*
+
+
+## `dplyr` and the verbs of data manipulation
+
+`dplyr` contains *verbs* used for data manipulation, such as filtering rows, selecting variables and changing or creating variables. Verbs can be used in a *pipe* and read as sequential operations:
+
+
+```{r}
+#| eval: false
+
+> Take the data **then do** 
+> filter based on group **then do**
+> create a new variable **then do**
+> show the data in the console.
+
+```
+
+
+The pipe operations are made possible by another package, [`magrittr`](https://magrittr.tidyverse.org/). This package contains the forward pipe operator `%>%`. The forward pipe operator (`%>%`) can be read as "*then do*". The operator takes the object on the left-hand side and puts it as the first argument in the following function.
+
+Translating the "pipe" above from human language to R language using the "tidyverse dialect" looks like this:
+
+```{r}
+#| eval: false
+
+data %>%
+        filter(group == "xx") %>%
+        mutate(new.var = old.var + old.var2) %>%
+        print()
+
+```
+
+## Getting started: Load data and packages
+
+We will use the `cyclingstudy` data from `exscidata` in our exercises. Load the required components to your session. 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+#| eval: false
+
+library(tidyverse) # loads dplyr etc.
+library(exscidata) # loads the data-package
+
+data("cyclingstudy")
+
+
+```
+
+## Adding, changing and selecting variables - `mutate` and `select`
+
+Mutate can help you create new variables (or overwrite existing once). In the cycling data set there is a variable called `VO2.max`, this variable is expressed in absolute units (ml min<sup>-1</sup>), however, we might want to express it as relative units (ml kg<sup>-1</sup> min<sup>-1</sup>).
+
+```{r}
+#| eval: false
+
+
+cyclingstudy %>%
+        mutate(rel.vo2max = VO2.max / weight.T1) %>%
+        print()
+
+
+```
+
+The mutate function creates new variables (or overwrite existing) in a flexible way. Here we simply use division. Other mathematical operators can similarly be used (`+`, `-`, `*`, etc.).
+
+Notice the `print()` function in the end of the pipe. This is used to display the results of any manipulations done in the pipe. Notice also that our new variable is not listed. We might need to select a sub-set of variables to get a better overview. We will do this using the `select` function.
+
+```{r}
+#| eval: false
+
+
+cyclingstudy %>%
+        mutate(rel.vo2max = VO2.max / weight.T1) %>%
+        select(subject, group, timepoint, age, height.T1, weight.T1, VO2.max, rel.vo2max) %>%
+        print()
+
+
+```
+
+The select function takes variable names as "unquoted" names. We can also select a range of columns using the syntax `<from>:<to>` where `<from>` is the first column you would like to select and `<to>` would be the last. Subsequently the above pipe can be re-written as
+
+```{r}
+#| eval: false
+
+
+cyclingstudy %>%
+        mutate(rel.vo2max = VO2.max / weight.T1) %>%
+        select(subject:weight.T1, VO2.max, rel.vo2max) %>%
+        print()
+
+
+
+```
+
+`select` can also be used to re-name variables. Simpler variable names for weight, height and relative V&#775;O<sub>2max</sub> could be `weight`, `height`, `vo2max.kg`.
+
+
+```{r}
+#| eval: false
+
+
+cyclingstudy %>%
+        mutate(rel.vo2max = VO2.max / weight.T1) %>%
+        select(subject:age, height = height.T1, weight = weight.T1, VO2.max,vo2max.kg = rel.vo2max) %>%
+        print()
+
+
+```
+
+
+## Select rows based on condition and sort them - `filter` and `arrange`
+
+Filtering is used to select specific observations (rows) of a data set. We filter based on specific *conditions* such as:
+
+- All values bigger than X
+- All values less than Y
+- All observations than contain A, B or C in variable V.
+
+The above examples must be translated to formal expressions.
+
+### Comparisons
+
+An expression that make comparisons can be
+
+- `x < y` &rarr; x less than y
+- `x > y` &rarr; x greater than y
+- `x <= y` &rarr; x less or equal to y
+- `x >= y` &rarr; x greater or equal to y
+- `x == y` &rarr; x exactly equal to y
+- `x != y` &rarr; x not exactly equal to y
+
+In the `filter` function these expressions give either `TRUE` or `FALSE`. If `TRUE` the rows are included in the filtered data frame.
+
+We can see the mechanism behind filtering by creating a vector of `TRUE` and `FALSE` based on an expression. Let's say that we want to see which rows has `weight.T1` greater than 75.
+
+```{r}
+#| echo: true
+
+cyclingstudy$weight.T1 > 75
+
+```
+
+We can see that the first row returns a `TRUE` while the second row returns `FALSE`.
+
+Using the `filter` function, we just add the expression as an argument in the function and all the rows that comes up `TRUE` will remain.
+
+```{r}
+#| echo: true
+
+cyclingstudy %>%
+        filter(weight.T1 > 75) %>%
+        print()
+
+```
+
+
+:::{.callout-caution collapse="true"}
+## Review your understanding
+
+How many rows in the `cyclingstudy` data set has
+
+- `VO2.max` values greater than `6000`
+- `VO2.max` values less than `6000`
+- `VO2.max` values less or equal to than `5360`
+- `VO2.max` values greater or equal to than `5360`
+- the value `pre` in `timepoint`
+- the a value in `timepoint` other than `pre`
+
+:::
+
+### Logical operators
+
+Logical operators similarly creates `TRUE` or `FALSE` as the basis of filtering operations. These can be used in combination with comparisons.
+
+- `! x` &rarr; NOT x
+- `x & y` &rarr; x and y
+- `x | y` &rarr; x or y
+- `is.na(x)` &rarr; returns TRUE if x is `NA` 
+
+We might want to keep all rows with `weight.T1` greater than 80 that are also from the group `INCR`. This can be solved with an AND operator (`&`).
+
+```{r}
+
+#| echo: true
+
+cyclingstudy %>%
+        filter(weight.T1 > 80 & group == "INCR") %>%
+        print()
+
+
+```
+
+We can similarly use OR (`|`) to select either weight greater than 80 or group `INCR`.
+
+```{r}
+
+#| echo: true
+
+cyclingstudy %>%
+        filter(weight.T1 > 80 | group == "INCR") %>%
+        print()
+
+
+```
+
+Notice that there are rows containing weights less than 80 from the `INCR` group.
+
+Any logical statement can also be negated with `!` indication NOT. This means we will get a vector of `TRUE` for any expression previously being `FALSE`. Notice the extra parentheses below.
+
+
+```{r}
+
+#| echo: true
+
+cyclingstudy %>%
+        filter(!(weight.T1 > 80 & group == "INCR")) %>%
+        print()
+
+
+```
+
+
+The `dplyr` function `filter` also accepts multiple arguments separated with a comma. This is equal to adding conditions with the AND operator. Example:
+
+
+```{r}
+
+#| echo: true
+
+cyclingstudy %>%
+        filter(weight.T1 > 80, 
+               group == "INCR", 
+               timepoint == "pre", 
+               age > 35) %>%
+        print()
+
+
+```
+
+Finally, `dplyr` comes with two convenient functions to find values `between` and `near` 
+
+:::{.callout-caution collapse="true"}
+## Review your understanding
+
+- Keep rows in your data frame from the `pre` time-point, age greater than 31 but height less than 180.
+- Use `between` to find rows with `VO2.max` values between 4800 and 5200 (see `?between`)
+- Use `near` to find `weight.T1` values close to 80.26 with a tolerance of 0.75 (see `?near`)
+- Remove all rows that are `NA` in the `height.T1` variable.
+
+:::
+
+## Group and summarise data - `group_by` and `summarise`
+
+A super power of `dplyr` is its ability to group and summarize data. The `group_by` function creates a grouped data frame suitable for summaries per group. In the `cyclingstudy` data set we have three groups that we might want to describe using some summary function.
+
+Examples of summary functions in R are:
+
+- `mean()` &rarr; computes arithmetic mean
+- `median()` &rarr; computes the median
+- `sd()` &rarr; computes the standard deviation from the mean
+- `IQR()` &rarr; returns the inter-quartile range
+- `min()` and `max()` &rarr; gives the minimum and maximum values from a vector
+- `quantile()` &rarr; sample quantiles from the smallest (`probs = 0`) to largest (`probs = 1`) values.  
+All the above functions comes with the optional argument of `na.rm = TRUE`. This can be read as *remove missing values (NA)*. If there are missing values (`NA`) and `na.rm = FALSE` (the default), the calculations will return `NA`. This is inconvenient but can often work as a *sanity check* of your code.
+
+
+:::{.callout-caution collapse="true"}
+## Review your understanding
+
+- What do we mean by *sanity check*?
+- What do you expect from the R code `sd(c(4, 5, 7, NA, 5))`
+- What would you add to the code above to improve it?
+
+:::
+
+In addition to the summaries above that are generic for base R, `dplyr` provides you with a number of great functions to...
+
+- `n()` &rarr; count the number of observations in each group
+- `n_distinct()` &rarr; return the number of unique values from a vector for each group
+
+In practice a grouped summary may look like this:
+
+```{r}
+#| eval: false
+
+cyclingstudy %>%
+        group_by(group) %>%
+        summarise(mean.vo2max = mean(VO2.max, na.rm = TRUE))
+        
+
+```
+
+Results from the above code includes multiple data points from each participant. The variable describing time-points can be added to the grouping.
+
+```{r}
+#| eval: false
+
+cyclingstudy %>%
+        group_by(group, timepoint) %>%
+        summarise(mean.vo2max = mean(VO2.max, na.rm = TRUE))
+        
+
+```
+
+Multiple summary functions can be added to the `summarise()` function where each adds a new variable to the result data frame.
+
+```{r}
+#| eval: false
+
+cyclingstudy %>%
+        group_by(group, timepoint) %>%
+        summarise(mean.vo2max = mean(VO2.max, na.rm = TRUE), 
+                  sd.vo2max = sd(VO2.max, na.rm = TRUE))
+        
+```
+
+
+## Pivoting using `pivot_longer` and `pivot_wider` from the `tidyr` package
+
+Data not always in a form that makes tables, graphs or statistical methods directly available. Data can be described as being in long form and wide form. The long form data is tidy in the sense that all columns are distinct variables. 
+
+![](https://github.com/gadenbuie/tidyexplain/raw/main/images/tidyr-pivoting.gif)
+
+There are examples of wide data sets as part of the cycling data set. Using only the `timepoint == pre` values and columns corresponding to lactate values from the graded exercise test we have an example of wide data as the columns `lac.125`, `lac.175`, `lac.225`, etc., contains lactate values from different exercise intensities. This means that a separate variable (watt or exercise intensity) is combined in each column of lactate values.  
+
+```{r}
+
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        dplyr::select(subject, group, lac.125:lac.375) %>%
+        print()
+
+```
+
+Using `pivot_longer` we can change this data into a long format. Pivot wider needs information on the new variable names for values and names. Names are the column names thta will form a variable and values are the values contained in the cells of the old variables. We also need to specify what columns to make longer, notice that I select variables `<from>:<to>`. 
+
+```{r}
+
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        dplyr::select(subject, group, lac.125:lac.375) %>%
+        pivot_longer(names_to = "watt", 
+                     values_to = "lactate", 
+                     cols = lac.125:lac.375) %>%
+        print()
+
+```
+
+`pivot_wider` makes it easy to remove prefix and fix the data type of the names variable. Below we specify to remove `lac.` from all names and convert the new variable to numeric data.
+
+```{r}
+
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        dplyr::select(subject, group, lac.125:lac.375) %>%
+        pivot_longer(names_to = "watt", 
+                     values_to = "lactate", 
+                     cols = lac.125:lac.375, 
+                     names_prefix = "lac.", 
+                     names_transform = list(watt = as.numeric)) %>%
+        print()
+
+```
+
+
+
+:::{.callout-caution collapse="true"}
+## Review your understanding
+
+Perform the opposite operation of the below data set:
+
+```{r}
+#| eval: false
+
+data.frame(id = c("id1", "id1", "id1", "id2", "id2", "id2"), 
+           NAME = c("a", "b", "c", "a", "b", "c"), 
+           NUMBER = c(4, 6, 7, 2, 3, 5)) %>%
+
+        print()
+
+
+
+```
+
+
+:::
+
+
+## Exercise: Preparing Table 1.
+
+Table 1 in experimental or observational studies often contains descriptive data on the sample. These tables may help readers to understand to what group/population a study may be generalized to and how key characteristics are distributed among experimental groups.
+
+We will prepare data from `cyclingstudy` to create a Table 1 with descriptive data:
+
+- Select a set of key variables that you want to describe (center, spread and/or range) from **baseline measurements**
+- Group the data set on `group` and perform summary calculations
+
+
+### Editing
+
+To display numbers with the correct number of decimals R provides many options. A simple function (`round()`) provides rounding. The problem is that you will lose trailing zero, e.g., `2.0` will be displayed as `2`. To keep the trailing zero we must use the `sprintf()` function. Examples:
+
+```{r}
+
+# Rounding
+round(2.10, 2) 
+
+# Formatting to keep the trailing zero
+sprintf("%.2f", 2.10)
+
+```
+
+Combining vectors may be a good idea to make the table more attractive. The mean and standard deviation is commonly presented as mean (SD). Data from a column of means and a column of SD's can be combined to create a nice display using the `paste0()` function. Example:
+
+```{r}
+
+data.frame(m = c(46.7, 47.89, 43.5),  # A vector of means
+           s = c(4.21, 4.666, 3.1)) %>% # A vector of SD's
+        mutate(stat = paste0(round(m, 1), 
+                             " (",
+                             round(s, 1), 
+                             ")")) %>%
+        print()
+
+```
+
+A character vector of group names can be arranged and re-named using the `factor` function. In the `cyclingstudy` data set the groups (`INCR`, `DECR` and `MIX`) may be given more descriptive names, example:
+
+```{r}
+
+cyclingstudy %>%
+        mutate(group = factor(group, levels = c("INCR", "DECR", "MIX"), 
+                              labels = c("Increased intensity", 
+                                         "Decreased intensity", 
+                                         "Mixed intensity"))) %>%
+        distinct(group)
+        
+```
+
+
+## The next step: Create a neat report
+
+We will use a table generator to create the table. See next part of this workshop [here](ws4b-tables.html)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

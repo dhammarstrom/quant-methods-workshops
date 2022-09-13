@@ -2,16 +2,19 @@ project:
   type: website
 
 website:
-  title: "quant-methods-workshops"
+  title: "Quantitative Methods - Workshop, Assigments and Tutorials"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: assignments.qmd
+        text: Assignments
+      - href: workshops.qmd
+        text: Workshops
 
 format:
   html:
-    theme: cosmo
+    theme: lumen
     css: styles.css
     toc: true
 
