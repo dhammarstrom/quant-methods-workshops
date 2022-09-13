@@ -5,6 +5,7 @@ editor_options:
   chunk_output_type: console
 ---
 
+
 # Data wrangling and tables, part 2
 
 See [part 1 of this workshop here](ws4-data-wrangling-tables.html).

@@ -4,7 +4,6 @@ bibliography: resources/bib-final.bib
 editor_options: 
   chunk_output_type: console
 ---
-
 # Data wrangling and tables
 
 ```{r}
