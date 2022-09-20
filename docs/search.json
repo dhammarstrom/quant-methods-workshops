@@ -60,7 +60,7 @@
     "href": "index.html#practical-information",
     "title": "Quantitative methods and statistics (In Sport and Exercise Science)",
     "section": "Practical information",
-    "text": "Practical information\nThese notes were updated on 2022-09-13 and cover the course held during 2022 autumn semester. Contact Daniel Hammarström if you have any questions regarding this content.\n\nLearning objectives\nLearning objectives can be read in Norwegian here.\n\n\nLearning strategies\nThe course will include lectures, laboratory exercises, computer exercises and workshops, seminars and student presentations. Lectures will be held in-person and as pre-recorded published on these websites.\nComputer exercises will eventually require that you have special computer software installed on your computer. The software is free (see specific chapters in lecture notes).\nAssignments will be presented on this website with information on how to hand them in. The whole course is evaluated based on a portfolio exam (see below).\n\n\nCourse evaluation\nAs a student you can contribute to the quality of the course by engaging in course evaluation throughout the course. You will be asked to answer a pre-course questionnaire about your expectations and a post-course questionnaire about your experiences. You are also welcomed to take part in systematic discussions during the course about the quality of teaching and course material. With these notes I want to underline the importance of student participation in the continuous development of the course (and program) teaching/learning quality.\n\n\nLecturers and course administration\nIn order of appearance\n\nDaniel Hammarström (daniel.hammarstrom@inn.no), is responsible for course administration and will be teaching statistics.\nTomas Urianstad will organize laboratory work in the physiology lab.\nKristian Lian will be involved in molecular methods.\nProf. Carsten Lundby will cover aspects CO2 re-breathing techniques (physiology).\nProf. Finnur Dellsén will cover philosophy of science.\nProf. Stian Ellefsen will teach molecular methods.\n\n\n\nUpdates, notifications and general communication\nThese course notes will be updated during the course. General information and last minute changes will be posted on Canvas, make sure to check it as part of your daily study routine.\n\n\nLiterature\nA full list of recommended literature can be found here. Literature will be referenced in specific sections in the lecture notes.\n\n\nGrades\nThe course is graded pass/fail.\n\n\nLanguage\nMy (Daniel) first language is Swedish, I’m sure most of you will understand what I’m talking about. However, due to the fact that we accept international students to the program, most written communication and some lectures will be in English. You are not expected to write in English, it is however possible!"
+    "text": "Practical information\nThese notes were updated on 2022-09-20 and cover the course held during 2022 autumn semester. Contact Daniel Hammarström if you have any questions regarding this content.\n\nLearning objectives\nLearning objectives can be read in Norwegian here.\n\n\nLearning strategies\nThe course will include lectures, laboratory exercises, computer exercises and workshops, seminars and student presentations. Lectures will be held in-person and as pre-recorded published on these websites.\nComputer exercises will eventually require that you have special computer software installed on your computer. The software is free (see specific chapters in lecture notes).\nAssignments will be presented on this website with information on how to hand them in. The whole course is evaluated based on a portfolio exam (see below).\n\n\nCourse evaluation\nAs a student you can contribute to the quality of the course by engaging in course evaluation throughout the course. You will be asked to answer a pre-course questionnaire about your expectations and a post-course questionnaire about your experiences. You are also welcomed to take part in systematic discussions during the course about the quality of teaching and course material. With these notes I want to underline the importance of student participation in the continuous development of the course (and program) teaching/learning quality.\n\n\nLecturers and course administration\nIn order of appearance\n\nDaniel Hammarström (daniel.hammarstrom@inn.no), is responsible for course administration and will be teaching statistics.\nTomas Urianstad will organize laboratory work in the physiology lab.\nKristian Lian will be involved in molecular methods.\nProf. Carsten Lundby will cover aspects CO2 re-breathing techniques (physiology).\nProf. Finnur Dellsén will cover philosophy of science.\nProf. Stian Ellefsen will teach molecular methods.\n\n\n\nUpdates, notifications and general communication\nThese course notes will be updated during the course. General information and last minute changes will be posted on Canvas, make sure to check it as part of your daily study routine.\n\n\nLiterature\nA full list of recommended literature can be found here. Literature will be referenced in specific sections in the lecture notes.\n\n\nGrades\nThe course is graded pass/fail.\n\n\nLanguage\nMy (Daniel) first language is Swedish, I’m sure most of you will understand what I’m talking about. However, due to the fact that we accept international students to the program, most written communication and some lectures will be in English. You are not expected to write in English, it is however possible!"
   },
   {
     "objectID": "index.html#assignments-and-portfolio-exam",
@@ -121,43 +121,85 @@
   {
     "objectID": "ws5-writing-reports.html",
     "href": "ws5-writing-reports.html",
-    "title": "Writing reports",
+    "title": "Writing reports and working with R projects",
     "section": "",
-    "text": "Quarto and Rmarkdown a special kind of scripts where text and computer code can be combined to generate reports.\nUnder the hood, a report generator is converting code and plain text to an output format such as html, pdf or docx.\nQuarto is a new, well documented format that gives extra flexibility, but also requires installation of extra software."
+    "text": "These workshop notes contains links to relevant documentation-"
   },
   {
-    "objectID": "ws5-writing-reports.html#code-chunks",
-    "href": "ws5-writing-reports.html#code-chunks",
-    "title": "Writing reports",
-    "section": "Code chunks",
-    "text": "Code chunks\n\nCode chunks are sections of your source file containing code. We primarily write R-code, but e.g., python is also possible.\nThe code chunk comes with several options specified in the top of the chunk using #|, such as:\n\n```{r}\n#| eval: true\n#| echo: true\n#| warning: false\n#| error: true\n#| include: false\n```"
-  },
-  {
-    "objectID": "ws5-writing-reports.html#inline-code",
-    "href": "ws5-writing-reports.html#inline-code",
-    "title": "Writing reports",
-    "section": "Inline code",
-    "text": "Inline code\n\nCode may be included inline to include code generated outputs"
+    "objectID": "ws5-writing-reports.html#quarto-and-rmarkdown",
+    "href": "ws5-writing-reports.html#quarto-and-rmarkdown",
+    "title": "Writing reports and working with R projects",
+    "section": "Quarto and Rmarkdown",
+    "text": "Quarto and Rmarkdown\n\nQuarto and R Markdown a special kind of scripts where text and computer code can be combined to generate reports.\nUnder the hood, a report generator is converting code and plain text to an output format such as html, pdf or docx (more formats are available).\nQuarto is a new, well documented format that gives extra flexibility, but also requires installation of extra software.\nR Markdown is even more well documented, see e.g. R Markdown, R Markdown: The Definitev Guide"
   },
   {
     "objectID": "ws5-writing-reports.html#code-execution-and-the-environment",
     "href": "ws5-writing-reports.html#code-execution-and-the-environment",
-    "title": "Writing reports",
+    "title": "Writing reports and working with R projects",
     "section": "Code execution and the environment",
-    "text": "Code execution and the environment\n\nFrom where do code execute?"
+    "text": "Code execution and the environment\n\nWhen a quarto or Rmarkdown file is “knitted”, the source file looks for e.g., data files in the same directory as the source file is saved.\nWorking in a RStudio projects makes it easy to work with the report interactively as you can use relative paths.\nRStudio has an excellent guide to its project feature"
+  },
+  {
+    "objectID": "ws5-writing-reports.html#rstudio-projects",
+    "href": "ws5-writing-reports.html#rstudio-projects",
+    "title": "Writing reports and working with R projects",
+    "section": "RStudio projects",
+    "text": "RStudio projects\n\nA projects is basically a collection of settings together with a root directory.\nSettings can be accessed in Tools > Project Options.\nThis means that you will be able to work with relative paths. If reading a csv file using relative paths, your code will look like this from a project.\n\n\ndat <- read_csv(\"./data/my-data.csv\")\n\n\nIf your are using absolute paths, reaching the same goal could look like this\n\n\ndat <- read_csv(\"C:/Users/Daniel/Dropbox/Some-folder/a-project/data/my-data.csv\")\n\n\nRStudio projects helps you create good habits for reproducible analysis as all analyses are conducted within a stand-alone folder structure. Your data and scripts can be shared.\nUse a basic structure for all projects:\n\nMy-project\n        |\n        |-.Rproj        (The project settings)\n        |--/data        (Contains all data needed for your analysis)\n        |--/R           (Contains all scripts/R-files)\n        |--/output      (Collection of all output files)\n\n\n\nStart a new project from the Project menu."
+  },
+  {
+    "objectID": "ws5-writing-reports.html#writing-in-quartor-markdown",
+    "href": "ws5-writing-reports.html#writing-in-quartor-markdown",
+    "title": "Writing reports and working with R projects",
+    "section": "Writing in Quarto/R Markdown",
+    "text": "Writing in Quarto/R Markdown\n\nThe basic syntax in quarto/R Markdown files is markdown. Markdown makes it easy to format text without point-and-click as all formatting can be added with syntax, example:\n\nThis text is an example of the markdown syntax which includes **bold**, *italic*,\n^super^ and ~subscript~ and ~~striketrough~~\nResulting in:\n\nThis text is an example of the markdown syntax which includes bold, italic, super and subscript and striketrough\n\n\nIn addition to text formatting, the markdown syntax offers solutions for adding images, tables, equations, lists, diagrams, different highligt blocks. See the the quarto documentation for more information."
+  },
+  {
+    "objectID": "ws5-writing-reports.html#code-chunks",
+    "href": "ws5-writing-reports.html#code-chunks",
+    "title": "Writing reports and working with R projects",
+    "section": "Code chunks",
+    "text": "Code chunks\n\nCode chunks are sections of your source file containing code. We primarily write R-code, but e.g., python is also possible.\nThe code chunk comes with several options specified in the top of the chunk using #|, such as:\n\n```{r}\n#| eval: true\n#| echo: true\n#| warning: false\n#| error: true\n#| include: false\n```\n\nNote that the #| is a “new” intervention, some documentation will still suggest that you use code chunk settings in the code chunk header."
+  },
+  {
+    "objectID": "ws5-writing-reports.html#inline-code",
+    "href": "ws5-writing-reports.html#inline-code",
+    "title": "Writing reports and working with R projects",
+    "section": "Inline code",
+    "text": "Inline code\n\nCode may be included inline to include code generated outputs\n\n\na_variable <- 3.14\n\n\nTo include the variable in the text:\n\n\nThe variable will be displayed here `r a_variable`"
   },
   {
     "objectID": "ws5-writing-reports.html#bibliographies",
     "href": "ws5-writing-reports.html#bibliographies",
-    "title": "Writing reports",
+    "title": "Writing reports and working with R projects",
     "section": "Bibliographies",
-    "text": "Bibliographies\n\nAdd a bib file to your report\nExport bibtex"
+    "text": "Bibliographies\n\nBibliographies/Citations may be added to reports using a external bibliography file. A simple format is bibtex\nPubmed entries can be searched using TexMed\nIn the visual editor, bibliographies can be easily created"
   },
   {
-    "objectID": "ws5-writing-reports.html#different-formats",
-    "href": "ws5-writing-reports.html#different-formats",
-    "title": "Writing reports",
-    "section": "Different formats",
-    "text": "Different formats\n\nWord\npdf\nhtml"
+    "objectID": "ws5-writing-reports.html#some-notes-on-different-formats",
+    "href": "ws5-writing-reports.html#some-notes-on-different-formats",
+    "title": "Writing reports and working with R projects",
+    "section": "Some notes on different formats",
+    "text": "Some notes on different formats\n\nHTML is the basic output from R Markdown and quarto. This is suitable for first drafts.\nTo be able to render PDF files you must have an installation of rendering software. TinyTeX is generally recomended, see the documentation and installation instructions here\nWord documents creates an editable document with associated pros and cons.\nAll formats has different advantages and offer flexibility that gives opportunities to create any type of document\nOther formats such as presentations, webpages, apps etc. makes quarto / R Markdown very versatile."
+  },
+  {
+    "objectID": "ws6-git.html",
+    "href": "ws6-git.html",
+    "title": "Collaborative coding with github",
+    "section": "",
+    "text": "Jennifer Bryan has written an excellent paper (Bryan 2017) on the use of git and GitHub when working with R.\nJennifer is also co-author on the web-book “Happy Git and GitHub for the useR” which is an excellent resource whenever you are stuck.\n\n\nGit is a version control system. It keeps track of changes made to files contained in a repository. Additionally, using GitHub users can collaborate on a repository by keeping an online version of the repository.\nThe benefits of using git comes from enabling collaboration with other and your future you (Bryan 2017)."
+  },
+  {
+    "objectID": "ws6-git.html#different-alternatives-for-version-control",
+    "href": "ws6-git.html#different-alternatives-for-version-control",
+    "title": "Collaborative coding with github",
+    "section": "Different alternatives for version control",
+    "text": "Different alternatives for version control\n\n\n\n(Figure from Bryan 2017)"
+  },
+  {
+    "objectID": "ws6-git.html#basic-git-and-github",
+    "href": "ws6-git.html#basic-git-and-github",
+    "title": "Collaborative coding with github",
+    "section": "Basic git and GitHub",
+    "text": "Basic git and GitHub\n\nCreate new repositories online on github, this will be an empty repository\nClone the repository in your R project (New Project > Version Control > Git)\nMake changes, add files etc.\ngit add file for a specific file or git add -A for all changed files\ngit commit -m \"message\" commit changes to the version control system with a message describing what you have done.\ngit push to the remote repository (GitHub)\nIf collaborating, a collaborator may git pull all changes to their local repository.\nCheck if you have any changes that needs to be commited or pulled by git status\n\n\nUsing forks and pull requests\n\nA fork is a copy of a repository that may evolve independently to the original repository under your own username on github.\nCreate a fork from the GitHub web interface (www.github.com).\nAfter you have made changes you may file a pull request to the original repository. You will have to describe the changes and why you think the maintainer should accept pulling your changes into the original repository.\nThis is a great way to suggest changes to complex projects.\n\n\n\nUsing branches\n\nSimilarly to forks, a branch can also be used to update a repository with changes which are then merged to the main branch after testing or review.\nSee the GitHub documentation for details."
   }
 ]

@@ -1,13 +1,82 @@
 ---
-title: "Writing reports"
+title: "Writing reports and working with R projects"
 ---
+
+
+These workshop notes contains links to relevant documentation-
 
 
 ## Quarto and Rmarkdown
 
-- Quarto and Rmarkdown a special kind of scripts where text and computer code can be combined to generate reports. 
-- Under the hood, a report generator is converting code and plain text to an output format such as *html*, *pdf* or *docx*.
+- Quarto and R Markdown a special kind of scripts where text and computer code can be combined to generate reports. 
+- Under the hood, a report generator is converting code and plain text to an output format such as *html*, *pdf* or *docx* (more formats are available).
 - Quarto is a new, [well documented](https://quarto.org/) format that gives extra flexibility, but also requires installation of extra software.
+- R Markdown is even more well documented, see e.g. [R Markdown](https://rmarkdown.rstudio.com/), [R Markdown: The Definitev Guide](https://bookdown.org/yihui/rmarkdown/)
+
+
+
+## Code execution and the environment
+
+- When a quarto or Rmarkdown file is "knitted", the source file looks for e.g., data files in the same directory as the source file is saved.
+- Working in a RStudio projects makes it easy to work with the report interactively as you can use relative paths.
+- [RStudio has an excellent guide to its project feature](https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-Projects)
+
+
+## RStudio projects
+
+- A projects is basically a collection of settings together with a root directory.
+- Settings can be accessed in Tools > Project Options.
+- This means that you will be able to work with relative paths. If reading a `csv` file using relative paths, your code will look like this from a project.
+
+```{r}
+#| eval: false
+
+dat <- read_csv("./data/my-data.csv")
+```
+
+
+- If your are using absolute paths, reaching the same goal could look like this
+
+```{r}
+#| eval: false
+
+dat <- read_csv("C:/Users/Daniel/Dropbox/Some-folder/a-project/data/my-data.csv")
+
+```
+
+- RStudio projects helps you create good habits for reproducible analysis as all analyses are conducted within a stand-alone folder structure. Your data and scripts can be shared.
+
+- Use a basic structure for all projects:
+
+```{}
+My-project
+        |
+        |-.Rproj        (The project settings)
+        |--/data        (Contains all data needed for your analysis)
+        |--/R           (Contains all scripts/R-files)
+        |--/output      (Collection of all output files)
+
+
+```
+
+- Start a new project from the Project menu. 
+
+
+## Writing in Quarto/R Markdown
+
+- The basic syntax in quarto/R Markdown files is markdown. Markdown makes it easy to format text without point-and-click as all formatting can be added with syntax, example:
+
+```{}
+This text is an example of the markdown syntax which includes **bold**, *italic*,
+^super^ and ~subscript~ and ~~striketrough~~
+```
+
+Resulting in:
+
+> This text is an example of the markdown syntax which includes **bold**, *italic*,
+^super^ and ~subscript~ and ~~striketrough~~
+
+- In addition to text formatting, the markdown syntax offers solutions for adding images, tables, equations, lists, diagrams, different highligt blocks. See the [the quarto documentation](https://quarto.org/docs/authoring/markdown-basics.html) for more information.
 
 
 ## Code chunks
@@ -24,25 +93,43 @@ title: "Writing reports"
 #| include: false
 ```
 ````
+```
+```
+
+Note that the `#|` is a "new" intervention, some documentation will still suggest that you use code chunk settings in the code chunk header.
 
 ## Inline code
 
 - Code may be included inline to include code generated outputs
 
-## Code execution and the environment
+```{r}
+#| eval: false
+a_variable <- 3.14
 
-- From where do code execute?
+```
+
+- To include the variable in the text:
+
+```{r}
+#| eval: false
+The variable will be displayed here `r a_variable` 
+```
 
 ## Bibliographies
 
-- Add a bib file to your report
-- Export bibtex
+- Bibliographies/Citations may be added to reports using a external bibliography file. A simple format is bibtex
+- Pubmed entries can be searched using [TexMed](https://www.bioinformatics.org/texmed/)
+- In the visual editor, bibliographies can be easily created
 
-## Different formats
+## Some notes on different formats
 
-- Word
-- pdf
-- html
+- HTML is the basic output from R Markdown and quarto. This is suitable for first drafts.
+- To be able to render PDF files you must have an installation of rendering software. TinyTeX is generally recomended, [see the documentation and installation instructions here](https://yihui.org/tinytex/)
+- Word documents creates an editable document with associated pros and cons.
+
+- All formats has different advantages and offer flexibility that gives opportunities to create any type of document
+
+- Other formats such as presentations, webpages, apps etc. makes quarto / R Markdown very versatile. 
 
 
 

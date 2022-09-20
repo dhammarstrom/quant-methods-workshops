@@ -17,7 +17,7 @@ Finally, we are interested in reliability. Here you need to calculate an estimat
 
 ## The format of the report
 
-The report should be uploaded to github with both a source file (`.Rmd` or `.qmd`) and report file as output (`html`, `pdf` or `docx`-file). The github folder should also contain the datset being used in the calculations. Work on your assignment as a R project. Contributions from members of the group can be made directly to the github repository. Follow this checklist on how to get started:
+The report should be uploaded to github with both a source file (`.Rmd` or `.qmd`) and report file as output (`html`, `pdf` or `docx`-file). The github folder should also contain the dataset being used in the calculations. Work on your assignment as a R project. Contributions from members of the group can be made directly to the github repository. Follow this checklist on how to get started:
 
 ([A nice introduction to github with R can be found here](https://happygitwithr.com/install-intro.html))
 
@@ -47,6 +47,13 @@ git pull
 
 If you are contributing to the project owned by another person in your group it is reccomended that you create a pull request with your changes.
 
+## Data
+
+If you want more data, you may "borrow" data from previous students:
+
+[VO<sub>2max</sub> tests (Group 1)](/data/reliability-old/vo2max-g1.xlsx)
+[VO<sub>2max</sub> tests (Group 2)](/data/reliability-old/vo2max-g2.xlsx)
+[Lactate threshold tests](/data/reliability-old/laktatprofil-g2.xlsx)
 
 ## How to hand in the report.
 

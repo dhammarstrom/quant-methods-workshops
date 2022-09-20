@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quantitative Methods - Workshop, Assigments and Tutorials - Writing reports</title>
+<title>Quantitative Methods - Workshop, Assigments and Tutorials - Writing reports and working with R projects</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -160,11 +160,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#quarto-and-rmarkdown" id="toc-quarto-and-rmarkdown" class="nav-link active" data-scroll-target="#quarto-and-rmarkdown">Quarto and Rmarkdown</a></li>
+  <li><a href="#code-execution-and-the-environment" id="toc-code-execution-and-the-environment" class="nav-link" data-scroll-target="#code-execution-and-the-environment">Code execution and the environment</a></li>
+  <li><a href="#rstudio-projects" id="toc-rstudio-projects" class="nav-link" data-scroll-target="#rstudio-projects">RStudio projects</a></li>
+  <li><a href="#writing-in-quartor-markdown" id="toc-writing-in-quartor-markdown" class="nav-link" data-scroll-target="#writing-in-quartor-markdown">Writing in Quarto/R Markdown</a></li>
   <li><a href="#code-chunks" id="toc-code-chunks" class="nav-link" data-scroll-target="#code-chunks">Code chunks</a></li>
   <li><a href="#inline-code" id="toc-inline-code" class="nav-link" data-scroll-target="#inline-code">Inline code</a></li>
-  <li><a href="#code-execution-and-the-environment" id="toc-code-execution-and-the-environment" class="nav-link" data-scroll-target="#code-execution-and-the-environment">Code execution and the environment</a></li>
   <li><a href="#bibliographies" id="toc-bibliographies" class="nav-link" data-scroll-target="#bibliographies">Bibliographies</a></li>
-  <li><a href="#different-formats" id="toc-different-formats" class="nav-link" data-scroll-target="#different-formats">Different formats</a></li>
+  <li><a href="#some-notes-on-different-formats" id="toc-some-notes-on-different-formats" class="nav-link" data-scroll-target="#some-notes-on-different-formats">Some notes on different formats</a></li>
   </ul>
 </nav>
     </div>
@@ -173,7 +175,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Writing reports</h1>
+<h1 class="title">Writing reports and working with R projects</h1>
 </div>
 
 
@@ -187,12 +189,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
+<p>These workshop notes contains links to relevant documentation-</p>
 <section id="quarto-and-rmarkdown" class="level2">
 <h2 class="anchored" data-anchor-id="quarto-and-rmarkdown">Quarto and Rmarkdown</h2>
 <ul>
-<li>Quarto and Rmarkdown a special kind of scripts where text and computer code can be combined to generate reports.</li>
-<li>Under the hood, a report generator is converting code and plain text to an output format such as <em>html</em>, <em>pdf</em> or <em>docx</em>.</li>
+<li>Quarto and R Markdown a special kind of scripts where text and computer code can be combined to generate reports.</li>
+<li>Under the hood, a report generator is converting code and plain text to an output format such as <em>html</em>, <em>pdf</em> or <em>docx</em> (more formats are available).</li>
 <li>Quarto is a new, <a href="https://quarto.org/">well documented</a> format that gives extra flexibility, but also requires installation of extra software.</li>
+<li>R Markdown is even more well documented, see e.g.&nbsp;<a href="https://rmarkdown.rstudio.com/">R Markdown</a>, <a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitev Guide</a></li>
+</ul>
+</section>
+<section id="code-execution-and-the-environment" class="level2">
+<h2 class="anchored" data-anchor-id="code-execution-and-the-environment">Code execution and the environment</h2>
+<ul>
+<li>When a quarto or Rmarkdown file is “knitted”, the source file looks for e.g., data files in the same directory as the source file is saved.</li>
+<li>Working in a RStudio projects makes it easy to work with the report interactively as you can use relative paths.</li>
+<li><a href="https://support.rstudio.com/hc/en-us/articles/200526207-Using-RStudio-Projects">RStudio has an excellent guide to its project feature</a></li>
+</ul>
+</section>
+<section id="rstudio-projects" class="level2">
+<h2 class="anchored" data-anchor-id="rstudio-projects">RStudio projects</h2>
+<ul>
+<li>A projects is basically a collection of settings together with a root directory.</li>
+<li>Settings can be accessed in Tools &gt; Project Options.</li>
+<li>This means that you will be able to work with relative paths. If reading a <code>csv</code> file using relative paths, your code will look like this from a project.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"./data/my-data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>If your are using absolute paths, reaching the same goal could look like this</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"C:/Users/Daniel/Dropbox/Some-folder/a-project/data/my-data.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>RStudio projects helps you create good habits for reproducible analysis as all analyses are conducted within a stand-alone folder structure. Your data and scripts can be shared.</p></li>
+<li><p>Use a basic structure for all projects:</p></li>
+</ul>
+<pre><code>My-project
+        |
+        |-.Rproj        (The project settings)
+        |--/data        (Contains all data needed for your analysis)
+        |--/R           (Contains all scripts/R-files)
+        |--/output      (Collection of all output files)
+
+</code></pre>
+<ul>
+<li>Start a new project from the Project menu.</li>
+</ul>
+</section>
+<section id="writing-in-quartor-markdown" class="level2">
+<h2 class="anchored" data-anchor-id="writing-in-quartor-markdown">Writing in Quarto/R Markdown</h2>
+<ul>
+<li>The basic syntax in quarto/R Markdown files is markdown. Markdown makes it easy to format text without point-and-click as all formatting can be added with syntax, example:</li>
+</ul>
+<pre><code>This text is an example of the markdown syntax which includes **bold**, *italic*,
+^super^ and ~subscript~ and ~~striketrough~~</code></pre>
+<p>Resulting in:</p>
+<blockquote class="blockquote">
+<p>This text is an example of the markdown syntax which includes <strong>bold</strong>, <em>italic</em>, <sup>super</sup> and <sub>subscript</sub> and <del>striketrough</del></p>
+</blockquote>
+<ul>
+<li>In addition to text formatting, the markdown syntax offers solutions for adding images, tables, equations, lists, diagrams, different highligt blocks. See the <a href="https://quarto.org/docs/authoring/markdown-basics.html">the quarto documentation</a> for more information.</li>
 </ul>
 </section>
 <section id="code-chunks" class="level2">
@@ -201,39 +260,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Code chunks are sections of your source file containing code. We primarily write R-code, but e.g., python is also possible.</li>
 <li>The code chunk comes with several options specified in the top of the chunk using <code>#|</code>, such as:</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#| error: true</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code></code></pre>
+<p>Note that the <code>#|</code> is a “new” intervention, some documentation will still suggest that you use code chunk settings in the code chunk header.</p>
 </section>
 <section id="inline-code" class="level2">
 <h2 class="anchored" data-anchor-id="inline-code">Inline code</h2>
 <ul>
 <li>Code may be included inline to include code generated outputs</li>
 </ul>
-</section>
-<section id="code-execution-and-the-environment" class="level2">
-<h2 class="anchored" data-anchor-id="code-execution-and-the-environment">Code execution and the environment</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>a_variable <span class="ot">&lt;-</span> <span class="fl">3.14</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
-<li>From where do code execute?</li>
+<li>To include the variable in the text:</li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>The variable will be displayed here <span class="st">`</span><span class="at">r a_variable</span><span class="st">`</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="bibliographies" class="level2">
 <h2 class="anchored" data-anchor-id="bibliographies">Bibliographies</h2>
 <ul>
-<li>Add a bib file to your report</li>
-<li>Export bibtex</li>
+<li>Bibliographies/Citations may be added to reports using a external bibliography file. A simple format is bibtex</li>
+<li>Pubmed entries can be searched using <a href="https://www.bioinformatics.org/texmed/">TexMed</a></li>
+<li>In the visual editor, bibliographies can be easily created</li>
 </ul>
 </section>
-<section id="different-formats" class="level2">
-<h2 class="anchored" data-anchor-id="different-formats">Different formats</h2>
+<section id="some-notes-on-different-formats" class="level2">
+<h2 class="anchored" data-anchor-id="some-notes-on-different-formats">Some notes on different formats</h2>
 <ul>
-<li>Word</li>
-<li>pdf</li>
-<li>html</li>
+<li><p>HTML is the basic output from R Markdown and quarto. This is suitable for first drafts.</p></li>
+<li><p>To be able to render PDF files you must have an installation of rendering software. TinyTeX is generally recomended, <a href="https://yihui.org/tinytex/">see the documentation and installation instructions here</a></p></li>
+<li><p>Word documents creates an editable document with associated pros and cons.</p></li>
+<li><p>All formats has different advantages and offer flexibility that gives opportunities to create any type of document</p></li>
+<li><p>Other formats such as presentations, webpages, apps etc. makes quarto / R Markdown very versatile.</p></li>
 </ul>
 
 
