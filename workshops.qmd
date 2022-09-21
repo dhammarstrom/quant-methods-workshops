@@ -12,3 +12,4 @@ format: html
 |[Data wrangling and tables, part 2](ws4b-tables.html)| |
 |[Writing reports](ws5-writing-reports.html)| |
 |[Collaborative coding](ws6-git.html)| |
+|[Reliability and writing up a report (in Norwegian)](ws8-norwegian.html)|

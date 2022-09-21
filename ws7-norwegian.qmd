@@ -1,0 +1,90 @@
+---
+title: "Workshop 7: Hvordan i huleste løser jeg arbeidskrav 1? En oppsummering av emnet så langt"
+bibliography: resources/bib-final.bib
+---
+
+Hensikten med oppgaven er (1) å beskrive reliabilitet i en testmetode fra fysiologilabben, og (2) bruke verktøy for reproduserbar dataanalyse. Testet skal beskrives i detalj, inkludert gjennomføring av testen og hvordan data prosesseres fra rådata til ferdig rapport. Kravet om verktøy for reproduserbar dataanalyse innebærer at dere forventes lage en rapport som kan reproduseres på en annen PC, rapporten skal derfor være koblet til data og kod som kan gjenskape den.
+
+## Steg 1: Forberedelse av data
+
+Som et første steg kan det være lurt å lage datasett som er «tidy». Dette innebærer en rad per observasjon og en kolonne per variabel. I en reliabilitetsstudie kan man f.eks. samle inn data fra et antall deltakere og to tester. Data fra de to første deltakerne kan se slik ut:
+
+|participant|	time|	value|
+| --- | --- | --- |
+|1|	1|	67|
+|2|	1|	54|
+|1|	2|	69|
+|2|	2|	53|
+		
+
+## Steg 2: Sett opp verktøy for reproduserbar dataanalyse
+Her kreves ekstra programvare på din PC og en brukere på www.github.com. Last ned git fra https://git-scm.com/downloads og legg til sti (file path) til git executable (git.exe) i RStudio gjennom menyene Tools > Global Options > Git/SVN > Git executable. Du finner git.exe i f.eks. C:/Program Files/Git/bin/git.exe.
+
+Neste steg er å skape en brukere på www.github.com. 
+
+Den enkleste måten å starte en mappe (repository) med versjonskontroll og kobling til github er å logge på github.com, velg «New» eller gå til https://github.com/new for å lage en ny repository. Velg et godt navn (beskrivende for hva hensikten med analysen er, men kort). Trykk på «create repository», kopier adressen i det neste steget (f.eks. https://github.com/dhammarstrom/vo2max-reliability.git).
+
+Starte opp RStudio. Velg «New project» i Project menyen. Velg «version control» og «Git», lim inn adressen fra github.com. Velg en passende plass på din PC for å lagre prosjektmappen, trykk på «Create project». Du har nå en mappe med versjonskontroll som er koblet mot en «remote repository» på github.com. 
+
+## Steg 3: Legg inn data og starte opp et quarto-dokument
+I den prosjektmappe du har på PC kan du nå legge til data. Skape en ny mappe med navnet «data» og legg in dataene du forbrett i Steg 1. Dette kan være en xlsx- eller csv-fil. 
+
+For å bruke quarto trenger du å installere quarto, gå til https://quarto.org/, trykk på «Get Started» og følg instruksjonene. 
+
+Ette å ha startet RStudio på nytt bør du ha mulighet til å starte et nytt quarto-dokument fra File > New File > Quarto document.
+
+Spare dokumentet i din prosjektmappe. Vi er nå klare for å logge den første versjonen av prosjektet.
+
+## Steg 4: «Git add, commit and push» 
+Filer kan legges til i versjonshistorikken ved å det grafiske grensesnittet i RStudio. Trykk på Ctrl+Alt+M og du får opp et vindu med endringer. Her bør du nå se din data-fil og quarto-dokumentet som du har spart. Marker de filer du ønsker å legge til i historikken (under Staged i menyen til venstre). Skriv et «Commit message» (til høyre) og trykk på «commit». Et vindu åpnes og sier noe om statusen for din commit. For å laste opp filene till github.com så trenger du å trykke på «Push» (pilen som peker oppover lengst oppe til høyre).
+
+Hvis du eller din kamerat har gjort forandringer i mappen på github kan du trykke på «pull» (pil som peker nedover). Du laster da ned forandringer til din lokale mappe.
+
+Hvor ofte bør jeg legge til forandringer? Det er opp til deg, men det kan være lurt å legge til flere små forandringer for å ha mulighet til å se når noe går galt.
+
+## Steg 5: Beregne reliabilitet
+Dette steget krever noe data wrangling, noe innsikt i hva som er reliabilitet og noe innsikt i hvordan du kan presentere resultater. For bakgrunn og diskusjon se [kursnotatene kapittel 9]( https://dhammarstrom.github.io/quant-methods/reliability-in-the-physiology-lab.html#reliability-in-the-physiology-lab).
+
+Hele analysen er ikke større enn at den får plass i et quarto-dokument. I mer komplekse prosjekter kreves det iblant flere filer/skript for å håndtere data og funksjoner.
+
+I quarto-dokumentet blir første steg å laste inn data. Du har plassert dataene i en mappen som heter «data», denne kan du nå gjennom en relativ adresse. For å laste inn en xlsx-fil trenger du pakken «readxl», for å laste inn en csv-fil vil «readr» eller funksjoner fra base R fungere. I eksemplet under laster vi inn en excelfil og lagrer den i et objekt som vi navngir «dat».
+
+```{r}
+#| message: false
+#| warning: false
+library(tidyverse); library(readxl)
+dat <- read_excel("data/vo2max-g2.xlsx") %>%
+        select(fp, time, vo2max = `VO2_max_ml/min`) %>%
+        print()
+```
+
+
+Vi skal beregne reliabilitet basert på differenser mellom to målinger. Hvis en test har høy reliabilitet så er differensen mellom to målinger liten. Vi ønsker bestemme den typiske differensen (eller typical error) mellom to målinger, dette definerer vi som standardavviket for differensene delt på kvadratroten av 2 [!, se @RN130].
+
+
+Den enkleste måten å regne ut differensen mellom parvise målinger er å lage datasettet til «wide» format. Dette gjør vi med pivot_wider, vi lager seden en ny variabel for å skape differensen. Standardavvik av differensen kan beregnes i summarise.
+Typiske feilet/differensen/error kan uttrykkes som en % av gjennomsnitt og ved hjelp av «limits of agreement» [@RN130] (Se også [kursnotatene](https://dhammarstrom.github.io/quant-methods/reliability-in-the-physiology-lab.html#reliability-in-the-physiology-lab)).
+
+```{r}
+dat %>%
+        pivot_wider(names_from = time, values_from = vo2max) %>%
+        mutate(diff = post - pre) %>%
+        summarise(s = sd(diff),  # SD av differense
+                  m = mean(c(pre, post)),  # Gjennomsnitt av alle målingene
+                  te = s / sqrt(2)) %>% # "Typical error" 
+        print()
+```
+
+
+## Steg 6: Skriv rapporten
+
+Nå er vi klare for å skrive rapporten. For å vise at du kan håndtere alle delene i en kvantitativ rapport bør den inneholde:
+
+- En figur. Bruk ggplot2 for å gi en grafisk representasjon av dataene, kanskje rådata fra test 1 og 2 plotet på x og y aksel. Alternativt noe mer avansert, som en [Bland-Altman plot]( https://www.statology.org/bland-altman-plot-r/)
+- En tabell, bruk gt for å lage en tabell for å beskrive deltakerne eller resultater
+- Bibliography/Referanser. Bruk visual editor og sett in referanser (Insert > Citation)
+- Teksten bør beskrive testen (protokoll, databearbeiding osv) og tolkning av resultatene. Her bør dere bruke relevante referanser for å sette deres resultat i kontekst.
+
+Se til at rapporten er mulig å lage til eks. html (knit/render virker). Legg alt på github og lim inn adressen i innleveringen på canvas.
+
+Lykke till! 
