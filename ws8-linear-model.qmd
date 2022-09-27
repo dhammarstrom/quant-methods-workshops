@@ -1,0 +1,290 @@
+---
+title: "The Linear Model"
+format:
+        html:
+          code-fold: true
+editor_options: 
+  chunk_output_type: console
+---
+
+## The equation of a straight line
+
+A straight line can be described using the simple equation $y = a + bx$. Here $a$ is the intercept and $b$ is the slope.
+
+The line is heading upwards if $b > 0$ and downwards if $b < 0$. 
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: "Straight lines following the equation $y = a + bx$" 
+
+library(tidyverse); library(patchwork)
+
+large_theme <- function() {
+        
+        theme(axis.text = element_text(size = 12), 
+              axis.title = element_text(size = 12))
+        
+}
+
+
+
+a <- ggplot(data.frame(x = c(0, 2), 
+                  y = c(0, 3)), 
+       aes(x, y)) +
+        
+        geom_blank() +
+        
+        scale_y_continuous(breaks = c(0, 1, 2, 3), 
+                           labels = c("a", "a+b", "a+2b", "a+3b")) + 
+        geom_abline(intercept = 0, slope = 1) +
+        large_theme()
+        
+b <- ggplot(data.frame(x = c(0, 2), 
+                  y = c(0, -3)), 
+       aes(x, y)) +
+        
+        geom_blank() +
+        
+        scale_y_continuous(breaks = c(0, -1, -2, -3), 
+                           labels = c("a", "a+b", "a+2b", "a+3b")) + 
+        geom_abline(intercept = 0, slope = -1) +
+        large_theme()
+
+
+a | b
+
+
+```
+
+
+
+
+
+
+## Creating models of data using straight lines
+
+We can use the straight line to create a model describing data. What line would be describe the data shown in the plots below? Copy the code in the code chunk below the figure and add straight lines thaty best describes the data.
+
+Straight lines can be added to a `ggplot` using the `geom_abline()` function. It takes the arguments `slope` and `intercept`.
+
+
+```{r}
+#| echo: false
+
+
+a <- ggplot(data.frame(x = c(1, 2, 3), 
+                  y = c(1, 2, 3)), 
+       aes(x, y)) +
+        geom_point(size = 3) +
+        scale_y_continuous(limits = c(0, 5)) +
+        scale_x_continuous(limits = c(0, 5)) +
+        large_theme()
+
+b <- ggplot(data.frame(x = c(1, 1, 2), 
+                  y = c(1, 2, 2)), 
+       aes(x, y)) +
+        geom_point(size = 3) +
+        scale_y_continuous(limits = c(0, 5)) +
+        scale_x_continuous(limits = c(0, 5)) +
+        large_theme()
+        
+c <- ggplot(data.frame(x = c(1, 1, 2, 2), 
+                  y = c(1, 2, 1, 2)), 
+       aes(x, y)) +
+        geom_point(size = 3) +
+        scale_y_continuous(limits = c(0, 5)) +
+        scale_x_continuous(limits = c(0, 5)) +
+        large_theme()
+
+
+d <- ggplot(data.frame(x = c(1, 2, 3, 3, 4, 5), 
+                  y = c(2, 3, 1, 3, 2, 3)), 
+       aes(x, y)) +
+        geom_point(size = 3) +
+        scale_y_continuous(limits = c(0, 5)) +
+        scale_x_continuous(limits = c(0, 5)) +
+        large_theme()
+
+
+
+mod_a <- data.frame(x = c(1, 2, 3), 
+                  y = c(1, 2, 3)) %>%
+        lm(y ~ x, data = .) %>%
+        coef()
+        
+        
+
+mod_b <- data.frame(x = c(1, 1, 2), 
+                  y = c(1, 2, 2)) %>%
+        lm(y ~ x, data = .) %>%
+        coef()
+
+mod_c <- data.frame(x = c(1, 1, 2, 2), 
+                  y = c(1, 2, 1, 2)) %>%
+        lm(y ~ x, data = .) %>%
+        coef() %>%
+        data.frame() %>%
+        round(2)
+                  
+        
+mod_d <- data.frame(x = c(1, 2, 3, 3, 4, 5), 
+                  y = c(2, 3, 1, 3, 2, 3)) %>%
+        lm(y ~ x, data = .) %>%
+        coef()
+        
+        
+        
+
+(a|b)/(c|d) + plot_annotation(tag_levels = 'A')
+
+```
+
+
+
+```{r}
+#| eval: false
+
+
+a <- ggplot(data.frame(x = c(1, 2, 3), 
+                  y = c(1, 2, 3)), 
+       aes(x, y)) +
+        geom_point(size = 3) +
+        scale_y_continuous(limits = c(0, 5)) +
+        scale_x_continuous(limits = c(0, 5)) 
+
+b <- ggplot(data.frame(x = c(1, 1, 2), 
+                  y = c(1, 2, 2)), 
+       aes(x, y)) +
+        geom_point(size = 3) +
+        scale_y_continuous(limits = c(0, 5)) +
+        scale_x_continuous(limits = c(0, 5)) 
+        
+c <- ggplot(data.frame(x = c(1, 1, 2, 2), 
+                  y = c(1, 2, 1, 2)), 
+       aes(x, y)) +
+        geom_point(size = 3) +
+        scale_y_continuous(limits = c(0, 5)) +
+        scale_x_continuous(limits = c(0, 5))
+
+
+d <- ggplot(data.frame(x = c(1, 2, 3, 3, 4, 5), 
+                  y = c(2, 3, 1, 3, 2, 3)), 
+       aes(x, y)) +
+        geom_point(size = 3) +
+        scale_y_continuous(limits = c(0, 5)) +
+        scale_x_continuous(limits = c(0, 5)) 
+
+
+```
+
+
+The goal of fitting a straight line to data is to minimize the squared error in $y$.
+
+For every observation ($y_i$) a line produces a prediction $\hat{y}_i$. The best fitting line is the line that minimizes the sum of squared errors:
+
+$$\sum{(y_i} - \hat{y}_i)^2}$$
+
+
+```{r}
+#| echo: false
+
+x <- rnorm(5, 6, 0.6)
+
+error <- rnorm(5, 0, 0.7)
+
+y2 <- 1 + 2*x + error
+
+mod <- lm(y2 ~ x)
+
+pred <- predict(mod)
+resid <- resid(mod)
+
+ggplot(data.frame(x = x, y = y2, error = error,resid = resid, pred = pred), aes(x, y)) + 
+        
+        geom_segment(aes(x = x, xend = x,  y = pred + resid, yend = pred), color = "coral2") +
+        
+
+        geom_smooth(method = "lm", se = FALSE, color = "lightblue") +
+        
+
+        geom_point(size = 4)  +
+        geom_point(aes(x, pred), fill = "lightblue", size = 4, shape = 21) +
+        large_theme() +
+        labs(y = "y", x = "x") 
+
+
+```
+
+Adding the error ($y_i - \hat{y}_i$) to the equation we can formalize the model using the following notation:
+
+$$y_i = \beta_0 + \beta_1x_{i} + \epsilon_i$$
+
+Each observation $y_i$ can be described with the straight line $\beta_0 + \beta_1x_i$ and some error $\epsilon_i$.
+
+## Fitting a regression model in R
+
+We will use `cyclingstudy` data set to fit regression models. In R, a linear model can be fitted with the `lm` function. This function needs a formula and a data set (data frame).
+
+A formula is written as `y ~ x`, this formula can be read as "y explained by x".
+
+Let's use the `pre` time-point data to predict/explain `VO2.max` with `height.T1`.  
+
+```{r}
+library(exscidata)
+
+data("cyclingstudy")
+
+# Reduce the data set 
+dat <- cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, height.T1, VO2.max) 
+
+mod <- lm(VO2.max ~ height.T1, data = dat)
+
+```
+
+
+
+:::{.callout-caution collapse="true"}
+## Test your understanding
+
+The model object contains a lot of information. Take moment to explain what these components contain:
+
+```{r}
+#| eval: false
+
+mod$model
+
+mod$coefficients
+
+mod$residuals
+
+mod$fitted
+
+```
+
+
+:::
+
+There are function to get valuable information from our models. The function `coef` extracts the coefficients (intercept and slope). Use `coef(mod)` to extract these. Similarly, `summary(mod)` gives a summary of the whole model, including statistics for inference.
+
+The coefficients are 
+
+---- UNDER CONSTRUCTION ----
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

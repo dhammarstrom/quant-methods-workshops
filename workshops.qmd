@@ -13,3 +13,5 @@ format: html
 |[Writing reports](ws5-writing-reports.html)| |
 |[Collaborative coding](ws6-git.html)| |
 |[Reliability and writing up a report (in Norwegian)](ws7-norwegian.html)|
+|[Discussions on reliability](ws7-reliability.html)|
+|[The linear model (1)](ws8-linear-model.html)|
