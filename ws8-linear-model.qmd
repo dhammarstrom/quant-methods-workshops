@@ -5,11 +5,13 @@ format:
           code-fold: true
 editor_options: 
   chunk_output_type: console
+bibliography: resources/bib-final.bib  
+
 ---
 
 ## The equation of a straight line
 
-A straight line can be described using the simple equation $y = a + bx$. Here $a$ is the intercept and $b$ is the slope.
+A straight line can be described using the simple equation $y = a + bx$. Here $a$ is the intercept ($y$ when $x=0$) and $b$ is the slope (difference in $y$ for every unit difference in $x$).
 
 The line is heading upwards if $b > 0$ and downwards if $b < 0$. 
 
@@ -60,14 +62,27 @@ a | b
 
 
 
-
-
-
 ## Creating models of data using straight lines
 
-We can use the straight line to create a model describing data. What line would be describe the data shown in the plots below? Copy the code in the code chunk below the figure and add straight lines thaty best describes the data.
+
+### Notes on models^[See [@RN2902] for inspiration on understanding models]
+
+- We can use the straight line to create a model that describes data.
+- A statistical model is an abstract representation of the underlying data that we hope captures some characteristics of the real world(!).
+- The straight line effectively avoids complexity of the real world
+- Statistical models are constructions made for some purpose (e.g., prediction or explanation)
+
+
+We will start our journey in statistical modelling using straight lines. 
+
+:::{.callout-Practice}
+
+#### Group work
+
+- Task: What line would best describe the data shown in the plots below? Copy the code in the code chunk below the figure and add straight lines that best describes the data.
 
 Straight lines can be added to a `ggplot` using the `geom_abline()` function. It takes the arguments `slope` and `intercept`.
+:::
 
 
 ```{r}
@@ -180,16 +195,22 @@ d <- ggplot(data.frame(x = c(1, 2, 3, 3, 4, 5),
 ```
 
 
-The goal of fitting a straight line to data is to minimize the squared error in $y$.
+## Fitting a straight line to data
+
+
+To achieve the goal of describing data with a model, a straight line can be fitted to data by minimizing the error in $y$.
 
 For every observation ($y_i$) a line produces a prediction $\hat{y}_i$. The best fitting line is the line that minimizes the sum of squared errors:
 
-$$\sum{(y_i} - \hat{y}_i)^2}$$
+$$\sum(y_i - \hat{y}_i)^2$$
+
+
 
 
 ```{r}
 #| echo: false
-
+#| message: false
+set.seed(10)
 x <- rnorm(5, 6, 0.6)
 
 error <- rnorm(5, 0, 0.7)
@@ -217,15 +238,37 @@ ggplot(data.frame(x = x, y = y2, error = error,resid = resid, pred = pred), aes(
 
 ```
 
-Adding the error ($y_i - \hat{y}_i$) to the equation we can formalize the model using the following notation:
+By adding the residual error ($y_i - \hat{y}_i$) to the equation mentioned above we can formalize the model using the following notation:
 
 $$y_i = \beta_0 + \beta_1x_{i} + \epsilon_i$$
 
-Each observation $y_i$ can be described with the straight line $\beta_0 + \beta_1x_i$ and some error $\epsilon_i$.
+
+Each observation $y_i$ can be described with coefficients describing the straight line $\beta_0 + \beta_1x_i$ and some error $\epsilon_i$.
+
+Which can be translated to [@RN2902]:
+
+$$\text{observation = deterministic model + residual error}$$
+
+
+:::{.callout-caution collapse="true"}
+## Review your understanding
+
+Define these concepts:
+
+1. Model
+2. Coefficients
+3. Intercept
+4. Slope
+5. Residuals
+
+:::
+
 
 ## Fitting a regression model in R
 
-We will use `cyclingstudy` data set to fit regression models. In R, a linear model can be fitted with the `lm` function. This function needs a formula and a data set (data frame).
+**Work in pairs and use the code below to fit and analyze a regression model**
+
+We will use the `cyclingstudy` data set to fit regression models. In R, a linear model can be fitted with the `lm` function. This function needs a formula and a data set (data frame).
 
 A formula is written as `y ~ x`, this formula can be read as "y explained by x".
 
@@ -243,38 +286,136 @@ dat <- cyclingstudy %>%
 
 mod <- lm(VO2.max ~ height.T1, data = dat)
 
+
+
 ```
 
+The resulting model object is a list that contains a lot of information. We will put some of these components in a figure by first creating a data frame. Copy the code and run it in your own environment!
 
+First, `mod$model` is a `data.frame` of the data used to fit the model. `mod$fitted.values` contains the predicted values from the regression model and `mod$residuals` contains each residual ($y_i - \hat{y}_i$). We can store these together in a new data frame: 
 
-:::{.callout-caution collapse="true"}
-## Test your understanding
-
-The model object contains a lot of information. Take moment to explain what these components contain:
 
 ```{r}
 #| eval: false
 
-mod$model
+mod_dat <- data.frame(mod$model, 
+           fitted = mod$fitted.values, 
+           resid = mod$residuals)
 
-mod$coefficients
+```
 
-mod$residuals
+We will start by adding the fitted values as a function of the predictor values (`height.T1`). Let's make the points a bit larger and filled circles.
 
-mod$fitted
+```{r}
+#| eval: false
+
+mod_dat %>%
+        ggplot(aes(height.T1, fitted)) + geom_point(size = 3, shape = 21, fill = "steelblue")
+
+```
+
+Next we will add the residuals as segments starting from the fitted values. `geom_segment` takes the aesthetics (`aes`) `x`, `xend`, `y` and `yend`. `x` and `xend` will be the predictor values (`height.T1`), `y` will be the fitted values and `yend` will be the fitted values + residuals.
+
+
+```{r}
+#| eval: false
+
+mod_dat %>%
+        ggplot(aes(height.T1, fitted)) + geom_point(size = 4, shape = 21, fill = "steelblue") + 
+        # Add residuals
+        geom_segment(aes(x = height.T1, xend = height.T1, y = fitted, yend = fitted + resid))
+
+```
+
+Notice that there are some overlap between individuals in height.
+
+Next, let's add the observed values in a new `geom_point`. We make the points a bit bigger and make the filled circles.
+
+```{r}
+#| eval: false
+
+mod_dat %>%
+        ggplot(aes(height.T1, fitted)) + geom_point(size = 4, shape = 21, fill = "steelblue") + 
+        # Add residuals
+        geom_segment(aes(x = height.T1, xend = height.T1, y = fitted, yend = fitted + resid)) +
+        # Add observed values
+        geom_point(aes(height.T1, VO2.max), shape = 21, fill = "hotpink", size = 4)
+
+```
+
+At last, let's add the model prediction as an annotation. Using `annotate` we can specify a geom and if we chose `"segment"` it let's us specify a start and an end on the x and y axis. We can use the function `coef()` to get the coefficients from the model where `coef(mod)[1]` is the intercept and `coef(mod)[2]` is the slope.
+
+
+```{r}
+#| eval: false
+
+mod_dat %>%
+        ggplot(aes(height.T1, fitted)) + geom_point(size = 4, shape = 21, fill = "steelblue") + 
+        # Add residuals
+        geom_segment(aes(x = height.T1, xend = height.T1, y = fitted, yend = fitted + resid)) +
+        # Add observed values
+        geom_point(aes(height.T1, VO2.max), shape = 21, fill = "hotpink", size = 4) +
+        # Add the model
+        annotate(geom = "segment", 
+                 x = min(mod_dat$height.T1), 
+                 xend = max(mod_dat$height.T1), 
+                 y = coef(mod)[1] + coef(mod)[2] * min(mod_dat$height.T1), 
+                 yend = coef(mod)[1] + coef(mod)[2] * max(mod_dat$height.T1), 
+                 
+                 color = "mediumorchid1", size = 1)
+
+```
+
+
+:::{.callout-caution collapse="true"}
+## Review your understanding
+
+Use the figure and explain to a friend:
+
+1. What do the object `mod$fitted.values` contain?
+2. What information can we get from `mod$residuals`?
+3. Explain how the line draw between these points gives a graphical representation of the model?:
+
+```{r}
+#| eval: false
+
+x = min(mod_dat$height.T1) 
+
+xend = max(mod_dat$height.T1) 
+
+y = coef(mod)[1] + coef(mod)[2] * min(mod_dat$height.T1) 
+
+yend = coef(mod)[1] + coef(mod)[2] * max(mod_dat$height.T1) 
+
 
 ```
 
 
 :::
 
-There are function to get valuable information from our models. The function `coef` extracts the coefficients (intercept and slope). Use `coef(mod)` to extract these. Similarly, `summary(mod)` gives a summary of the whole model, including statistics for inference.
+## Predicting from a regression model
 
-The coefficients are 
+Simple predictions can be made from our model using the model coefficients. When the intercept and slope is known, we can simply plug in $x$ values to get predictions.
 
----- UNDER CONSTRUCTION ----
+$$\hat{y} = \beta_0 + \beta_1x$$
+$$\hat{y} = 10 + 2.2x$$
+if $x=2$, then
+
+$$\hat{y} = 10 + 2.2 \times 2$$
+$$ = 14.4$$
 
 
+:::{.callout-Practice}
+
+#### Group work
+
+Use R and solve the following problems
+
+1. Calculate the expected difference in VO<sub>2max</sub> between a person that has a stature of 175 and 185 cm
+
+2. What would be the expected VO<sub>2max</sub> of a person of height 201 cm?
+
+:::
 
 
 

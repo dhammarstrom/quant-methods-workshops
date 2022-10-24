@@ -1,0 +1,192 @@
+---
+title: "Notes: Univariate regression models by hand"
+editor_options: 
+  chunk_output_type: console
+---
+
+
+The univariate regression model has one dependent and one independent variable. The goal is to determine the relationship between the two variables. 
+
+
+Here we will explore the mathematics of this model and replicate results from R "by hand".
+
+First, let's simulate some data.
+
+
+```{r}
+#| message: false
+#| warning: false
+
+
+library(tidyverse)
+
+set.seed(100)
+
+x <- runif(10, 5, 10)
+y <- 10 + 2 * x + rnorm(10, 0, 1)
+
+
+ggplot(data = data.frame(x, y), 
+       aes(x, y)) + geom_point()
+
+
+
+```
+
+
+### Calculating the correlation
+
+We will start by standardizing both $x$ and $y$, this means calculating each observations distance from the mean in units of standard deviations. For $x$, standardization will give
+
+$$z_x = \frac{x_i-\bar{x}}{s_x}$$
+where $x_i$ is a single observation, $\bar{x}$ is the mean and $s_x$ is the sample standard deviation.
+
+The correlation ($r_{xy}$) is sum of products of the standardized variables divided by $n-1$:
+
+
+$$r_{xy} = \frac{1}{n-1}\sum^n_{i=1} z_x * z_y$$
+Using R we can save the standardized values in separate objects and the calculate the correlation coefficient:
+
+
+```{r}
+
+
+zx <- (x - mean(x)) / sd(x)
+zy <- (y - mean(y)) / sd(y)
+
+
+rxy <- sum(zx * zy) / (length(x) - 1)
+
+
+```
+
+The sum of the standardized products will reach the sample size (or $n - 1$) when the there is agreement between the standardized scores from the center (mean) of each variable. $r=1$ occurs when $z_x = z_y$ which is equivalent to $\frac{\sum^n_{i=1} {z^2_x}_i}{n-1}=1$. We have to use $n - 1$ if we use the sample standard deviation in calculations (where the denominator is also is $n-1$).
+
+The slope $b_1$ in a univariate regression is closely related to the correlation as:
+
+$$b_1=r_{xy} \times \frac{s_y}{s_x}$$
+
+When we have established the slope, we are also able to calculate the intercept $b_0$:
+
+
+$$b_0 = \bar{y} - b1 \times \bar{x}$$
+
+
+```{r}
+
+b1 <- rxy * (sd(y)/sd(x))
+
+b0 <- mean(y) - b1 * mean(x)
+
+```
+
+We will now be able to calculate the residuals or errors of the model which will tell us something about the variation around the fitted line. A residual is the difference between the observed $y_i$ and fitted $\hat{y}_i$ value. As $\hat{y}_i = b_0 + b_1x_i$ we can calculate the erors in R as:
+
+```{r}
+e <- y - (b0 + b1*x)
+```
+
+From the errors we derive the standard error of the model ($se$) from the equation:
+
+$$se = \sqrt{\frac{1}{n-2} \sum^n_{i=1}e^2_i}$$
+```{r}
+
+se <- sqrt(1/(length(x)-2) * sum(e^2)) 
+
+```
+
+We are dividing by the degrees of freedom for two estimates (intercept and slope; $n-2$). 
+
+The standard error of the intercept is
+
+$${se_b}_0 = \frac{se}{\sqrt{n}} \times \sqrt{1+\frac{\bar{x}^2}{\frac{\sum x-\bar{x}^2}{n}}}$$
+
+```{r}
+## Must use n in the denominator
+varx <- (sum((x-mean(x))^2))/length(x)
+
+seb0 <- se/sqrt(length(x)) * sqrt(1 + ((mean(x)^2) / varx))
+
+```
+
+
+The standard error of the slope is
+
+$${se_b}_1 = \frac{se}{\sqrt{n}} \times \frac{1}{s_y}$$
+```{r}
+sx <- sqrt(sum((x - mean(x))^2) / length(x))
+
+seb1 <- se/sqrt(length(y)) * 1 /  sx
+
+```
+
+
+Let's fit the model in R and compare the numbers:
+
+
+```{r}
+
+m <- lm(y ~ x, data = data.frame(y, x))
+
+summary(m)
+
+```
+
+
+## A categorical predictor variable
+
+
+```{r}
+
+xcat <- ifelse(x < 7, 0, 1)
+
+
+## Calculate the correlation 
+zx <- (xcat - mean(xcat)) / sd(xcat)
+zy <- (y - mean(y)) / sd(y)
+
+
+rxy <- sum(zx * zy) / (length(xcat) - 1)
+
+
+## Calculate the slope 
+
+b1 <- rxy * (sd(y)/sd(xcat))
+
+b0 <- mean(y) - b1 * mean(xcat)
+
+
+b1
+b0
+
+## Calculate the errors
+
+e <- y - (b0 + b1*xcat)
+
+## 
+
+varx <- (sum((xcat-mean(xcat))^2))/length(xcat)
+
+seb0 <- se/sqrt(length(xcat)) * sqrt(1 + ((mean(xcat)^2) / varx))
+
+sx <- sqrt(sum((xcat - mean(xcat))^2) / length(xcat))
+
+seb1 <- se/sqrt(length(y)) * 1 /  sx
+
+
+## Calculate 
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+

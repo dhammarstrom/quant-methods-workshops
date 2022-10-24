@@ -78,6 +78,25 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -161,8 +180,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
    
   <ul>
   <li><a href="#the-equation-of-a-straight-line" id="toc-the-equation-of-a-straight-line" class="nav-link active" data-scroll-target="#the-equation-of-a-straight-line">The equation of a straight line</a></li>
-  <li><a href="#creating-models-of-data-using-straight-lines" id="toc-creating-models-of-data-using-straight-lines" class="nav-link" data-scroll-target="#creating-models-of-data-using-straight-lines">Creating models of data using straight lines</a></li>
+  <li><a href="#creating-models-of-data-using-straight-lines" id="toc-creating-models-of-data-using-straight-lines" class="nav-link" data-scroll-target="#creating-models-of-data-using-straight-lines">Creating models of data using straight lines</a>
+  <ul class="collapse">
+  <li><a href="#notes-on-models" id="toc-notes-on-models" class="nav-link" data-scroll-target="#notes-on-models">Notes on models</a></li>
+  </ul></li>
+  <li><a href="#fitting-a-straight-line-to-data" id="toc-fitting-a-straight-line-to-data" class="nav-link" data-scroll-target="#fitting-a-straight-line-to-data">Fitting a straight line to data</a></li>
   <li><a href="#fitting-a-regression-model-in-r" id="toc-fitting-a-regression-model-in-r" class="nav-link" data-scroll-target="#fitting-a-regression-model-in-r">Fitting a regression model in R</a></li>
+  <li><a href="#predicting-from-a-regression-model" id="toc-predicting-from-a-regression-model" class="nav-link" data-scroll-target="#predicting-from-a-regression-model">Predicting from a regression model</a></li>
   </ul>
 </nav>
     </div>
@@ -187,7 +211,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="the-equation-of-a-straight-line" class="level2">
 <h2 class="anchored" data-anchor-id="the-equation-of-a-straight-line">The equation of a straight line</h2>
-<p>A straight line can be described using the simple equation <span class="math inline">\(y = a + bx\)</span>. Here <span class="math inline">\(a\)</span> is the intercept and <span class="math inline">\(b\)</span> is the slope.</p>
+<p>A straight line can be described using the simple equation <span class="math inline">\(y = a + bx\)</span>. Here <span class="math inline">\(a\)</span> is the intercept (<span class="math inline">\(y\)</span> when <span class="math inline">\(x=0\)</span>) and <span class="math inline">\(b\)</span> is the slope (difference in <span class="math inline">\(y\)</span> for every unit difference in <span class="math inline">\(x\)</span>).</p>
 <p>The line is heading upwards if <span class="math inline">\(b &gt; 0\)</span> and downwards if <span class="math inline">\(b &lt; 0\)</span>.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -202,8 +226,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="creating-models-of-data-using-straight-lines" class="level2">
 <h2 class="anchored" data-anchor-id="creating-models-of-data-using-straight-lines">Creating models of data using straight lines</h2>
-<p>We can use the straight line to create a model describing data. What line would be describe the data shown in the plots below? Copy the code in the code chunk below the figure and add straight lines thaty best describes the data.</p>
+<section id="notes-on-models" class="level3">
+<h3 class="anchored" data-anchor-id="notes-on-models">Notes on models<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></h3>
+<ul>
+<li>We can use the straight line to create a model that describes data.</li>
+<li>A statistical model is an abstract representation of the underlying data that we hope captures some characteristics of the real world(!).</li>
+<li>The straight line effectively avoids complexity of the real world</li>
+<li>Statistical models are constructions made for some purpose (e.g., prediction or explanation)</li>
+</ul>
+<p>We will start our journey in statistical modelling using straight lines.</p>
+<div class="callout-Practice callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Group work
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Task: What line would best describe the data shown in the plots below? Copy the code in the code chunk below the figure and add straight lines that best describes the data.</li>
+</ul>
 <p>Straight lines can be added to a <code>ggplot</code> using the <code>geom_abline()</code> function. It takes the arguments <code>slope</code> and <code>intercept</code>.</p>
+</div>
+</div>
 <div class="cell">
 <div class="cell-output-display">
 <p><img src="ws8-linear-model_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
@@ -242,77 +289,204 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">5</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>The goal of fitting a straight line to data is to minimize the squared error in <span class="math inline">\(y\)</span>.</p>
+</section>
+</section>
+<section id="fitting-a-straight-line-to-data" class="level2">
+<h2 class="anchored" data-anchor-id="fitting-a-straight-line-to-data">Fitting a straight line to data</h2>
+<p>To achieve the goal of describing data with a model, a straight line can be fitted to data by minimizing the error in <span class="math inline">\(y\)</span>.</p>
 <p>For every observation (<span class="math inline">\(y_i\)</span>) a line produces a prediction <span class="math inline">\(\hat{y}_i\)</span>. The best fitting line is the line that minimizes the sum of squared errors:</p>
-<p><span class="math display">\[\sum{(y_i} - \hat{y}_i)^2}\]</span></p>
+<p><span class="math display">\[\sum(y_i - \hat{y}_i)^2\]</span></p>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula 'y ~ x'</code></pre>
-</div>
 <div class="cell-output-display">
 <p><img src="ws8-linear-model_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Adding the error (<span class="math inline">\(y_i - \hat{y}_i\)</span>) to the equation we can formalize the model using the following notation:</p>
+<p>By adding the residual error (<span class="math inline">\(y_i - \hat{y}_i\)</span>) to the equation mentioned above we can formalize the model using the following notation:</p>
 <p><span class="math display">\[y_i = \beta_0 + \beta_1x_{i} + \epsilon_i\]</span></p>
-<p>Each observation <span class="math inline">\(y_i\)</span> can be described with the straight line <span class="math inline">\(\beta_0 + \beta_1x_i\)</span> and some error <span class="math inline">\(\epsilon_i\)</span>.</p>
+<p>Each observation <span class="math inline">\(y_i\)</span> can be described with coefficients describing the straight line <span class="math inline">\(\beta_0 + \beta_1x_i\)</span> and some error <span class="math inline">\(\epsilon_i\)</span>.</p>
+<p>Which can be translated to <span class="citation" data-cites="RN2902">(<a href="#ref-RN2902" role="doc-biblioref">Spiegelhalter 2019</a>)</span>:</p>
+<p><span class="math display">\[\text{observation = deterministic model + residual error}\]</span></p>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Review your understanding
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Define these concepts:</p>
+<ol type="1">
+<li>Model</li>
+<li>Coefficients</li>
+<li>Intercept</li>
+<li>Slope</li>
+<li>Residuals</li>
+</ol>
+</div>
+</div>
+</div>
 </section>
 <section id="fitting-a-regression-model-in-r" class="level2">
 <h2 class="anchored" data-anchor-id="fitting-a-regression-model-in-r">Fitting a regression model in R</h2>
-<p>We will use <code>cyclingstudy</code> data set to fit regression models. In R, a linear model can be fitted with the <code>lm</code> function. This function needs a formula and a data set (data frame).</p>
+<p><strong>Work in pairs and use the code below to fit and analyze a regression model</strong></p>
+<p>We will use the <code>cyclingstudy</code> data set to fit regression models. In R, a linear model can be fitted with the <code>lm</code> function. This function needs a formula and a data set (data frame).</p>
 <p>A formula is written as <code>y ~ x</code>, this formula can be read as “y explained by x”.</p>
 <p>Let’s use the <code>pre</code> time-point data to predict/explain <code>VO2.max</code> with <code>height.T1</code>.</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(exscidata)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"cyclingstudy"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduce the data set </span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> cyclingstudy <span class="sc">%&gt;%</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(timepoint <span class="sc">==</span> <span class="st">"pre"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(subject, height.T1, VO2.max) </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(VO2.max <span class="sc">~</span> height.T1, <span class="at">data =</span> dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(exscidata)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"cyclingstudy"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduce the data set </span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(timepoint <span class="sc">==</span> <span class="st">"pre"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(subject, height.T1, VO2.max) </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(VO2.max <span class="sc">~</span> height.T1, <span class="at">data =</span> dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The resulting model object is a list that contains a lot of information. We will put some of these components in a figure by first creating a data frame. Copy the code and run it in your own environment!</p>
+<p>First, <code>mod$model</code> is a <code>data.frame</code> of the data used to fit the model. <code>mod$fitted.values</code> contains the predicted values from the regression model and <code>mod$residuals</code> contains each residual (<span class="math inline">\(y_i - \hat{y}_i\)</span>). We can store these together in a new data frame:</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mod_dat <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(mod<span class="sc">$</span>model, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">fitted =</span> mod<span class="sc">$</span>fitted.values, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">resid =</span> mod<span class="sc">$</span>residuals)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>We will start by adding the fitted values as a function of the predictor values (<code>height.T1</code>). Let’s make the points a bit larger and filled circles.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mod_dat <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(height.T1, fitted)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Next we will add the residuals as segments starting from the fitted values. <code>geom_segment</code> takes the aesthetics (<code>aes</code>) <code>x</code>, <code>xend</code>, <code>y</code> and <code>yend</code>. <code>x</code> and <code>xend</code> will be the predictor values (<code>height.T1</code>), <code>y</code> will be the fitted values and <code>yend</code> will be the fitted values + residuals.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mod_dat <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(height.T1, fitted)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add residuals</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> height.T1, <span class="at">xend =</span> height.T1, <span class="at">y =</span> fitted, <span class="at">yend =</span> fitted <span class="sc">+</span> resid))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Notice that there are some overlap between individuals in height.</p>
+<p>Next, let’s add the observed values in a new <code>geom_point</code>. We make the points a bit bigger and make the filled circles.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mod_dat <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(height.T1, fitted)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add residuals</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> height.T1, <span class="at">xend =</span> height.T1, <span class="at">y =</span> fitted, <span class="at">yend =</span> fitted <span class="sc">+</span> resid)) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add observed values</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="fu">aes</span>(height.T1, VO2.max), <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"hotpink"</span>, <span class="at">size =</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>At last, let’s add the model prediction as an annotation. Using <code>annotate</code> we can specify a geom and if we chose <code>"segment"</code> it let’s us specify a start and an end on the x and y axis. We can use the function <code>coef()</code> to get the coefficients from the model where <code>coef(mod)[1]</code> is the intercept and <code>coef(mod)[2]</code> is the slope.</p>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mod_dat <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(height.T1, fitted)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add residuals</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> height.T1, <span class="at">xend =</span> height.T1, <span class="at">y =</span> fitted, <span class="at">yend =</span> fitted <span class="sc">+</span> resid)) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add observed values</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_point</span>(<span class="fu">aes</span>(height.T1, VO2.max), <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"hotpink"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Add the model</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"segment"</span>, </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                 <span class="at">x =</span> <span class="fu">min</span>(mod_dat<span class="sc">$</span>height.T1), </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                 <span class="at">xend =</span> <span class="fu">max</span>(mod_dat<span class="sc">$</span>height.T1), </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                 <span class="at">y =</span> <span class="fu">coef</span>(mod)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(mod)[<span class="dv">2</span>] <span class="sc">*</span> <span class="fu">min</span>(mod_dat<span class="sc">$</span>height.T1), </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>                 <span class="at">yend =</span> <span class="fu">coef</span>(mod)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(mod)[<span class="dv">2</span>] <span class="sc">*</span> <span class="fu">max</span>(mod_dat<span class="sc">$</span>height.T1), </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>                 </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>                 <span class="at">color =</span> <span class="st">"mediumorchid1"</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="callout-caution callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Test your understanding
+Review your understanding
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>The model object contains a lot of information. Take moment to explain what these components contain:</p>
+<p>Use the figure and explain to a friend:</p>
+<ol type="1">
+<li>What do the object <code>mod$fitted.values</code> contain?</li>
+<li>What information can we get from <code>mod$residuals</code>?</li>
+<li>Explain how the line draw between these points gives a graphical representation of the model?:</li>
+</ol>
 <div class="cell">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mod<span class="sc">$</span>model</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>mod<span class="sc">$</span>coefficients</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>mod<span class="sc">$</span>residuals</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>mod<span class="sc">$</span>fitted</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">min</span>(mod_dat<span class="sc">$</span>height.T1) </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>xend <span class="ot">=</span> <span class="fu">max</span>(mod_dat<span class="sc">$</span>height.T1) </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>y <span class="ot">=</span> <span class="fu">coef</span>(mod)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(mod)[<span class="dv">2</span>] <span class="sc">*</span> <span class="fu">min</span>(mod_dat<span class="sc">$</span>height.T1) </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>yend <span class="ot">=</span> <span class="fu">coef</span>(mod)[<span class="dv">1</span>] <span class="sc">+</span> <span class="fu">coef</span>(mod)[<span class="dv">2</span>] <span class="sc">*</span> <span class="fu">max</span>(mod_dat<span class="sc">$</span>height.T1) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </div>
 </div>
 </div>
-<p>There are function to get valuable information from our models. The function <code>coef</code> extracts the coefficients (intercept and slope). Use <code>coef(mod)</code> to extract these. Similarly, <code>summary(mod)</code> gives a summary of the whole model, including statistics for inference.</p>
-<p>The coefficients are</p>
-<p>—- UNDER CONSTRUCTION —-</p>
+</section>
+<section id="predicting-from-a-regression-model" class="level2">
+<h2 class="anchored" data-anchor-id="predicting-from-a-regression-model">Predicting from a regression model</h2>
+<p>Simple predictions can be made from our model using the model coefficients. When the intercept and slope is known, we can simply plug in <span class="math inline">\(x\)</span> values to get predictions.</p>
+<p><span class="math display">\[\hat{y} = \beta_0 + \beta_1x\]</span></p>
+<p><span class="math display">\[\hat{y} = 10 + 2.2x\]</span></p>
+<p>if <span class="math inline">\(x=2\)</span>, then</p>
+<p><span class="math display">\[\hat{y} = 10 + 2.2 \times 2\]</span></p>
+<p><span class="math display">\[ = 14.4\]</span></p>
+<div class="callout-Practice callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Group work
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use R and solve the following problems</p>
+<ol type="1">
+<li><p>Calculate the expected difference in VO<sub>2max</sub> between a person that has a stature of 175 and 185 cm</p></li>
+<li><p>What would be the expected VO<sub>2max</sub> of a person of height 201 cm?</p></li>
+</ol>
+</div>
+</div>
+
 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-RN2902" class="csl-entry" role="doc-biblioentry">
+Spiegelhalter, D. J. 2019. <em>The Art of Statistics : How to Learn from Data</em>. Book. First US edition. New York: Basic Books.
+</div>
+</div></section><section class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1" role="doc-endnote"><p>See <span class="citation" data-cites="RN2902">(<a href="#ref-RN2902" role="doc-biblioref">Spiegelhalter 2019</a>)</span> for inspiration on understanding models<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

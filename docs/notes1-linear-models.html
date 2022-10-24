@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Quantitative Methods - Workshop, Assigments and Tutorials - Notes: Univariate regression models by hand</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Quantitative Methods - Workshop, Assigments and Tutorials</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./assignments.html">Assignments</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./workshops.html">Workshops</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#calculating-the-correlation" id="toc-calculating-the-correlation" class="nav-link active" data-scroll-target="#calculating-the-correlation">Calculating the correlation</a></li>
+  <li><a href="#a-categorical-predictor-variable" id="toc-a-categorical-predictor-variable" class="nav-link" data-scroll-target="#a-categorical-predictor-variable">A categorical predictor variable</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Notes: Univariate regression models by hand</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>The univariate regression model has one dependent and one independent variable. The goal is to determine the relationship between the two variables.</p>
+<p>Here we will explore the mathematics of this model and replicate results from R “by hand”.</p>
+<p>First, let’s simulate some data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">10</span>, <span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span> <span class="sc">+</span> <span class="dv">2</span> <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(x, y), </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(x, y)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="notes1-linear-models_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="calculating-the-correlation" class="level3">
+<h3 class="anchored" data-anchor-id="calculating-the-correlation">Calculating the correlation</h3>
+<p>We will start by standardizing both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, this means calculating each observations distance from the mean in units of standard deviations. For <span class="math inline">\(x\)</span>, standardization will give</p>
+<p><span class="math display">\[z_x = \frac{x_i-\bar{x}}{s_x}\]</span></p>
+<p>where <span class="math inline">\(x_i\)</span> is a single observation, <span class="math inline">\(\bar{x}\)</span> is the mean and <span class="math inline">\(s_x\)</span> is the sample standard deviation.</p>
+<p>The correlation (<span class="math inline">\(r_{xy}\)</span>) is sum of products of the standardized variables divided by <span class="math inline">\(n-1\)</span>:</p>
+<p><span class="math display">\[r_{xy} = \frac{1}{n-1}\sum^n_{i=1} z_x * z_y\]</span></p>
+<p>Using R we can save the standardized values in separate objects and the calculate the correlation coefficient:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>zx <span class="ot">&lt;-</span> (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>zy <span class="ot">&lt;-</span> (y <span class="sc">-</span> <span class="fu">mean</span>(y)) <span class="sc">/</span> <span class="fu">sd</span>(y)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>rxy <span class="ot">&lt;-</span> <span class="fu">sum</span>(zx <span class="sc">*</span> zy) <span class="sc">/</span> (<span class="fu">length</span>(x) <span class="sc">-</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The sum of the standardized products will reach the sample size (or <span class="math inline">\(n - 1\)</span>) when the there is agreement between the standardized scores from the center (mean) of each variable. <span class="math inline">\(r=1\)</span> occurs when <span class="math inline">\(z_x = z_y\)</span> which is equivalent to <span class="math inline">\(\frac{\sum^n_{i=1} {z^2_x}_i}{n-1}=1\)</span>. We have to use <span class="math inline">\(n - 1\)</span> if we use the sample standard deviation in calculations (where the denominator is also is <span class="math inline">\(n-1\)</span>).</p>
+<p>The slope <span class="math inline">\(b_1\)</span> in a univariate regression is closely related to the correlation as:</p>
+<p><span class="math display">\[b_1=r_{xy} \times \frac{s_y}{s_x}\]</span></p>
+<p>When we have established the slope, we are also able to calculate the intercept <span class="math inline">\(b_0\)</span>:</p>
+<p><span class="math display">\[b_0 = \bar{y} - b1 \times \bar{x}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> rxy <span class="sc">*</span> (<span class="fu">sd</span>(y)<span class="sc">/</span><span class="fu">sd</span>(x))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> <span class="fu">mean</span>(y) <span class="sc">-</span> b1 <span class="sc">*</span> <span class="fu">mean</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will now be able to calculate the residuals or errors of the model which will tell us something about the variation around the fitted line. A residual is the difference between the observed <span class="math inline">\(y_i\)</span> and fitted <span class="math inline">\(\hat{y}_i\)</span> value. As <span class="math inline">\(\hat{y}_i = b_0 + b_1x_i\)</span> we can calculate the erors in R as:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> y <span class="sc">-</span> (b0 <span class="sc">+</span> b1<span class="sc">*</span>x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>From the errors we derive the standard error of the model (<span class="math inline">\(se\)</span>) from the equation:</p>
+<p><span class="math display">\[se = \sqrt{\frac{1}{n-2} \sum^n_{i=1}e^2_i}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span>(<span class="fu">length</span>(x)<span class="sc">-</span><span class="dv">2</span>) <span class="sc">*</span> <span class="fu">sum</span>(e<span class="sc">^</span><span class="dv">2</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We are dividing by the degrees of freedom for two estimates (intercept and slope; <span class="math inline">\(n-2\)</span>).</p>
+<p>The standard error of the intercept is</p>
+<p><span class="math display">\[{se_b}_0 = \frac{se}{\sqrt{n}} \times \sqrt{1+\frac{\bar{x}^2}{\frac{\sum x-\bar{x}^2}{n}}}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Must use n in the denominator</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>varx <span class="ot">&lt;-</span> (<span class="fu">sum</span>((x<span class="sc">-</span><span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">length</span>(x)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>seb0 <span class="ot">&lt;-</span> se<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(x)) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">+</span> ((<span class="fu">mean</span>(x)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> varx))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The standard error of the slope is</p>
+<p><span class="math display">\[{se_b}_1 = \frac{se}{\sqrt{n}} \times \frac{1}{s_y}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sx <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>((x <span class="sc">-</span> <span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">length</span>(x))</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>seb1 <span class="ot">&lt;-</span> se<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(y)) <span class="sc">*</span> <span class="dv">1</span> <span class="sc">/</span>  sx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s fit the model in R and compare the numbers:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x, <span class="at">data =</span> <span class="fu">data.frame</span>(y, x))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = y ~ x, data = data.frame(y, x))
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.45687 -0.40060 -0.09901  0.42615  0.54157 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   8.1907     0.9887   8.284 3.39e-05 ***
+x             2.2596     0.1395  16.200 2.12e-07 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4557 on 8 degrees of freedom
+Multiple R-squared:  0.9704,    Adjusted R-squared:  0.9667 
+F-statistic: 262.5 on 1 and 8 DF,  p-value: 2.119e-07</code></pre>
+</div>
+</div>
+</section>
+<section id="a-categorical-predictor-variable" class="level2">
+<h2 class="anchored" data-anchor-id="a-categorical-predictor-variable">A categorical predictor variable</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>xcat <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(x <span class="sc">&lt;</span> <span class="dv">7</span>, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate the correlation </span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>zx <span class="ot">&lt;-</span> (xcat <span class="sc">-</span> <span class="fu">mean</span>(xcat)) <span class="sc">/</span> <span class="fu">sd</span>(xcat)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>zy <span class="ot">&lt;-</span> (y <span class="sc">-</span> <span class="fu">mean</span>(y)) <span class="sc">/</span> <span class="fu">sd</span>(y)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>rxy <span class="ot">&lt;-</span> <span class="fu">sum</span>(zx <span class="sc">*</span> zy) <span class="sc">/</span> (<span class="fu">length</span>(xcat) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate the slope </span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> rxy <span class="sc">*</span> (<span class="fu">sd</span>(y)<span class="sc">/</span><span class="fu">sd</span>(xcat))</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> <span class="fu">mean</span>(y) <span class="sc">-</span> b1 <span class="sc">*</span> <span class="fu">mean</span>(xcat)</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>b1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3.891868</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>b0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 22.09147</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate the errors</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>e <span class="ot">&lt;-</span> y <span class="sc">-</span> (b0 <span class="sc">+</span> b1<span class="sc">*</span>xcat)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>varx <span class="ot">&lt;-</span> (<span class="fu">sum</span>((xcat<span class="sc">-</span><span class="fu">mean</span>(xcat))<span class="sc">^</span><span class="dv">2</span>))<span class="sc">/</span><span class="fu">length</span>(xcat)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>seb0 <span class="ot">&lt;-</span> se<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(xcat)) <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">+</span> ((<span class="fu">mean</span>(xcat)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> varx))</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>sx <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">sum</span>((xcat <span class="sc">-</span> <span class="fu">mean</span>(xcat))<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> <span class="fu">length</span>(xcat))</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>seb1 <span class="ot">&lt;-</span> se<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">length</span>(y)) <span class="sc">*</span> <span class="dv">1</span> <span class="sc">/</span>  sx</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Calculate </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

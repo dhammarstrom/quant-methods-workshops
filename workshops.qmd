@@ -14,4 +14,7 @@ format: html
 |[Collaborative coding](ws6-git.html)| |
 |[Reliability and writing up a report (in Norwegian)](ws7-norwegian.html)|
 |[Discussions on reliability](ws7-reliability.html)|
-|[The linear model (1)](ws8-linear-model.html)|
+|[The linear model (1): Straight lines and predicting from models](ws8-linear-model.html)|
+|[The linear model (2): Categorical predictors and diagnostics](ws9-linear-model-categorical.html)|
+|[The linear model (3): Curve-linear regression](ws10-curve-linear.html)|
+|[Creating functions in R](ws12-writing-functions.html)|
