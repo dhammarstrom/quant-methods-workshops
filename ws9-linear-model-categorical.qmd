@@ -889,3 +889,138 @@ Explain these concepts:
 
 :::
 
+
+## Multiple linear regression
+
+- The ordinary linear model is easily extended to include more predictor variables.
+- In fact, when we add a categorical variable with more than 2 levels, we effectively perform multiple regression.
+
+- Let's say that we want to estimate the differences in change in VO<sub>2max</sub> (ml min<sup>-1</sup>) between the three groups in the cycling study data set (see figure).
+
+```{r}
+#| code-fold: true
+#| warning: false
+#| message: false
+#| fig-cap: "Changes in VO<sub>2max</sub> from `pre` to `meso3` in three groups in the cycling study data set"
+
+
+library(ggtext) # needed to use markdown in legends/axis texts
+
+cyclingstudy %>% 
+        select(subject, group, timepoint, VO2.max) %>%
+        pivot_wider(names_from = timepoint, 
+                    values_from = VO2.max) %>%
+        mutate(change = meso3 - pre) %>%
+        ggplot(aes(group, change)) + geom_boxplot() +
+        labs(y = "VO<sub>2max</sub> (ml min<sup>-1</sup>) change from pre to meso3", 
+             x = "Group", 
+             title = "Absolute change in maximal aerobic power") + 
+        
+        theme(axis.title.y = element_markdown())
+        
+
+```
+
+- When R dummy codes the factor variable `group`, `DECR` will be the reference level. A coefficient will be used to indicate each of the other two groups (`INCR` and `MIX`).
+- This can be written as
+
+`change = intercept + group2 + group3 + error`
+
+or
+
+$$\hat{y_i} = \beta_0 + \beta_1x_1 + \beta_2x_2 + \epsilon_i$$
+- If e.g., $x_1$ is 0, then $\beta_1$ drops from the equation, otherwise it is added to the estimate.
+- Let's fit the model (copy the code in to your own session).
+
+```{r}
+#| code-fold: true
+#| echo: false
+
+
+dat <- cyclingstudy %>% 
+        select(subject, group, timepoint, VO2.max) %>%
+        pivot_wider(names_from = timepoint, 
+                    values_from = VO2.max) %>%
+        mutate(change = meso3 - pre) %>%
+        print()
+
+m <- lm(change ~ group, data = dat)
+
+
+# Use summary to retrieve the results
+
+summary(m)
+
+```
+
+
+
+:::{.callout-caution collapse="true"}
+## Review your understanding
+
+Look at the figure, and the output from the model.
+
+- Explain the estimates for `(Intercept)`, `groupINCR` and `groupMIX`.
+- The order of the factor variable `group` determines the reference level. Change the reference level to `MIX` using `mutate(group = factor(group, levels = c("MIX", "DECR", "INCR")))`
+- Fit a new model and reinterpret the results.
+
+```{r}
+#| code-fold: true
+#| code-summary: "A possible solution"
+#| echo: false
+
+
+dat <- cyclingstudy %>% 
+        select(subject, group, timepoint, VO2.max) %>%
+        pivot_wider(names_from = timepoint, 
+                    values_from = VO2.max) %>%
+        mutate(change = meso3 - pre, 
+               group = factor(group, levels = c("MIX", "DECR", "INCR"))) %>%
+        print()
+
+m <- lm(change ~ group, data = dat)
+
+
+# Use summary to retrieve the results
+
+summary(m)
+
+```
+
+:::
+
+
+- The interpretation of model coefficients in multiple linear regression is the effect when the other coefficents are held contant (at zero).
+
+
+:::{.callout-caution collapse="true"}
+## Review your understanding
+
+- Select two or more variables (continuous or categorical) from the `cyclingstudy` data set and fit a model. 
+- Interpret the results.
+
+
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

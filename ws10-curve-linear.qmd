@@ -1,4 +1,11 @@
 ---
-title: "Untitled"
+title: "The linear model: Categorical predictors and diagnostics"
+format:
+        html:
+          code-fold: true
+editor_options: 
+  chunk_output_type: console
+bibliography: resources/bib-final.bib  
 ---
+
 

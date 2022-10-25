@@ -178,6 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul></li>
   <li><a href="#interpreting-the-output-from-plotmodel" id="toc-interpreting-the-output-from-plotmodel" class="nav-link" data-scroll-target="#interpreting-the-output-from-plotmodel">Interpreting the output from <code>plot(model)</code></a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#multiple-linear-regression" id="toc-multiple-linear-regression" class="nav-link" data-scroll-target="#multiple-linear-regression">Multiple linear regression</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -924,6 +925,192 @@ Review your understanding
 <li>Fitted values, residuals, standardized residuals</li>
 <li>Homoscedasticity, heteroscedasticity, equal variance, normality of residuals</li>
 <li>Pseudo-replication</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="multiple-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-linear-regression">Multiple linear regression</h2>
+<ul>
+<li><p>The ordinary linear model is easily extended to include more predictor variables.</p></li>
+<li><p>In fact, when we add a categorical variable with more than 2 levels, we effectively perform multiple regression.</p></li>
+<li><p>Let’s say that we want to estimate the differences in change in VO<sub>2max</sub> (ml min<sup>-1</sup>) between the three groups in the cycling study data set (see figure).</p></li>
+</ul>
+<div class="cell">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext) <span class="co"># needed to use markdown in legends/axis texts</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(subject, group, timepoint, VO2.max) <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> timepoint, </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>                    <span class="at">values_from =</span> VO2.max) <span class="sc">%&gt;%</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">change =</span> meso3 <span class="sc">-</span> pre) <span class="sc">%&gt;%</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(group, change)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">labs</span>(<span class="at">y =</span> <span class="st">"VO&lt;sub&gt;2max&lt;/sub&gt; (ml min&lt;sup&gt;-1&lt;/sup&gt;) change from pre to meso3"</span>, </span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>             <span class="at">x =</span> <span class="st">"Group"</span>, </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>             <span class="at">title =</span> <span class="st">"Absolute change in maximal aerobic power"</span>) <span class="sc">+</span> </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">theme</span>(<span class="at">axis.title.y =</span> <span class="fu">element_markdown</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="ws9-linear-model-categorical_files/figure-html/unnamed-chunk-40-1.png" class="img-fluid figure-img" width="672"></p>
+<p></p><figcaption class="figure-caption">Changes in VO<sub>2max</sub> from <code>pre</code> to <code>meso3</code> in three groups in the cycling study data set</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li>When R dummy codes the factor variable <code>group</code>, <code>DECR</code> will be the reference level. A coefficient will be used to indicate each of the other two groups (<code>INCR</code> and <code>MIX</code>).</li>
+<li>This can be written as</li>
+</ul>
+<p><code>change = intercept + group2 + group3 + error</code></p>
+<p>or</p>
+<p><span class="math display">\[\hat{y_i} = \beta_0 + \beta_1x_1 + \beta_2x_2 + \epsilon_i\]</span></p>
+<ul>
+<li>If e.g., <span class="math inline">\(x_1\)</span> is 0, then <span class="math inline">\(\beta_1\)</span> drops from the equation, otherwise it is added to the estimate.</li>
+<li>Let’s fit the model (copy the code in to your own session).</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 x 7
+   subject group   pre meso1 meso2 meso3 change
+     &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1       1 INCR  5629   5209  5485  5330 -299  
+ 2       2 DECR  4471   4792  4662  4886  415  
+ 3       3 INCR  5598.  5698  5920  6380  782. 
+ 4       4 DECR  4944.  4782  4877  5171  227. 
+ 5       5 DECR  5748   5694    NA    NA   NA  
+ 6       6 INCR  4633.  4706  4695  4864  231. 
+ 7       7 MIX   4250   4562  4165  4402  152  
+ 8       8 MIX   4760.  5093  5266  5172  412. 
+ 9       9 MIX   4629   5247    NA  4864  235  
+10      10 INCR  5226   5360  5666  5755  529  
+11      11 MIX   4063   4149  3812  4077   14  
+12      13 DECR  4981.  4874    NA  5045   63.6
+13      14 MIX   4444   4360  4316  4636  192  
+14      15 INCR  4486   4780  4637  4991  505  
+15      16 INCR  4604   4866  4904  5087  483  
+16      17 MIX   4366   4520  4277  4483  117  
+17      18 DECR  5135.  4802  5445  5315  180. 
+18      19 DECR  4018.  4019  3447  4404  386. 
+19      20 INCR  4739   5125  4899  5119  380  
+20      21 DECR  4753.  4436  4228  4730  -22.5</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = change ~ group, data = dat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-672.01 -105.97    6.99  143.99  409.00 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)   208.21      98.50   2.114   0.0506 .
+groupINCR     164.80     134.24   1.228   0.2373  
+groupMIX      -21.21     139.31  -0.152   0.8809  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 241.3 on 16 degrees of freedom
+  (1 observation deleted due to missingness)
+Multiple R-squared:  0.1285,    Adjusted R-squared:  0.01958 
+F-statistic:  1.18 on 2 and 16 DF,  p-value: 0.3327</code></pre>
+</div>
+</div>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Review your understanding
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Look at the figure, and the output from the model.</p>
+<ul>
+<li>Explain the estimates for <code>(Intercept)</code>, <code>groupINCR</code> and <code>groupMIX</code>.</li>
+<li>The order of the factor variable <code>group</code> determines the reference level. Change the reference level to <code>MIX</code> using <code>mutate(group = factor(group, levels = c("MIX", "DECR", "INCR")))</code></li>
+<li>Fit a new model and reinterpret the results.</li>
+</ul>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 x 7
+   subject group   pre meso1 meso2 meso3 change
+     &lt;dbl&gt; &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+ 1       1 INCR  5629   5209  5485  5330 -299  
+ 2       2 DECR  4471   4792  4662  4886  415  
+ 3       3 INCR  5598.  5698  5920  6380  782. 
+ 4       4 DECR  4944.  4782  4877  5171  227. 
+ 5       5 DECR  5748   5694    NA    NA   NA  
+ 6       6 INCR  4633.  4706  4695  4864  231. 
+ 7       7 MIX   4250   4562  4165  4402  152  
+ 8       8 MIX   4760.  5093  5266  5172  412. 
+ 9       9 MIX   4629   5247    NA  4864  235  
+10      10 INCR  5226   5360  5666  5755  529  
+11      11 MIX   4063   4149  3812  4077   14  
+12      13 DECR  4981.  4874    NA  5045   63.6
+13      14 MIX   4444   4360  4316  4636  192  
+14      15 INCR  4486   4780  4637  4991  505  
+15      16 INCR  4604   4866  4904  5087  483  
+16      17 MIX   4366   4520  4277  4483  117  
+17      18 DECR  5135.  4802  5445  5315  180. 
+18      19 DECR  4018.  4019  3447  4404  386. 
+19      20 INCR  4739   5125  4899  5119  380  
+20      21 DECR  4753.  4436  4228  4730  -22.5</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = change ~ group, data = dat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-672.01 -105.97    6.99  143.99  409.00 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)  
+(Intercept)   187.00      98.50   1.898   0.0758 .
+groupDECR      21.21     139.31   0.152   0.8809  
+groupINCR     186.01     134.24   1.386   0.1849  
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 241.3 on 16 degrees of freedom
+  (1 observation deleted due to missingness)
+Multiple R-squared:  0.1285,    Adjusted R-squared:  0.01958 
+F-statistic:  1.18 on 2 and 16 DF,  p-value: 0.3327</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>The interpretation of model coefficients in multiple linear regression is the effect when the other coefficents are held contant (at zero).</li>
+</ul>
+<div class="callout-caution callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Review your understanding
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Select two or more variables (continuous or categorical) from the <code>cyclingstudy</code> data set and fit a model.</li>
+<li>Interpret the results.</li>
 </ul>
 </div>
 </div>

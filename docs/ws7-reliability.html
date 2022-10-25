@@ -256,8 +256,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>         s     mdiff        m       te     cv       L     iisd
-1 306.6635 -13.68663 4735.513 216.8439 4.5791 608.487 485.6995</code></pre>
+<pre><code>        s    mdiff        m      te       cv        L     iisd
+1 311.103 16.45666 4877.201 219.983 4.510436 617.2958 481.0148</code></pre>
 </div>
 </div>
 <p>We can plot differences (y-axis) against the overall average per participant (x-axis) to produce a Bland-Altman plot. We also plot the average difference between measurements, and the 95% limits of agreement.</p>
@@ -339,8 +339,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code># A tibble: 2 x 2
   within     n
   &lt;chr&gt;  &lt;int&gt;
-1 in        96
-2 out        4</code></pre>
+1 in        98
+2 out        2</code></pre>
 </div>
 <details>
 <summary>Code</summary>
@@ -373,7 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="te-as-an-intra-individual-variation" class="level2">
 <h2 class="anchored" data-anchor-id="te-as-an-intra-individual-variation">TE as an intra-individual variation!</h2>
-<p>The typical error (or standard error of measurement) of our simulated data is about 4.6% of the mean. We can think of this as the <em>long-run variation</em> in an athlete or patient. If nothing changes most repeated measures will be inside e.g., a 95% range (<span class="math inline">\(\pm 2 \times SD \approx 95\%\)</span> of all values under a normal distribution).</p>
+<p>The typical error (or standard error of measurement) of our simulated data is about 4.5% of the mean. We can think of this as the <em>long-run variation</em> in an athlete or patient. If nothing changes most repeated measures will be inside e.g., a 95% range (<span class="math inline">\(\pm 2 \times SD \approx 95\%\)</span> of all values under a normal distribution).</p>
 <div class="cell">
 <details>
 <summary>Code</summary>
