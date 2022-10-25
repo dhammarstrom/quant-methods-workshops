@@ -967,7 +967,7 @@ Look at the figure, and the output from the model.
 ```{r}
 #| code-fold: true
 #| code-summary: "A possible solution"
-#| echo: false
+#| eval: false
 
 
 dat <- cyclingstudy %>% 

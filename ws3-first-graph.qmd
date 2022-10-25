@@ -533,7 +533,7 @@ child_heart <- read_csv("https://raw.githubusercontent.com/dspiegel29/ArtofStati
 - Reproduce figure 2.2 and 2.3
 
 ```{r}
-
+#| eval: false
 beans <- read.csv("https://raw.githubusercontent.com/dspiegel29/ArtofStatistics/master/02-2-3-jelly-bean-counts/02-1-bean-data-full-x.csv", header = FALSE)
 
 
