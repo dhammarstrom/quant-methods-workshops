@@ -934,7 +934,7 @@ $$\hat{y_i} = \beta_0 + \beta_1x_1 + \beta_2x_2 + \epsilon_i$$
 
 ```{r}
 #| code-fold: true
-#| echo: false
+#| eval: false
 
 
 dat <- cyclingstudy %>% 
