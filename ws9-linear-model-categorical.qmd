@@ -990,7 +990,7 @@ summary(m)
 :::
 
 
-- The interpretation of model coefficients in multiple linear regression is the effect when the other coefficents are held contant (at zero).
+- The interpretation of model coefficients in multiple linear regression is the effect when the other coefficents are held constant (at zero).
 
 
 :::{.callout-caution collapse="true"}
@@ -1001,6 +1001,26 @@ summary(m)
 
 
 :::
+
+
+## The `hypertrophy` data set
+
+
+:::{.callout-Practice}
+
+#### Group work
+
+Using the `hypertrophy` data set:
+
+
+1. Reproduce the results in figure 9B
+
+2. Identify variables of interest (e.g. strength or muscle mass gains) and explain the using a regression model with a selected set of predictor varaibles.
+
+
+:::
+
+
 
 
 
