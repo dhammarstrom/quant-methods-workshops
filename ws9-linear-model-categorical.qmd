@@ -1005,6 +1005,16 @@ summary(m)
 
 ## The `hypertrophy` data set
 
+- @RN2225 investigated the predictors of responses to a resistance training intervention
+- The composite score of muscle hypertrophy is calculated as
+
+```{r}
+data(hypertrophy)
+```
+
+
+
+
 
 :::{.callout-Practice}
 

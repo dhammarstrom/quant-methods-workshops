@@ -18,3 +18,4 @@ format: html
 |[The linear model (2): Categorical predictors and diagnostics](ws9-linear-model-categorical.html)|
 |[The linear model (3): Curve-linear regression](ws10-curve-linear.html)|
 |[Creating functions in R](ws12-writing-functions.html)|
+|[Understanding p-values through simulations](ws13-p-values-simulation.html)|

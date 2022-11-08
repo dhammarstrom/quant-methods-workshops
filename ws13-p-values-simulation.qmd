@@ -1,0 +1,92 @@
+---
+title: "Populations, samples and statistical inference"
+format:
+        html:
+          code-fold: false
+editor_options: 
+  chunk_output_type: console
+bibliography: resources/bib-final.bib  
+---
+
+
+## A simple test of differences
+
+- We have a two-group design and want to know if *Condition A* is different from *Condition B* **in any meaningful way**.
+- To accomplish this we can test if an observed difference is very different to a reference, where any difference is up to chance
+- Use the code chunk below to simulate data
+
+
+```{r}
+set.seed(1)
+# Population 
+A <- rnorm(1000, mean = 100, 10)
+
+B <- rnorm(1000, mean = 92, 10)
+
+# Sample
+a <- sample(A, 15, replace = FALSE)
+b <- sample(B, 15, replace = FALSE)
+
+```
+
+
+
+:::{.callout-Practice}
+
+#### Group work
+
+- Using the `t.test` function, test against the null-hypothesis of no difference between groups
+
+- Construct a permutation test where a *reference distribution of possible outcomes* is created in a loop(!). Try to explain what the code below does.
+
+- Calculate how many cases led to a more extreme result than the observed in your experiment.
+
+```{r}
+#| echo: true
+#| eval: false
+library(tidyverse)
+
+differences <- vector()
+
+for(i in 1:1000) {
+        
+        
+     samp <- sample(c(a, b), 30, replace = FALSE)
+        
+     differences[i] <- mean(samp[1:15]) - mean(samp[16:30])
+        
+        
+}
+
+
+data.frame(differences) %>%
+        ggplot(aes(differences)) + geom_histogram() + 
+        geom_vline(xintercept = mean(a) - mean(b), color = "red", size = 2)
+
+
+```
+
+
+:::
+
+## The effect of small and large samples.
+
+- The sample size determines what differences we may observe.
+
+:::{.callout-Practice}
+
+#### Group work
+
+- Re-do the experiment above with a smaller sample size, and a larger sample size.
+- Report your experiment as a t-test and a permutation test.
+
+
+## Limitations of p-values
+
+- P-values are often misinterpreted!
+- Find a scientific paper (full text) in any area and search for "P < 0.05" and "P > 0.05", see how authors interpret the results. 
+
+
+
+
+
