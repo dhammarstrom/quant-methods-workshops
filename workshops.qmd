@@ -19,3 +19,6 @@ format: html
 |[The linear model (3): Curve-linear regression](ws10-curve-linear.html)|
 |[Creating functions in R](ws12-writing-functions.html)|
 |[Understanding p-values through simulations](ws13-p-values-simulation.html)|
+|[Study designs and statistical tests](ws15-study-design-1.html)|
+|[Analyzing trials](ws16-analyzing-trials.html)|
+|[Mixed effects models for repeated measures](ws17-mixed-effects-repeated-measures.html)|
