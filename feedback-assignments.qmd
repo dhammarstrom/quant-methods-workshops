@@ -1,0 +1,67 @@
+---
+title: "Sjekkliste for arbeidskrav"
+---
+
+
+
+Følgende punkter er basert på de arbeidskrav som til nå er levert i emnet. Jeg oppdaterer teksten etter neste innlevering.
+
+## Å skrive rapporter
+
+-	Unngå å forfatte rapporter i punkter/lister. Denne formen av tekst kan hjelpe leseren men kan også bryte opp og skape unødvendig forvirring. En punktliste kan også få spørsmålet «hvorfor» å forsvinne. Leseren kan være interessert i å vite hvorfor man velger en tilnærming eller metode.
+-	Skriv for en lesere som er kjent med området men savner informasjon om hvorfor man skal lese rapporten. Du må fylle i «blanks» hos leseren!
+-	Rapporter kan med fordel struktureres som introduksjon, metode, resultat og diskusjon. Man kan velge å ikke ha med disse overskriftene men til tross organisere paragrafene på denne måten. Introduksjonen forteller leseren hva teksten skal belyse, metoden gir et innblikk i hva og hvordan du gjennomført arbeidet, resultatene beskriver og diskusjon tolker.
+-	Vær sikker på at begreper og metoder er definerte! «Typical error», «Coefficient of variation», «laktatterskel» osv. kan være mange ulike ting. Man kan bruke en referanse eller en formel for å definere beregninger, referanser for konsepter osv.
+-	Husk å definer feilstapler (error bars), farger, punkter enheter osv. I tabeller, figurer og tekst.
+
+## Spesifikt innhold
+
+### Arbeidskrav 1
+
+-	Se til å organiser github-mapper på en overskuelig måte. En metode for å underlette for leseren er å bruke en README.md. Denne vil bli konvertert til HTML på github og kan dermed gi et overblikk over mappen. Hvis du trenger å spare gamle filer så kan disse flyttes til en mappe («archive» eller lignende). 
+-	Det er viktig å vise at du bruker kilder som er angitt i oppgaven. Bruk disse for å vise til definisjoner og gi bakgrunn til hvorfor du ønsker å vise dine resultater til leseren.
+-	Hva betyr CV, typical error osv. som du beregnet? Her holder det ikke bare med definisjoner, prøv deg også på en tolkning. En måte kan være å bruke annen litteratur som beregnet CV, eller sammenligne med et annet test som du gjort.
+-	Noen detaljer i en metode kan med fordel holdes kort og kanskje til og med utelates da det tilhører eks. «good laboratory practice». Her kan man spørre seg hvilken informasjon som kreves for å repetere forsøkene gitt at man praktiserer gode rutiner i laboratoriet? 
+
+### Arbeidskrav 2
+-	Alle gruppene/rapportene er meget sparsomt skrevne. Bruk rapportens deler til å skrive noe om de grafer og analysene som dere presenter. Hvordan kan man tolke laktatterskel? hvorfor predikerer man størrelse på DNA fragmenter? Etc!
+-	Standard error er spredning i en estimert fordeling av «teoretiske» utvalg. Den forteller ikke hvor bra modellen er, men snarere med hvilken usikkerhet vi bør tolke estimatet. Hvordan skiller denne tolkningen fra deres tolkning?
+-	T-verdien i en regresjonstabell er en ratio mellom estimat og SE, denne brukes for å beregne p-verdien. P-verdien i sin tur forteller oss om hvor usannsynlig vår data, eller enda mer ekstrem data er hvis nullhypotesen er sann. Hvordan kan dere justere beskrivelsen av regresjonsoutput basert på denne beskrivelsen?
+
+### Arbeidskrav 3
+
+Spørsmål 1-3:
+
+-	Forskjell i SE mellom modellene henger sammen med utvalgsstørrelsen. P-verdien forteller ikke sannsynligheten for at null-hypotesen er sann. Hvordan henger utvalgsstørrelse sammen p-verdien?
+-	Den skyggete delen av t-fordeling er resultater like eller mer ekstreme enn et observert resultat. T-fordelingen representerer vårt beste estimat av mulige resultater under null-hypotesen.
+
+Spørsmål 4:
+
+-	Her er del lurt å igjen definere SE! Den gjennomsnittlige standardfeilen er et estimat på spredningen i utvalgsfordelingen! Utvalgsfordelingen er alle beregnede gjennomsnittene!  
+
+Spørsmål 5-7:
+
+-	Hvordan kan vi bruke dette for å definere statistisk styrke? Statistisk styrke kan defineres ved hjelp av tankeeksperimentet at man gjennomfører 1000 studier på samme populasjon. Hvor mange vill finne en definert effekt når man setter grensen for p-verdien og utvalgsstørrelsen til et spesifikt nivå? 
+
+Spørsmål 8:
+
+-	Når vi ikke har noen effekt så vil vi finne en effekt i et antall studier basert på den grense vi setter på $\alpha$. Dette betyr at $\alpha$ definerer våre antall falske positive fynd og at fordeling av p-verdier ved ingen effekt er uniform, hva betyr dette? 
+
+## Å bruke R
+
+-	R bruker punktum som kommaseparerare. For en helhetlig rapport kan det være lurt å velge en måte å rapportere resultater på.
+-	Hensikten/styrken med reproduserbar rapportering er at tall, tabeller, figurer osv. er direkte koblet til dataene. Prøv å unngå å skrive inn tall direkte. Bruk isteden variabler (eks. `var1`) som du skaper i code chunks och settes inn i teksten. R vill i dette fallet lete etter en variable i environment som heter `var1`. Se her [https://rmarkdown.rstudio.com/lesson-4.html](https://rmarkdown.rstudio.com/lesson-4.html) for mer info.
+
+-	Å definere innstillinger for code chunks vil gjøre rapportene lettere å lese. F.eks. ved å inkludere koden som beskrives under vil ta vekk meddelende, «warnings» og koden fra din rapport. Hus at innstillinger må settes først i code chunken.
+
+
+```{}
+#| echo: false
+#| message: false
+#| warning: false
+
+
+```
+-	Unngå å bruke `print()` i en rapport da dette vil resultere i uformatert tekst. Bruk istedenfor tabellverktøy (som gt eller knitr::kable()) for tabeller.
+-	Se her [Quarto - Citations & Footnotes](https://quarto.org/docs/authoring/footnotes-and-citations.html#bibliography-generation) for hvordan du kan sette en egen overskrift for referanser og inkludere referanser hvor du ønsker.
+

@@ -3,6 +3,10 @@ title: "Assignments"
 format: html
 ---
 
+[Her finner dere feedback på arbeidskrav i emnet.](feedback-assignments.html)
+
+
+
 |Assignment |Due date |Included in portfolio |Group assignment|
 | :--- | :---: | ---:| ---:|
 |[Descriptive statistics, reliability and validity, tools for reproducible data science](assignment-1.html)| 2022-09-26 |Yes|Yes|
