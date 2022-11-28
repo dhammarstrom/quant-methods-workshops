@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quantitative Methods - Workshop, Assigments and Tutorials - Sjekkliste for arbeidskrav</title>
+<title>Quantitative Methods - Workshop, Assigments and Tutorials - Sjekkliste for arbeidskrav og eksamen</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -103,8 +103,11 @@ ul.task-list{list-style: none;}
   <li><a href="#arbeidskrav-1" id="toc-arbeidskrav-1" class="nav-link" data-scroll-target="#arbeidskrav-1">Arbeidskrav 1</a></li>
   <li><a href="#arbeidskrav-2" id="toc-arbeidskrav-2" class="nav-link" data-scroll-target="#arbeidskrav-2">Arbeidskrav 2</a></li>
   <li><a href="#arbeidskrav-3" id="toc-arbeidskrav-3" class="nav-link" data-scroll-target="#arbeidskrav-3">Arbeidskrav 3</a></li>
+  <li><a href="#arbeidskrav-4" id="toc-arbeidskrav-4" class="nav-link" data-scroll-target="#arbeidskrav-4">Arbeidskrav 4:</a></li>
+  <li><a href="#reproduserbare-rapporter-på-github" id="toc-reproduserbare-rapporter-på-github" class="nav-link" data-scroll-target="#reproduserbare-rapporter-på-github">Reproduserbare rapporter på Github</a></li>
   </ul></li>
   <li><a href="#å-bruke-r" id="toc-å-bruke-r" class="nav-link" data-scroll-target="#å-bruke-r">Å bruke R</a></li>
+  <li><a href="#innlevering-av-eksamen" id="toc-innlevering-av-eksamen" class="nav-link" data-scroll-target="#innlevering-av-eksamen">Innlevering av eksamen</a></li>
   </ul>
 </nav>
     </div>
@@ -113,7 +116,7 @@ ul.task-list{list-style: none;}
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Sjekkliste for arbeidskrav</h1>
+<h1 class="title">Sjekkliste for arbeidskrav og eksamen</h1>
 </div>
 
 
@@ -177,6 +180,28 @@ ul.task-list{list-style: none;}
 <li>Når vi ikke har noen effekt så vil vi finne en effekt i et antall studier basert på den grense vi setter på <span class="math inline">\(\alpha\)</span>. Dette betyr at <span class="math inline">\(\alpha\)</span> definerer våre antall falske positive fynd og at fordeling av p-verdier ved ingen effekt er uniform, hva betyr dette?</li>
 </ul>
 </section>
+<section id="arbeidskrav-4" class="level3">
+<h3 class="anchored" data-anchor-id="arbeidskrav-4">Arbeidskrav 4:</h3>
+<ul>
+<li><p>Husk primær målsetting med denne oppgaven: «fokus på design av studiene og valg av statistiske metoder/test for å besvare studienes problemstilling». For å løfte flere av deres tekster kan man tenke at man fokuserer på å sammenligne studiene på disse punktene.</p></li>
+<li><p>Jeg savner noe informasjon i mange arbeidskrav om studiedesigner i stort, hvordan forholder seg de studier dere har analysert til andre studiedesigner. Her kan tenkes at man gir en generell innføring i studiedesigner i en paragraf for å vise for leseren hvordan man kan forstå de studiene som du har analysert. Det er da også mulig å bruke forslag på pensum!:)</p></li>
+<li><p>Bruk gjerne også noe plass på å beskrive de statistiske metodene som blir brukt, dette kan med fordel gjøres med henvisning til pensum (eller annen passende litteratur). Har du kjennskap til testene som blir brukt på den nivå at du vet hvilke kommandoen som skal brukes i R for å gjenskape analysene?</p></li>
+<li><p>Til tross for at jeg foreslå at man kan bruke QALMRI så sa jeg også at rapporten ikke skulle inneholde QALMRI-tabellen. (Jeg vil ikke underkjenne oppgaver som har QALMRI som bærende struktur).</p></li>
+<li><p>Tenk på om din tekst kan bli mer strukturert ved å bruke tydeligere temaer per paragraf. Når en paragraf er veldig lang, og inneholder flere ulike temaer blir det vanskelig for leseren å følge. En lettlest paragraf har kanskje 100-200 ord!</p></li>
+<li><p>I oppgaven er det lov på kommer med noen meninger om studiedesignene, eller analysene er «gode», hva bør gjøres annerledes for å lage bedre vitenskap. Et eksempel som flere er inne på er statistiske tester innad eksperimentelle grupper, hva sier disse oss?</p></li>
+<li><p>En tabell eller figur er et veldig godt innslag i en rapport. Men den må følges opp i løpende tekst.</p></li>
+</ul>
+</section>
+<section id="reproduserbare-rapporter-på-github" class="level3">
+<h3 class="anchored" data-anchor-id="reproduserbare-rapporter-på-github">Reproduserbare rapporter på Github</h3>
+<ul>
+<li>Med en reproduserbar rapport mener jeg at tekst, kode og data blir brukt til å skape et «output» som en pdf-, html- eller word-fil. Fordelen med github (og lignende løsninger) er at man har mulighet å samle alle delene i et versjonskontrollsystem. Dette har fordeler for deg som forfatter og for vitenskapelig arbeid i stort (transparens, muligheter å reprodusere osv.). Hensikten med å bruke Github i emnet er å øve på denne måten å lage rapporter.</li>
+</ul>
+<p>Med det sagt vil jeg ikke underkjenne rapporter som ikke er reproduserbar i denne betydningen. - Vær konsekvent med filstruktur, filnavn osv på github. Filer som ikke blir brukt bør f.eks. flyttes til en annen mappe.</p>
+<ul>
+<li>Kontroller at din mappe går å laste ned fra github, at den seneste versjonen av prosjektet ligger oppe osv!</li>
+</ul>
+</section>
 </section>
 <section id="å-bruke-r" class="level2">
 <h2 class="anchored" data-anchor-id="å-bruke-r">Å bruke R</h2>
@@ -193,6 +218,17 @@ ul.task-list{list-style: none;}
 <ul>
 <li>Unngå å bruke <code>print()</code> i en rapport da dette vil resultere i uformatert tekst. Bruk istedenfor tabellverktøy (som gt eller knitr::kable()) for tabeller.</li>
 <li>Se her <a href="https://quarto.org/docs/authoring/footnotes-and-citations.html#bibliography-generation">Quarto - Citations &amp; Footnotes</a> for hvordan du kan sette en egen overskrift for referanser og inkludere referanser hvor du ønsker.</li>
+</ul>
+</section>
+<section id="innlevering-av-eksamen" class="level2">
+<h2 class="anchored" data-anchor-id="innlevering-av-eksamen">Innlevering av eksamen</h2>
+<ul>
+<li>Eksamen skal leveres som en pdf på inspera.</li>
+<li>I pdf:en skal det stå beskrevet hvor man kan finne data og kod (beskriv dette under preface i mallen).</li>
+<li>Jeg har skapt en mal for innlevering av eksamen, for å bruke denne: o Lag en <code>fork</code> av <code>https://github.com/dhammarstrom/innlevering-idr4000-qmd</code> til din egen github bruker. o Last ned din <code>fork</code> til R Studio og oppdatere qmd-filene med dine tekster og repository med dine data. o For å lage pdf:en, tryck på render. Det kan kreves flere render for å løse problemer som oppstår. Se til å levere den endlige versjonen! o Den pdf som skapes finner du i mappen <code>_book</code> o Legg til endringer (gi add -A) og commit (git commit -m ‘a message’) og push (git push). Din versjon av innleveringsmappen er nå oppdatert på din github profil</li>
+<li>For å bruke denne løsningen kreves at du har quarto installert (https://quarto.org/docs/get-started/).</li>
+<li>Det kreves også en installasjon av TeX, quarto sier at TinyTeX er et godt alternativ (se https://quarto.org/docs/output-formats/pdf-engine.html)</li>
+<li>Du kan være interessert av å forandre automatisk generert tekst i rapporten, eks. figurtekster, overskrifter. Se i .yml-filen for å endre disse innstillingene.</li>
 </ul>
 
 

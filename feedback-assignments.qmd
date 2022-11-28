@@ -1,5 +1,5 @@
 ---
-title: "Sjekkliste for arbeidskrav"
+title: "Sjekkliste for arbeidskrav og eksamen"
 ---
 
 
@@ -47,6 +47,33 @@ Spørsmål 8:
 
 -	Når vi ikke har noen effekt så vil vi finne en effekt i et antall studier basert på den grense vi setter på $\alpha$. Dette betyr at $\alpha$ definerer våre antall falske positive fynd og at fordeling av p-verdier ved ingen effekt er uniform, hva betyr dette? 
 
+
+### Arbeidskrav 4:
+
+-	Husk primær målsetting med denne oppgaven: «fokus på design av studiene og valg av statistiske metoder/test for å besvare studienes problemstilling». For å løfte flere av deres tekster kan man tenke at man fokuserer på å sammenligne studiene på disse punktene.
+
+-	Jeg savner noe informasjon i mange arbeidskrav om studiedesigner i stort, hvordan forholder seg de studier dere har analysert til andre studiedesigner. Her kan tenkes at man gir en generell innføring i studiedesigner i en paragraf for å vise for leseren hvordan man kan forstå de studiene som du har analysert. Det er da også mulig å bruke forslag på pensum!:)
+
+-	Bruk gjerne også noe plass på å beskrive de statistiske metodene som blir brukt, dette kan med fordel gjøres med henvisning til pensum (eller annen passende litteratur). Har du kjennskap til testene som blir brukt på den nivå at du vet hvilke kommandoen som skal brukes i R for å gjenskape analysene?
+
+-	Til tross for at jeg foreslå at man kan bruke QALMRI så sa jeg også at rapporten ikke skulle inneholde QALMRI-tabellen. (Jeg vil ikke underkjenne oppgaver som har QALMRI som bærende struktur). 
+
+-	Tenk på om din tekst kan bli mer strukturert ved å bruke tydeligere temaer per paragraf. Når en paragraf er veldig lang, og inneholder flere ulike temaer blir det vanskelig for leseren å følge. En lettlest paragraf har kanskje 100-200 ord!
+
+-	I oppgaven er det lov på kommer med noen meninger om studiedesignene, eller analysene er «gode», hva bør gjøres annerledes for å lage bedre vitenskap. Et eksempel som flere er inne på er statistiske tester innad eksperimentelle grupper, hva sier disse oss?
+-	En tabell eller figur er et veldig godt innslag i en rapport. Men den må følges opp i løpende tekst. 
+
+### Reproduserbare rapporter på Github
+
+-	Med en reproduserbar rapport mener jeg at tekst, kode og data blir brukt til å skape et «output» som en pdf-, html- eller word-fil. Fordelen med github (og lignende løsninger) er at man har mulighet å samle alle delene i et versjonskontrollsystem. Dette har fordeler for deg som forfatter og for vitenskapelig arbeid i stort (transparens, muligheter å reprodusere osv.). Hensikten med å bruke Github i emnet er å øve på denne måten å lage rapporter.
+
+Med det sagt vil jeg ikke underkjenne rapporter som ikke er reproduserbar i denne betydningen. 
+-	Vær konsekvent med filstruktur, filnavn osv på github. Filer som ikke blir brukt bør f.eks. flyttes til en annen mappe.
+
+-	Kontroller at din mappe går å laste ned fra github, at den seneste versjonen av prosjektet ligger oppe osv!
+
+
+
 ## Å bruke R
 
 -	R bruker punktum som kommaseparerare. For en helhetlig rapport kan det være lurt å velge en måte å rapportere resultater på.
@@ -64,4 +91,27 @@ Spørsmål 8:
 ```
 -	Unngå å bruke `print()` i en rapport da dette vil resultere i uformatert tekst. Bruk istedenfor tabellverktøy (som gt eller knitr::kable()) for tabeller.
 -	Se her [Quarto - Citations & Footnotes](https://quarto.org/docs/authoring/footnotes-and-citations.html#bibliography-generation) for hvordan du kan sette en egen overskrift for referanser og inkludere referanser hvor du ønsker.
+
+
+
+
+## Innlevering av eksamen
+
+-	Eksamen skal leveres som en pdf på inspera.
+-	I pdf:en skal det stå beskrevet hvor man kan finne data og kod (beskriv dette under preface i mallen).
+-	Jeg har skapt en mal for innlevering av eksamen, for å bruke denne:
+o	Lag en `fork` av `https://github.com/dhammarstrom/innlevering-idr4000-qmd` til din egen github bruker.
+o	Last ned din `fork` til R Studio og oppdatere qmd-filene med dine tekster og repository med dine data.
+o	For å lage pdf:en, tryck på render. Det kan kreves flere render for å løse problemer som oppstår. Se til å levere den endlige versjonen!
+o	Den pdf som skapes finner du i mappen `_book`
+o	Legg til endringer (gi add -A) og commit (git commit -m ‘a message’) og push (git push). Din versjon av innleveringsmappen er nå oppdatert på din github profil
+-	For å bruke denne løsningen kreves at du har quarto installert (https://quarto.org/docs/get-started/).
+-	Det kreves også en installasjon av TeX, quarto sier at TinyTeX er et godt alternativ (se https://quarto.org/docs/output-formats/pdf-engine.html) 
+-	Du kan være interessert av å forandre automatisk generert tekst i rapporten, eks. figurtekster, overskrifter. Se i .yml-filen for å endre disse innstillingene.   
+
+
+
+
+
+
 
