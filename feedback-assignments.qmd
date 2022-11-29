@@ -1,5 +1,7 @@
 ---
 title: "Sjekkliste for arbeidskrav og eksamen"
+editor_options: 
+  chunk_output_type: console
 ---
 
 
@@ -63,6 +65,162 @@ Spørsmål 8:
 -	I oppgaven er det lov på kommer med noen meninger om studiedesignene, eller analysene er «gode», hva bør gjøres annerledes for å lage bedre vitenskap. Et eksempel som flere er inne på er statistiske tester innad eksperimentelle grupper, hva sier disse oss?
 -	En tabell eller figur er et veldig godt innslag i en rapport. Men den må følges opp i løpende tekst. 
 
+
+Arbeidskrav 5
+
+-	Bruk tabeller for det mest sentrale. En kortere liste på eksempelvis øvelser, eksklusjonskriterier osv. kan skrives i løpende tekst. Når man har en mer kompleks fremstilling kan tabellen hjelpe.
+
+-	Husk at %-vis endring passer mindre bra for statistiske analyser. Det finnes noen unnatak, når vi log-transformerer så blir tilbake-transformerte data % endring (pga loven om logaritmer, log(a) – log(b) = log(a/b)). Istedenfor % endring i statistiske analyser kan man bruke absolutte tall og eventuelt konvertere til % endring for fremvisning av resultater.
+
+-	Ved å bruke ordet signifikant så gjør man av tradisjon et utsagn om et statistikk test, vær nøyaktig med hvilken sammenligning som er «signifikant».
+
+-	I metodeavsnitt så bør rapporten bare beskrive de deler som rapporten omhandler. Dersom man f.eks. ikke presenterer muskelbiopsidata bør disse ikke presenteres. Tanken her er å lage en rapport som etterligner men ikke er en kopi av originalrapporten!
+
+- Studiedesignen kan stille till problemer da vi måler styrke og muskelvekst innad deltakere. Vi kan bruke mixed-effects models, men også forenkle. Under følger eksempler på modeller for muskelmassedataene (den samme tilnærmingen kan brukes for styrke).
+
+```{r}
+#| message: false
+#| warning: false
+
+library(tidyverse); library(exscidata); library(lme4)
+
+# Load data
+dat <- dxadata %>%
+  select(participant:include, lean.left_leg, lean.right_leg) %>%
+        
+        # Extract leg specific data
+  pivot_longer(names_to = "leg", 
+               values_to = "lean.mass", 
+               cols = lean.left_leg:lean.right_leg) %>%
+  mutate(leg = if_else(leg == "lean.left_leg", "L", "R"), 
+         sets = if_else(multiple == leg, "multiple", "single")) %>%
+  select(participant, time, sex, include, sets, leg, lean.mass) %>%
+        # Filter only included participants
+        filter(include == "incl") %>%
+        # Make data set wider by time 
+        
+        pivot_wider(names_from = "time", 
+                    values_from = "lean.mass") %>%
+        # Calculate change score
+        
+        mutate(change = post - pre) %>%
+        
+        # Keep change score and make it wider by sets
+        select(participant:sets, change) %>%
+        pivot_wider(names_from = sets, values_from = change) %>%
+        
+  print()
+
+### Use simple t-test on change score
+
+t.test(dat$multiple, dat$single, paired = TRUE)
+
+```
+
+- Denne enkle måten å analysere dataene på er helt OK. Et annet alternativ er en "mixed-effects" modell.
+
+```{r}
+#| message: false
+#| warning: false
+#| eval: true
+
+# Load data
+dat <- dxadata %>%
+  select(participant:include, lean.left_leg, lean.right_leg) %>%
+        
+        # Extract leg specific data
+  pivot_longer(names_to = "leg", 
+               values_to = "lean.mass", 
+               cols = lean.left_leg:lean.right_leg) %>%
+  mutate(leg = if_else(leg == "lean.left_leg", "L", "R"), 
+         sets = if_else(multiple == leg, "multiple", "single")) %>%
+  select(participant, time, sex, include, sets, leg, lean.mass) %>%
+        # Filter only included participants
+        filter(include == "incl") %>%
+        # Fix time factor 
+        mutate(time = factor(time, levels = c("pre", "post"))) %>%
+        
+  print()
+
+### Use a mixed model to determine effects of time and condition
+
+m <- lmer(lean.mass ~ time + time:sets + (1|participant), 
+          data = dat)
+
+
+summary(m)
+
+confint(m)
+
+
+```
+
+- I modellen over gis ingen korreksjon for "baseline" i sammenligningen post. Dette er en legitim måte å analysere dataene på når vi kan anta at forskjeller ved baseline bare er målefeil.
+
+- Til sist kan vi prøve en ANCOVA, denne må og ta hensyn til at dataene kommer fra samme individ to ganger
+
+```{r}
+#| message: false
+#| warning: false
+#| eval: true
+
+
+# Load data
+dat <- dxadata %>%
+  select(participant:include, lean.left_leg, lean.right_leg) %>%
+        
+        # Extract leg specific data
+  pivot_longer(names_to = "leg", 
+               values_to = "lean.mass", 
+               cols = lean.left_leg:lean.right_leg) %>%
+  mutate(leg = if_else(leg == "lean.left_leg", "L", "R"), 
+         sets = if_else(multiple == leg, "multiple", "single")) %>%
+  select(participant, time, sex, include, sets, leg, lean.mass) %>%
+        # Filter only included participants
+        filter(include == "incl") %>%
+        # Fix time factor 
+        mutate(time = factor(time, levels = c("pre", "post"))) %>%
+        # Pivot wider by time
+        pivot_wider(names_from = time, 
+                    values_from = lean.mass) %>%
+        
+  print()
+
+### Use a mixed model to determine effects of time and condition
+
+m <- lmer(post ~ pre + sets + (1|participant), 
+          data = dat)
+
+
+summary(m)
+
+confint(m)
+
+
+```
+
+- `lme4` gir oss ikke p-verdier. Men vi kan bruke `confint()` for å beregne konfidensintervaller. Disse kan brukes får inferens.
+
+- Man kan være intressert i å få ut estimate fra modellene, her kan pakken `emmeans` hjelpe. La si at du ønsker å estimere post-skår fra modellen `m`.
+
+```{r}
+#| message: false
+#| warning: false
+#| eval: true
+
+library(emmeans)
+
+# store estimated marginal means in new object
+em <- emmeans(m, specs = ~ sets)
+
+# For plotting you can make the estimates to a data frame
+data.frame(em)
+
+
+
+```
+
+
 ### Reproduserbare rapporter på Github
 
 -	Med en reproduserbar rapport mener jeg at tekst, kode og data blir brukt til å skape et «output» som en pdf-, html- eller word-fil. Fordelen med github (og lignende løsninger) er at man har mulighet å samle alle delene i et versjonskontrollsystem. Dette har fordeler for deg som forfatter og for vitenskapelig arbeid i stort (transparens, muligheter å reprodusere osv.). Hensikten med å bruke Github i emnet er å øve på denne måten å lage rapporter.
@@ -100,11 +258,14 @@ Med det sagt vil jeg ikke underkjenne rapporter som ikke er reproduserbar i denn
 -	Eksamen skal leveres som en pdf på inspera.
 -	I pdf:en skal det stå beskrevet hvor man kan finne data og kod (beskriv dette under preface i mallen).
 -	Jeg har skapt en mal for innlevering av eksamen, for å bruke denne:
-o	Lag en `fork` av `https://github.com/dhammarstrom/innlevering-idr4000-qmd` til din egen github bruker.
-o	Last ned din `fork` til R Studio og oppdatere qmd-filene med dine tekster og repository med dine data.
-o	For å lage pdf:en, tryck på render. Det kan kreves flere render for å løse problemer som oppstår. Se til å levere den endlige versjonen!
-o	Den pdf som skapes finner du i mappen `_book`
-o	Legg til endringer (gi add -A) og commit (git commit -m ‘a message’) og push (git push). Din versjon av innleveringsmappen er nå oppdatert på din github profil
+
+        - Lag en `fork` av `https://github.com/dhammarstrom/innlevering-idr4000-qmd` til din egen github bruker.
+        - Last ned din `fork` til R Studio og oppdatere qmd-filene med dine tekster og repository med dine data.
+        - For å lage pdf:en, tryck på render. Det kan kreves flere render for å løse problemer som oppstår. Se til å levere den endlige versjonen!
+        - Den pdf som skapes finner du i mappen `_book`
+        - Legg til endringer (gi add -A) og commit (git commit -m ‘a message’) og push (git push). Din versjon av innleveringsmappen er nå oppdatert på din github profil
+        
+        
 -	For å bruke denne løsningen kreves at du har quarto installert (https://quarto.org/docs/get-started/).
 -	Det kreves også en installasjon av TeX, quarto sier at TinyTeX er et godt alternativ (se https://quarto.org/docs/output-formats/pdf-engine.html) 
 -	Du kan være interessert av å forandre automatisk generert tekst i rapporten, eks. figurtekster, overskrifter. Se i .yml-filen for å endre disse innstillingene.   
