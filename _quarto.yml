@@ -1,15 +1,16 @@
 project:
+  render: 
+        - "*.qmd"
+        - "!devel-workshops/"
   type: website
   output-dir: docs
 
 website:
-  title: "Quantitative Methods - Workshop, Assigments and Tutorials"
+  title: "Quantitative Methods - Workshop and Tutorials"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - href: assignments.qmd
-        text: Assignments
       - href: workshops.qmd
         text: Workshops
 

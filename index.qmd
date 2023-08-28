@@ -4,22 +4,20 @@ title: "Quantitative methods and statistics (In Sport and Exercise Science)"
 
 ## Introduction
 
-Welcome to the course **Quantitative methods and Statistics (IDR4000)**. The course aims to give students an overview of methodological aspects within the field of sport and exercise-physiology. Specifically, planning, conducting and analysing research projects with human participants will be covered. The lecture notes for the course can [be found here](https://dhammarstrom.github.io/quant-methods/). This website will contain tutorials that we will work on in class, assignments and additional materials related to the course content.  
+Welcome to the course **Quantitative methods and Statistics (IDR4000)**. The course aims to give students an overview of methodological aspects within the field of sport and exercise-physiology. Specifically, planning, conducting and analyzing research projects with human participants will be covered. The lecture notes for the course can [be found here](https://dhammarstrom.github.io/quant-methods/). This website will contain tutorials and workshops that we will work on in class.
 
 
 ## Practical information
 
-These notes were updated on **`r Sys.Date()`** and cover the course held during 2022 autumn semester. Contact [Daniel Hammarström](mailto:daniel.hammarstrom@inn.no) if you have any questions regarding this content.
+These notes were updated on **`r Sys.Date()`** and cover the course held during 2023 autumn semester. Contact [Daniel Hammarström](mailto:daniel.hammarstrom@inn.no) if you have any questions regarding this content.
 
 ### Learning objectives
 Learning objectives can be read in Norwegian [here](https://www.inn.no/content/view/full/163709/language/nor-NO).
 
 ### Learning strategies
-The course will include lectures, laboratory exercises, computer exercises and workshops, seminars and student presentations. Lectures will be held in-person and as pre-recorded published on these websites.
+The course will include lectures, laboratory exercises, computer exercises and workshops, seminars and student presentations. Lectures/Workshops will be held in-person and as pre-recorded published on these websites.
 
-Computer exercises will eventually require that you have special computer software installed on your computer. The software is free (see specific chapters in [lecture notes](https://dhammarstrom.github.io/quant-methods/installing-and-starting-up-r-and-r-studio.html#installing-and-starting-up-r-and-r-studio)).
-
-Assignments will be presented on this website with information on how to hand them in. The whole course is evaluated based on a portfolio exam (see below).
+Computer exercises will eventually require that you have special computer software installed on your computer. The software is free (see specific chapters in [lecture notes](https://dhammarstrom.github.io/quant-methods)).
 
 ### Course evaluation
 As a student you can contribute to the quality of the course by engaging in course evaluation throughout the course. You will be asked to answer a pre-course questionnaire about your *expectations* and a post-course questionnaire about your *experiences*. You are also welcomed to take part in systematic discussions during the course about the quality of teaching and course material. With these notes I want to underline the importance of student participation in the continuous development of the course (and program) teaching/learning quality.
