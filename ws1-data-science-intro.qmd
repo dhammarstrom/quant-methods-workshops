@@ -6,13 +6,13 @@ bibliography: resources/bib-final.bib
 
 # Introduksjon til datavitenskap og data i praksis
 
-## Hvordan fortså å bruke datavitenskap?
+## Hvordan forstå å bruke datavitenskap?
 
 Diskuter i grupper (3-4 pers, 15 min):
 
 - Hvilke verktøy for reproduserbar dataanalyse er du kjent med i dag? På hvilken måte kan disse verktøyene brukes for reproduserbar dataanalyse? 
 
-- Diskuter noen scenarioer hvor du, i forskjellige yrkesroller (f.eks. helse-omsorg, idrett, undervisning, forskning) ville hatt bruk av PPDAC (eller lignende datadrevet grunnlag for besluttninger). Vær realistisk! Tenk på noen spesifikke arbeidsoppgaver.
+- Diskuter noen scenarioer hvor du, i forskjellige yrkesroller (f.eks. helse-omsorg, idrett, undervisning, forskning) ville hatt bruk av PPDAC (eller lignende datadrevet grunnlag for beslutninger). Vær realistisk! Tenk på noen spesifikke arbeidsoppgaver.
 
 - Hvilke er de største hindringene for lære «datavitenskap» som beskrevet i pensum/forelesning?
 
@@ -28,9 +28,7 @@ Bruk Broman og Woo [@RN2391] for å analysere et [datasett](data/data-problems.x
 
 - Gruppe 3 bruker punktene 10-13
 
-Når det er mulig, forandre filen til det bedre. Noter når det er ikke er mulig eller gir uønskede konsekvenser. 
-
-
+Når det er mulig, forandre filen til det bedre. Noter når det er ikke er mulig eller gir uønskede konsekvenser.
 
 
 

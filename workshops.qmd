@@ -8,17 +8,3 @@ format: html
 |[Introduction to data science](ws1-data-science-intro.html) (Norwegian)| |
 |[Installing and starting R](ws2-installing-r.html)| |
 |[Creating your first graph](ws3-first-graph.html) | |
-|[Data wrangling and tables](ws4-data-wrangling-tables.html)| |
-|[Data wrangling and tables, part 2](ws4b-tables.html)| |
-|[Writing reports](ws5-writing-reports.html)| |
-|[Collaborative coding](ws6-git.html)| |
-|[Reliability and writing up a report (in Norwegian)](ws7-norwegian.html)|
-|[Discussions on reliability](ws7-reliability.html)|
-|[The linear model (1): Straight lines and predicting from models](ws8-linear-model.html)|
-|[The linear model (2): Categorical predictors and diagnostics](ws9-linear-model-categorical.html)|
-|[The linear model (3): Curve-linear regression](ws10-curve-linear.html)|
-|[Creating functions in R](ws12-writing-functions.html)|
-|[Understanding p-values through simulations](ws13-p-values-simulation.html)|
-|[Study designs and statistical tests](ws15-study-design-1.html)|
-|[Analyzing trials](ws16-analyzing-trials.html)|
-|[Mixed effects models for repeated measures](ws17-mixed-effects-repeated-measures.html)|

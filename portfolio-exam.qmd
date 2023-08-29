@@ -1,7 +1,11 @@
 ---
 title: "IDR4000 Portfolio exam - 2022"
-format: pdf
+format: docx
 ---
+
+## Oversikt mappeeksamen
+
+Din mappeeksamen skal bestå av reproduserbare rapporter som bygges fra "source-filer" med data og kod lagret i en mappe (eks. github). En lenke til online-mappen skal finnes i rappoertene/mappen. Se under for detaljer.
 
 ## Overall requirements for the portfolio exam
 Your report should be a completely reproducible document, built from a source file (e.g. R markdown) with data and code stored in a repository. A reference/link to your github repository should be provided in the report. To make your life easier, I suggest that you compile your report from one repository.
