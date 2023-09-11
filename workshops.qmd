@@ -8,3 +8,5 @@ format: html
 |[Introduction to data science](ws1-data-science-intro.html) (Norwegian)| |
 |[Installing and starting R](ws2-installing-r.html)| |
 |[Creating your first graph](ws3-first-graph.html) | |
+|[Data wrangling](ws4-data-wrangling-tables.html)| |
+|[Creating tables](ws4b-tables.html)| |

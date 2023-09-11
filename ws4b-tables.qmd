@@ -12,13 +12,13 @@ See [part 1 of this workshop here](ws4-data-wrangling-tables.html).
 
 ## A file-type for reports
 
-Tables are generated in R in specific output formats. These formats are commonly `html`, `pdf` or `docx` files. The output format type determines how a table is coded. However, common to all outputs is the source file. Previously, reports with tables, figures and text were built from Rmarkdown files (`Rmd`). Recently^[[Quarto was released on the 28:th of July 2022](https://www.rstudio.com/blog/announcing-quarto-a-new-scientific-and-technical-publishing-system/)], a new publishing system was released enabling more flexible reporting of data. This system is called quarto.
+Tables are generated in R in specific output formats. These formats are commonly `html`, `pdf` or `docx` files. The output format type determines how a table is coded. However, common to all outputs is the source file. Reports with tables, figures and text are built from Rmarkdown (`Rmd`) or quarto (`qmd`) files. 
 
 The transition between Rmarkdown-files and quarto is effortless as they use the same syntax but quarto has benefits when it comes to publishing.
 
 Quarto requires the installation of [plug-in software](https://quarto.org/docs/get-started/). The workshop is possible to follow using a Rmarkdown file also.
 
-We will talk more about publishing reports later. For now, we just need a source file to create our table. **Start a new quarto or Rmarkdown file and save it somewhere on your computer.**
+We will talk more about publishing reports later. For now, we just need a source file to create our table. **Start a new quarto or Rmarkdown file and save it somewhere on your computer. Prefferably as part of a PROJECT**
 
 ```{r}
 #| eval: false 
@@ -33,10 +33,6 @@ title: "Untitled"
 
 
 ```
-
-
-
-
 
 ## Table generators
 

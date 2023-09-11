@@ -21,7 +21,7 @@ The `tidyverse` contains two packages with functions used to wrangle data, `dply
 In the age of data we would be ignorant to teach data analysis without *data wrangling*
 
 
-## `dplyr` and the verbs of data manipulation
+## `dplyr`, pipes and the verbs of data manipulation
 
 `dplyr` contains *verbs* used for data manipulation, such as filtering rows, selecting variables and changing or creating variables. Verbs can be used in a *pipe* and read as sequential operations:
 
@@ -35,6 +35,9 @@ In the age of data we would be ignorant to teach data analysis without *data wra
 > show the data in the console.
 
 ```
+
+
+![A pipe](./img/pipe-illustration.png)
 
 
 The pipe operations are made possible by another package, [`magrittr`](https://magrittr.tidyverse.org/). This package contains the forward pipe operator `%>%`. The forward pipe operator (`%>%`) can be read as "*then do*". The operator takes the object on the left-hand side and puts it as the first argument in the following function.
