@@ -12,13 +12,13 @@ See [part 1 of this workshop here](ws4-data-wrangling-tables.html).
 
 ## A file-type for reports
 
-Tables are generated in R in specific output formats. These formats are commonly `html`, `pdf` or `docx` files. The output format type determines how a table is coded. However, common to all outputs is the source file. Reports with tables, figures and text are built from Rmarkdown (`Rmd`) or quarto (`qmd`) files. 
+Tables are generated in R in specific output formats. These formats are commonly `html`, `pdf` or `docx` files. The output format type determines how a table is coded by the table generator. However, common to all outputs is the source file. Reports with tables, figures and text are built from Rmarkdown (`Rmd`) or quarto (`qmd`) files. 
 
 The transition between Rmarkdown-files and quarto is effortless as they use the same syntax but quarto has benefits when it comes to publishing.
 
 Quarto requires the installation of [plug-in software](https://quarto.org/docs/get-started/). The workshop is possible to follow using a Rmarkdown file also.
 
-We will talk more about publishing reports later. For now, we just need a source file to create our table. **Start a new quarto or Rmarkdown file and save it somewhere on your computer. Prefferably as part of a PROJECT**
+We will talk more about publishing reports later. For now, we just need a source file to create our table. **Start a new quarto or Rmarkdown file and save it somewhere on your computer. Preferably as part of a PROJECT**
 
 ```{r}
 #| eval: false 
@@ -36,9 +36,9 @@ title: "Untitled"
 
 ## Table generators
 
-There are at least 15 commonly used packages in R used for tables.^[See the list at the bottom of the [gt package webpage](https://gt.rstudio.com/)] This really creates a jungle for the user.
+There are at least 15 commonly used packages in R used for tables.^[See the list in the [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/table-other.html)] This really creates a jungle for the user.
 
-This course have previously been focusing on `knitr` and the `kable` function as well as `flextable`. Both has their benefits, however, both also has drawbacks. These tools were covered in [Chapter 6 of the course notes](https://dhammarstrom.github.io/quant-methods/wrangling-data-to-create-your-first-table.html#wrangling-data-to-create-your-first-table).
+This course have previously been focusing on `knitr` and the `kable` function as well as `flextable`. Both has their benefits, however, both also has drawbacks.
 
 During this workshop we will focus on the `gt` package. This package is promising in bridging gaps in previous packages.
 
@@ -99,10 +99,12 @@ If the code is executed without compiling the source-file you will see a table i
 We proceed by formatting numbers. `gt` has many formatting functions created to make formatting of cell values easy. The function `fmt_numbers()` needs the columns to be formatted, otherwise defaults seems to give reasonable output. Be aware however of the `sep_mark = ","` option.
 
 
-:::{.callout-caution collapse="true"}
-## Review your understanding
+::: {.callout-note icon=false}
+
+### Exercises (1)
 
 - Find documentation for the `fmt_number` function and find out what how you may format numeric columns, including separation of thousands.
+- Look up the argument `drop_trailing_zeros` in the help page for `fmt_number`.
 
 :::
 
@@ -117,7 +119,7 @@ cyclingstudy %>%
                   sj = mean(sj.max),
                   weight = mean(weight.T1)) %>%
         gt() %>%
-        fmt_number(columns = VO2max:weight)
+        fmt_number(columns = VO2max:weight, sep_mark = "")
 
 
 
@@ -302,35 +304,16 @@ cyclingstudy %>%
         locations = cells_column_labels(columns = weight))
 ```
 
-## Exercise/Homework: Completing Table 1.
-
-Table 1 in experimental or observational studies often contains descriptive data on the sample. These tables may help readers to understand to what group/population a study may be generalized to and how key characteristics are distributed among experimental groups.
-
-We will prepare data from `cyclingstudy` to create a Table 1 with descriptive data:
-
-- Select a set of key variables that you want to describe (center, spread and/or range) from **baseline measurements**
-- Group the data set on `group` and perform summary calculations
 
 
-### Editing
+## Adding more statistics
 
-As we have seen, editing of text and cell values can be made before starting the table generator, or inside the table generator. Below are reminder of tips for pre-generator editing.
+We might want to combine multiple statistics in one table, for example the mean and stamdard deviation for each variable. Below I use a different approach to summarise values per variable and group by first adding a `pivot_longer` which makes it possible to do this operation without creating multiple new variables.
 
-To display numbers with the correct number of decimals R provides many options. A simple function (`round()`) provides rounding. The problem is that you will lose trailing zero, e.g., `2.0` will be displayed as `2`. To keep the trailing zero we must use the `sprintf()` function. Examples:
+A *mean-and-standard-deviation-variable* could be created by combining vectors. The mean and standard deviation is commonly presented as *mean (SD)*. Data from a column of means and a column of SD's can be combined to create a nice display using the `paste0()` function. Example:
 
 ```{r}
-
-# Rounding
-round(2.10, 2) 
-
-# Formatting to keep the trailing zero
-sprintf("%.2f", 2.10)
-
-```
-
-Combining vectors may be a good idea to make the table more attractive. The mean and standard deviation is commonly presented as mean (SD). Data from a column of means and a column of SD's can be combined to create a nice display using the `paste0()` function. Example:
-
-```{r}
+#| eval: false
 
 data.frame(m = c(46.7, 47.89, 43.5),  # A vector of means
            s = c(4.21, 4.666, 3.1)) %>% # A vector of SD's
@@ -342,18 +325,84 @@ data.frame(m = c(46.7, 47.89, 43.5),  # A vector of means
 
 ```
 
-A character vector of group names can be arranged and re-named using the `factor` function. In the `cyclingstudy` data set the groups (`INCR`, `DECR` and `MIX`) may be given more descriptive names, example:
+However, the gt package has a nice helper function that makes it possible to do this in the gt part of the pipe.
+
 
 ```{r}
+#| label: tbl-char4
+#| tbl-cap: "Group characteristics (code chunk)"
+
+
 
 cyclingstudy %>%
-        mutate(group = factor(group, levels = c("INCR", "DECR", "MIX"), 
-                              labels = c("Increased intensity", 
-                                         "Decreased intensity", 
-                                         "Mixed intensity"))) %>%
-        distinct(group)
+        filter(timepoint == "pre") %>%
+        select(subject, group, VO2.max, sj.max, weight.T1) %>%
+        pivot_longer(names_to = "variable", # <1> 
+                     values_to = "value", # <1>
+                     cols = VO2.max:weight.T1) %>% # <1>
+        group_by(group, variable) %>% # <2>
+        summarise(mean = mean(value), # <2>
+                  sd = sd(value)) %>% # <2>
+        pivot_wider(names_from = variable, # <3>
+                        values_from = c(mean, sd)) %>% # <3>
+        select(group, mean_VO2.max, sd_VO2.max,  # <3>
+                        mean_sj.max, sd_sj.max, # <3>
+                        mean_weight.T1, sd_weight.T1) %>% # <3>
+        ungroup() %>% # <4>
         
+        gt(caption = "Group characteristics (Caption)") %>%
+        
+        fmt_number(columns = mean_VO2.max:sd_VO2.max, decimals = 0) %>% # <5>
+        fmt_number(columns = mean_sj.max:sd_weight.T1, decimals = 1) %>% # <5>
+         
+        cols_merge(columns = c("mean_VO2.max", "sd_VO2.max"), # <6>
+                   pattern = "<<{1}>> <<({2})>>") %>% # <6>
+        
+        cols_merge(columns = c("mean_sj.max", "sd_sj.max"), # <6> 
+                   pattern = "<<{1}>> <<({2})>>") %>% # <6>
+        
+        cols_merge(columns = c("mean_weight.T1", "sd_weight.T1"), # <6>
+                   pattern = "<<{1}>> <<({2})>>") %>% # <6>
+                   
+
+        cols_label(group = "Group", 
+                   mean_VO2.max = md("VO<sub>2max</sub><br><small>(ml min<sup>-1</sup>)"), 
+                   mean_sj.max = md("Squat jump<br><small>(cm)"), 
+                   mean_weight.T1 = md("Weight<br><small>(kg)")) %>%
+        tab_header(title = "Group characteristics (Title)") %>%
+        tab_footnote(footnote = "Values are means for weight")
+
 ```
+
+1. Using `pivot_longer` to combine multiple variables in one value/name combination.
+2. Here we group by *variable* and *group* and create two new variables in a summarised data frame. This requires less code than the above example.
+3. Making the table "wide" again and using select to sort the columns.
+4. `gt` tables are group-sensitive. This means that if we have a grouped data frame/tibble, `gt` will use this grouping when it creates the table.
+5. It is good practice to have the same number of decimals in both the mean and SD.
+6. This is where we combine the columns using `column_merge`, for each new column we need a specified `column_merge`.
+
+
+
+
+
+## Exercise/Homework: Recreating Table 1 in [@haun2018].
+
+Data from [@haun2018] are part of the `exscidata` package as the `hypertrophy` data set. Access it by using
+
+```{r}
+#| eval: false
+
+library(exscidata); data(hypertrophy)
+
+glimpse(hypertrophy)
+
+```
+
+Try to find as many variables presented in Table 1 in the original publication as possible in the available data and format your version of the table to the best of your ability!
+
+
+
+
 
 
 
