@@ -325,8 +325,6 @@ cyclingstudy %>%
 Notice however that the default tolerance is a very small number (`r .Machine$double.eps^0.5`).
 
 
-
-
 ::: {.callout-note icon=false}
 
 ### Exercises (3)
@@ -337,6 +335,41 @@ Notice however that the default tolerance is a very small number (`r .Machine$do
 - Remove all rows that are `NA` in the `height.T1` variable.
 
 :::
+
+
+#### `arrange` sorts the rows of a data frame
+
+Sorting a data frame does not change the observations, it only determines how the data frame is printed or passed to other functions. 
+
+If we want to sort our data in `cyclingstudy` based on `VO2.max` we would
+
+```{r}
+#| eval: false
+
+cyclingstudy %>%
+        select(subject, group, VO2.max) %>% # <1>
+        arrange(VO2.max) # <2>
+
+
+cyclingstudy %>%
+        select(subject, group, VO2.max) %>% 
+        arrange(desc(VO2.max)) # <3>
+
+
+cyclingstudy %>%
+        select(subject, group, VO2.max) %>% 
+        arrange(desc(group) )
+
+
+```
+
+1. Selects a subset of variables for display
+2. Arrange based on the variable `VO2.max`, smallest values on top
+3. Arrange with largest value on top
+
+Notice the use of the `desc` function. In this example it is equivalent to using `arrange(-VO2.max)`, in other situations, like with factors, `desc` will work as expected but not `-`.
+
+
 
 ## Group and summarise data - `group_by` and `summarise`
 
@@ -409,29 +442,21 @@ cyclingstudy %>%
 
 ::: {.callout-note icon=false}
 
-### Exercises (1)
+### Exercises (5)
 
 1. Use the `cyc.bmi` data frame your created above, filter to only keep `timepoint == "pre"`, and from the BMI variable calculate:
-    + median
+    + median 
     + minimum
     + maximum
-    + 25th percentile
-    + 75th percentile
+    + 25th percentile (`q25` in the example below)
+    + 75th percentile (`q75` in the example below)
 2. Save the new data set as `cyc.bmi.summary` and plot the data using the code below:
-
+3. Compare the plot with figure created with geom_boxplot(), see ?geom_boxplot for the difference between plots as described under *Summary statistics*.
 
 ```{r}
+#| eval: false
 
-cyclingstudy %>%
-        filter(timepoint == "pre") %>%
-        select(subject, group, weight = weight.T1, height = height.T1) %>%
-        mutate(bmi = weight / ((height/100)^2)) %>%
-        group_by(group) %>%
-        summarize(median = median(bmi), 
-                  q25 = quantile(bmi, 0.25), 
-                  q75 = quantile(bmi, 0.75), 
-                  min = min(bmi), 
-                  max = max(bmi)) %>%
+cyc.bmi.summary %>%
         ggplot(aes(group, median)) + geom_point( size = 4) + 
         geom_errorbar(aes(ymin = q25, ymax = q75), width = 0, size = 2) +
         geom_errorbar(aes(ymin = min, ymax = max), width = 0, size = 1)
@@ -457,7 +482,7 @@ cyclingstudy %>%
 
 ## Pivoting using `pivot_longer` and `pivot_wider` from the `tidyr` package
 
-Data not always in a form that makes tables, graphs or statistical methods directly available. Data can be described as being in long form and wide form. The long form data is tidy in the sense that all columns are distinct variables. 
+Data can be described as being in long form and wide form. The long form data is tidy in the sense that all columns are distinct variables. 
 
 ![](https://github.com/gadenbuie/tidyexplain/raw/main/images/tidyr-pivoting.gif)
 
@@ -472,7 +497,7 @@ cyclingstudy %>%
 
 ```
 
-Using `pivot_longer` we can change this data into a long format. Pivot wider needs information on the new variable names for values and names. Names are the column names thta will form a variable and values are the values contained in the cells of the old variables. We also need to specify what columns to make longer, notice that I select variables `<from>:<to>`. 
+Using `pivot_longer` we can change this data into a long format. Pivot wider needs information on the new variable names for values and names. Names are the column names that will form a variable and values are the values contained in the cells of the old variables. We also need to specify what columns to make longer, notice that I select variables `<from>:<to>`. 
 
 ```{r}
 
@@ -489,6 +514,8 @@ cyclingstudy %>%
 `pivot_wider` makes it easy to remove prefix and fix the data type of the names variable. Below we specify to remove `lac.` from all names and convert the new variable to numeric data.
 
 ```{r}
+# eval: false
+
 
 cyclingstudy %>%
         filter(timepoint == "pre") %>%
@@ -502,12 +529,38 @@ cyclingstudy %>%
 
 ```
 
+A data set can contain multiple "groups" of variables in a wide format. In the cycling data set variables such as `HF.*` and `lac.*` are variables that are collected at different intensities (watt, indicated with `*`). We would like to make the data set tidy, each column contains a variable and each row is an observation.
+
+In the example below we create a long data set using two variables of interest, lactate (`lac.*`) and heart rate (`HF.*`) each collected over multiple intensities. Using a special name `.value` we can tell `pivot_longer` that there are additional information in the column names that should be regarded as names. We also need to a separator that separates our `.value` with the `watt` column, in this case the separator is a period/point (`.`). Note that R evaluates a single `.` as special character matching any single character. To use the period character as a separator we must "escape" it using either `\\.` or `[.]`, this removes its special meaning. 
 
 
-:::{.callout-caution collapse="true"}
-## Review your understanding
 
-Perform the opposite operation of the below data set:
+```{r}
+# eval: false
+
+cyclingstudy %>%
+        filter(timepoint == "pre") %>% # <1>
+        select(subject, group, lac.125:lac.375, HF.125:HF.375) %>% # <1>
+        pivot_longer(cols = !c(subject, group),  # <2>
+                     names_to = c(".value", "watt"),  # <3>
+                     names_sep = "[.]") %>% # <4>
+        print()
+
+```
+
+1. Filter the data set an select variables
+2. Using `pivot_wider`, first specify what columns to "make longer". 
+3. Use the special `.value` to indicate that each variable name contains information that should be used in creating new variables
+4. Indicate what character to split the variables on, in this case we need to "escape" the period using `[.]`.
+
+
+
+
+::: {.callout-note icon=false}
+
+### Exercises (6)
+
+1. Pivot the following data set, making separate columns/variables for each `NAME`
 
 ```{r}
 #| eval: false
@@ -522,22 +575,70 @@ data.frame(id = c("id1", "id1", "id1", "id2", "id2", "id2"),
 
 ```
 
+2. Using the `cyclingstudy` data set, make a ggplot that shows
+    - VCO<sub>2</sub> and VO<sub>2</sub> values at sub-maximal intensities (watt 125-375) for participant 15.
+    - Each time-point (`pre`, `meso1`, `meso2` and `meso3`) should be its own facet/panel
+    - VCO<sub>2</sub> and VO<sub>2</sub> should be of different colors indicated with points and lines
+    - Labels and units should be fixed (see figure below for details, look up the `ggtext` package for examples on how to format text in labels and titles).
 
-:::
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+library(ggtext)
+
+cyclingstudy %>%
+        select(subject, group,timepoint,  VO2.125:VO2.375, VCO2.125:VCO2.375) %>% # <1>
+        pivot_longer(cols = !c(subject, group, timepoint),  # <2>
+                     names_to = c(".value", "watt"),  # <3>
+                     names_sep = "[.]", 
+                     names_transform = list(watt = as.numeric)) %>% # <4>
+        
+        mutate(RER = round(VCO2 / VO2, 2)) %>%
+        
+        
+        pivot_longer(cols = VO2:VCO2) %>%
+
+        
+        filter(subject == 15, !is.na(value)) %>%
+        mutate(timepoint = factor(timepoint, levels = c("pre", "meso1", "meso2", "meso3"))) %>%
+        
+        ggplot(aes(watt, value, group = name, color = name)) + 
+        geom_point(size = 2.5) + 
+        geom_line() +
+        facet_wrap(~ timepoint) + 
+        
+        scale_color_manual(values = c("#ef8a62", "#67a9cf")) +
+        
+        labs(color = "", 
+             x = "Intensity (watt)", 
+             y = "Flow (ml min<sup>-1</sup>)", 
+             title = "Ventolatory gas exchange during four incremental tests in participant 15", 
+             subtitle = "Carbon dioxide (<span style = color:#ef8a62>VCO<sub>2</sub></span>) and Oxygen (<span style = color:#67a9cf>VO<sub>2</sub></span>)") +
+        
+        theme(axis.title.y = element_markdown(), 
+              plot.subtitle = element_markdown(), 
+              legend.position = "none")
+        
 
 
-## Exercise: Preparing Table 1.
 
-Table 1 in experimental or observational studies often contains descriptive data on the sample. These tables may help readers to understand to what group/population a study may be generalized to and how key characteristics are distributed among experimental groups.
 
-We will prepare data from `cyclingstudy` to create a Table 1 with descriptive data:
+```
 
-- Select a set of key variables that you want to describe (center, spread and/or range) from **baseline measurements**
+
+
+
+3. Table 1 in experimental or observational studies often contains descriptive data on the sample. These tables may help readers to understand to what group/population a study may be generalized to and how key characteristics are distributed among experimental groups. 
+
+> We will prepare data from `cyclingstudy` to create a Table 1 with descriptive data
+- Select a set of key variables that you want to describe (center, spread and/or range) from **baseline measurements** (`timepoint == "pre"`), for example age, weight, height and BMI.
 - Group the data set on `group` and perform summary calculations
 
 
-### Editing
-
+> ### Editing
 To display numbers with the correct number of decimals R provides many options. A simple function (`round()`) provides rounding. The problem is that you will lose trailing zero, e.g., `2.0` will be displayed as `2`. To keep the trailing zero we must use the `sprintf()` function. Examples:
 
 ```{r}
@@ -550,7 +651,7 @@ sprintf("%.2f", 2.10)
 
 ```
 
-Combining vectors may be a good idea to make the table more attractive. The mean and standard deviation is commonly presented as mean (SD). Data from a column of means and a column of SD's can be combined to create a nice display using the `paste0()` function. Example:
+> Combining vectors may be a good idea to make the table more attractive. The mean and standard deviation is commonly presented as mean (SD). Data from a column of means and a column of SD's can be combined to create a nice display using the `paste0()` function. Example:
 
 ```{r}
 
@@ -564,7 +665,7 @@ data.frame(m = c(46.7, 47.89, 43.5),  # A vector of means
 
 ```
 
-A character vector of group names can be arranged and re-named using the `factor` function. In the `cyclingstudy` data set the groups (`INCR`, `DECR` and `MIX`) may be given more descriptive names, example:
+> A character vector of group names can be arranged and re-named using the `factor` function. In the `cyclingstudy` data set the groups (`INCR`, `DECR` and `MIX`) may be given more descriptive names, example:
 
 ```{r}
 
@@ -576,6 +677,8 @@ cyclingstudy %>%
         distinct(group)
         
 ```
+
+:::
 
 
 ## The next step: Create a neat report
