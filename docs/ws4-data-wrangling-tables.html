@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.330">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -89,10 +89,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -140,9 +143,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#data-wrangling-and-tables" id="toc-data-wrangling-and-tables" class="nav-link active" data-scroll-target="#data-wrangling-and-tables">Data wrangling and tables</a>
   <ul class="collapse">
-  <li><a href="#dplyr-pipes-and-the-verbs-of-data-manipulation" id="toc-dplyr-pipes-and-the-verbs-of-data-manipulation" class="nav-link" data-scroll-target="#dplyr-pipes-and-the-verbs-of-data-manipulation"><code>dplyr</code>, pipes and the verbs of data manipulation</a></li>
+  <li><a href="#dplyr-verbs-of-data-manipulation-and-pipes" id="toc-dplyr-verbs-of-data-manipulation-and-pipes" class="nav-link" data-scroll-target="#dplyr-verbs-of-data-manipulation-and-pipes"><code>dplyr</code>, verbs of data manipulation (and pipes)</a></li>
   <li><a href="#getting-started-load-data-and-packages" id="toc-getting-started-load-data-and-packages" class="nav-link" data-scroll-target="#getting-started-load-data-and-packages">Getting started: Load data and packages</a></li>
-  <li><a href="#adding-changing-and-selecting-variables---mutate-and-select" id="toc-adding-changing-and-selecting-variables---mutate-and-select" class="nav-link" data-scroll-target="#adding-changing-and-selecting-variables---mutate-and-select">Adding, changing and selecting variables - <code>mutate</code> and <code>select</code></a></li>
+  <li><a href="#adding-changing-and-selecting-variables---mutate-and-select" id="toc-adding-changing-and-selecting-variables---mutate-and-select" class="nav-link" data-scroll-target="#adding-changing-and-selecting-variables---mutate-and-select">Adding, changing and selecting variables - <code>mutate</code> and <code>select</code></a>
+  <ul class="collapse">
+  <li><a href="#storing-your-results-as-a-data-frame-in-the-environment" id="toc-storing-your-results-as-a-data-frame-in-the-environment" class="nav-link" data-scroll-target="#storing-your-results-as-a-data-frame-in-the-environment">Storing your results as a data frame in the environment</a></li>
+  </ul></li>
   <li><a href="#select-rows-based-on-condition-and-sort-them---filter-and-arrange" id="toc-select-rows-based-on-condition-and-sort-them---filter-and-arrange" class="nav-link" data-scroll-target="#select-rows-based-on-condition-and-sort-them---filter-and-arrange">Select rows based on condition and sort them - <code>filter</code> and <code>arrange</code></a>
   <ul class="collapse">
   <li><a href="#comparisons" id="toc-comparisons" class="nav-link" data-scroll-target="#comparisons">Comparisons</a></li>
@@ -170,29 +176,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <p>Data analysts typically spend the majority of their time in the process of data wrangling compared to the actual analysis of the data.</p>
 </blockquote>
-<p>In the age of data we would be ignorant to teach data analysis without <em>data wrangling</em></p>
-<section id="dplyr-pipes-and-the-verbs-of-data-manipulation" class="level2">
-<h2 class="anchored" data-anchor-id="dplyr-pipes-and-the-verbs-of-data-manipulation"><code>dplyr</code>, pipes and the verbs of data manipulation</h2>
+<p>In the age of data, we need <em>data wrangling</em></p>
+<section id="dplyr-verbs-of-data-manipulation-and-pipes" class="level2">
+<h2 class="anchored" data-anchor-id="dplyr-verbs-of-data-manipulation-and-pipes"><code>dplyr</code>, verbs of data manipulation (and pipes)</h2>
 <p><code>dplyr</code> contains <em>verbs</em> used for data manipulation, such as filtering rows, selecting variables and changing or creating variables. Verbs can be used in a <em>pipe</em> and read as sequential operations:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> Take the data <span class="sc">**</span>then do<span class="sc">**</span> </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span> filter based on group <span class="sc">**</span>then do<span class="sc">**</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span> create a new variable <span class="sc">**</span>then do<span class="sc">**</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="er">&gt;</span> show the data <span class="cf">in</span> the console.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<blockquote class="blockquote">
+<p>Take the data <strong>then do</strong></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>filter based on group <strong>then do</strong></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>create a new variable <strong>then do</strong></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>show the data in the console.</p>
+</blockquote>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./img/pipe-illustration.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">A pipe</figcaption><p></p>
+<figcaption class="figure-caption">A pipe</figcaption>
 </figure>
 </div>
 <p>The pipe operations are made possible by another package, <a href="https://magrittr.tidyverse.org/"><code>magrittr</code></a>. This package contains the forward pipe operator <code>%&gt;%</code>. The forward pipe operator (<code>%&gt;%</code>) can be read as “<em>then do</em>”. The operator takes the object on the left-hand side and puts it as the first argument in the following function.</p>
 <p>Translating the “pipe” above from human language to R language using the “tidyverse dialect” looks like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">"xx"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">new.var =</span> old.var <span class="sc">+</span> old.var2) <span class="sc">%&gt;%</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(group <span class="sc">==</span> <span class="st">"xx"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">new.var =</span> old.var <span class="sc">+</span> old.var2) <span class="sc">%&gt;%</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="getting-started-load-data-and-packages" class="level2">
@@ -201,10 +213,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># loads dplyr etc.</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(exscidata) <span class="co"># loads the data-package</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"cyclingstudy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># loads dplyr etc.</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(exscidata) <span class="co"># loads the data-package</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"cyclingstudy"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -212,32 +224,59 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="adding-changing-and-selecting-variables---mutate-and-select">Adding, changing and selecting variables - <code>mutate</code> and <code>select</code></h2>
 <p>Mutate can help you create new variables (or overwrite existing once). In the cycling data set there is a variable called <code>VO2.max</code>, this variable is expressed in absolute units (ml min<sup>-1</sup>), however, we might want to express it as relative units (ml kg<sup>-1</sup> min<sup>-1</sup>).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">rel.vo2max =</span> VO2.max <span class="sc">/</span> weight.T1) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">rel.vo2max =</span> VO2.max <span class="sc">/</span> weight.T1) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The mutate function creates new variables (or overwrite existing) in a flexible way. Here we simply use division. Other mathematical operators can similarly be used (<code>+</code>, <code>-</code>, <code>*</code>, etc.).</p>
 <p>Notice the <code>print()</code> function in the end of the pipe. This is used to display the results of any manipulations done in the pipe. Notice also that our new variable is not listed. We might need to select a sub-set of variables to get a better overview. We will do this using the <code>select</code> function.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">rel.vo2max =</span> VO2.max <span class="sc">/</span> weight.T1) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(subject, group, timepoint, age, height.T1, weight.T1, VO2.max, rel.vo2max) <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">rel.vo2max =</span> VO2.max <span class="sc">/</span> weight.T1) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(subject, group, timepoint, age, height.T1, weight.T1, VO2.max, rel.vo2max) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The select function takes variable names as “unquoted” names. We can also select a range of columns using the syntax <code>&lt;from&gt;:&lt;to&gt;</code> where <code>&lt;from&gt;</code> is the first column you would like to select and <code>&lt;to&gt;</code> would be the last. Subsequently the above pipe can be re-written as</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">rel.vo2max =</span> VO2.max <span class="sc">/</span> weight.T1) <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(subject<span class="sc">:</span>weight.T1, VO2.max, rel.vo2max) <span class="sc">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>select</code> can also be used to re-name variables. Simpler variable names for weight, height and relative VO<sub>2max</sub> could be <code>weight</code>, <code>height</code>, <code>vo2max.kg</code>.</p>
+<div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">rel.vo2max =</span> VO2.max <span class="sc">/</span> weight.T1) <span class="sc">%&gt;%</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(subject<span class="sc">:</span>weight.T1, VO2.max, rel.vo2max) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(subject<span class="sc">:</span>age, <span class="at">height =</span> height.T1, <span class="at">weight =</span> weight.T1, VO2.max,<span class="at">vo2max.kg =</span> rel.vo2max) <span class="sc">%&gt;%</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><code>select</code> can also be used to re-name variables. Simpler variable names for weight, height and relative V̇O<sub>2max</sub> could be <code>weight</code>, <code>height</code>, <code>vo2max.kg</code>.</p>
+<section id="storing-your-results-as-a-data-frame-in-the-environment" class="level3">
+<h3 class="anchored" data-anchor-id="storing-your-results-as-a-data-frame-in-the-environment">Storing your results as a data frame in the environment</h3>
+<p>When you have selected and mutated variables you might want to keep the new data frame in your environment. Do this by assigning the whole pipe to a new object.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cyc.subset <span class="ot">&lt;-</span> cyclingstudy <span class="sc">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">rel.vo2max =</span> VO2.max <span class="sc">/</span> weight.T1) <span class="sc">%&gt;%</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(subject<span class="sc">:</span>age, <span class="at">height =</span> height.T1, <span class="at">weight =</span> weight.T1, VO2.max,<span class="at">vo2max.kg =</span> rel.vo2max) <span class="sc">%&gt;%</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercises (1)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Select the variables <code>subject</code>, <code>group</code>, <code>timepoint</code>, <code>age</code>, <code>height.T1</code>, <code>weight.T1</code>. Rename the variables <code>weight.T1</code> and <code>height.T1</code> to <code>weight</code> and <code>height</code>.</li>
+<li>Calculate body mass index (BMI) for all observations using the formula <span class="math inline">\(\text{BMI} = \frac{\text{weight (kg)}}{\text{height (m)}^2}\)</span></li>
+<li>Store the data frame as <code>cyc.bmi</code> in your environment.</li>
+</ol>
+</div>
+</div>
+</section>
 </section>
 <section id="select-rows-based-on-condition-and-sort-them---filter-and-arrange" class="level2">
 <h2 class="anchored" data-anchor-id="select-rows-based-on-condition-and-sort-them---filter-and-arrange">Select rows based on condition and sort them - <code>filter</code> and <code>arrange</code></h2>
@@ -302,17 +341,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 #   VCO2.300 &lt;dbl&gt;, VCO2.325 &lt;dbl&gt;, VCO2.350 &lt;dbl&gt;, VCO2.375 &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Review your understanding
+Exercises (2)
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>How many rows in the <code>cyclingstudy</code> data set has</p>
 <ul>
@@ -321,9 +358,8 @@ Review your understanding
 <li><code>VO2.max</code> values less or equal to than <code>5360</code></li>
 <li><code>VO2.max</code> values greater or equal to than <code>5360</code></li>
 <li>the value <code>pre</code> in <code>timepoint</code></li>
-<li>the a value in <code>timepoint</code> other than <code>pre</code></li>
+<li>a value in <code>timepoint</code> other than <code>pre</code></li>
 </ul>
-</div>
 </div>
 </div>
 </section>
@@ -451,18 +487,85 @@ Review your understanding
 #   VE.125 &lt;dbl&gt;, VE.175 &lt;dbl&gt;, VE.225 &lt;dbl&gt;, VE.250 &lt;dbl&gt;, VE.275 &lt;dbl&gt;, …</code></pre>
 </div>
 </div>
-<p>Finally, <code>dplyr</code> comes with two convenient functions to find values <code>between</code> and <code>near</code></p>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<p>Finally, <code>dplyr</code> comes with two convenient functions to find values <code>between</code> and <code>near</code>.</p>
+<p><code>between()</code> lets you select observations between two values:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>( <span class="fu">between</span>(age, <span class="dv">31</span>, <span class="dv">42</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 62 × 101
+   subject group timepoint   age height.T1 weight.T1 sj.max cmj.max lac.125
+     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1       1 INCR  pre          33       183      80.3   31.0    35.0    1.5 
+ 2       2 DECR  pre          32       174      71.4   31.6    33.8    1.19
+ 3       3 INCR  pre          39       193      98.1   26.8    28.8    1.17
+ 4       4 DECR  pre          37       175      79.2   29.2    30.8    0.88
+ 5       5 DECR  pre          31       176      88     31.2    25.8    1.06
+ 6       6 INCR  pre          33       168      79.6   34.2    35.3    1.27
+ 7       7 MIX   pre          42       180      77.6   30.1    33.0    0.85
+ 8       9 MIX   pre          41       185      82.4   22.7    22.4    1.48
+ 9      10 INCR  pre          35       187      75.6   29.7    31.1    0.93
+10      11 MIX   pre          34       168      55.8   33.2    30.8    0.62
+# ℹ 52 more rows
+# ℹ 92 more variables: lac.175 &lt;dbl&gt;, lac.225 &lt;dbl&gt;, lac.250 &lt;dbl&gt;,
+#   lac.275 &lt;dbl&gt;, lac.300 &lt;dbl&gt;, lac.325 &lt;dbl&gt;, lac.350 &lt;dbl&gt;, lac.375 &lt;dbl&gt;,
+#   VO2.125 &lt;dbl&gt;, VO2.175 &lt;dbl&gt;, VO2.225 &lt;dbl&gt;, VO2.250 &lt;dbl&gt;, VO2.275 &lt;dbl&gt;,
+#   VO2.300 &lt;dbl&gt;, VO2.325 &lt;dbl&gt;, VO2.350 &lt;dbl&gt;, VO2.375 &lt;dbl&gt;, VCO2.125 &lt;dbl&gt;,
+#   VCO2.175 &lt;dbl&gt;, VCO2.225 &lt;dbl&gt;, VCO2.250 &lt;dbl&gt;, VCO2.275 &lt;dbl&gt;,
+#   VCO2.300 &lt;dbl&gt;, VCO2.325 &lt;dbl&gt;, VCO2.350 &lt;dbl&gt;, VCO2.375 &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p><code>near</code> lets you select values that are approximately equal to your specified value with some specified tolerance:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>( <span class="fu">near</span>(age, <span class="dv">40</span>, <span class="at">tol =</span> <span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 18 × 101
+   subject group timepoint   age height.T1 weight.T1 sj.max cmj.max lac.125
+     &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+ 1       3 INCR  pre          39       193      98.1   26.8    28.8    1.17
+ 2       9 MIX   pre          41       185      82.4   22.7    22.4    1.48
+ 3      13 DECR  pre          41       183      76     34.3    36      1.67
+ 4      18 DECR  pre          41       186     105.    33.5    33.7    1.75
+ 5      21 DECR  pre          40       175      82.3   35.2    32.6    0.68
+ 6       3 INCR  meso1        39        NA     101.    26.0    26.5    0.72
+ 7       9 MIX   meso1        41        NA      82.3   23.3    22.4    0.96
+ 8      13 DECR  meso1        41        NA      76     34.4    33.8    1.25
+ 9      18 DECR  meso1        41        NA     103     33.2    34.1    1.51
+10      21 DECR  meso1        40        NA      81.1   33.6    34.5    0.6 
+11       3 INCR  meso2        39        NA      99.2   25.4    26.8    0.5 
+12       9 MIX   meso2        41        NA      NA     NA      NA     NA   
+13      13 DECR  meso2        41        NA      NA     NA      NA     NA   
+14      18 DECR  meso2        41        NA     101.    32.1    33.6    0.5 
+15      21 DECR  meso2        40        NA      81.7   32.4    31.5    0.5 
+16       3 INCR  meso3        39        NA      99.2   27.1    27.0    0.77
+17       9 MIX   meso3        41        NA      78.7   25.0    25.6    1.25
+18      18 DECR  meso3        41        NA     101.    32.1    34.7    1.94
+# ℹ 92 more variables: lac.175 &lt;dbl&gt;, lac.225 &lt;dbl&gt;, lac.250 &lt;dbl&gt;,
+#   lac.275 &lt;dbl&gt;, lac.300 &lt;dbl&gt;, lac.325 &lt;dbl&gt;, lac.350 &lt;dbl&gt;, lac.375 &lt;dbl&gt;,
+#   VO2.125 &lt;dbl&gt;, VO2.175 &lt;dbl&gt;, VO2.225 &lt;dbl&gt;, VO2.250 &lt;dbl&gt;, VO2.275 &lt;dbl&gt;,
+#   VO2.300 &lt;dbl&gt;, VO2.325 &lt;dbl&gt;, VO2.350 &lt;dbl&gt;, VO2.375 &lt;dbl&gt;, VCO2.125 &lt;dbl&gt;,
+#   VCO2.175 &lt;dbl&gt;, VCO2.225 &lt;dbl&gt;, VCO2.250 &lt;dbl&gt;, VCO2.275 &lt;dbl&gt;,
+#   VCO2.300 &lt;dbl&gt;, VCO2.325 &lt;dbl&gt;, VCO2.350 &lt;dbl&gt;, VCO2.375 &lt;dbl&gt;,
+#   VE.125 &lt;dbl&gt;, VE.175 &lt;dbl&gt;, VE.225 &lt;dbl&gt;, VE.250 &lt;dbl&gt;, VE.275 &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+<p>Notice however that the default tolerance is a very small number (1.4901161^{-8}).</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Review your understanding
+Exercises (3)
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Keep rows in your data frame from the <code>pre</code> time-point, age greater than 31 but height less than 180.</li>
@@ -470,7 +573,6 @@ Review your understanding
 <li>Use <code>near</code> to find <code>weight.T1</code> values close to 80.26 with a tolerance of 0.75 (see <code>?near</code>)</li>
 <li>Remove all rows that are <code>NA</code> in the <code>height.T1</code> variable.</li>
 </ul>
-</div>
 </div>
 </div>
 </section>
@@ -485,27 +587,24 @@ Review your understanding
 <li><code>sd()</code> → computes the standard deviation from the mean</li>
 <li><code>IQR()</code> → returns the inter-quartile range</li>
 <li><code>min()</code> and <code>max()</code> → gives the minimum and maximum values from a vector</li>
-<li><code>quantile()</code> → sample quantiles from the smallest (<code>probs = 0</code>) to largest (<code>probs = 1</code>) values.<br>
-All the above functions comes with the optional argument of <code>na.rm = TRUE</code>. This can be read as <em>remove missing values (NA)</em>. If there are missing values (<code>NA</code>) and <code>na.rm = FALSE</code> (the default), the calculations will return <code>NA</code>. This is inconvenient but can often work as a <em>sanity check</em> of your code.</li>
+<li><code>quantile()</code> → sample quantiles from the smallest (<code>probs = 0</code>) to largest (<code>probs = 1</code>) values.</li>
 </ul>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<p>All the above functions comes with the optional argument of <code>na.rm = TRUE</code>. This can be read as <em>remove missing values (NA)</em>. If there are missing values (<code>NA</code>) and <code>na.rm = FALSE</code> (the default), the calculations will return <code>NA</code>. This is inconvenient but can often work as check of your assumptions.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Review your understanding
+Exercises (4)
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<ul>
-<li>What do we mean by <em>sanity check</em>?</li>
+<ol type="1">
+<li>What do we mean by <em>check of your assumptions</em>?</li>
 <li>What do you expect from the R code <code>sd(c(4, 5, 7, NA, 5))</code></li>
 <li>What would you add to the code above to improve it?</li>
-</ul>
-</div>
+</ol>
 </div>
 </div>
 <p>In addition to the summaries above that are generic for base R, <code>dplyr</code> provides you with a number of great functions to…</p>
@@ -515,22 +614,75 @@ Review your understanding
 </ul>
 <p>In practice a grouped summary may look like this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">mean.vo2max =</span> <span class="fu">mean</span>(VO2.max, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">mean.vo2max =</span> <span class="fu">mean</span>(VO2.max, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Results from the above code includes multiple data points from each participant. The variable describing time-points can be added to the grouping.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(group, timepoint) <span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">mean.vo2max =</span> <span class="fu">mean</span>(VO2.max, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(group, timepoint) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">mean.vo2max =</span> <span class="fu">mean</span>(VO2.max, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Multiple summary functions can be added to the <code>summarise()</code> function where each adds a new variable to the result data frame.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(group, timepoint) <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">mean.vo2max =</span> <span class="fu">mean</span>(VO2.max, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sd.vo2max =</span> <span class="fu">sd</span>(VO2.max, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(group, timepoint) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">mean.vo2max =</span> <span class="fu">mean</span>(VO2.max, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">sd.vo2max =</span> <span class="fu">sd</span>(VO2.max, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercises (1)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Use the <code>cyc.bmi</code> data frame your created above, filter to only keep <code>timepoint == "pre"</code>, and from the BMI variable calculate:
+<ul>
+<li>median</li>
+<li>minimum</li>
+<li>maximum</li>
+<li>25th percentile</li>
+<li>75th percentile</li>
+</ul></li>
+<li>Save the new data set as <code>cyc.bmi.summary</code> and plot the data using the code below:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(timepoint <span class="sc">==</span> <span class="st">"pre"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(subject, group, <span class="at">weight =</span> weight.T1, <span class="at">height =</span> height.T1) <span class="sc">%&gt;%</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">bmi =</span> weight <span class="sc">/</span> ((height<span class="sc">/</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">group_by</span>(group) <span class="sc">%&gt;%</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarize</span>(<span class="at">median =</span> <span class="fu">median</span>(bmi), </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>                  <span class="at">q25 =</span> <span class="fu">quantile</span>(bmi, <span class="fl">0.25</span>), </span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>                  <span class="at">q75 =</span> <span class="fu">quantile</span>(bmi, <span class="fl">0.75</span>), </span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">min =</span> <span class="fu">min</span>(bmi), </span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">max =</span> <span class="fu">max</span>(bmi)) <span class="sc">%&gt;%</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(group, median)) <span class="sc">+</span> <span class="fu">geom_point</span>( <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span> </span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> q25, <span class="at">ymax =</span> q75), <span class="at">width =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> min, <span class="at">ymax =</span> max), <span class="at">width =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+ℹ Please use `linewidth` instead.</code></pre>
+</div>
+<div class="cell-output-display">
+<p><img src="ws4-data-wrangling-tables_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(timepoint <span class="sc">==</span> <span class="st">"pre"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(subject, group, <span class="at">weight =</span> weight.T1, <span class="at">height =</span> height.T1) <span class="sc">%&gt;%</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">bmi =</span> weight <span class="sc">/</span> ((height<span class="sc">/</span><span class="dv">100</span>)<span class="sc">^</span><span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(group, bmi)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="ws4-data-wrangling-tables_files/figure-html/unnamed-chunk-20-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="pivoting-using-pivot_longer-and-pivot_wider-from-the-tidyr-package" class="level2">
@@ -539,10 +691,10 @@ Review your understanding
 <p><img src="https://github.com/gadenbuie/tidyexplain/raw/main/images/tidyr-pivoting.gif" class="img-fluid"></p>
 <p>There are examples of wide data sets as part of the cycling data set. Using only the <code>timepoint == pre</code> values and columns corresponding to lactate values from the graded exercise test we have an example of wide data as the columns <code>lac.125</code>, <code>lac.175</code>, <code>lac.225</code>, etc., contains lactate values from different exercise intensities. This means that a separate variable (watt or exercise intensity) is combined in each column of lactate values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(timepoint <span class="sc">==</span> <span class="st">"pre"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">select</span>(subject, group, lac<span class="fl">.125</span><span class="sc">:</span>lac<span class="fl">.375</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(timepoint <span class="sc">==</span> <span class="st">"pre"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">select</span>(subject, group, lac<span class="fl">.125</span><span class="sc">:</span>lac<span class="fl">.375</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 20 × 11
    subject group lac.125 lac.175 lac.225 lac.250 lac.275 lac.300 lac.325 lac.350
@@ -572,13 +724,13 @@ Review your understanding
 </div>
 <p>Using <code>pivot_longer</code> we can change this data into a long format. Pivot wider needs information on the new variable names for values and names. Names are the column names thta will form a variable and values are the values contained in the cells of the old variables. We also need to specify what columns to make longer, notice that I select variables <code>&lt;from&gt;:&lt;to&gt;</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(timepoint <span class="sc">==</span> <span class="st">"pre"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">select</span>(subject, group, lac<span class="fl">.125</span><span class="sc">:</span>lac<span class="fl">.375</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"watt"</span>, </span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values_to =</span> <span class="st">"lactate"</span>, </span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cols =</span> lac<span class="fl">.125</span><span class="sc">:</span>lac<span class="fl">.375</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(timepoint <span class="sc">==</span> <span class="st">"pre"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">select</span>(subject, group, lac<span class="fl">.125</span><span class="sc">:</span>lac<span class="fl">.375</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"watt"</span>, </span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values_to =</span> <span class="st">"lactate"</span>, </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cols =</span> lac<span class="fl">.125</span><span class="sc">:</span>lac<span class="fl">.375</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 180 × 4
    subject group watt    lactate
@@ -598,15 +750,15 @@ Review your understanding
 </div>
 <p><code>pivot_wider</code> makes it easy to remove prefix and fix the data type of the names variable. Below we specify to remove <code>lac.</code> from all names and convert the new variable to numeric data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(timepoint <span class="sc">==</span> <span class="st">"pre"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">select</span>(subject, group, lac<span class="fl">.125</span><span class="sc">:</span>lac<span class="fl">.375</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"watt"</span>, </span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values_to =</span> <span class="st">"lactate"</span>, </span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cols =</span> lac<span class="fl">.125</span><span class="sc">:</span>lac<span class="fl">.375</span>, </span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_prefix =</span> <span class="st">"lac."</span>, </span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">watt =</span> as.numeric)) <span class="sc">%&gt;%</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(timepoint <span class="sc">==</span> <span class="st">"pre"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>        dplyr<span class="sc">::</span><span class="fu">select</span>(subject, group, lac<span class="fl">.125</span><span class="sc">:</span>lac<span class="fl">.375</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"watt"</span>, </span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">values_to =</span> <span class="st">"lactate"</span>, </span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cols =</span> lac<span class="fl">.125</span><span class="sc">:</span>lac<span class="fl">.375</span>, </span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_prefix =</span> <span class="st">"lac."</span>, </span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>                     <span class="at">names_transform =</span> <span class="fu">list</span>(<span class="at">watt =</span> as.numeric)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 180 × 4
    subject group  watt lactate
@@ -625,7 +777,7 @@ Review your understanding
 </div>
 </div>
 <div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -634,15 +786,15 @@ Review your understanding
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Perform the opposite operation of the below data set:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="st">"id1"</span>, <span class="st">"id1"</span>, <span class="st">"id1"</span>, <span class="st">"id2"</span>, <span class="st">"id2"</span>, <span class="st">"id2"</span>), </span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">NAME =</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>), </span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">NUMBER =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">id =</span> <span class="fu">c</span>(<span class="st">"id1"</span>, <span class="st">"id1"</span>, <span class="st">"id1"</span>, <span class="st">"id2"</span>, <span class="st">"id2"</span>, <span class="st">"id2"</span>), </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">NAME =</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>), </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">NUMBER =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -660,26 +812,26 @@ Review your understanding
 <h3 class="anchored" data-anchor-id="editing">Editing</h3>
 <p>To display numbers with the correct number of decimals R provides many options. A simple function (<code>round()</code>) provides rounding. The problem is that you will lose trailing zero, e.g., <code>2.0</code> will be displayed as <code>2</code>. To keep the trailing zero we must use the <code>sprintf()</code> function. Examples:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rounding</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">2.10</span>, <span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rounding</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fl">2.10</span>, <span class="dv">2</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Formatting to keep the trailing zero</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, <span class="fl">2.10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Formatting to keep the trailing zero</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, <span class="fl">2.10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "2.10"</code></pre>
 </div>
 </div>
 <p>Combining vectors may be a good idea to make the table more attractive. The mean and standard deviation is commonly presented as mean (SD). Data from a column of means and a column of SD’s can be combined to create a nice display using the <code>paste0()</code> function. Example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">m =</span> <span class="fu">c</span>(<span class="fl">46.7</span>, <span class="fl">47.89</span>, <span class="fl">43.5</span>),  <span class="co"># A vector of means</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">s =</span> <span class="fu">c</span>(<span class="fl">4.21</span>, <span class="fl">4.666</span>, <span class="fl">3.1</span>)) <span class="sc">%&gt;%</span> <span class="co"># A vector of SD's</span></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">stat =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(m, <span class="dv">1</span>), </span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">" ("</span>,</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">round</span>(s, <span class="dv">1</span>), </span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>                             <span class="st">")"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">m =</span> <span class="fu">c</span>(<span class="fl">46.7</span>, <span class="fl">47.89</span>, <span class="fl">43.5</span>),  <span class="co"># A vector of means</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">s =</span> <span class="fu">c</span>(<span class="fl">4.21</span>, <span class="fl">4.666</span>, <span class="fl">3.1</span>)) <span class="sc">%&gt;%</span> <span class="co"># A vector of SD's</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">stat =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(m, <span class="dv">1</span>), </span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>                             <span class="st">" ("</span>,</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>                             <span class="fu">round</span>(s, <span class="dv">1</span>), </span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>                             <span class="st">")"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      m     s       stat
 1 46.70 4.210 46.7 (4.2)
@@ -689,12 +841,12 @@ Review your understanding
 </div>
 <p>A character vector of group names can be arranged and re-named using the <code>factor</code> function. In the <code>cyclingstudy</code> data set the groups (<code>INCR</code>, <code>DECR</code> and <code>MIX</code>) may be given more descriptive names, example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">factor</span>(group, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"INCR"</span>, <span class="st">"DECR"</span>, <span class="st">"MIX"</span>), </span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Increased intensity"</span>, </span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">"Decreased intensity"</span>, </span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">"Mixed intensity"</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">distinct</span>(group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">factor</span>(group, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"INCR"</span>, <span class="st">"DECR"</span>, <span class="st">"MIX"</span>), </span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Increased intensity"</span>, </span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">"Decreased intensity"</span>, </span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>                                         <span class="st">"Mixed intensity"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">distinct</span>(group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 1
   group              

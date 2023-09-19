@@ -18,23 +18,23 @@ The `tidyverse` contains two packages with functions used to wrangle data, `dply
 
 > Data analysts typically spend the majority of their time in the process of data wrangling compared to the actual analysis of the data. 
 
-In the age of data we would be ignorant to teach data analysis without *data wrangling*
+In the age of data, we need *data wrangling*
 
 
-## `dplyr`, pipes and the verbs of data manipulation
+## `dplyr`, verbs of data manipulation (and pipes)
 
 `dplyr` contains *verbs* used for data manipulation, such as filtering rows, selecting variables and changing or creating variables. Verbs can be used in a *pipe* and read as sequential operations:
 
 
-```{r}
-#| eval: false
-
 > Take the data **then do** 
+
 > filter based on group **then do**
+
 > create a new variable **then do**
+
 > show the data in the console.
 
-```
+
 
 
 ![A pipe](./img/pipe-illustration.png)
@@ -74,6 +74,7 @@ data("cyclingstudy")
 ## Adding, changing and selecting variables - `mutate` and `select`
 
 Mutate can help you create new variables (or overwrite existing once). In the cycling data set there is a variable called `VO2.max`, this variable is expressed in absolute units (ml min<sup>-1</sup>), however, we might want to express it as relative units (ml kg<sup>-1</sup> min<sup>-1</sup>).
+
 
 ```{r}
 #| eval: false
@@ -117,7 +118,7 @@ cyclingstudy %>%
 
 ```
 
-`select` can also be used to re-name variables. Simpler variable names for weight, height and relative V&#775;O<sub>2max</sub> could be `weight`, `height`, `vo2max.kg`.
+`select` can also be used to re-name variables. Simpler variable names for weight, height and relative VO<sub>2max</sub> could be `weight`, `height`, `vo2max.kg`.
 
 
 ```{r}
@@ -131,6 +132,35 @@ cyclingstudy %>%
 
 
 ```
+
+
+### Storing your results as a data frame in the environment
+
+When you have selected and mutated variables you might want to keep the new data frame in your environment. Do this by assigning the whole pipe to a new object.
+
+```{r}
+#| eval: false
+
+cyc.subset <- cyclingstudy %>%
+        mutate(rel.vo2max = VO2.max / weight.T1) %>%
+        select(subject:age, height = height.T1, weight = weight.T1, VO2.max,vo2max.kg = rel.vo2max) %>%
+        print()
+
+
+
+```
+
+
+
+::: {.callout-note icon=false}
+
+### Exercises (1)
+
+1. Select the variables `subject`, `group`, `timepoint`, `age`, `height.T1`, `weight.T1`. Rename the variables `weight.T1` and `height.T1` to `weight` and `height`.
+2. Calculate body mass index (BMI) for all observations using the formula $\text{BMI} = \frac{\text{weight (kg)}}{\text{height (m)}^2}$
+3. Store the data frame as `cyc.bmi` in your environment.
+
+:::
 
 
 ## Select rows based on condition and sort them - `filter` and `arrange`
@@ -179,8 +209,9 @@ cyclingstudy %>%
 ```
 
 
-:::{.callout-caution collapse="true"}
-## Review your understanding
+::: {.callout-note icon=false}
+
+### Exercises (2)
 
 How many rows in the `cyclingstudy` data set has
 
@@ -189,7 +220,7 @@ How many rows in the `cyclingstudy` data set has
 - `VO2.max` values less or equal to than `5360`
 - `VO2.max` values greater or equal to than `5360`
 - the value `pre` in `timepoint`
-- the a value in `timepoint` other than `pre`
+- a value in `timepoint` other than `pre`
 
 :::
 
@@ -262,10 +293,43 @@ cyclingstudy %>%
 
 ```
 
-Finally, `dplyr` comes with two convenient functions to find values `between` and `near` 
+Finally, `dplyr` comes with two convenient functions to find values `between` and `near`. 
 
-:::{.callout-caution collapse="true"}
-## Review your understanding
+`between()` lets you select observations between two values:
+
+```{r}
+
+#| echo: true
+
+cyclingstudy %>%
+        filter( between(age, 31, 42)) %>%
+        print()
+
+
+```
+
+`near` lets you select values that are approximately equal to your specified value with some specified tolerance:
+
+
+```{r}
+
+#| echo: true
+
+cyclingstudy %>%
+        filter( near(age, 40, tol = 2)) %>%
+        print()
+
+
+```
+
+Notice however that the default tolerance is a very small number (`r .Machine$double.eps^0.5`).
+
+
+
+
+::: {.callout-note icon=false}
+
+### Exercises (3)
 
 - Keep rows in your data frame from the `pre` time-point, age greater than 31 but height less than 180.
 - Use `between` to find rows with `VO2.max` values between 4800 and 5200 (see `?between`)
@@ -286,15 +350,18 @@ Examples of summary functions in R are:
 - `IQR()` &rarr; returns the inter-quartile range
 - `min()` and `max()` &rarr; gives the minimum and maximum values from a vector
 - `quantile()` &rarr; sample quantiles from the smallest (`probs = 0`) to largest (`probs = 1`) values.  
-All the above functions comes with the optional argument of `na.rm = TRUE`. This can be read as *remove missing values (NA)*. If there are missing values (`NA`) and `na.rm = FALSE` (the default), the calculations will return `NA`. This is inconvenient but can often work as a *sanity check* of your code.
 
 
-:::{.callout-caution collapse="true"}
-## Review your understanding
+All the above functions comes with the optional argument of `na.rm = TRUE`. This can be read as *remove missing values (NA)*. If there are missing values (`NA`) and `na.rm = FALSE` (the default), the calculations will return `NA`. This is inconvenient but can often work as check of your assumptions.
 
-- What do we mean by *sanity check*?
-- What do you expect from the R code `sd(c(4, 5, 7, NA, 5))`
-- What would you add to the code above to improve it?
+
+::: {.callout-note icon=false}
+
+### Exercises (4)
+
+1. What do we mean by *check of your assumptions*?
+2. What do you expect from the R code `sd(c(4, 5, 7, NA, 5))`
+3. What would you add to the code above to improve it?
 
 :::
 
@@ -338,6 +405,54 @@ cyclingstudy %>%
                   sd.vo2max = sd(VO2.max, na.rm = TRUE))
         
 ```
+
+
+::: {.callout-note icon=false}
+
+### Exercises (1)
+
+1. Use the `cyc.bmi` data frame your created above, filter to only keep `timepoint == "pre"`, and from the BMI variable calculate:
+    + median
+    + minimum
+    + maximum
+    + 25th percentile
+    + 75th percentile
+2. Save the new data set as `cyc.bmi.summary` and plot the data using the code below:
+
+
+```{r}
+
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, group, weight = weight.T1, height = height.T1) %>%
+        mutate(bmi = weight / ((height/100)^2)) %>%
+        group_by(group) %>%
+        summarize(median = median(bmi), 
+                  q25 = quantile(bmi, 0.25), 
+                  q75 = quantile(bmi, 0.75), 
+                  min = min(bmi), 
+                  max = max(bmi)) %>%
+        ggplot(aes(group, median)) + geom_point( size = 4) + 
+        geom_errorbar(aes(ymin = q25, ymax = q75), width = 0, size = 2) +
+        geom_errorbar(aes(ymin = min, ymax = max), width = 0, size = 1)
+
+
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, group, weight = weight.T1, height = height.T1) %>%
+        mutate(bmi = weight / ((height/100)^2)) %>%
+        ggplot(aes(group, bmi)) + geom_boxplot()
+
+
+
+
+
+```
+
+
+:::
+
+
 
 
 ## Pivoting using `pivot_longer` and `pivot_wider` from the `tidyr` package
