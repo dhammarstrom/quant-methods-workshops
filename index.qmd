@@ -9,6 +9,11 @@ Welcome to the course **Quantitative methods and Statistics (IDR4000)**. The cou
 
 ## Practical information
 
+```{r}
+#| echo: false
+```
+
+
 These notes were updated on `r Sys.Date()` and cover the course held during 2023 autumn semester. Contact [Daniel Hammarström](mailto:daniel.hammarstrom@inn.no) if you have any questions regarding this content.
 
 ### Learning objectives
