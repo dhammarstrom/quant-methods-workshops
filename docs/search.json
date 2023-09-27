@@ -221,7 +221,7 @@
     "href": "index.html#practical-information",
     "title": "Quantitative methods and statistics (In Sport and Exercise Science)",
     "section": "Practical information",
-    "text": "Practical information\nThese notes were updated on 2023-09-19 and cover the course held during 2023 autumn semester. Contact Daniel Hammarström if you have any questions regarding this content.\n\nLearning objectives\nLearning objectives can be read in Norwegian here.\n\n\nLearning strategies\nThe course will include lectures, laboratory exercises, computer exercises and workshops, seminars and student presentations. Lectures/Workshops will be held in-person.\nComputer exercises will eventually require that you have special computer software installed on your computer. The software is free (see specific chapters in lecture notes)."
+    "text": "Practical information\nThese notes were updated on 2023-09-27 and cover the course held during 2023 autumn semester. Contact Daniel Hammarström if you have any questions regarding this content.\n\nLearning objectives\nLearning objectives can be read in Norwegian here.\n\n\nLearning strategies\nThe course will include lectures, laboratory exercises, computer exercises and workshops, seminars and student presentations. Lectures/Workshops will be held in-person.\nComputer exercises will eventually require that you have special computer software installed on your computer. The software is free (see specific chapters in lecture notes)."
   },
   {
     "objectID": "index.html#assignments-and-portfolio-exam",
@@ -249,7 +249,7 @@
     "href": "workshops.html",
     "title": "Workshops",
     "section": "",
-    "text": "Workshop\nAdditional material\n\n\n\n\nIntroduction to data science (Norwegian)\n\n\n\nInstalling and starting R\n\n\n\nCreating your first graph\n\n\n\nData wrangling\n\n\n\nCreating tables"
+    "text": "Workshop\nAdditional material\n\n\n\n\nIntroduction to data science (Norwegian)\n\n\n\nInstalling and starting R\n\n\n\nCreating your first graph\n\n\n\nData wrangling\n\n\n\nCreating tables\n\n\n\nWriting reproducible, version controlled reports"
   },
   {
     "objectID": "ws1-data-science-intro.html",
@@ -537,5 +537,12 @@
     "title": "Data wrangling and tables, part 2",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nSee the list in the R Markdown Cookbook↩︎"
+  },
+  {
+    "objectID": "ws5-writing-reports.html#creating-an-empty-project-github-first",
+    "href": "ws5-writing-reports.html#creating-an-empty-project-github-first",
+    "title": "Writing version controlled reports",
+    "section": "Creating an empty project (GitHub first)",
+    "text": "Creating an empty project (GitHub first)\n\n\n\n\n\n\nExercise (1)\n\n\n\nIn groups of three (Student A, B and C), work together and help Student A to:\n\nGo to github.com and sign in\nCreate a new repository\nGive the repository a good name\nMake the repository public, and add a readme file\nAfter pressing “create new repository”, Add your fellow group members to be collaborators\nAll group members must accept the invitation to the repository\n\n\n\n\nYour new github project is now ready to be downloaded into an RStudio project.\n\n\n\n\n\n\n\nExercise (2)\n\n\n\nStudent A, B and C all do the same steps on their own computer\n\nOpen RStudio and create a New Project from the RStudio project menu\nChose “Version Control” and add the address to the repository\nSave your version of the project at a good location on your computer (What is a good location?)\nOpen Github Desktop and add the local repository (your local folder) to your list of repositories\n\n\n\n\nAll group members have downloaded a copy of the original repository, we will start making changes and see how we can “share” them across group members.\n\n\n\n\n\n\n\nExercise (3)\n\n\n\nStudent A performs the following steps\n\nAdd a quarto document called my-report.qmd to the root project folder.\nUsing GitHub desktop Student A"
   }
 ]

@@ -1,0 +1,80 @@
+---
+title: "Writing version controlled reports"
+---
+
+
+
+
+## Introduction
+
+
+
+
+
+
+## Creating an empty project (GitHub first)
+
+
+::: {.callout-tip}
+## Exercise (1)
+
+
+In groups of three (Student A, B and C), work together and help Student A to:
+
+1. Go to github.com and sign in 
+2. Create a new repository
+3. Give the repository a good name
+4. Make the repository public, and add a readme file
+5. After pressing "create new repository", Add your fellow group members to be collaborators
+6. All group members must accept the invitation to the repository
+
+
+:::
+
+- Your new github project is now ready to be downloaded into an RStudio project.
+
+
+::: {.callout-tip}
+## Exercise (2)
+
+
+Student A, B and C all do the same steps on their own computer
+
+1. Open RStudio and create a New Project from the RStudio project menu
+2. Chose "Version Control" and add the address to the repository
+3. Save your version of the project at a good location on your computer (What is a good location?)
+4. Open Github Desktop and add the local repository (your local folder) to your list of repositories  
+
+
+:::
+
+- All group members have downloaded a copy of the original repository, we will start making changes and see how we can "share" them across group members.
+
+
+
+::: {.callout-tip}
+## Exercise (3)
+
+
+Student A performs the following steps
+
+1. Add a quarto document called `my-report.qmd` to the root project folder.
+2. Using GitHub desktop Student A 
+
+
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
