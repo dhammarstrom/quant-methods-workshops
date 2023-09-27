@@ -106,6 +106,10 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#creating-an-empty-project-github-first" id="toc-creating-an-empty-project-github-first" class="nav-link" data-scroll-target="#creating-an-empty-project-github-first">Creating an empty project (GitHub first)</a></li>
+  <li><a href="#git-ignore" id="toc-git-ignore" class="nav-link" data-scroll-target="#git-ignore">Git ignore</a></li>
+  <li><a href="#using-a-branch-for-a-large-change" id="toc-using-a-branch-for-a-large-change" class="nav-link" data-scroll-target="#using-a-branch-for-a-large-change">Using a branch for a large change</a></li>
+  <li><a href="#using-forks-for-changes" id="toc-using-forks-for-changes" class="nav-link" data-scroll-target="#using-forks-for-changes">Using forks for changes</a></li>
+  <li><a href="#conflicts" id="toc-conflicts" class="nav-link" data-scroll-target="#conflicts">Conflicts!</a></li>
   </ul>
 </nav>
     </div>
@@ -193,7 +197,136 @@ Exercise (3)
 <p>Student A performs the following steps</p>
 <ol type="1">
 <li>Add a quarto document called <code>my-report.qmd</code> to the root project folder.</li>
-<li>Using GitHub desktop Student A</li>
+<li>Using GitHub desktop Student A commits changes (addition of the file) and push to the remote repository</li>
+</ol>
+<p>Student B and C does</p>
+<ol type="1">
+<li>In Github desktop, press “fetch origin”.</li>
+<li>Inspect what changes occurred in Files in R Studio.</li>
+</ol>
+</div>
+</div>
+<ul>
+<li>Next we want to add different content to the report. We will do this simultaneously and see how git manages this.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise (4)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Student B:</p>
+<ol type="1">
+<li>Add a table to the report, use the table created during homework (a <a href="https://dhammarstrom.github.io/quant-methods-lectures/03-data-wrangling-homework.html">solution can be found here</a>)</li>
+<li>The table should be cross-referenced and displayed without the code (<code>#| echo: false</code>)</li>
+<li>Commit changes with a message and push</li>
+</ol>
+<p>Student C:</p>
+<ol type="1">
+<li>Add a figure to the report, use the code from the homework as <a href="https://dhammarstrom.github.io/quant-methods-lectures/02-datavis-homework.html">can be found here</a>.</li>
+<li>The figure should have a label and cross-referenced without the code (<code>#| echo: false</code>)</li>
+<li>Commit changes with a message and push</li>
+</ol>
+<p>Student A: 1. Fetch origin and inspect changes</p>
+</div>
+</div>
+</section>
+<section id="git-ignore" class="level2">
+<h2 class="anchored" data-anchor-id="git-ignore">Git ignore</h2>
+<ul>
+<li>Sometimes you would like to store information in your folder locally that is not meant to be version controlled</li>
+<li>Git ignore can make this possible</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise (4)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>All group members</p>
+<ol type="1">
+<li>In RStudio, find the <code>.gitignore</code> file and add a line that says <code>my-files-studentA/</code> (if you play the part of student A),</li>
+<li>In RStudio create a text-file and store it in a folder called <code>my-files/</code></li>
+<li>Commit changes and push.</li>
+<li>Fetch any changes and inspect what happens to your repo.</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="using-a-branch-for-a-large-change" class="level2">
+<h2 class="anchored" data-anchor-id="using-a-branch-for-a-large-change">Using a branch for a large change</h2>
+<ul>
+<li>Branches are different from forks as they are parallel copies of the main working branch</li>
+<li>A branch can be used to introduce some new feature to the repository which needs more attention.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise (5)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Student A:</p>
+<ol type="1">
+<li>In Github desktop, create a new branch, name it <code>new-branch</code></li>
+<li>Add a bibliography to the report (using the visual editor and a DOI of your choosing).</li>
+<li>Commit changes to the new branch.</li>
+<li>Go to GitHub.com and make a pull request.</li>
+<li>Review the change and merge the branches (on Github.com)</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="using-forks-for-changes" class="level2">
+<h2 class="anchored" data-anchor-id="using-forks-for-changes">Using forks for changes</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise (5)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Student B and C:</p>
+<ol type="1">
+<li>In Github desktop, fork the original repository to your own user profile</li>
+<li>Do a change to the repository</li>
+<li>Commit changes and create a pull request</li>
+<li>Student A reviews the pull requests.</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="conflicts" class="level2">
+<h2 class="anchored" data-anchor-id="conflicts">Conflicts!</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise (6)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Student A selects a specific line in the report and edits it, commits and push</li>
+<li>Student B (without first fetching), change the same line, commits and push.</li>
+<li>What does the error message say,</li>
+<li>Resolve the conflict and commit/push the final version.</li>
 </ol>
 </div>
 </div>

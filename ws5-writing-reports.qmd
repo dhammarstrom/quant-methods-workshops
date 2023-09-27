@@ -59,10 +59,126 @@ Student A, B and C all do the same steps on their own computer
 Student A performs the following steps
 
 1. Add a quarto document called `my-report.qmd` to the root project folder.
-2. Using GitHub desktop Student A 
+2. Using GitHub desktop Student A commits changes (addition of the file) and push to the remote repository
+
+Student B and C does
+
+1. In Github desktop, press "fetch origin". 
+2. Inspect what changes occurred in Files in R Studio.
+
 
 
 :::
+
+- Next we want to add different content to the report. We will do this simultaneously and see how git manages this.
+
+
+::: {.callout-tip}
+## Exercise (4)
+
+
+Student B:
+
+1. Add a table to the report, use the table created during homework (a [solution can be found here](https://dhammarstrom.github.io/quant-methods-lectures/03-data-wrangling-homework.html))
+2. The table should be cross-referenced and displayed without the code (`#| echo: false`)
+3. Commit changes with a message and push
+
+
+Student C: 
+
+1. Add a figure to the report, use the code from the homework as [can be found here](https://dhammarstrom.github.io/quant-methods-lectures/02-datavis-homework.html).
+2. The figure should have a label and cross-referenced without the code (`#| echo: false`)
+3. Commit changes with a message and push
+
+
+
+Student A: 
+1. Fetch origin and inspect changes
+
+
+:::
+
+## Git ignore
+
+- Sometimes you would like to store information in your folder locally that is not meant to be version controlled
+- Git ignore can make this possible
+
+::: {.callout-tip}
+## Exercise (4)
+
+
+All group members
+
+1. In RStudio, find the `.gitignore` file and add a line that says `my-files-studentA/` (if you play the part of student A), 
+2. In RStudio create a text-file and store it in a folder called `my-files/`
+3. Commit changes and push.
+4. Fetch any changes and inspect what happens to your repo.
+
+
+:::
+
+## Using a branch for a large change
+
+- Branches are different from forks as they are parallel copies of the main working branch
+- A branch can be used to introduce some new feature to the repository which needs more attention.
+
+::: {.callout-tip}
+## Exercise (5)
+
+
+Student A:
+
+1. In Github desktop, create a new branch, name it `new-branch`
+2. Add a bibliography to the report (using the visual editor and a DOI of your choosing).
+3. Commit changes to the new branch.
+4. Go to GitHub.com and make a pull request.
+5. Review the change and merge the branches (on Github.com)
+
+:::
+
+
+## Using forks for changes
+
+::: {.callout-tip}
+## Exercise (5)
+
+
+Student B and C:
+
+1. In Github desktop, fork the original repository to your own user profile
+2. Do a change to the repository
+3. Commit changes and create a pull request
+4. Student A reviews the pull requests.
+
+:::
+
+## Conflicts!
+
+::: {.callout-tip}
+## Exercise (6)
+
+1. Student A selects a specific line in the report and edits it, commits and push
+2. Student B (without first fetching), change the same line, commits and push.
+3. What does the error message say, 
+4. Resolve the conflict and commit/push the final version.
+
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
