@@ -15,11 +15,27 @@ The next section should contain descriptive data from the test. This could be me
 
 Finally, we are interested in reliability. Here you need to calculate an estimate of reliability of the test. Use (and reference) [@RN130]. Try to be clear with what measure of reliability you are using and what it is telling you.
 
+**Importantly, the report should contain:**
+
+- At least one table (created from your data)
+- At least one figure (created from your data), and
+- data presented in the text.
+- The report should use a bibliography file to manage references.
+
+
 ## The format of the report
 
-The report should be uploaded to github with both a source file (`.Rmd` or `.qmd`) and report file as output (`html`, `pdf` or `docx`-file). The github folder should also contain the dataset being used in the calculations. Work on your assignment as a R project. Contributions from members of the group can be made directly to the github repository. Follow this checklist on how to get started:
+The report should be uploaded to github with both a source file (`.Rmd` or `.qmd`) and report file as output (`html`, `pdf` or `docx`-file). The github folder should also contain the dataset being used in the calculations. Work on your assignment as a R project. Contributions from members of the group can be made directly to the github repository. 
 
-([A nice introduction to github with R can be found here](https://happygitwithr.com/install-intro.html))
+
+### Resources 
+- See [Chapter 8 in the course notes](https://dhammarstrom.github.io/quant-methods/07-version-control-git.html) for a step by step approach to getting started with git.
+
+- An even more comprehensive guide to using github can be found here ([Happy git with R](https://happygitwithr.com/))
+
+- See [Chapters 5-7 ](https://dhammarstrom.github.io/quant-methods) for graphs, tables and report writing in R in the course notes
+
+### Follow this checklist on how to get started:
 
 - Create a [github account](http://www.github.com). All members of the group should have their own account.
 - Once signed in to github.com, create a new repository with an informative name. Make sure that the repository is public. One member of the group can create this repository in their own account.
@@ -43,9 +59,11 @@ git pull
 
 ```
 
+- Alternatively, use GitHub desktop to commit/push/pull your changes.
+
 - You may encounter conflicts if pushing changes that overwrites changes made by other group members. These may be tricky but can be resolved... Have patience!
 
-If you are contributing to the project owned by another person in your group it is reccomended that you create a pull request with your changes.
+If you are contributing to the project owned by another person in your group it is recommended that you create a pull request with your changes.
 
 ## Data
 

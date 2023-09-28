@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.330">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -89,7 +89,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -123,6 +124,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li class="nav-item">
     <a class="nav-link" href="./workshops.html" rel="" target="">
  <span class="menu-text">Workshops</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./assignments.html" rel="" target="">
+ <span class="menu-text">Assignments/Arbeidskrav</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./feedback-assignments.html" rel="" target="">
+ <span class="menu-text">Feedback</span></a>
   </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
@@ -190,7 +199,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./img/pipe-illustration.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">A pipe</figcaption><p></p>
+<figcaption class="figure-caption">A pipe</figcaption>
 </figure>
 </div>
 <p>The pipe operations are made possible by another package, <a href="https://magrittr.tidyverse.org/"><code>magrittr</code></a>. This package contains the forward pipe operator <code>%&gt;%</code>. The forward pipe operator (<code>%&gt;%</code>) can be read as “<em>then do</em>”. The operator takes the object on the left-hand side and puts it as the first argument in the following function.</p>
@@ -592,15 +601,15 @@ Exercises (3)
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="2" data-code-cell="annotated-cell-16" data-code-annotation="1">Selects a subset of variables for display</span>
+<span data-code-cell="annotated-cell-16" data-code-lines="2" data-code-annotation="1">Selects a subset of variables for display</span>
 </dd>
 <dt data-target-cell="annotated-cell-16" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="3" data-code-cell="annotated-cell-16" data-code-annotation="2">Arrange based on the variable <code>VO2.max</code>, smallest values on top</span>
+<span data-code-cell="annotated-cell-16" data-code-lines="3" data-code-annotation="2">Arrange based on the variable <code>VO2.max</code>, smallest values on top</span>
 </dd>
 <dt data-target-cell="annotated-cell-16" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="8" data-code-cell="annotated-cell-16" data-code-annotation="3">Arrange with largest value on top</span>
+<span data-code-cell="annotated-cell-16" data-code-lines="8" data-code-annotation="3">Arrange with largest value on top</span>
 </dd>
 </dl>
 </div>
@@ -811,19 +820,19 @@ Exercises (5)
 <dl class="code-annotation-container-grid">
 <dt data-target-cell="annotated-cell-23" data-target-annotation="1">1</dt>
 <dd>
-<span data-code-lines="4,5" data-code-cell="annotated-cell-23" data-code-annotation="1">Filter the data set an select variables</span>
+<span data-code-cell="annotated-cell-23" data-code-lines="4,5" data-code-annotation="1">Filter the data set an select variables</span>
 </dd>
 <dt data-target-cell="annotated-cell-23" data-target-annotation="2">2</dt>
 <dd>
-<span data-code-lines="6" data-code-cell="annotated-cell-23" data-code-annotation="2">Using <code>pivot_wider</code>, first specify what columns to “make longer”.</span>
+<span data-code-cell="annotated-cell-23" data-code-lines="6" data-code-annotation="2">Using <code>pivot_wider</code>, first specify what columns to “make longer”.</span>
 </dd>
 <dt data-target-cell="annotated-cell-23" data-target-annotation="3">3</dt>
 <dd>
-<span data-code-lines="7" data-code-cell="annotated-cell-23" data-code-annotation="3">Use the special <code>.value</code> to indicate that each variable name contains information that should be used in creating new variables</span>
+<span data-code-cell="annotated-cell-23" data-code-lines="7" data-code-annotation="3">Use the special <code>.value</code> to indicate that each variable name contains information that should be used in creating new variables</span>
 </dd>
 <dt data-target-cell="annotated-cell-23" data-target-annotation="4">4</dt>
 <dd>
-<span data-code-lines="8" data-code-cell="annotated-cell-23" data-code-annotation="4">Indicate what character to split the variables on, in this case we need to “escape” the period using <code>[.]</code>.</span>
+<span data-code-cell="annotated-cell-23" data-code-lines="8" data-code-annotation="4">Indicate what character to split the variables on, in this case we need to “escape” the period using <code>[.]</code>.</span>
 </dd>
 </dl>
 </div>

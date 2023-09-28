@@ -6,22 +6,43 @@ editor_options:
 
 
 
-Følgende punkter er basert på de arbeidskrav som til nå er levert i emnet. Jeg oppdaterer teksten etter neste innlevering.
+Følgende punkter er basert på tidligere arbeidskrav som har blitt levert i emnet. Disse kan brukes for å forbedre dine arbeidskrav.
 
 ## Å skrive rapporter
 
 -	Unngå å forfatte rapporter i punkter/lister. Denne formen av tekst kan hjelpe leseren men kan også bryte opp og skape unødvendig forvirring. En punktliste kan også få spørsmålet «hvorfor» å forsvinne. Leseren kan være interessert i å vite hvorfor man velger en tilnærming eller metode.
 -	Skriv for en lesere som er kjent med området men savner informasjon om hvorfor man skal lese rapporten. Du må fylle i «blanks» hos leseren!
 -	Rapporter kan med fordel struktureres som introduksjon, metode, resultat og diskusjon. Man kan velge å ikke ha med disse overskriftene men til tross organisere paragrafene på denne måten. Introduksjonen forteller leseren hva teksten skal belyse, metoden gir et innblikk i hva og hvordan du gjennomført arbeidet, resultatene beskriver og diskusjon tolker.
--	Vær sikker på at begreper og metoder er definerte! «Typical error», «Coefficient of variation», «laktatterskel» osv. kan være mange ulike ting. Man kan bruke en referanse eller en formel for å definere beregninger, referanser for konsepter osv.
+-	Vær sikker på at begreper og metoder er definerte! «Typical error», «Coefficient of variation», «laktatterskel» osv. kan være mange ulike ting. Man kan bruke en referanse eller en formel for å definere beregninger og konsepter osv.
 -	Husk å definer feilstapler (error bars), farger, punkter enheter osv. I tabeller, figurer og tekst.
+
+
+## Å bruke R
+
+-	R bruker punktum som kommaseparerare. For en helhetlig rapport kan det være lurt å velge en måte å rapportere resultater på.
+-	Hensikten/styrken med reproduserbar rapportering er at tall, tabeller, figurer osv. er direkte koblet til dataene. Prøv å unngå å skrive inn tall direkte. Bruk isteden variabler (eks. `var1`) som du skaper i code chunks och settes inn i teksten. R vill i dette fallet lete etter en variable i environment som heter `var1`. Se her [https://rmarkdown.rstudio.com/lesson-4.html](https://rmarkdown.rstudio.com/lesson-4.html) for mer info.
+
+-	Å definere innstillinger for code chunks vil gjøre rapportene lettere å lese. F.eks. ved å inkludere koden som beskrives under vil ta vekk meddelende, «warnings» og koden fra din rapport. Hus at innstillinger må settes først i code chunken.
+
+
+```{}
+#| echo: false
+#| message: false
+#| warning: false
+
+
+```
+-	Unngå å bruke `print()` i en rapport da dette vil resultere i uformatert tekst. Bruk istedenfor tabellverktøy (som gt eller knitr::kable()) for tabeller.
+-	Se her [Quarto - Citations & Footnotes](https://quarto.org/docs/authoring/footnotes-and-citations.html#bibliography-generation) for hvordan du kan sette en egen overskrift for referanser og inkludere referanser hvor du ønsker.
+
+
 
 ## Spesifikt innhold
 
 ### Arbeidskrav 1
 
--	Se til å organiser github-mapper på en overskuelig måte. En metode for å underlette for leseren er å bruke en README.md. Denne vil bli konvertert til HTML på github og kan dermed gi et overblikk over mappen. Hvis du trenger å spare gamle filer så kan disse flyttes til en mappe («archive» eller lignende). 
--	Det er viktig å vise at du bruker kilder som er angitt i oppgaven. Bruk disse for å vise til definisjoner og gi bakgrunn til hvorfor du ønsker å vise dine resultater til leseren.
+-	Se til å organiser github-mapper på en overskuelig måte. En metode for å underlette for leseren er å bruke en README.md. Denne vil bli konvertert til HTML på github og kan dermed gi et overblikk over mappen (repository). Hvis du trenger å spare gamle filer så kan disse flyttes til en mappe («archive» eller lignende). 
+-	Det er viktig å vise at du bruker kilder som er angitt i oppgaven. Bruk disse for å vise til definisjoner og gi bakgrunn til hvorfor du ønsker å vise dine resultater til leseren. Bruk funksjonen for bibliography i quarto.
 -	Hva betyr CV, typical error osv. som du beregnet? Her holder det ikke bare med definisjoner, prøv deg også på en tolkning. En måte kan være å bruke annen litteratur som beregnet CV, eller sammenligne med et annet test som du gjort.
 -	Noen detaljer i en metode kan med fordel holdes kort og kanskje til og med utelates da det tilhører eks. «good laboratory practice». Her kan man spørre seg hvilken informasjon som kreves for å repetere forsøkene gitt at man praktiserer gode rutiner i laboratoriet? 
 
@@ -232,23 +253,6 @@ Med det sagt vil jeg ikke underkjenne rapporter som ikke er reproduserbar i denn
 
 
 
-## Å bruke R
-
--	R bruker punktum som kommaseparerare. For en helhetlig rapport kan det være lurt å velge en måte å rapportere resultater på.
--	Hensikten/styrken med reproduserbar rapportering er at tall, tabeller, figurer osv. er direkte koblet til dataene. Prøv å unngå å skrive inn tall direkte. Bruk isteden variabler (eks. `var1`) som du skaper i code chunks och settes inn i teksten. R vill i dette fallet lete etter en variable i environment som heter `var1`. Se her [https://rmarkdown.rstudio.com/lesson-4.html](https://rmarkdown.rstudio.com/lesson-4.html) for mer info.
-
--	Å definere innstillinger for code chunks vil gjøre rapportene lettere å lese. F.eks. ved å inkludere koden som beskrives under vil ta vekk meddelende, «warnings» og koden fra din rapport. Hus at innstillinger må settes først i code chunken.
-
-
-```{}
-#| echo: false
-#| message: false
-#| warning: false
-
-
-```
--	Unngå å bruke `print()` i en rapport da dette vil resultere i uformatert tekst. Bruk istedenfor tabellverktøy (som gt eller knitr::kable()) for tabeller.
--	Se her [Quarto - Citations & Footnotes](https://quarto.org/docs/authoring/footnotes-and-citations.html#bibliography-generation) for hvordan du kan sette en egen overskrift for referanser og inkludere referanser hvor du ønsker.
 
 
 

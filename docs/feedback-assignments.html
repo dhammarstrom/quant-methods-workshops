@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.330">
+<meta name="generator" content="quarto-1.3.361">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -89,7 +89,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 
@@ -124,6 +125,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="./workshops.html" rel="" target="">
  <span class="menu-text">Workshops</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./assignments.html" rel="" target="">
+ <span class="menu-text">Assignments/Arbeidskrav</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./feedback-assignments.html" rel="" target="" aria-current="page">
+ <span class="menu-text">Feedback</span></a>
+  </li>  
 </ul>
             <div class="quarto-navbar-tools ms-auto">
 </div>
@@ -141,6 +150,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#å-skrive-rapporter" id="toc-å-skrive-rapporter" class="nav-link active" data-scroll-target="#å-skrive-rapporter">Å skrive rapporter</a></li>
+  <li><a href="#å-bruke-r" id="toc-å-bruke-r" class="nav-link" data-scroll-target="#å-bruke-r">Å bruke R</a></li>
   <li><a href="#spesifikt-innhold" id="toc-spesifikt-innhold" class="nav-link" data-scroll-target="#spesifikt-innhold">Spesifikt innhold</a>
   <ul class="collapse">
   <li><a href="#arbeidskrav-1" id="toc-arbeidskrav-1" class="nav-link" data-scroll-target="#arbeidskrav-1">Arbeidskrav 1</a></li>
@@ -149,7 +159,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#arbeidskrav-4" id="toc-arbeidskrav-4" class="nav-link" data-scroll-target="#arbeidskrav-4">Arbeidskrav 4:</a></li>
   <li><a href="#reproduserbare-rapporter-på-github" id="toc-reproduserbare-rapporter-på-github" class="nav-link" data-scroll-target="#reproduserbare-rapporter-på-github">Reproduserbare rapporter på Github</a></li>
   </ul></li>
-  <li><a href="#å-bruke-r" id="toc-å-bruke-r" class="nav-link" data-scroll-target="#å-bruke-r">Å bruke R</a></li>
   <li><a href="#innlevering-av-eksamen" id="toc-innlevering-av-eksamen" class="nav-link" data-scroll-target="#innlevering-av-eksamen">Innlevering av eksamen</a></li>
   </ul>
 </nav>
@@ -174,15 +183,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>Følgende punkter er basert på de arbeidskrav som til nå er levert i emnet. Jeg oppdaterer teksten etter neste innlevering.</p>
+<p>Følgende punkter er basert på tidligere arbeidskrav som har blitt levert i emnet. Disse kan brukes for å forbedre dine arbeidskrav.</p>
 <section id="å-skrive-rapporter" class="level2">
 <h2 class="anchored" data-anchor-id="å-skrive-rapporter">Å skrive rapporter</h2>
 <ul>
 <li>Unngå å forfatte rapporter i punkter/lister. Denne formen av tekst kan hjelpe leseren men kan også bryte opp og skape unødvendig forvirring. En punktliste kan også få spørsmålet «hvorfor» å forsvinne. Leseren kan være interessert i å vite hvorfor man velger en tilnærming eller metode.</li>
 <li>Skriv for en lesere som er kjent med området men savner informasjon om hvorfor man skal lese rapporten. Du må fylle i «blanks» hos leseren!</li>
 <li>Rapporter kan med fordel struktureres som introduksjon, metode, resultat og diskusjon. Man kan velge å ikke ha med disse overskriftene men til tross organisere paragrafene på denne måten. Introduksjonen forteller leseren hva teksten skal belyse, metoden gir et innblikk i hva og hvordan du gjennomført arbeidet, resultatene beskriver og diskusjon tolker.</li>
-<li>Vær sikker på at begreper og metoder er definerte! «Typical error», «Coefficient of variation», «laktatterskel» osv. kan være mange ulike ting. Man kan bruke en referanse eller en formel for å definere beregninger, referanser for konsepter osv.</li>
+<li>Vær sikker på at begreper og metoder er definerte! «Typical error», «Coefficient of variation», «laktatterskel» osv. kan være mange ulike ting. Man kan bruke en referanse eller en formel for å definere beregninger og konsepter osv.</li>
 <li>Husk å definer feilstapler (error bars), farger, punkter enheter osv. I tabeller, figurer og tekst.</li>
+</ul>
+</section>
+<section id="å-bruke-r" class="level2">
+<h2 class="anchored" data-anchor-id="å-bruke-r">Å bruke R</h2>
+<ul>
+<li><p>R bruker punktum som kommaseparerare. For en helhetlig rapport kan det være lurt å velge en måte å rapportere resultater på.</p></li>
+<li><p>Hensikten/styrken med reproduserbar rapportering er at tall, tabeller, figurer osv. er direkte koblet til dataene. Prøv å unngå å skrive inn tall direkte. Bruk isteden variabler (eks. <code>var1</code>) som du skaper i code chunks och settes inn i teksten. R vill i dette fallet lete etter en variable i environment som heter <code>var1</code>. Se her <a href="https://rmarkdown.rstudio.com/lesson-4.html">https://rmarkdown.rstudio.com/lesson-4.html</a> for mer info.</p></li>
+<li><p>Å definere innstillinger for code chunks vil gjøre rapportene lettere å lese. F.eks. ved å inkludere koden som beskrives under vil ta vekk meddelende, «warnings» og koden fra din rapport. Hus at innstillinger må settes først i code chunken.</p></li>
+</ul>
+<pre><code>#| echo: false
+#| message: false
+#| warning: false
+
+</code></pre>
+<ul>
+<li>Unngå å bruke <code>print()</code> i en rapport da dette vil resultere i uformatert tekst. Bruk istedenfor tabellverktøy (som gt eller knitr::kable()) for tabeller.</li>
+<li>Se her <a href="https://quarto.org/docs/authoring/footnotes-and-citations.html#bibliography-generation">Quarto - Citations &amp; Footnotes</a> for hvordan du kan sette en egen overskrift for referanser og inkludere referanser hvor du ønsker.</li>
 </ul>
 </section>
 <section id="spesifikt-innhold" class="level2">
@@ -190,8 +216,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="arbeidskrav-1" class="level3">
 <h3 class="anchored" data-anchor-id="arbeidskrav-1">Arbeidskrav 1</h3>
 <ul>
-<li>Se til å organiser github-mapper på en overskuelig måte. En metode for å underlette for leseren er å bruke en README.md. Denne vil bli konvertert til HTML på github og kan dermed gi et overblikk over mappen. Hvis du trenger å spare gamle filer så kan disse flyttes til en mappe («archive» eller lignende).</li>
-<li>Det er viktig å vise at du bruker kilder som er angitt i oppgaven. Bruk disse for å vise til definisjoner og gi bakgrunn til hvorfor du ønsker å vise dine resultater til leseren.</li>
+<li>Se til å organiser github-mapper på en overskuelig måte. En metode for å underlette for leseren er å bruke en README.md. Denne vil bli konvertert til HTML på github og kan dermed gi et overblikk over mappen (repository). Hvis du trenger å spare gamle filer så kan disse flyttes til en mappe («archive» eller lignende).</li>
+<li>Det er viktig å vise at du bruker kilder som er angitt i oppgaven. Bruk disse for å vise til definisjoner og gi bakgrunn til hvorfor du ønsker å vise dine resultater til leseren. Bruk funksjonen for bibliography i quarto.</li>
 <li>Hva betyr CV, typical error osv. som du beregnet? Her holder det ikke bare med definisjoner, prøv deg også på en tolkning. En måte kan være å bruke annen litteratur som beregnet CV, eller sammenligne med et annet test som du gjort.</li>
 <li>Noen detaljer i en metode kan med fordel holdes kort og kanskje til og med utelates da det tilhører eks. «good laboratory practice». Her kan man spørre seg hvilken informasjon som kreves for å repetere forsøkene gitt at man praktiserer gode rutiner i laboratoriet?</li>
 </ul>
@@ -244,34 +270,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>Studiedesignen kan stille till problemer da vi måler styrke og muskelvekst innad deltakere. Vi kan bruke mixed-effects models, men også forenkle. Under følger eksempler på modeller for muskelmassedataene (den samme tilnærmingen kan brukes for styrke).</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse); <span class="fu">library</span>(exscidata); <span class="fu">library</span>(lme4)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dxadata <span class="sc">%&gt;%</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant<span class="sc">:</span>include, lean.left_leg, lean.right_leg) <span class="sc">%&gt;%</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Extract leg specific data</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"leg"</span>, </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"lean.mass"</span>, </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> lean.left_leg<span class="sc">:</span>lean.right_leg) <span class="sc">%&gt;%</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">leg =</span> <span class="fu">if_else</span>(leg <span class="sc">==</span> <span class="st">"lean.left_leg"</span>, <span class="st">"L"</span>, <span class="st">"R"</span>), </span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">sets =</span> <span class="fu">if_else</span>(multiple <span class="sc">==</span> leg, <span class="st">"multiple"</span>, <span class="st">"single"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant, time, sex, include, sets, leg, lean.mass) <span class="sc">%&gt;%</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Filter only included participants</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(include <span class="sc">==</span> <span class="st">"incl"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Make data set wider by time </span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"time"</span>, </span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">values_from =</span> <span class="st">"lean.mass"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate change score</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">change =</span> post <span class="sc">-</span> pre) <span class="sc">%&gt;%</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Keep change score and make it wider by sets</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(participant<span class="sc">:</span>sets, change) <span class="sc">%&gt;%</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sets, <span class="at">values_from =</span> change) <span class="sc">%&gt;%</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse); <span class="fu">library</span>(exscidata); <span class="fu">library</span>(lme4)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dxadata <span class="sc">%&gt;%</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant<span class="sc">:</span>include, lean.left_leg, lean.right_leg) <span class="sc">%&gt;%</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Extract leg specific data</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"leg"</span>, </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"lean.mass"</span>, </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> lean.left_leg<span class="sc">:</span>lean.right_leg) <span class="sc">%&gt;%</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">leg =</span> <span class="fu">if_else</span>(leg <span class="sc">==</span> <span class="st">"lean.left_leg"</span>, <span class="st">"L"</span>, <span class="st">"R"</span>), </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">sets =</span> <span class="fu">if_else</span>(multiple <span class="sc">==</span> leg, <span class="st">"multiple"</span>, <span class="st">"single"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant, time, sex, include, sets, leg, lean.mass) <span class="sc">%&gt;%</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Filter only included participants</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(include <span class="sc">==</span> <span class="st">"incl"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Make data set wider by time </span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> <span class="st">"time"</span>, </span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">values_from =</span> <span class="st">"lean.mass"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Calculate change score</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">change =</span> post <span class="sc">-</span> pre) <span class="sc">%&gt;%</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Keep change score and make it wider by sets</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(participant<span class="sc">:</span>sets, change) <span class="sc">%&gt;%</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> sets, <span class="at">values_from =</span> change) <span class="sc">%&gt;%</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 34 × 5
    participant sex    include multiple single
@@ -288,9 +314,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 10 FP13        male   incl         734    915
 # ℹ 24 more rows</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Use simple t-test on change score</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dat<span class="sc">$</span>multiple, dat<span class="sc">$</span>single, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Use simple t-test on change score</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(dat<span class="sc">$</span>multiple, dat<span class="sc">$</span>single, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Paired t-test
@@ -309,23 +335,23 @@ mean difference
 <li>Denne enkle måten å analysere dataene på er helt OK. Et annet alternativ er en “mixed-effects” modell.</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dxadata <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant<span class="sc">:</span>include, lean.left_leg, lean.right_leg) <span class="sc">%&gt;%</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Extract leg specific data</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"leg"</span>, </span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"lean.mass"</span>, </span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> lean.left_leg<span class="sc">:</span>lean.right_leg) <span class="sc">%&gt;%</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">leg =</span> <span class="fu">if_else</span>(leg <span class="sc">==</span> <span class="st">"lean.left_leg"</span>, <span class="st">"L"</span>, <span class="st">"R"</span>), </span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">sets =</span> <span class="fu">if_else</span>(multiple <span class="sc">==</span> leg, <span class="st">"multiple"</span>, <span class="st">"single"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant, time, sex, include, sets, leg, lean.mass) <span class="sc">%&gt;%</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Filter only included participants</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(include <span class="sc">==</span> <span class="st">"incl"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fix time factor </span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">factor</span>(time, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"pre"</span>, <span class="st">"post"</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dxadata <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant<span class="sc">:</span>include, lean.left_leg, lean.right_leg) <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Extract leg specific data</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"leg"</span>, </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"lean.mass"</span>, </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> lean.left_leg<span class="sc">:</span>lean.right_leg) <span class="sc">%&gt;%</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">leg =</span> <span class="fu">if_else</span>(leg <span class="sc">==</span> <span class="st">"lean.left_leg"</span>, <span class="st">"L"</span>, <span class="st">"R"</span>), </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">sets =</span> <span class="fu">if_else</span>(multiple <span class="sc">==</span> leg, <span class="st">"multiple"</span>, <span class="st">"single"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant, time, sex, include, sets, leg, lean.mass) <span class="sc">%&gt;%</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Filter only included participants</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(include <span class="sc">==</span> <span class="st">"incl"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fix time factor </span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">factor</span>(time, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"pre"</span>, <span class="st">"post"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 136 × 7
    participant time  sex    include sets     leg   lean.mass
@@ -342,13 +368,13 @@ mean difference
 10 FP23        pre   male   incl    multiple R          8685
 # ℹ 126 more rows</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Use a mixed model to determine effects of time and condition</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lean.mass <span class="sc">~</span> time <span class="sc">+</span> time<span class="sc">:</span>sets <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>participant), </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> dat)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Use a mixed model to determine effects of time and condition</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lmer</span>(lean.mass <span class="sc">~</span> time <span class="sc">+</span> time<span class="sc">:</span>sets <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>participant), </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> dat)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
 Formula: lean.mass ~ time + time:sets + (1 | participant)
@@ -379,7 +405,7 @@ timepost    -0.082
 tmpr:stssng -0.082  0.500       
 tmpst:stssn  0.000 -0.500  0.000</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                        2.5 %     97.5 %
 .sig01              1614.7219 2609.47559
@@ -395,26 +421,26 @@ timepost:setssingle -250.3936  -24.25346</code></pre>
 <li><p>Til sist kan vi prøve en ANCOVA, denne må og ta hensyn til at dataene kommer fra samme individ to ganger</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dxadata <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant<span class="sc">:</span>include, lean.left_leg, lean.right_leg) <span class="sc">%&gt;%</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Extract leg specific data</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"leg"</span>, </span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"lean.mass"</span>, </span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> lean.left_leg<span class="sc">:</span>lean.right_leg) <span class="sc">%&gt;%</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">leg =</span> <span class="fu">if_else</span>(leg <span class="sc">==</span> <span class="st">"lean.left_leg"</span>, <span class="st">"L"</span>, <span class="st">"R"</span>), </span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">sets =</span> <span class="fu">if_else</span>(multiple <span class="sc">==</span> leg, <span class="st">"multiple"</span>, <span class="st">"single"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant, time, sex, include, sets, leg, lean.mass) <span class="sc">%&gt;%</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Filter only included participants</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(include <span class="sc">==</span> <span class="st">"incl"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fix time factor </span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">factor</span>(time, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"pre"</span>, <span class="st">"post"</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Pivot wider by time</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> time, </span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>                    <span class="at">values_from =</span> lean.mass) <span class="sc">%&gt;%</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dxadata <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant<span class="sc">:</span>include, lean.left_leg, lean.right_leg) <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Extract leg specific data</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">names_to =</span> <span class="st">"leg"</span>, </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">"lean.mass"</span>, </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>               <span class="at">cols =</span> lean.left_leg<span class="sc">:</span>lean.right_leg) <span class="sc">%&gt;%</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">leg =</span> <span class="fu">if_else</span>(leg <span class="sc">==</span> <span class="st">"lean.left_leg"</span>, <span class="st">"L"</span>, <span class="st">"R"</span>), </span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>         <span class="at">sets =</span> <span class="fu">if_else</span>(multiple <span class="sc">==</span> leg, <span class="st">"multiple"</span>, <span class="st">"single"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant, time, sex, include, sets, leg, lean.mass) <span class="sc">%&gt;%</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Filter only included participants</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(include <span class="sc">==</span> <span class="st">"incl"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Fix time factor </span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">factor</span>(time, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"pre"</span>, <span class="st">"post"</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Pivot wider by time</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> time, </span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>                    <span class="at">values_from =</span> lean.mass) <span class="sc">%&gt;%</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 68 × 7
    participant sex    include sets     leg     pre  post
@@ -431,13 +457,13 @@ timepost:setssingle -250.3936  -24.25346</code></pre>
 10 FP23        male   incl    multiple R      8685  8480
 # ℹ 58 more rows</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Use a mixed model to determine effects of time and condition</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lmer</span>(post <span class="sc">~</span> pre <span class="sc">+</span> sets <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>participant), </span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> dat)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Use a mixed model to determine effects of time and condition</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">lmer</span>(post <span class="sc">~</span> pre <span class="sc">+</span> sets <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>participant), </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">data =</span> dat)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Linear mixed model fit by REML ['lmerMod']
 Formula: post ~ pre + sets + (1 | participant)
@@ -468,7 +494,7 @@ setssingle -0.116  0.008
 fit warnings:
 Some predictor variables are on very different scales: consider rescaling</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(m)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   2.5 %     97.5 %
 .sig01       203.3519123 399.741610
@@ -483,17 +509,17 @@ setssingle  -234.5001167 -10.850906</code></pre>
 <li><p>Man kan være intressert i å få ut estimate fra modellene, her kan pakken <code>emmeans</code> hjelpe. La si at du ønsker å estimere post-skår fra modellen <code>m</code>.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># store estimated marginal means in new object</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>em <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(m, <span class="at">specs =</span> <span class="sc">~</span> sets)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># For plotting you can make the estimates to a data frame</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(em)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(emmeans)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># store estimated marginal means in new object</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>em <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(m, <span class="at">specs =</span> <span class="sc">~</span> sets)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co"># For plotting you can make the estimates to a data frame</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(em)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      sets   emmean       SE       df lower.CL upper.CL
-1 multiple 8885.274 65.08461 46.04908 8754.269 9016.279
-2   single 8762.579 65.08461 46.04908 8631.574 8893.584</code></pre>
+1 multiple 8885.274 65.08461 45.88236 8754.256 9016.291
+2   single 8762.579 65.08461 45.88236 8631.562 8893.597</code></pre>
 </div>
 </div>
 </section>
@@ -507,23 +533,6 @@ setssingle  -234.5001167 -10.850906</code></pre>
 <li>Kontroller at din mappe går å laste ned fra github, at den seneste versjonen av prosjektet ligger oppe osv!</li>
 </ul>
 </section>
-</section>
-<section id="å-bruke-r" class="level2">
-<h2 class="anchored" data-anchor-id="å-bruke-r">Å bruke R</h2>
-<ul>
-<li><p>R bruker punktum som kommaseparerare. For en helhetlig rapport kan det være lurt å velge en måte å rapportere resultater på.</p></li>
-<li><p>Hensikten/styrken med reproduserbar rapportering er at tall, tabeller, figurer osv. er direkte koblet til dataene. Prøv å unngå å skrive inn tall direkte. Bruk isteden variabler (eks. <code>var1</code>) som du skaper i code chunks och settes inn i teksten. R vill i dette fallet lete etter en variable i environment som heter <code>var1</code>. Se her <a href="https://rmarkdown.rstudio.com/lesson-4.html">https://rmarkdown.rstudio.com/lesson-4.html</a> for mer info.</p></li>
-<li><p>Å definere innstillinger for code chunks vil gjøre rapportene lettere å lese. F.eks. ved å inkludere koden som beskrives under vil ta vekk meddelende, «warnings» og koden fra din rapport. Hus at innstillinger må settes først i code chunken.</p></li>
-</ul>
-<pre><code>#| echo: false
-#| message: false
-#| warning: false
-
-</code></pre>
-<ul>
-<li>Unngå å bruke <code>print()</code> i en rapport da dette vil resultere i uformatert tekst. Bruk istedenfor tabellverktøy (som gt eller knitr::kable()) for tabeller.</li>
-<li>Se her <a href="https://quarto.org/docs/authoring/footnotes-and-citations.html#bibliography-generation">Quarto - Citations &amp; Footnotes</a> for hvordan du kan sette en egen overskrift for referanser og inkludere referanser hvor du ønsker.</li>
-</ul>
 </section>
 <section id="innlevering-av-eksamen" class="level2">
 <h2 class="anchored" data-anchor-id="innlevering-av-eksamen">Innlevering av eksamen</h2>

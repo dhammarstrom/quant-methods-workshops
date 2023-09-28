@@ -13,6 +13,10 @@ website:
         text: Home
       - href: workshops.qmd
         text: Workshops
+      - href: assignments.qmd
+        text: Assignments/Arbeidskrav
+      - href: feedback-assignments.qmd
+        text: Feedback
 
 format:
   html:
