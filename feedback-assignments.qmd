@@ -35,6 +35,17 @@ Følgende punkter er basert på tidligere arbeidskrav som har blitt levert i emn
 -	Unngå å bruke `print()` i en rapport da dette vil resultere i uformatert tekst. Bruk istedenfor tabellverktøy (som gt eller knitr::kable()) for tabeller.
 -	Se her [Quarto - Citations & Footnotes](https://quarto.org/docs/authoring/footnotes-and-citations.html#bibliography-generation) for hvordan du kan sette en egen overskrift for referanser og inkludere referanser hvor du ønsker.
 
+For å bytte ut engelsk Table/Figure mot norsk Tabell/Figur, sett inn
+```{}
+crossref:
+  fig-title: "Figur"
+  tbl-title: "Tabell"
+```
+
+
+i YAML feltet.
+
+
 
 
 ## Spesifikt innhold
