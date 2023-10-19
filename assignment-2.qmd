@@ -3,13 +3,13 @@ format: html
 bibliography: resources/bib-final.bib
 ---
 
-# Assignment 2: Regression models, predicting from data  {#assignment2}
+# Assignment 2: Regression models, predicting from data {#assignment2}
 
 ## Part 1: Lactate thresholds
 
-There are several suggestions on how to best capture the physiological "essence" of the lactate threshold test [See @RN2511, Chapter 6]. A simple, and very common way to analyze the relationship between exercise intensity and blood lactate is to determine exercise intensity at fixed blood lactate values. This can be done by fitting a regression model that captures the relationship and then "inverse predict" the exercise intensity value. An example of such inverse prediction can be found in [the lecture notes](https://dhammarstrom.github.io/quant-methods/predictions.html).
+There are several suggestions on how to best capture the physiological "essence" of the lactate threshold test [See @RN2511, Chapter 6]. A simple, and very common way to analyze the relationship between exercise intensity and blood lactate is to determine exercise intensity at fixed blood lactate values. This can be done by fitting a regression model that captures the relationship and then "inverse predict" the exercise intensity value. Machado [-Machado_2012] provides a more elaborate method for calculating the lactate threshold. An example of such calculation can be found in [the lecture notes, Linear and curve-linear relationships, and predictions](https://dhammarstrom.github.io/quant-methods).
 
-Your report should use data from the reliability project in the lab. Calculate at least two lactate thresholds (e.g. exercise intensity at 2 and 4 mmol L<sup>-1</sup>) and compare the reliability (typical error as a percentage of the mean) between the two thresholds. If you want to complicate things further you may want to implement other lactate threshold concepts [described in @RN2511; @RN228].
+Your report should use data from the reliability project in the lab. Calculate at least two lactate thresholds (e.g. exercise intensity at 2 and 4 mmol L<sup>-1</sup>) and compare the reliability (typical error as a percentage of the mean) between the two thresholds. If you want to complicate things further you may want to implement other lactate threshold concepts [described in @RN2511; @RN228; Machado_2012] and the course notes.
 
 
 ## Part 2: Predicting sizes of DNA fragments

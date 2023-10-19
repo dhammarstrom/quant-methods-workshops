@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quantitative Methods - Workshop and Tutorials – assignment-2</title>
+<title>Quantitative Methods - Workshop and Tutorials - The linear model: Categorical predictors and diagnostics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,26 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -127,68 +108,32 @@ div.csl-indent {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#assignment2" id="toc-assignment2" class="nav-link active" data-scroll-target="#assignment2">Assignment 2: Regression models, predicting from data</a>
-  <ul class="collapse">
-  <li><a href="#part-1-lactate-thresholds" id="toc-part-1-lactate-thresholds" class="nav-link" data-scroll-target="#part-1-lactate-thresholds">Part 1: Lactate thresholds</a></li>
-  <li><a href="#part-2-predicting-sizes-of-dna-fragments" id="toc-part-2-predicting-sizes-of-dna-fragments" class="nav-link" data-scroll-target="#part-2-predicting-sizes-of-dna-fragments">Part 2: Predicting sizes of DNA fragments</a></li>
-  <li><a href="#part-3-intepreting-a-regression-table" id="toc-part-3-intepreting-a-regression-table" class="nav-link" data-scroll-target="#part-3-intepreting-a-regression-table">Part 3: Intepreting a regression table</a></li>
-  <li><a href="#how-to-hand-in-the-report" id="toc-how-to-hand-in-the-report" class="nav-link" data-scroll-target="#how-to-hand-in-the-report">How to hand in the report</a></li>
-  </ul></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-
-
-<section id="assignment2" class="level1">
-<h1>Assignment 2: Regression models, predicting from data</h1>
-<section id="part-1-lactate-thresholds" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-lactate-thresholds">Part 1: Lactate thresholds</h2>
-<p>There are several suggestions on how to best capture the physiological “essence” of the lactate threshold test <span class="citation" data-cites="RN2511">(See <a href="#ref-RN2511" role="doc-biblioref">Tanner and Gore 2012, chap. 6</a>)</span>. A simple, and very common way to analyze the relationship between exercise intensity and blood lactate is to determine exercise intensity at fixed blood lactate values. This can be done by fitting a regression model that captures the relationship and then “inverse predict” the exercise intensity value. Machado [-Machado_2012] provides a more elaborate method for calculating the lactate threshold. An example of such calculation can be found in <a href="https://dhammarstrom.github.io/quant-methods">the lecture notes, Linear and curve-linear relationships, and predictions</a>.</p>
-<p>Your report should use data from the reliability project in the lab. Calculate at least two lactate thresholds (e.g.&nbsp;exercise intensity at 2 and 4 mmol L<sup>-1</sup>) and compare the reliability (typical error as a percentage of the mean) between the two thresholds. If you want to complicate things further you may want to implement other lactate threshold concepts [described in <span class="citation" data-cites="RN2511">Tanner and Gore (<a href="#ref-RN2511" role="doc-biblioref">2012</a>)</span>; <span class="citation" data-cites="RN228">Newell et al. (<a href="#ref-RN228" role="doc-biblioref">2007</a>)</span>; Machado_2012] and the course notes.</p>
-</section>
-<section id="part-2-predicting-sizes-of-dna-fragments" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-predicting-sizes-of-dna-fragments">Part 2: Predicting sizes of DNA fragments</h2>
-<p>In the molecular laboratory you have been tasked to extract and analyze DNA. In this process we have to determine the size of resulting PCR (polymerase chain reaction) amplified DNA fragments. A tutorial using Image J and R can be found <a href="https://trainome.github.io/sw_pcr_size_determination.html">here</a>. In your report you should show how you arrived to your predicted sizes by including the code chunk in your report.</p>
-</section>
-<section id="part-3-intepreting-a-regression-table" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-intepreting-a-regression-table">Part 3: Intepreting a regression table</h2>
-<p>Using the <code>hypertrophy</code> data set, state a question that concerns a linear relationship between two variables in the data set. These variables might be related to muscle size and strength, or two molecular markers or any other variables you are interested in. Include a regression table from your analysis in the report and interpret its components in plain language (e.g.&nbsp;for an unit difference in the independent variable the dependent variable differs by <em>y</em> units). The interpretation should also include a description and explanation of the standard error, the <em>t</em>-value and the <em>p</em>-value. Valuable guidance on how to interpret the table may be found in for example and in <span class="citation" data-cites="statistiske_metoder">(<a href="#ref-statistiske_metoder" role="doc-biblioref">Frigessi and Aalen 2018</a>)</span>, <span class="citation" data-cites="campbell_2020">(<a href="#ref-campbell_2020" role="doc-biblioref">Campbell, Walters, and Machin 2020</a>)</span> and <span class="citation" data-cites="RN2902">(<a href="#ref-RN2902" role="doc-biblioref">Spiegelhalter 2019, chap. 5</a>)</span>.</p>
-<p>Special attention should be made concerning the <em>p</em>-value. How do you define and interpret the <em>p</em>-value in your regression table. <em>What does it mean?</em>.</p>
-</section>
-<section id="how-to-hand-in-the-report" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-hand-in-the-report">How to hand in the report</h2>
-<p>The report is a group assignment, it is not to be included in the portfolio (mappeeksamen). However, it is required in order to pass the course (arbeidskrav).</p>
-<p>Create a new project on github and collaborate with your group there. The repository with all data and coded needed to create the report, and the report itself (in <code>html</code>, <code>docx</code> or <code>pdf</code> format) should be reported on canvas as a link to the repository. <strong>Each member of the group hand in the link in canvas</strong>. The repository should be the same for all group members.</p>
-
-
-
-</section>
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
-<div id="ref-campbell_2020" class="csl-entry" role="listitem">
-Campbell, Michael J., Stephen John Walters, and David Machin. 2020. <em>Medical Statistics: A Textbook for the Health Sciences</em>. Fifth edition. Hoboken, NJ: Wiley-Blackwell.
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The linear model: Categorical predictors and diagnostics</h1>
 </div>
-<div id="ref-statistiske_metoder" class="csl-entry" role="listitem">
-Frigessi, Arnoldo, and Odd O Aalen. 2018. <em>Statistiske Metoder i Medisin Og Helsefag</em>. Oslo: Gyldendal akademisk.
-</div>
-<div id="ref-RN228" class="csl-entry" role="listitem">
-Newell, J., D. Higgins, N. Madden, J. Cruickshank, J. Einbeck, K. McMillan, and R. McDonald. 2007. <span>“Software for Calculating Blood Lactate Endurance Markers.”</span> Journal Article. <em>Journal of Sports Sciences</em> 25 (12): 1403–9. <a href="https://doi.org/10.1080/02640410601128922">https://doi.org/10.1080/02640410601128922</a>.
-</div>
-<div id="ref-RN2902" class="csl-entry" role="listitem">
-Spiegelhalter, D. J. 2019. <em>The Art of Statistics : How to Learn from Data</em>. Book. First US edition. New York: Basic Books.
-</div>
-<div id="ref-RN2511" class="csl-entry" role="listitem">
-Tanner, R. K., and C. J. Gore. 2012. <em>Physiological Tests for Elite Athletes 2nd Edition</em>. Book. Human Kinetics. <a href="https://books.google.no/books?id=0OPIiMks58MC">https://books.google.no/books?id=0OPIiMks58MC</a>.
-</div>
-</div></section></div></main> <!-- /main -->
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+
+
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

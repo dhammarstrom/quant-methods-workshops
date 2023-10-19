@@ -11,4 +11,5 @@ format: html
 |[Data wrangling](ws4-data-wrangling-tables.html)| |
 |[Creating tables](ws4b-tables.html)| |
 |[Writing reproducible, version controlled reports](ws5-writing-reports.qmd)||
-|[The linear model](ws8-linear-model.qmd)
+|[The linear model](ws8-linear-model.qmd)|
+|[Categorical predictors](ws9-linear-model-categorical.qmd)|
