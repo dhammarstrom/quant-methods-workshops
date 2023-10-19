@@ -134,7 +134,7 @@ div.csl-indent {
   <li><a href="#assignment2" id="toc-assignment2" class="nav-link active" data-scroll-target="#assignment2">Assignment 2: Regression models, predicting from data</a>
   <ul class="collapse">
   <li><a href="#part-1-lactate-thresholds" id="toc-part-1-lactate-thresholds" class="nav-link" data-scroll-target="#part-1-lactate-thresholds">Part 1: Lactate thresholds</a></li>
-  <li><a href="#part-2-predicting-sizes-of-dna-fragments" id="toc-part-2-predicting-sizes-of-dna-fragments" class="nav-link" data-scroll-target="#part-2-predicting-sizes-of-dna-fragments">Part 2: Predicting sizes of DNA fragments</a></li>
+  <li><a href="#part-2-predicting-sizes-of-dna-fragments-or-slopes-of-a-qpcr-calibration-curve" id="toc-part-2-predicting-sizes-of-dna-fragments-or-slopes-of-a-qpcr-calibration-curve" class="nav-link" data-scroll-target="#part-2-predicting-sizes-of-dna-fragments-or-slopes-of-a-qpcr-calibration-curve">Part 2: Predicting sizes of DNA fragments, or slopes of a qPCR calibration curve</a></li>
   <li><a href="#part-3-intepreting-a-regression-table" id="toc-part-3-intepreting-a-regression-table" class="nav-link" data-scroll-target="#part-3-intepreting-a-regression-table">Part 3: Intepreting a regression table</a></li>
   <li><a href="#how-to-hand-in-the-report" id="toc-how-to-hand-in-the-report" class="nav-link" data-scroll-target="#how-to-hand-in-the-report">How to hand in the report</a></li>
   </ul></li>
@@ -153,9 +153,12 @@ div.csl-indent {
 <p>There are several suggestions on how to best capture the physiological “essence” of the lactate threshold test <span class="citation" data-cites="RN2511">(See <a href="#ref-RN2511" role="doc-biblioref">Tanner and Gore 2012, chap. 6</a>)</span>. A simple, and very common way to analyze the relationship between exercise intensity and blood lactate is to determine exercise intensity at fixed blood lactate values. This can be done by fitting a regression model that captures the relationship and then “inverse predict” the exercise intensity value. Machado [-Machado_2012] provides a more elaborate method for calculating the lactate threshold. An example of such calculation can be found in <a href="https://dhammarstrom.github.io/quant-methods">the lecture notes, Linear and curve-linear relationships, and predictions</a>.</p>
 <p>Your report should use data from the reliability project in the lab. Calculate at least two lactate thresholds (e.g.&nbsp;exercise intensity at 2 and 4 mmol L<sup>-1</sup>) and compare the reliability (typical error as a percentage of the mean) between the two thresholds. If you want to complicate things further you may want to implement other lactate threshold concepts [described in <span class="citation" data-cites="RN2511">Tanner and Gore (<a href="#ref-RN2511" role="doc-biblioref">2012</a>)</span>; <span class="citation" data-cites="RN228">Newell et al. (<a href="#ref-RN228" role="doc-biblioref">2007</a>)</span>; Machado_2012] and the course notes.</p>
 </section>
-<section id="part-2-predicting-sizes-of-dna-fragments" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-predicting-sizes-of-dna-fragments">Part 2: Predicting sizes of DNA fragments</h2>
-<p>In the molecular laboratory you have been tasked to extract and analyze DNA. In this process we have to determine the size of resulting PCR (polymerase chain reaction) amplified DNA fragments. A tutorial using Image J and R can be found <a href="https://trainome.github.io/sw_pcr_size_determination.html">here</a>. In your report you should show how you arrived to your predicted sizes by including the code chunk in your report.</p>
+<section id="part-2-predicting-sizes-of-dna-fragments-or-slopes-of-a-qpcr-calibration-curve" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-predicting-sizes-of-dna-fragments-or-slopes-of-a-qpcr-calibration-curve">Part 2: Predicting sizes of DNA fragments, or slopes of a qPCR calibration curve</h2>
+<p>In the molecular laboratory you have been tasked to extract and analyze DNA and RNA in two different assignments. In this process we have to determine the size of resulting PCR (polymerase chain reaction) amplified DNA fragments or C<sub>t</sub> values in qPCR reactions.</p>
+<p>In this assignment you can either analyze DNA fragments or qPCR results.</p>
+<p>A tutorial using Image J and R to analyze DNA fragments can be found <a href="https://trainome.github.io/sw_pcr_size_determination.html">here</a>. In your report you should show how you arrived to your predicted sizes by including the code chunk in your report.</p>
+<p>The slope of a calibration curve can inform on the efficiency of qPCR reactions. Use the data that you collected to calculate reaction efficiency.</p>
 </section>
 <section id="part-3-intepreting-a-regression-table" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-intepreting-a-regression-table">Part 3: Intepreting a regression table</h2>

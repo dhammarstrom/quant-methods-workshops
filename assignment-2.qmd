@@ -12,10 +12,15 @@ There are several suggestions on how to best capture the physiological "essence"
 Your report should use data from the reliability project in the lab. Calculate at least two lactate thresholds (e.g. exercise intensity at 2 and 4 mmol L<sup>-1</sup>) and compare the reliability (typical error as a percentage of the mean) between the two thresholds. If you want to complicate things further you may want to implement other lactate threshold concepts [described in @RN2511; @RN228; Machado_2012] and the course notes.
 
 
-## Part 2: Predicting sizes of DNA fragments
+## Part 2: Predicting sizes of DNA fragments, or slopes of a qPCR calibration curve
 
-In the molecular laboratory you have been tasked to extract and analyze DNA. In this process we have to determine the size of resulting PCR (polymerase chain reaction) amplified DNA fragments. A tutorial using Image J and R can be found [here](https://trainome.github.io/sw_pcr_size_determination.html). In your report you should show how you arrived to your predicted sizes by including the code chunk in your report.
+In the molecular laboratory you have been tasked to extract and analyze DNA and RNA in two different assignments. In this process we have to determine the size of resulting PCR (polymerase chain reaction) amplified DNA fragments or C~t~ values in qPCR reactions.
 
+In this assignment you can either analyze DNA fragments or qPCR results.
+
+A tutorial using Image J and R to analyze DNA fragments can be found [here](https://trainome.github.io/sw_pcr_size_determination.html). In your report you should show how you arrived to your predicted sizes by including the code chunk in your report.
+
+The slope of a calibration curve can inform on the efficiency of qPCR reactions. Use the data that you collected to calculate reaction efficiency.
 
 ## Part 3: Intepreting a regression table
 
