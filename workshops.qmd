@@ -11,3 +11,6 @@ format: html
 |[Data wrangling](ws4-data-wrangling-tables.html)| |
 |[Creating tables](ws4b-tables.html)| |
 |[Writing reproducible, version controlled reports](ws5-writing-reports.qmd)||
+|[Writing function](ws12-writing-functions.qmd)||
+|[*p*-values from simulations](ws13-p-values-simulation.qmd)||
+|[Sampling, effects and power](ws14-sampling-power-effects.qmd)||

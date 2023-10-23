@@ -31,7 +31,7 @@ b <- sample(B, 15, replace = FALSE)
 
 
 
-:::{.callout-Practice}
+::: {.callout-note}
 
 #### Group work
 
@@ -73,7 +73,7 @@ data.frame(differences) %>%
 
 - The sample size determines what differences we may observe.
 
-:::{.callout-Practice}
+::: {.callout-note}
 
 #### Group work
 

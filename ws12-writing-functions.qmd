@@ -215,7 +215,7 @@ my_fun(value1 = 2, value2 = 4)
 - There are several additional ways to create conditional operations (see [@r4ds]).
 
 
-:::{.callout-Practice}
+::: {.callout-note}
 
 #### Group work
 
@@ -423,7 +423,7 @@ lactate_threshold <- ndf %>%
   filter(abs(predictions - 4) == min(abs(predictions - 4)))
 ```
 
-:::{.callout-Practice}
+::: {.callout-note}
 
 #### Group work
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quantitative Methods - Workshop and Tutorials - Quantitative methods and statistics (In Sport and Exercise Science)</title>
+<title>Quantitative Methods - Workshop and Tutorials - Populations, samples and statistical inference</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -82,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="./index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -113,13 +147,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#practical-information" id="toc-practical-information" class="nav-link" data-scroll-target="#practical-information">Practical information</a>
-  <ul class="collapse">
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives">Learning objectives</a></li>
-  <li><a href="#learning-strategies" id="toc-learning-strategies" class="nav-link" data-scroll-target="#learning-strategies">Learning strategies</a></li>
-  </ul></li>
-  <li><a href="#assignments-and-portfolio-exam" id="toc-assignments-and-portfolio-exam" class="nav-link" data-scroll-target="#assignments-and-portfolio-exam">Assignments and Portfolio exam</a></li>
+  <li><a href="#a-simple-test-of-differences" id="toc-a-simple-test-of-differences" class="nav-link active" data-scroll-target="#a-simple-test-of-differences">A simple test of differences</a></li>
+  <li><a href="#the-effect-of-small-and-large-samples." id="toc-the-effect-of-small-and-large-samples." class="nav-link" data-scroll-target="#the-effect-of-small-and-large-samples.">The effect of small and large samples.</a></li>
+  <li><a href="#limitations-of-p-values" id="toc-limitations-of-p-values" class="nav-link" data-scroll-target="#limitations-of-p-values">Limitations of p-values</a></li>
   </ul>
 </nav>
     </div>
@@ -128,7 +158,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Quantitative methods and statistics (In Sport and Exercise Science)</h1>
+<h1 class="title">Populations, samples and statistical inference</h1>
 </div>
 
 
@@ -143,28 +173,82 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Welcome to the course <strong>Quantitative methods and Statistics (IDR4000)</strong>. The course aims to give students an overview of methodological aspects within the field of sport and exercise-physiology. Specifically, planning, conducting and analyzing research projects with human participants will be covered. The lecture notes for the course can <a href="https://dhammarstrom.github.io/quant-methods/">be found here</a>. This website will contain tutorials and workshops that we will work on in class.</p>
+<section id="a-simple-test-of-differences" class="level2">
+<h2 class="anchored" data-anchor-id="a-simple-test-of-differences">A simple test of differences</h2>
+<ul>
+<li>We have a two-group design and want to know if <em>Condition A</em> is different from <em>Condition B</em> <strong>in any meaningful way</strong>.</li>
+<li>To accomplish this we can test if an observed difference is very different to a reference, where any difference is up to chance</li>
+<li>Use the code chunk below to simulate data</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Population </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>A <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="dv">10</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>B <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">92</span>, <span class="dv">10</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">sample</span>(A, <span class="dv">15</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">sample</span>(B, <span class="dv">15</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Group work
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Using the <code>t.test</code> function, test against the null-hypothesis of no difference between groups</p></li>
+<li><p>Construct a permutation test where a <em>reference distribution of possible outcomes</em> is created in a loop(!). Try to explain what the code below does.</p></li>
+<li><p>Calculate how many cases led to a more extreme result than the observed in your experiment.</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>differences <span class="ot">&lt;-</span> <span class="fu">vector</span>()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">1000</span>) {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>     samp <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(a, b), <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>     differences[i] <span class="ot">&lt;-</span> <span class="fu">mean</span>(samp[<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>]) <span class="sc">-</span> <span class="fu">mean</span>(samp[<span class="dv">16</span><span class="sc">:</span><span class="dv">30</span>])</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="fu">data.frame</span>(differences) <span class="sc">%&gt;%</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(differences)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(a) <span class="sc">-</span> <span class="fu">mean</span>(b), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="practical-information" class="level2">
-<h2 class="anchored" data-anchor-id="practical-information">Practical information</h2>
-<p>These notes were updated on 2023-10-23 and cover the course held during 2023 autumn semester. Contact <a href="mailto:daniel.hammarstrom@inn.no">Daniel Hammarström</a> if you have any questions regarding this content.</p>
-<section id="learning-objectives" class="level3">
-<h3 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h3>
-<p>Learning objectives can be read in Norwegian <a href="https://www.inn.no/content/view/full/163709/language/nor-NO">here</a>.</p>
+<section id="the-effect-of-small-and-large-samples." class="level2">
+<h2 class="anchored" data-anchor-id="the-effect-of-small-and-large-samples.">The effect of small and large samples.</h2>
+<ul>
+<li>The sample size determines what differences we may observe.</li>
+</ul>
+<p>::: {.callout-note}</p>
+<section id="group-work-1" class="level4">
+<h4 class="anchored" data-anchor-id="group-work-1">Group work</h4>
+<ul>
+<li>Re-do the experiment above with a smaller sample size, and a larger sample size.</li>
+<li>Report your experiment as a t-test and a permutation test.</li>
+</ul>
 </section>
-<section id="learning-strategies" class="level3">
-<h3 class="anchored" data-anchor-id="learning-strategies">Learning strategies</h3>
-<p>The course will include lectures, laboratory exercises, computer exercises and workshops, seminars and student presentations. Lectures/Workshops will be held in-person.</p>
-<p>Computer exercises will eventually require that you have special computer software installed on your computer. The software is free (see specific chapters in <a href="https://dhammarstrom.github.io/quant-methods">lecture notes</a>).</p>
 </section>
-</section>
-<section id="assignments-and-portfolio-exam" class="level2">
-<h2 class="anchored" data-anchor-id="assignments-and-portfolio-exam">Assignments and Portfolio exam</h2>
-<p>The course is based on several assignments. Some of these assignments are to be handed in as part of a portfolio exam upon which your grade is based.</p>
-<p>Assignments that are due during the course (arbeidskrav) are expected to be further improved after feedback from fellow students and teachers before inclusion in your portfolio.</p>
-<p>See this <a href="https://github.com/dhammarstrom/idr4000-student-assignments/">GitHub repository for an overview</a></p>
+<section id="limitations-of-p-values" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-of-p-values">Limitations of p-values</h2>
+<ul>
+<li>P-values are often misinterpreted!</li>
+<li>Find a scientific paper (full text) in any area and search for “P &lt; 0.05” and “P &gt; 0.05”, see how authors interpret the results.</li>
+</ul>
 
 
 </section>
