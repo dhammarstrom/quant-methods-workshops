@@ -20,6 +20,7 @@ The line is heading upwards if $b > 0$ and downwards if $b < 0$.
 #| message: false
 #| warning: false
 #| fig-cap: "Straight lines following the equation $y = a + bx$" 
+#| fig-height: 3.5
 
 library(tidyverse); library(patchwork)
 
@@ -41,7 +42,40 @@ a <- ggplot(data.frame(x = c(0, 2),
         scale_y_continuous(breaks = c(0, 1, 2, 3), 
                            labels = c("a", "a+b", "a+2b", "a+3b")) + 
         geom_abline(intercept = 0, slope = 1) +
+        
+  
+        ## Annotation for the intercept
+        geom_curve(aes(x = 0.5, y = 0.25, xend = 0.03, yend = 0.0), 
+                   curvature = -0.2, 
+                   arrow = arrow(length = unit(0.03, "npc"), 
+                                 type = "closed")) +
+        annotate("text", label = "Intercept", 
+                 x = 0.52, 
+                 y = 0.25, 
+                 hjust = 0) +
+        
+        ## Annotation for the slope
+        annotate("segment", 
+                 x = c(0.5, 0.5), 
+                 xend = c(0.5, 1.5), 
+                 y = c(0.5, 1.5), 
+                 yend = c(1.5, 1.5), 
+                 lty = 2) +
+        
+         geom_curve(aes(x = 0.1, y = 0.5, xend = 0.48, yend = 1), 
+                   curvature = -0.2, 
+                   arrow = arrow(length = unit(0.03, "npc"), 
+                                 type = "closed")) +
+        annotate("text", label = "Slope", 
+                 x =0.4, 
+                 y = 1.05, 
+                 hjust = 1) +
+        
+        
         large_theme()
+
+
+
         
 b <- ggplot(data.frame(x = c(0, 2), 
                   y = c(0, -3)), 
@@ -75,14 +109,34 @@ a | b
 
 We will start our journey in statistical modelling using straight lines. 
 
-:::{.callout-Practice}
+::: {.callout-note}
 
 #### Group work
 
-- Task: What line would best describe the data shown in the plots below? Copy the code in the code chunk below the figure and add straight lines that best describes the data.
 
-Straight lines can be added to a `ggplot` using the `geom_abline()` function. It takes the arguments `slope` and `intercept`.
-:::
+Straight lines can be added to a `ggplot` using the `geom_abline()` function. It takes the arguments `slope` and `intercept`. For example:
+
+```{r}
+#| fig-height: 3
+#| fig-width: 3
+#| fig-align: "center"
+
+ggplot(data = data.frame(x = c(1, 2, 3), 
+                         y = c(3, 2, 1)), 
+       aes(x, y)) + geom_point() +
+        
+        geom_abline(slope = 1, intercept = 0, color = "steelblue", linewidth  = 1) + 
+        
+        scale_y_continuous(limits = c(0, 3)) +
+        
+        scale_x_continuous(limits = c(0, 3))
+
+```
+
+
+- What line would best describe the data shown in the plots below? Copy the code in the code chunk below the figure and add straight lines that best describes the data.
+- Discuss: What made you decide where to place the lines?
+
 
 
 ```{r}
@@ -157,7 +211,6 @@ mod_d <- data.frame(x = c(1, 2, 3, 3, 4, 5),
 ```
 
 
-
 ```{r}
 #| eval: false
 
@@ -194,13 +247,14 @@ d <- ggplot(data.frame(x = c(1, 2, 3, 3, 4, 5),
 
 ```
 
+:::
 
 ## Fitting a straight line to data
 
 
 To achieve the goal of describing data with a model, a straight line can be fitted to data by minimizing the error in $y$.
 
-For every observation ($y_i$) a line produces a prediction $\hat{y}_i$. The best fitting line is the line that minimizes the sum of squared errors:
+For every observation ($y_i$) a line produces a prediction $\hat{y}_i$. The best fitting line is the line that minimizes the **sum of squared errors**:
 
 $$\sum(y_i - \hat{y}_i)^2$$
 
@@ -250,7 +304,7 @@ Which can be translated to [@RN2902]:
 $$\text{observation = deterministic model + residual error}$$
 
 
-:::{.callout-caution collapse="true"}
+::: {.callout-note collapse="true"}
 ## Review your understanding
 
 Define these concepts:
@@ -367,7 +421,7 @@ mod_dat %>%
 ```
 
 
-:::{.callout-caution collapse="true"}
+:::{.callout-note collapse="true"}
 ## Review your understanding
 
 Use the figure and explain to a friend:
@@ -405,8 +459,7 @@ $$\hat{y} = 10 + 2.2 \times 2$$
 $$ = 14.4$$
 
 
-:::{.callout-Practice}
-
+:::{.callout-note}
 #### Group work
 
 Use R and solve the following problems
@@ -417,6 +470,111 @@ Use R and solve the following problems
 
 :::
 
+## Assumptions
+
+A regression model provides a valid representation of underlying data when assumptions are met.
+
+For an ordinary regression model we have the following main assumptions:
+
+- **Independent observations**. This is an assumption about the design of the study and the data at hand. If we have observations that are related, the ordinary linear model will give us biased conclusions. As an example, if we collect data from the same participants over time we will not have independent observations and this will lead to pseudo-replication, lower standard errors and biased inference. Another way to see it is that non-independent observations will give non-independence of the residuals which is the mechanism that creates bad inference (as the residuals are used to estimate the sampling distribution of parameters).
+
+- **Linear relationship**. In the basic case, we expect a linear trend that can be described with a straight line. If the relationship is curve-linear, we can adjust the model. 
+
+- **Normal residuals**. This condition might be violated when there are outliers.
+
+- **Constant variance**. This assumption says that we want to be equally wrong all along our data. If we predict $y$ with greater error at large $x$ we have *heteroscedasticity* (unequal variance), if we are "equally wrong" we have *homoscedasticity* (equal variance).
+
+
+### Independent observations and linear relationship
+
+We will use height and VO<sub>2max</sub> from `cyclingstudy` to explore assumptions. We need to:
+
+- Filter only to use one time-point, e.g. `pre` values (why?)
+- Select relevant columns (optional)
+- Make a plot to explore if there is a straight-line relationship.
+
+```{r}
+#| code-fold: false
+#| echo: true
+#| eval: false
+
+exscidata::cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, height.T1, VO2.max) %>%
+        ggplot(aes(height.T1, VO2.max)) + geom_point() + 
+        geom_smooth(se = FALSE) + 
+        geom_smooth(se = FALSE, method = "lm", color = "red") +
+        geom_smooth(method = "lm", formula = y ~ poly(x, 2), 
+                    color = "green", se = FALSE)
+        
+
+```
+
+
+We have the possibility to plot the results of preliminary models in ggplot2. 
+
+By adding the following we will get an idea about the relationship. Notice that `se = FALSE` turns of confidence bands, `method = "lm"` tells `geom_smooth` to use an ordinary linear model. The default model is a "local polynomial regression model".
+
+### Normal residual and constant variance. 
+
+These are assumptions about the model, and the resulting residuals. Normal residuals can be assessed with a qq-plot which shows every observed residual against its theoretical position in a normal distribution.
+
+A qq-plot can be created using ggplot:
+
+
+```{r}
+#| eval: false
+
+
+m1 <- lm(VO2.max ~ height.T1, data = exscidata::cyclingstudy)
+
+
+
+
+exscidata::cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, group, VO2.max, height.T1)  %>%
+        mutate(resid = resid(m1), 
+               st.resid = resid/sd(resid)) %>%
+        ggplot(aes(sample = st.resid)) +
+         stat_qq(size = 3, fill = "lightblue", shape = 21) + 
+                 stat_qq_line() +
+        labs(title = "A qq-plot of residuals") +
+                 theme_minimal()
+
+
+```
+
+
+A residual plot can be created to assess the assumtion regarding equal variance. We can plot residuals against fitted values or the predictor.
+
+```{r}
+#| eval: false
+
+
+exscidata::cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, group, VO2.max, height.T1)  %>%
+        mutate(resid = resid(m1),
+               fitted = fitted(m1),
+               st.resid = resid/sd(resid)) %>%
+        ggplot(aes(fitted, st.resid))  +
+        geom_hline(yintercept = 0) + 
+        geom_point()  
+
+
+```
+
+
+::: {.callout-note}
+## Practice: Body dimensions and ventilation
+
+
+We think that body dimensions influence physiological characteristics. To test if if the stature (`height.T1`) influence maximum ventilatory capacity (`VE.max`) fit a regression model, check model assumptions and interpret the results.
+
+
+
+:::
 
 
 

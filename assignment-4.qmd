@@ -18,7 +18,7 @@ The report should be handed in on canvas as a link to a github folder containing
 
 When **analyzing** your studies you can use the QALMRI method^[See [Teaching undergraduate students to read empirical articles: An evaluation and revision of the QALMRI method](https://psyarxiv.com/p39sc/), this advice was also heavily influenced by [this website](https://bartlettje.github.io/2021-10-06-learning-to-read-scientific-journal-articles/)].
 
-Note that the report **should not** contain your QALMRI table but should instead be focused on describing differences and similarities in all studies together (see also below)!
+> Note that the report **should not** contain your QALMRI table but should instead be focused on describing differences and similarities in all studies together (see also below)!
 
 ### The questions may help you analyze your studies
 

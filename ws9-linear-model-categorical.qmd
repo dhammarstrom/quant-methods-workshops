@@ -17,19 +17,19 @@ bibliography: resources/bib-final.bib
 - The model can still be described as 
 
 $$y_i = \beta_0 + \beta_1x_{i} + \epsilon_i$$
-- where $\beta_0$ is the intercept, $\hat{y}$ when $x=0$ which will be the average of group A.
+- where $\beta_0$ is the intercept, $\hat{y_i}$ when $x=0$ which will be the average of group A.
 - The slope, $\beta_1$ represents the difference between the groups which equals to the change in $\hat{y}$ for a one-unit change in $x$.
 
 ## A bad example!
 
 - We will create a bad example of a categorical predictor variable to predict `VO2.max` with `height.T1` in the `cyclingstudy` data set. Why bad? Let's find out! 
 
-- First, let's dichotomize the height variable into two groups. In our analysis we want to compare the group of "tall" individuals to "short" individuals from the `pre` time-point.
+- First, let's _**dichotomize**_ the height variable into two groups. In our analysis we want to compare the group of "tall" individuals to "short" individuals from the `pre` time-point.
 - The threshold for the grouping will be above/below the median height.
 - In the code chunk below, we add a new variable `height` which takes the value `tall` if `height.T1` is greater then the median, otherwise "short". For clarity, we will also convert the variable to a `factor` variable. 
 
-:::{.callout-caution collapse="true"}
-## Review your understanding
+:::{.callout-note collapse="false"}
+## Practice
 
 Based on the description above, and before you look at the example below, write the required commands and save a data set in an object called `dat`. 
 
@@ -91,27 +91,14 @@ dat %>%
 
 - This translates to a more formal description
 
-$$\text{VO}_\text{2max} = \beta_0 + \beta_{\text{tall}}$$
+$$\text{VO}_\text{2max} = \beta_0 + \beta_{\text{tall}}x_i$$
 
-:::{.callout-Practice}
-
+::: {.callout-note}
 #### Group work
 
 Fit the model `VO2.max ~ height` using the dichotomized factor variable for height and calculate the average VO<sub>2max</sub> for the `tall` group.
 
 :::
-
-
-```{r}
-#| code-fold: true
-#| code-summary: "A possible solution"
-
-
-mod <- lm(VO2.max ~ height, data = dat)
-
-tall.vo2max <- coef(mod)[1] + coef(mod)[2]
-
-```
 
 
 ### Note: A statistical test for differences in means
@@ -132,8 +119,7 @@ tall.vo2max <- coef(mod)[1] + coef(mod)[2]
 ```{r}
 #| code-fold: false
 
-library(knitr)
-
+library(gt)
 
 ttest <- t.test(VO2.max ~ height, data = dat, var.equal = TRUE)
 
@@ -143,7 +129,8 @@ data.frame(model = c("t-test", "Regression"),
            t.val = c(ttest$statistic, coef(summary(reg))[2,3]),
            p.val = c(ttest$p.value, coef(summary(reg))[2,4]), 
            row.names = NULL) %>%
-        kable(col.names = c("Model", "t-value", "p-value"), digits = 3)
+        gt() %>%
+        fmt_auto()
 
 ```
 
@@ -153,16 +140,12 @@ Notice that:
 - The minus sign in the t-statistic of the t-test indicate that the comparison is reversed in the t-test.
 
 
-:::{.callout-Practice}
-
+::: {.callout-note}
 #### Group work
 
 How do you interpret the model summary of the model `VO2.max ~ height` using the dichotomized factor variable for height? What does the p-value and slope estimate tell us?
 
 :::
-
-
-
 
 ## Why was this a bad example: A short lesson on dichotomization
 
@@ -195,8 +178,7 @@ dat %>%
 
 - Since we are actually removing data before fitting the model we also create a model that is difficult to interpret.
 
-:::{.callout-Practice}
-
+::: {.callout-note}
 ### Group work
 
 Interpret the estimates from
@@ -244,8 +226,7 @@ A linear regression model comes with a set of assumptions, these concern
 - This can also be the case if we sample individuals that are structured together in teams or classrooms etc.
 - More elaborate models are needed to account for such structures in the data.
 
-:::{.callout-Practice}
-
+::: {.callout-note}
 ### Group work
 
 Interpret the estimates from a model with height treated as a **continuous** variable but containing all time-points. Compare the results to the previous model containing data only from `timepoint == "pre"`
@@ -302,7 +283,6 @@ summary(m1);summary(m2)
 
 - The regression model expects straight-line relationships.
 - Curve-linear relationships needs more elaborate model formulations.
-
 - If the underlying data has some curve linear characteristics, a residual plot will aid in detecting it.
 
 
@@ -371,8 +351,7 @@ library(patchwork)
 
 ```
 
-:::{.callout-Practice}
-
+::: {.callout-note}
 ### Group work
 
 Explain to a friend:
@@ -392,11 +371,9 @@ Explain to a friend:
 - This assumption is that errors are equally distributed across the fitted values.
 - In the case of a continuous predictor, the spread of the residuals should vary similarly across the whole range of fitted values.
 - In the case of a categorical variable, residuals should have similar spread in all categories.
-
-- Let's examine the models formulated above with height, both as a categorical predictor as well as a continous predictor. 
+- Let's examine the models formulated above with height, both as a categorical predictor as well as a continuous predictor. 
 
 :::{.callout-Practice}
-
 ### Group work
 
 - Fit the models, only containing the `pre` data
@@ -517,6 +494,7 @@ fig_homo + fig_hetero
 
 ```{r}
 #| echo: false
+#| cache: true
 #| message: false
 #| warning: false
 #| fig-cap: "Sampling data with different sizes from population data with equal vs. unequal variation across x-values and comparing p-values from a test of homoscedasticity."
@@ -603,6 +581,7 @@ power_curve
 ```{r}
 #| code-fold: true
 #| eval: true
+#| cache: true
 #| warning: false
 #| message: false
 #| fig-cap: "Dealing with heteroscedasticity using log-transformation of the data"
@@ -740,6 +719,7 @@ hist_resid + qq_resid
 
 ```{r}
 #| echo: false
+#| cache: true
 #| warning: false
 #| message: false
 #| fig-cap: "Assessing normality of residuals using graphical methods with 6 observations inflated by 200 units"
@@ -876,7 +856,7 @@ raw_data + leverage_plot
 
 ## Summary
 
-:::{.callout-caution collapse="true"}
+::: {.callout-note collapse="true"}
 ## Review your understanding
 
 Explain these concepts:
@@ -955,7 +935,7 @@ summary(m)
 
 
 
-:::{.callout-caution collapse="true"}
+::: {.callout-note collapse="true"}
 ## Review your understanding
 
 Look at the figure, and the output from the model.
@@ -990,10 +970,10 @@ summary(m)
 :::
 
 
-- The interpretation of model coefficients in multiple linear regression is the effect when the other coefficents are held constant (at zero).
+- The interpretation of model coefficients in multiple linear regression is the effect when the other coefficients are held constant (at zero).
 
 
-:::{.callout-caution collapse="true"}
+::: {.callout-note collapse="true"}
 ## Review your understanding
 
 - Select two or more variables (continuous or categorical) from the `cyclingstudy` data set and fit a model. 
@@ -1006,26 +986,44 @@ summary(m)
 ## The `hypertrophy` data set
 
 - @RN2225 investigated the predictors of responses to a resistance training intervention
-- The composite score of muscle hypertrophy is calculated as
+- The composite score of muscle hypertrophy is calculated as: 
+
+
+(a) right leg VL muscle thickness assessed via ultrasound
+
+(b) upper right leg lean soft tissue assessed via DXA
+
+(c) right leg mid-thigh circumference
+
+(d) right leg VL mean (type I and type II) muscle fCSA.
+
+(See @RN2225).
+
+To load the data set:
+
 
 ```{r}
-data(hypertrophy)
+#| eval: false
+
+library(exscidata)
+
+exscidata::hypertrophy
+
 ```
 
 
 
 
 
-:::{.callout-Practice}
+::: {.callout-note}
 
 #### Group work
 
 Using the `hypertrophy` data set:
 
-
 1. Reproduce the results in figure 9B
 
-2. Identify variables of interest (e.g. strength or muscle mass gains) and explain the using a regression model with a selected set of predictor varaibles.
+2. Identify variables of interest (e.g. strength or muscle mass gains) and explain the using a regression model with a selected set of predictor variables.
 
 
 :::
