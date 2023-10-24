@@ -190,8 +190,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">sample</span>(A, <span class="dv">15</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">sample</span>(B, <span class="dv">15</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="group-work" class="level4 callout-Practice">
-<h4 class="anchored" data-anchor-id="group-work">Group work</h4>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Group work
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
 <li><p>Using the <code>t.test</code> function, test against the null-hypothesis of no difference between groups</p></li>
 <li><p>Construct a permutation test where a <em>reference distribution of possible outcomes</em> is created in a loop(!). Try to explain what the code below does.</p></li>
@@ -217,14 +225,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">ggplot</span>(<span class="fu">aes</span>(differences)) <span class="sc">+</span> <span class="fu">geom_histogram</span>() <span class="sc">+</span> </span>
 <span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="fu">mean</span>(a) <span class="sc">-</span> <span class="fu">mean</span>(b), <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
+</div>
+</div>
 </section>
 <section id="the-effect-of-small-and-large-samples." class="level2">
 <h2 class="anchored" data-anchor-id="the-effect-of-small-and-large-samples.">The effect of small and large samples.</h2>
 <ul>
 <li>The sample size determines what differences we may observe.</li>
 </ul>
-<p>:::{.callout-Practice}</p>
+<p>::: {.callout-note}</p>
 <section id="group-work-1" class="level4">
 <h4 class="anchored" data-anchor-id="group-work-1">Group work</h4>
 <ul>

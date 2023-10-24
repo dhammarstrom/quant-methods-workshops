@@ -11,6 +11,7 @@ There are several suggestions on how to best capture the physiological "essence"
 
 Your report should use data from the reliability project in the lab. Calculate at least two lactate thresholds (e.g. exercise intensity at 2 and 4 mmol L<sup>-1</sup>) and compare the reliability (typical error as a percentage of the mean) between the two thresholds. If you want to complicate things further you may want to implement other lactate threshold concepts [described in @RN2511; @RN228; Machado_2012] and the course notes.
 
+If you lack data, you could use data from the `exscidata` package or from a previous year (see this file [Lactate threshold tests](/data/reliability-old/laktatprofil-g2.xlsx)).
 
 ## Part 2: Predicting sizes of DNA fragments, or slopes of a qPCR calibration curve
 
