@@ -249,7 +249,7 @@
     "href": "workshops.html",
     "title": "Workshops",
     "section": "",
-    "text": "Workshop\nAdditional material\n\n\n\n\nIntroduction to data science (Norwegian)\n\n\n\nInstalling and starting R\n\n\n\nCreating your first graph\n\n\n\nData wrangling\n\n\n\nCreating tables\n\n\n\nWriting reproducible, version controlled reports\n\n\n\n\n&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD |The linear model|| |Categorical predictors|| |Curve-linear model|| |Writing functions|| |P-values and simulations|| |Sampling, power and effects|| |Study designs|| =======\n|Writing function|| |p-values from simulations|| |Sampling, effects and power||\n|The linear model| |Categorical predictors| &gt;&gt;&gt;&gt;&gt;&gt;&gt; bc40143d0878270b0249bfcc6f42380c7bfc8f1b"
+    "text": "Workshop\nAdditional material\n\n\n\n\nIntroduction to data science (Norwegian)\n\n\n\nInstalling and starting R\n\n\n\nCreating your first graph\n\n\n\nData wrangling\n\n\n\nCreating tables\n\n\n\nWriting reproducible, version controlled reports\n\n\n\nThe linear model\n\n\n\nCategorical predictors\n\n\n\nCurve-linear model\n\n\n\nWriting functions\n\n\n\nP-values and simulations\n\n\n\nSampling, power and effects\n\n\n\nStudy designs"
   },
   {
     "objectID": "ws1-data-science-intro.html",
