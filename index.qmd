@@ -4,7 +4,7 @@ title: "Quantitative methods and statistics (In Sport and Exercise Science)"
 
 ## Introduction
 
-Welcome to the course **Quantitative methods and Statistics (IDR4000)**. The course aims to give students an overview of methodological aspects within the field of sport and exercise-physiology. Specifically, planning, conducting and analyzing research projects with human participants will be covered. The lecture notes for the course can [be found here](https://dhammarstrom.github.io/quant-methods/). This website will contain tutorials and workshops that we will work on in class.
+Welcome to the course **Quantitative methods and Statistics (IDR4000)**. The course aims to give students an overview of methodological aspects within the field of sport and exercise-physiology. Specifically, planning, conducting and analyzing research projects with human participants will be covered. The lecture notes for the course can [be found here](https://dhammarstrom.github.io/quant-methods/). This website will contain tutorials, workshops, assignments and lectures that we will work on in the course.
 
 
 ## Practical information
@@ -14,13 +14,13 @@ Welcome to the course **Quantitative methods and Statistics (IDR4000)**. The cou
 ```
 
 
-These notes were updated on `r Sys.Date()` and cover the course held during 2023 autumn semester. Contact [Daniel Hammarström](mailto:daniel.hammarstrom@inn.no) if you have any questions regarding this content.
+These notes were updated on `r Sys.Date()` and cover the course held during 2024 autumn semester. Contact [Daniel Hammarström](mailto:daniel.hammarstrom@inn.no) if you have any questions regarding this content.
 
 ### Learning objectives
 Learning objectives can be read in Norwegian [here](https://www.inn.no/content/view/full/163709/language/nor-NO).
 
 ### Learning strategies
-The course will include lectures, laboratory exercises, computer exercises and workshops, seminars and student presentations. Lectures/Workshops will be held in-person.
+The course will include lectures, laboratory exercises, computer exercises and workshops, seminars and student presentations. Workshops will be held in-person.
 
 Computer exercises will eventually require that you have special computer software installed on your computer. The software is free (see specific chapters in [lecture notes](https://dhammarstrom.github.io/quant-methods)).
 
@@ -32,6 +32,26 @@ The course is based on several assignments. Some of these assignments are to be 
 Assignments that are due during the course (arbeidskrav) are expected to be further improved after feedback from fellow students and teachers before inclusion in your portfolio.
 
 See this [GitHub repository for an overview](https://github.com/dhammarstrom/idr4000-student-assignments/)
+
+## The whole course in one table
+
+|Week |Workshops| Suggested reading|Lectures|Assignments|
+|---|---|---|---|---|
+| 34| [Introduction to data science](ws1-data-science-intro.qmd), [Starting up R](ws2-installing-r.qmd), [Creating your first graph](ws3-first-graph.qmd), [The quarto publishing system](ws3b-quarto.qmd)|[Course notes ch. 1-5](https://dhammarstrom.github.io/quant-methods/), [@RN2902, Ch. 1-2]|Intro to data science ([video]())([slides](lec1-intr-to-data-sci.qmd)) | |
+| 35| | | | |
+| 36| | | | |
+| 37| | | | |
+| 38| | | | |
+| 39| | | | |
+| 40| | | | |
+| 41| | | | |
+| 42| | | | |
+| 43| | | | |
+| 44| | | | |
+| 45| | | | |
+| 46| | | | |
+| 47| | | | |
+| 48| | | | |
 
 
 

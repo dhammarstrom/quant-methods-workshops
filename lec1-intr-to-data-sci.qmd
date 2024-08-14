@@ -1,0 +1,433 @@
+---
+title: "Lecture 1: Introduction to data science"
+author: "Daniel Hammarström"
+format:  
+  revealjs:
+    theme: resources/presentation_theme.scss
+    transition: slide
+    slideNumber: true
+    incremental: true
+    highlightStyle: github
+    highlightLanguage: r
+    backgroundTransition: fade
+    code: true
+embed-resources: true
+bibliography: resources/bib-final.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+## Why data science and statistics?
+
+```{r}
+#| echo: false
+#| message: false
+
+library(tidyverse)
+source("resources/presentations_theme_r.R")
+
+
+fig_ppdac <- ggplot(data = data.frame(x = c(0,1), y = c(0,1)), 
+       aes(x, y)) + schema_theme() +
+        
+        scale_y_continuous(limits = c(0,1)) + 
+        scale_x_continuous(limits = c(0,1)) +
+        
+        
+        annotate("label2", x = 0.5, y = 0.9, label = "PROBLEM", 
+                 color = colors[6],
+                 label.size = 1, 
+                 label.padding = unit(0.75, "lines"),
+                 label.r = unit(0.1, "lines")) + 
+        annotate("label2", x = 0.85, y = 0.62, label = "PLAN", 
+                 label.size = 1, 
+                 label.padding = unit(0.75, "lines"),
+                 label.r = unit(0.1, "lines")) +
+        annotate("label2", x = 0.65, y = 0.30, label = "DATA", 
+                 label.size = 1, 
+                 label.padding = unit(0.75, "lines"),
+                 label.r = unit(0.1, "lines")) + 
+        annotate("label2", x = 0.35, y = 0.30, label = "ANALYSIS", 
+                 label.size = 1, 
+                 label.padding = unit(0.75, "lines"),
+                 label.r = unit(0.1, "lines")) + 
+        annotate("label2", x = 0.15, y = 0.62, label = "CONCLUSION", 
+                 label.size = 1, 
+                 label.padding = unit(0.75, "lines"),
+                 label.r = unit(0.1, "lines")) +
+        
+        ## Arrows
+        
+         annotate('curve',
+                  x = 0.6, 
+                  curvature = -0.2,
+                  y = 0.9,
+                  yend = 0.7,
+                  xend = 0.85,
+                  linewidth = 0.5 ,
+                  arrow = arrow(length = unit(0.35, 'cm'), type = "closed")) +
+        annotate('curve',
+                  x = 0.85, 
+                  curvature = -0.3,
+                  y = 0.55,
+                  yend = 0.35,
+                  xend = 0.78,
+                  linewidth = 0.5 ,
+                  arrow = arrow(length = unit(0.35, 'cm'), type = "closed")) +
+        annotate('curve',
+                  x = 0.6, 
+                  curvature = -0.2,
+                  y = 0.22,
+                  yend = 0.22,
+                  xend = 0.4,
+                  linewidth = 0.5 ,
+                  arrow = arrow(length = unit(0.35, 'cm'), type = "closed")) +
+        annotate('curve',
+                  x = 0.22, 
+                  curvature = -0.2,
+                  y = 0.35,
+                  yend = 0.55,
+                  xend = 0.15,
+                  linewidth = 0.5 ,
+                  arrow = arrow(length = unit(0.35, 'cm'), type = "closed")) +
+               annotate('curve',
+                  x = 0.15, 
+                  curvature = -0.2,
+                  y = 0.7,
+                  yend = 0.9,
+                  xend = 0.4,
+                  linewidth = 0.5 ,
+                  arrow = arrow(length = unit(0.35, 'cm'), type = "closed")) 
+
+
+
+
+
+```
+
+
+
+
+::: {.r-stack}
+
+
+::: {.fragment}
+```{r}
+#| echo: false
+#| message: false
+#| fig-align: "center"
+#| fig-cap: "From [@RN2902, pp. 24] "
+
+fig_ppdac
+
+```
+:::
+::: {.fragment}
+```{r}
+#| echo: false
+#| message: false
+#| fig-align: "center"
+#| fig-cap: "From [@RN2902, pp. 24] "
+
+fig_ppdac + 
+        annotate("text", x = 0.4, y = 0.8, label = "- Define the problem\n- How to answer the question(s)", hjust = 0)
+
+
+```
+:::
+::: {.fragment}
+```{r}
+#| echo: false
+#| message: false
+#| fig-align: "center"
+#| fig-cap: "From [@RN2902, pp. 24] "
+
+fig_ppdac + 
+        annotate("text", x = 0.4, y = 0.8, label = "- Define the problem\n- How to answer the question(s)", hjust = 0) + 
+        annotate("text", x = 0.7, y = 0.5, label = "- Measurements\n- Study design\n- Organization", hjust = 0)  
+
+
+```
+:::
+::: {.fragment}
+```{r}
+#| echo: false
+#| message: false
+#| fig-align: "center"
+#| fig-cap: "From [@RN2902, pp. 24] "
+
+fig_ppdac + 
+        annotate("text", x = 0.4, y = 0.8, label = "- Define the problem\n- How to answer the question(s)", hjust = 0) + 
+        annotate("text", x = 0.7, y = 0.5, label = "- Measurements\n- Study design\n- Organization", hjust = 0)  +
+        annotate("text", x = 0.64, y = 0.2, label = "- Management\n- Cleaning", hjust = 0) 
+
+```
+:::
+::: {.fragment}
+```{r}
+#| echo: false
+#| message: false
+#| fig-align: "center"
+#| fig-cap: "From [@RN2902, pp. 24] "
+
+fig_ppdac + 
+        annotate("text", x = 0.4, y = 0.8, label = "- Define the problem\n- How to answer the question(s)", hjust = 0) + 
+        annotate("text", x = 0.7, y = 0.5, label = "- Measurements\n- Study design\n- Organization", hjust = 0)  +
+        annotate("text", x = 0.64, y = 0.2, label = "- Management\n- Cleaning", hjust = 0) +
+        annotate("text", x = 0.25, y = 0.15, label = "- Visualize\n- Summarise\n- Model\n-Hypotheses", hjust = 0) 
+
+```
+:::
+::: {.fragment}
+```{r}
+#| echo: false
+#| message: false
+#| fig-align: "center"
+#| fig-cap: "From [@RN2902, pp. 24] "
+
+fig_ppdac + 
+        annotate("text", x = 0.4, y = 0.8, label = "- Define the problem\n- How to answer the question(s)", hjust = 0) + 
+        annotate("text", x = 0.7, y = 0.5, label = "- Measurements\n- Study design\n- Organization", hjust = 0)  +
+        annotate("text", x = 0.64, y = 0.2, label = "- Management\n- Cleaning", hjust = 0) +
+        annotate("text", x = 0.25, y = 0.16, label = "- Visualize\n- Summarise\n- Model\n-Hypotheses", hjust = 0) +
+        annotate("text", x = 0.24, y = 0.47, label = "- Interpret\n- Draw conclusions\n- Communicate\n- Identify new problems...", hjust = 0) 
+
+```
+:::
+:::
+
+
+::: {.notes}
+
+- We will start by talking about the research process. One way to think about this process is to imagine it as a cycle. 
+- A definition of a problem comes from first finding something else. 
+- After defining the problem we could move on to plan how to resolve the problem (...).
+- The next step includes collecting, managing and cleaning data (...)
+- The analysis includes steps like summarising and visualizing data, creating models and examine hypotheses...
+- In the "conclusion" step we interpret and communicate what we have found, and the cycle moves on..
+
+
+
+:::
+
+
+
+
+## Why data science and statistics?
+
+
+Data literacy: *"the ability to understand the principles behind learning from data, carry out basic data analyses, and critique the quality of claims made on the basis of data"* [@RN2902]
+
+::: {.notes}
+- All steps in the research cycle helps you develop data literacy. 
+- How can we LEARN from data, how can we do analyses, and how may analyses fool us (...)
+
+
+:::
+
+
+
+## Transferable skills
+
+![[New York Post](https://nypost.com/2018/10/16/how-snoop-doggs-joint-rolling-skills-made-him-a-sushi-master/)](img/lec1/snoop-dogg.png){align="center"}
+
+::: {.notes}
+- Data literacy is a transferable skill, we can apply what we learn here in many different contexts.
+
+:::
+
+# Most research is false!
+
+::: {.notes}
+
+- It turns out that research results is not always a good representation of reality!
+- In fact, it can be argued that most claims made in research are false!
+
+:::
+
+## Replication
+
+- A lot of the scientific process is about confirming claims and refining what we think we know
+- *Replication* is a key component in scientific research &rarr; can a phenomena be replicated in an independent setting?
+
+
+
+## Replication and Reproducibility
+
+```{r}
+#| fig-cap: "From [@peng2011]."
+
+
+fig_reprod <- ggplot(data = data.frame(x = c(0,1), y = c(0,1)), 
+       aes(x, y)) + schema_theme() +
+        
+        scale_y_continuous(limits = c(0,1)) + 
+        scale_x_continuous(limits = c(0,1)) +
+        
+        annotate("rect", xmin = 0.8, xmax = 1, ymin = 0.3, ymax = 0.7, fill = colors[5]) +
+        annotate("rect", xmin = 0.2, xmax = 0.79, ymin = 0.3, ymax = 0.7, fill = colors[5], alpha = 0.5) +
+        
+        annotate("rect", xmin = 0.2, xmax = 0.39, ymin = 0.4, ymax = 0.6, fill = colors[1], alpha = 0.9) +
+        annotate("rect", xmin = 0.39, xmax = 0.58, ymin = 0.4, ymax = 0.6, fill = colors[1], alpha = 0.5) +
+        annotate("rect", xmin = 0.58, xmax = 0.8, ymin = 0.4, ymax = 0.6, fill = colors[1], alpha = 0.1) +
+        
+        annotate("rect", xmin = 0.01, xmax = 0.19, ymin = 0.3, ymax = 0.7, fill = colors[1]) +
+        
+        annotate("text", x = 0.05, y = 0.5, label = "Publication\nonly", hjust = 0) + 
+        annotate("text", x = 0.22, y = 0.5, label = "Publication and \ncode", hjust = 0) + 
+        annotate("text", x = 0.4, y = 0.5, label = "Publication, \ncode and data", hjust = 0) + 
+        annotate("text", x = 0.59, y = 0.5, label = "Publication,\ndocumented and available \ncode and data", hjust = 0) +
+   annotate("text", x = 0.81, y = 0.5, label = "Independent\nreplication", hjust = 0) +
+        
+        annotate("label2", x = 0.1, y = 0.25, label = "Not reproducible", hjust = 0, fill = colors[1]) +
+
+        
+        annotate("label2", x = 0.9, y = 0.25, label = "Gold standard", hjust = 0, fill = "gold") +
+        annotate("Text", x = 0.5, y = 0.25, label = "Reproducibility spectrum", hjust = 0.5, color = colors[6], 
+                 size = 5) 
+
+
+
+fig_reprod     
+        
+
+
+```
+
+
+
+
+
+## Replication and Reproducibility
+
+- **Replication**: Confirming scientific claims with independent data.
+  - Essential for verifying research findings.
+  - Challenges with replication due to study size, cost, and urgency.
+
+- **Reproducibility**: Minimum standard in scientific research.
+  - Independent researchers can replicate the results using the same data.
+
+
+## Reproducibility
+<center>
+![](img/lec1/reprod-meme.png)
+</center>
+
+::: {.notes}
+- Unfortunately, reproducibility is one of those things that are not a top priority in the scientific community...
+
+:::
+
+## Reproducibility
+
+   - Available data
+   - Computer code
+   - Documentation
+   - Data and code sharing methods
+
+[@peng2011]
+
+
+## How to enable reproducibility
+
+```{r}
+
+fig_ppdac + 
+        annotate("rect", fill = colors[3], alpha = 0.2, 
+                 xmin = 0.02, xmax = 0.98, ymin = 0.02, ymax = 0.98) + 
+        annotate("text", x = 0.03, y = 0.06, label = "PROGRAM", size = 12, hjust = 0)
+
+
+
+```
+
+## What is a computer program?
+
+::: {.columns}
+
+::: {.column width="25%"}
+
+
+![(By <a href="https://foundation.wikimedia.org/wiki/Contact_us" class="extiw" title="wmf:Contact us">Wikimedia Foundation</a>, <a href="https://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=10309782">Link</a>)](img/lec1/wikipedia.png)
+:::
+::: {.column width="75%"}
+
+"A computer program is a sequence or set of instructions in a programming language for a computer to execute. It is one component of software, which also includes documentation and other intangible components."
+
+:::
+:::
+
+## A sequence of instructions
+::: {.r-stack}
+::: {.fragment width="500" height="500"}
+![](img/lec1/coko-2.jpg)
+:::
+::: {.fragment}
+![](img/lec1/coko-3.jpg){.fragment width="500" height="500"}
+:::
+:::
+
+Coko, a programmable crocodile
+
+
+## Data analysis as a computer program
+
+![[@r4ds]](https://r4ds.hadley.nz/diagrams/data-science/whole-game.png)
+
+
+
+
+
+## Tools in Data Science
+
+::: {.incremental}
+- **Microsoft Excel**: Widely used, versatile tool.
+- **SPSS, Stata, Jamovi**: Specialized software for statistical analysis.
+- **R**: Preferred for reproducible data analysis:
+  - Free, open-source, and script-based.
+  - Steep learning curve.
+:::
+
+
+## Research software
+
+
+<center>
+![[https://xkcd.com/2347/](https://xkcd.com/2347/)](https://imgs.xkcd.com/comics/dependency.png)
+</center>
+
+
+
+
+## Why R?
+
+![](img/lec1/ws2-stats-cars.jpg)
+
+::: {.notes}
+- R is a very powerful language (software ecosystem), we want to use it because it makes doing reproducible science easier.
+
+:::
+
+## Why R?
+
+![](img/lec1/r-vs-python.jpg){.fragment width="609" height="304" align="center"}
+
+::: {.notes}
+
+- There are other languages that offer similar capabilities, but R is developed with *Data analysis in mind*.
+
+:::
+
+
+## How to learn?
+
+::: {.incremental}
+- Practice by imitation
+- Understand that there are multiple solutions to problems
+- Use online resources like Stack Overflow and Google
+- Stay motivated by using what you learn on problems that interest you
+- Have patience: *"the capacity to accept or tolerate delay, problems, or suffering without becoming annoyed or anxious."* 
+
+:::
+
+# Thank you!

@@ -1,0 +1,24 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+/*-- scss:defaults --*/
+
+// fonts
+$font-family-sans-serif: Lato, "Book Antiqua", Palatino,
+  FreeSerif, serif !default;
+
+// colors
+$body-bg: #fdf3e3 !default;
+$body-color: #034a58 !default;
+$link-color: #f9a170 !default;
+$selection-bg: #26351c !default;
+
+// headings
+$presentation-heading-font: Lato, "Book Antiqua", Palatino,
+  FreeSerif, serif !default;
+$presentation-heading-color: #6d97d9 !default;
+
+/*-- scss:rules --*/
+
+.reveal a {
+  line-height: 1.3em;
+}
