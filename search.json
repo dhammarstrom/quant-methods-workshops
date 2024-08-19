@@ -576,23 +576,37 @@
   {
     "objectID": "ws1-data-science-intro.html",
     "href": "ws1-data-science-intro.html",
-    "title": "Introduksjon til datavitenskap og data i praksis",
+    "title": "Introduction to Data Science with R",
     "section": "",
-    "text": "Diskuter i grupper (3-4 pers, 15 min):\n\nHvilke verktøy for reproduserbar dataanalyse er du kjent med i dag? På hvilken måte kan disse verktøyene brukes for reproduserbar dataanalyse?\nDiskuter noen scenarioer hvor du, i forskjellige yrkesroller (f.eks. helse-omsorg, idrett, undervisning, forskning) ville hatt bruk av PPDAC (eller lignende datadrevet grunnlag for beslutninger). Vær realistisk! Tenk på noen spesifikke arbeidsoppgaver.\nHvilke er de største hindringene for lære «datavitenskap» som beskrevet i pensum/forelesning?\n\n\n\n\nBruk Broman og Woo (Broman and Woo 2018) for å analysere et datasett. Oppgaven er å finne problemer og foreslå løsninger. Gjennomfør øvelsen i gruppe (3-4 pers, 20 min):\n\nAlle leser punkt 1 (Introduction)\nGruppe 1 analysere datasett ved hjelp av punktene 2-5\nGruppe 2 analysere ved hjelp av 6-8\nGruppe 3 bruker punktene 10-13\n\nNår det er mulig, forandre filen til det bedre. Noter når det er ikke er mulig eller gir uønskede konsekvenser."
+    "text": "Before we go any further, you should have working installations of the following software:\n\nR\nRStudio\nQuarto\n\nLater in the course we will use git and GitHub for version control and collaborative work.\n\nInstall git here\nRegister for an account at GitHub\nInstall GitHub CLI\n\nYou may also want to install a interface to git such as GitHub desktop\n\n\n\n\nA big issue in doing science using computers is how to organize your files.\nWe will start by using RStudio projects. A project will help you keep track of files in one place.\nWhat is a project? - A single report (source files, data, figures, etc) - A book or collection of reports (source files, figures, data, etc.) - A website/blog/course notes (…)\n\n\n\n\n\n\n\nCreate a project\n\n\n\n\nFind the project menu in RStudio (upper right corner)\nSelect New Project, New Directory, New Project\nSelect a suitable name!\n\n\n\n\n\n\nA project should be contain everything you need for a certain task (like writing a book, project report etc.)\nThe name of the project should reflect this. Files inside the project can have more general names (like figure-1.R, report.qmd).\n“The hardest thing in Data Science is naming things” (is not the exact quote, but close enough)\n\n\n\n\n\n\nStart up a new R script (File&gt;New File&gt;R Script)\nA R script is a text file with a specific extension .R\nA R script can be written as a program for R to evaluate.\nWe will use the R script to talk about basic R\nObjects and assignments\nData types and vectors\nData frames and lists\nFunctions and packages\n\n\n\n\n\n\n\nMarkdown is the basic syntax for editing text in quarto (qmd) files.\nThe syntax let’s you format the text in a plain text editor.\n  - Headings\n  - Links & Images\n  - Lists\n  - Footnotes\n  - Tables\n  - Equations\n  - Page Breaks\n  - Callout Blocks\n\n\n\n\n    - `echo`\n    - `warning`\n    - `message`"
   },
   {
-    "objectID": "ws1-data-science-intro.html#hvordan-forstå-å-bruke-datavitenskap",
-    "href": "ws1-data-science-intro.html#hvordan-forstå-å-bruke-datavitenskap",
-    "title": "Introduksjon til datavitenskap og data i praksis",
+    "objectID": "ws1-data-science-intro.html#installing-software",
+    "href": "ws1-data-science-intro.html#installing-software",
+    "title": "Introduction to Data Science with R",
     "section": "",
-    "text": "Diskuter i grupper (3-4 pers, 15 min):\n\nHvilke verktøy for reproduserbar dataanalyse er du kjent med i dag? På hvilken måte kan disse verktøyene brukes for reproduserbar dataanalyse?\nDiskuter noen scenarioer hvor du, i forskjellige yrkesroller (f.eks. helse-omsorg, idrett, undervisning, forskning) ville hatt bruk av PPDAC (eller lignende datadrevet grunnlag for beslutninger). Vær realistisk! Tenk på noen spesifikke arbeidsoppgaver.\nHvilke er de største hindringene for lære «datavitenskap» som beskrevet i pensum/forelesning?"
+    "text": "Before we go any further, you should have working installations of the following software:\n\nR\nRStudio\nQuarto\n\nLater in the course we will use git and GitHub for version control and collaborative work.\n\nInstall git here\nRegister for an account at GitHub\nInstall GitHub CLI\n\nYou may also want to install a interface to git such as GitHub desktop"
   },
   {
-    "objectID": "ws1-data-science-intro.html#data-in-the-wild",
-    "href": "ws1-data-science-intro.html#data-in-the-wild",
-    "title": "Introduksjon til datavitenskap og data i praksis",
+    "objectID": "ws1-data-science-intro.html#how-to-organize-your-files---rstudio-projects",
+    "href": "ws1-data-science-intro.html#how-to-organize-your-files---rstudio-projects",
+    "title": "Introduction to Data Science with R",
     "section": "",
-    "text": "Bruk Broman og Woo (Broman and Woo 2018) for å analysere et datasett. Oppgaven er å finne problemer og foreslå løsninger. Gjennomfør øvelsen i gruppe (3-4 pers, 20 min):\n\nAlle leser punkt 1 (Introduction)\nGruppe 1 analysere datasett ved hjelp av punktene 2-5\nGruppe 2 analysere ved hjelp av 6-8\nGruppe 3 bruker punktene 10-13\n\nNår det er mulig, forandre filen til det bedre. Noter når det er ikke er mulig eller gir uønskede konsekvenser."
+    "text": "A big issue in doing science using computers is how to organize your files.\nWe will start by using RStudio projects. A project will help you keep track of files in one place.\nWhat is a project? - A single report (source files, data, figures, etc) - A book or collection of reports (source files, figures, data, etc.) - A website/blog/course notes (…)\n\n\n\n\n\n\n\nCreate a project\n\n\n\n\nFind the project menu in RStudio (upper right corner)\nSelect New Project, New Directory, New Project\nSelect a suitable name!\n\n\n\n\n\n\nA project should be contain everything you need for a certain task (like writing a book, project report etc.)\nThe name of the project should reflect this. Files inside the project can have more general names (like figure-1.R, report.qmd).\n“The hardest thing in Data Science is naming things” (is not the exact quote, but close enough)"
+  },
+  {
+    "objectID": "ws1-data-science-intro.html#basic-r-in-a-script",
+    "href": "ws1-data-science-intro.html#basic-r-in-a-script",
+    "title": "Introduction to Data Science with R",
+    "section": "",
+    "text": "Start up a new R script (File&gt;New File&gt;R Script)\nA R script is a text file with a specific extension .R\nA R script can be written as a program for R to evaluate.\nWe will use the R script to talk about basic R\nObjects and assignments\nData types and vectors\nData frames and lists\nFunctions and packages"
+  },
+  {
+    "objectID": "ws1-data-science-intro.html#combine-code-and-text-in-quarto-files",
+    "href": "ws1-data-science-intro.html#combine-code-and-text-in-quarto-files",
+    "title": "Introduction to Data Science with R",
+    "section": "",
+    "text": "Markdown is the basic syntax for editing text in quarto (qmd) files.\nThe syntax let’s you format the text in a plain text editor.\n  - Headings\n  - Links & Images\n  - Lists\n  - Footnotes\n  - Tables\n  - Equations\n  - Page Breaks\n  - Callout Blocks\n\n\n\n\n    - `echo`\n    - `warning`\n    - `message`"
   },
   {
     "objectID": "ws5-writing-reports.html#creating-an-empty-project-github-first",

@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -132,10 +112,19 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduksjon-til-datavitenskap-og-data-i-praksis" id="toc-introduksjon-til-datavitenskap-og-data-i-praksis" class="nav-link active" data-scroll-target="#introduksjon-til-datavitenskap-og-data-i-praksis">Introduksjon til datavitenskap og data i praksis</a>
+  <li><a href="#introduction-to-data-science-with-r" id="toc-introduction-to-data-science-with-r" class="nav-link active" data-scroll-target="#introduction-to-data-science-with-r">Introduction to Data Science with R</a>
   <ul class="collapse">
-  <li><a href="#hvordan-forstå-å-bruke-datavitenskap" id="toc-hvordan-forstå-å-bruke-datavitenskap" class="nav-link" data-scroll-target="#hvordan-forstå-å-bruke-datavitenskap">Hvordan forstå å bruke datavitenskap?</a></li>
-  <li><a href="#data-in-the-wild" id="toc-data-in-the-wild" class="nav-link" data-scroll-target="#data-in-the-wild">“Data in the wild”</a></li>
+  <li><a href="#installing-software" id="toc-installing-software" class="nav-link" data-scroll-target="#installing-software">Installing software</a></li>
+  <li><a href="#how-to-organize-your-files---rstudio-projects" id="toc-how-to-organize-your-files---rstudio-projects" class="nav-link" data-scroll-target="#how-to-organize-your-files---rstudio-projects">How to organize your files - RStudio projects</a>
+  <ul class="collapse">
+  <li><a href="#naming-projects" id="toc-naming-projects" class="nav-link" data-scroll-target="#naming-projects">Naming projects</a></li>
+  </ul></li>
+  <li><a href="#basic-r-in-a-script" id="toc-basic-r-in-a-script" class="nav-link" data-scroll-target="#basic-r-in-a-script">Basic R in a script</a></li>
+  <li><a href="#combine-code-and-text-in-quarto-files" id="toc-combine-code-and-text-in-quarto-files" class="nav-link" data-scroll-target="#combine-code-and-text-in-quarto-files">Combine code and text in quarto files</a>
+  <ul class="collapse">
+  <li><a href="#markdown" id="toc-markdown" class="nav-link" data-scroll-target="#markdown">Markdown</a></li>
+  <li><a href="#code-chunks" id="toc-code-chunks" class="nav-link" data-scroll-target="#code-chunks">Code chunks</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -146,38 +135,100 @@ div.csl-indent {
 
 
 
-<section id="introduksjon-til-datavitenskap-og-data-i-praksis" class="level1">
-<h1>Introduksjon til datavitenskap og data i praksis</h1>
-<section id="hvordan-forstå-å-bruke-datavitenskap" class="level2">
-<h2 class="anchored" data-anchor-id="hvordan-forstå-å-bruke-datavitenskap">Hvordan forstå å bruke datavitenskap?</h2>
-<p>Diskuter i grupper (3-4 pers, 15 min):</p>
+<section id="introduction-to-data-science-with-r" class="level1">
+<h1>Introduction to Data Science with R</h1>
+<section id="installing-software" class="level2">
+<h2 class="anchored" data-anchor-id="installing-software">Installing software</h2>
+<p>Before we go any further, you should have working installations of the following software:</p>
 <ul>
-<li><p>Hvilke verktøy for reproduserbar dataanalyse er du kjent med i dag? På hvilken måte kan disse verktøyene brukes for reproduserbar dataanalyse?</p></li>
-<li><p>Diskuter noen scenarioer hvor du, i forskjellige yrkesroller (f.eks. helse-omsorg, idrett, undervisning, forskning) ville hatt bruk av PPDAC (eller lignende datadrevet grunnlag for beslutninger). Vær realistisk! Tenk på noen spesifikke arbeidsoppgaver.</p></li>
-<li><p>Hvilke er de største hindringene for lære «datavitenskap» som beskrevet i pensum/forelesning?</p></li>
+<li><a href="https://cran.r-project.org/">R</a></li>
+<li><a href="https://posit.co/downloads/">RStudio</a></li>
+<li><a href="https://quarto.org/docs/get-started/">Quarto</a></li>
 </ul>
-</section>
-<section id="data-in-the-wild" class="level2">
-<h2 class="anchored" data-anchor-id="data-in-the-wild">“Data in the wild”</h2>
-<p>Bruk Broman og Woo <span class="citation" data-cites="RN2391">(<a href="#ref-RN2391" role="doc-biblioref">Broman and Woo 2018</a>)</span> for å analysere et <a href="data/data-problems.xlsx">datasett</a>. Oppgaven er å finne problemer og foreslå løsninger. Gjennomfør øvelsen i gruppe (3-4 pers, 20 min):</p>
+<p>Later in the course we will use git and GitHub for version control and collaborative work.</p>
 <ul>
-<li><p>Alle leser punkt 1 (Introduction)</p></li>
-<li><p>Gruppe 1 analysere datasett ved hjelp av punktene 2-5</p></li>
-<li><p>Gruppe 2 analysere ved hjelp av 6-8</p></li>
-<li><p>Gruppe 3 bruker punktene 10-13</p></li>
+<li>Install <a href="https://git-scm.com/downloads">git here</a></li>
+<li>Register for an account at <a href="https://www.github.com">GitHub</a></li>
+<li>Install <a href="https://cli.github.com/">GitHub CLI</a></li>
 </ul>
-<p>Når det er mulig, forandre filen til det bedre. Noter når det er ikke er mulig eller gir uønskede konsekvenser.</p>
-
-
-
+<p>You may also want to install a interface to git such as <a href="https://desktop.github.com/download/">GitHub desktop</a></p>
 </section>
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-RN2391" class="csl-entry" role="listitem">
-Broman, Karl W., and Kara H. Woo. 2018. <span>“Data Organization in Spreadsheets.”</span> Journal Article. <em>The American Statistician</em> 72 (1): 2–10. <a href="https://doi.org/10.1080/00031305.2017.1375989">https://doi.org/10.1080/00031305.2017.1375989</a>.
+<section id="how-to-organize-your-files---rstudio-projects" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-organize-your-files---rstudio-projects">How to organize your files - RStudio projects</h2>
+<ul>
+<li>A big issue in doing science using computers is how to organize your files.</li>
+<li>We will start by using RStudio projects. A project will help you keep track of files in one place.</li>
+<li>What is a project? - A single report (source files, data, figures, etc) - A book or collection of reports (source files, figures, data, etc.) - A website/blog/course notes (…)</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-</div></section></div></main> <!-- /main -->
+<div class="callout-title-container flex-fill">
+Create a project
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Find the project menu in RStudio (upper right corner)</li>
+<li>Select <em>New Project</em>, <em>New Directory</em>, <em>New Project</em></li>
+<li>Select a suitable name!</li>
+</ul>
+</div>
+</div>
+<section id="naming-projects" class="level3">
+<h3 class="anchored" data-anchor-id="naming-projects">Naming projects</h3>
+<ul>
+<li>A project should be contain everything you need for a certain task (like writing a book, project report etc.)</li>
+<li>The name of the project should reflect this. Files inside the project can have more general names (like figure-1.R, report.qmd).</li>
+<li>“The hardest thing in Data Science is naming things” (is not the exact quote, but close enough)</li>
+</ul>
+</section>
+</section>
+<section id="basic-r-in-a-script" class="level2">
+<h2 class="anchored" data-anchor-id="basic-r-in-a-script">Basic R in a script</h2>
+<ul>
+<li><p>Start up a new R script (<em>File</em>&gt;<em>New File</em>&gt;<em>R Script</em>)</p></li>
+<li><p>A R script is a text file with a specific extension <code>.R</code></p></li>
+<li><p>A R script can be written as a program for R to evaluate.</p></li>
+<li><p>We will use the R script to talk about basic R</p></li>
+<li><p>Objects and assignments</p></li>
+<li><p>Data types and vectors</p></li>
+<li><p>Data frames and lists</p></li>
+<li><p>Functions and packages</p></li>
+</ul>
+</section>
+<section id="combine-code-and-text-in-quarto-files" class="level2">
+<h2 class="anchored" data-anchor-id="combine-code-and-text-in-quarto-files">Combine code and text in quarto files</h2>
+<section id="markdown" class="level3">
+<h3 class="anchored" data-anchor-id="markdown">Markdown</h3>
+<ul>
+<li><p><a href="https://quarto.org/docs/authoring/markdown-basics.html">Markdown</a> is the basic syntax for editing text in quarto (<code>qmd</code>) files.</p></li>
+<li><p>The syntax let’s you format the text in a plain text editor.</p>
+<pre><code>  - Headings
+  - Links &amp; Images
+  - Lists
+  - Footnotes
+  - Tables
+  - Equations
+  - Page Breaks
+  - Callout Blocks</code></pre></li>
+</ul>
+</section>
+<section id="code-chunks" class="level3">
+<h3 class="anchored" data-anchor-id="code-chunks">Code chunks</h3>
+<pre><code>    - `echo`
+    - `warning`
+    - `message`
+    </code></pre>
+
+
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
