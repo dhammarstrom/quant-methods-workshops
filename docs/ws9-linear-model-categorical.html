@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quantitative Methods - Workshop and Tutorials - The linear model: Categorical predictors and diagnostics</title>
+<title>The linear model: Categorical predictors and diagnostics – Quantitative Methods - Workshop and Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -121,7 +121,7 @@ div.csl-indent {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -166,7 +166,7 @@ window.Quarto = {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -176,20 +176,12 @@ window.Quarto = {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./workshops.html"> 
-<span class="menu-text">Workshops</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./assignments.html"> 
-<span class="menu-text">Assignments/Arbeidskrav</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./feedback-assignments.html"> 
 <span class="menu-text">Feedback</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -367,24 +359,23 @@ Group work
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">gt</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">fmt_auto</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div>
-<div id="baajdagybz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#baajdagybz table {
+<div id="xonnpkutak" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#xonnpkutak table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#baajdagybz thead, #baajdagybz tbody, #baajdagybz tfoot, #baajdagybz tr, #baajdagybz td, #baajdagybz th {
+#xonnpkutak thead, #xonnpkutak tbody, #xonnpkutak tfoot, #xonnpkutak tr, #xonnpkutak td, #xonnpkutak th {
   border-style: none;
 }
 
-#baajdagybz p {
+#xonnpkutak p {
   margin: 0;
   padding: 0;
 }
 
-#baajdagybz .gt_table {
+#xonnpkutak .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -410,12 +401,12 @@ Group work
   border-left-color: #D3D3D3;
 }
 
-#baajdagybz .gt_caption {
+#xonnpkutak .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#baajdagybz .gt_title {
+#xonnpkutak .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -427,7 +418,7 @@ Group work
   border-bottom-width: 0;
 }
 
-#baajdagybz .gt_subtitle {
+#xonnpkutak .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -439,7 +430,7 @@ Group work
   border-top-width: 0;
 }
 
-#baajdagybz .gt_heading {
+#xonnpkutak .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -451,13 +442,13 @@ Group work
   border-right-color: #D3D3D3;
 }
 
-#baajdagybz .gt_bottom_border {
+#xonnpkutak .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#baajdagybz .gt_col_headings {
+#xonnpkutak .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -472,7 +463,7 @@ Group work
   border-right-color: #D3D3D3;
 }
 
-#baajdagybz .gt_col_heading {
+#xonnpkutak .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -492,7 +483,7 @@ Group work
   overflow-x: hidden;
 }
 
-#baajdagybz .gt_column_spanner_outer {
+#xonnpkutak .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -504,15 +495,15 @@ Group work
   padding-right: 4px;
 }
 
-#baajdagybz .gt_column_spanner_outer:first-child {
+#xonnpkutak .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#baajdagybz .gt_column_spanner_outer:last-child {
+#xonnpkutak .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#baajdagybz .gt_column_spanner {
+#xonnpkutak .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -524,11 +515,11 @@ Group work
   width: 100%;
 }
 
-#baajdagybz .gt_spanner_row {
+#xonnpkutak .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#baajdagybz .gt_group_heading {
+#xonnpkutak .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -554,7 +545,7 @@ Group work
   text-align: left;
 }
 
-#baajdagybz .gt_empty_group_heading {
+#xonnpkutak .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -569,15 +560,15 @@ Group work
   vertical-align: middle;
 }
 
-#baajdagybz .gt_from_md > :first-child {
+#xonnpkutak .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#baajdagybz .gt_from_md > :last-child {
+#xonnpkutak .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#baajdagybz .gt_row {
+#xonnpkutak .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -596,7 +587,7 @@ Group work
   overflow-x: hidden;
 }
 
-#baajdagybz .gt_stub {
+#xonnpkutak .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -609,7 +600,7 @@ Group work
   padding-right: 5px;
 }
 
-#baajdagybz .gt_stub_row_group {
+#xonnpkutak .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -623,15 +614,15 @@ Group work
   vertical-align: top;
 }
 
-#baajdagybz .gt_row_group_first td {
+#xonnpkutak .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#baajdagybz .gt_row_group_first th {
+#xonnpkutak .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#baajdagybz .gt_summary_row {
+#xonnpkutak .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -641,16 +632,16 @@ Group work
   padding-right: 5px;
 }
 
-#baajdagybz .gt_first_summary_row {
+#xonnpkutak .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#baajdagybz .gt_first_summary_row.thick {
+#xonnpkutak .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#baajdagybz .gt_last_summary_row {
+#xonnpkutak .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -660,7 +651,7 @@ Group work
   border-bottom-color: #D3D3D3;
 }
 
-#baajdagybz .gt_grand_summary_row {
+#xonnpkutak .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -670,7 +661,7 @@ Group work
   padding-right: 5px;
 }
 
-#baajdagybz .gt_first_grand_summary_row {
+#xonnpkutak .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -680,7 +671,7 @@ Group work
   border-top-color: #D3D3D3;
 }
 
-#baajdagybz .gt_last_grand_summary_row_top {
+#xonnpkutak .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -690,11 +681,11 @@ Group work
   border-bottom-color: #D3D3D3;
 }
 
-#baajdagybz .gt_striped {
+#xonnpkutak .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#baajdagybz .gt_table_body {
+#xonnpkutak .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -703,7 +694,7 @@ Group work
   border-bottom-color: #D3D3D3;
 }
 
-#baajdagybz .gt_footnotes {
+#xonnpkutak .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -717,7 +708,7 @@ Group work
   border-right-color: #D3D3D3;
 }
 
-#baajdagybz .gt_footnote {
+#xonnpkutak .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -726,7 +717,7 @@ Group work
   padding-right: 5px;
 }
 
-#baajdagybz .gt_sourcenotes {
+#xonnpkutak .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -740,7 +731,7 @@ Group work
   border-right-color: #D3D3D3;
 }
 
-#baajdagybz .gt_sourcenote {
+#xonnpkutak .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -748,77 +739,77 @@ Group work
   padding-right: 5px;
 }
 
-#baajdagybz .gt_left {
+#xonnpkutak .gt_left {
   text-align: left;
 }
 
-#baajdagybz .gt_center {
+#xonnpkutak .gt_center {
   text-align: center;
 }
 
-#baajdagybz .gt_right {
+#xonnpkutak .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#baajdagybz .gt_font_normal {
+#xonnpkutak .gt_font_normal {
   font-weight: normal;
 }
 
-#baajdagybz .gt_font_bold {
+#xonnpkutak .gt_font_bold {
   font-weight: bold;
 }
 
-#baajdagybz .gt_font_italic {
+#xonnpkutak .gt_font_italic {
   font-style: italic;
 }
 
-#baajdagybz .gt_super {
+#xonnpkutak .gt_super {
   font-size: 65%;
 }
 
-#baajdagybz .gt_footnote_marks {
+#xonnpkutak .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#baajdagybz .gt_asterisk {
+#xonnpkutak .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#baajdagybz .gt_indent_1 {
+#xonnpkutak .gt_indent_1 {
   text-indent: 5px;
 }
 
-#baajdagybz .gt_indent_2 {
+#xonnpkutak .gt_indent_2 {
   text-indent: 10px;
 }
 
-#baajdagybz .gt_indent_3 {
+#xonnpkutak .gt_indent_3 {
   text-indent: 15px;
 }
 
-#baajdagybz .gt_indent_4 {
+#xonnpkutak .gt_indent_4 {
   text-indent: 20px;
 }
 
-#baajdagybz .gt_indent_5 {
+#xonnpkutak .gt_indent_5 {
   text-indent: 25px;
 }
 
-#baajdagybz .katex-display {
+#xonnpkutak .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#baajdagybz div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#xonnpkutak div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
 
-<table class="gt_table table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="header gt_col_headings">
 <th id="model" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">model</th>
@@ -840,7 +831,6 @@ Group work
 </tbody>
 </table>
 
-</div>
 </div>
 </div>
 </div>
@@ -1619,18 +1609,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1662,15 +1641,37 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/dhammarstrom\.github\.io\/quant-methods-workshops\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

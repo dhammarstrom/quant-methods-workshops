@@ -3,32 +3,98 @@ format: html
 bibliography: resources/bib-final.bib
 ---
 
+# Introduction to Data Science with R
 
-# Introduksjon til datavitenskap og data i praksis
+## Installing software
 
-## Hvordan forstå å bruke datavitenskap?
+Before we go any further, you should have working installations of the following software:
 
-Diskuter i grupper (3-4 pers, 15 min):
+- [R](https://cran.r-project.org/)
+- [RStudio](https://posit.co/downloads/)
+- [Quarto](https://quarto.org/docs/get-started/)
 
-- Hvilke verktøy for reproduserbar dataanalyse er du kjent med i dag? På hvilken måte kan disse verktøyene brukes for reproduserbar dataanalyse? 
+Later in the course we will use git and GitHub for version control and collaborative work.
 
-- Diskuter noen scenarioer hvor du, i forskjellige yrkesroller (f.eks. helse-omsorg, idrett, undervisning, forskning) ville hatt bruk av PPDAC (eller lignende datadrevet grunnlag for beslutninger). Vær realistisk! Tenk på noen spesifikke arbeidsoppgaver.
+- Install [git here](https://git-scm.com/downloads)
+- Register for an account at [GitHub](https://www.github.com)
+- Install [GitHub CLI](https://cli.github.com/)
 
-- Hvilke er de største hindringene for lære «datavitenskap» som beskrevet i pensum/forelesning?
+You may also want to install a interface to git such as [GitHub desktop](https://desktop.github.com/download/)
+
+## How to organize your files - RStudio projects
+
+- A big issue in doing science using computers is how to organize your files. 
+- We will start by using RStudio projects. A project will help you keep track of files in one place.
+- What is a project?
+        - A single report (source files, data, figures, etc)
+        - A book or collection of reports (source files, figures, data, etc.)
+        - A website/blog/course notes (...)
+
+::: {.callout-note}
+## Create a project
+
+- Find the project menu in RStudio (upper right corner)
+- Select *New Project*, *New Directory*, *New Project*
+- Select a suitable name!
+
+:::
+
+### Naming projects
+
+- A project should be contain everything you need for a certain task (like writing a book, project report etc.)
+- The name of the project should reflect this. Files inside the project can have more general names (like figure-1.R, report.qmd).
+- "The hardest thing in Data Science is naming things" (is not the exact quote, but close enough)
 
 
-## "Data in the wild"
-Bruk Broman og Woo [@RN2391] for å analysere et [datasett](data/data-problems.xlsx). Oppgaven er å finne problemer og foreslå løsninger. Gjennomfør øvelsen i gruppe (3-4 pers, 20 min):
+## Basic R in a script
 
-- Alle leser punkt 1 (Introduction)
+- Start up a new R script (*File*>*New File*>*R Script*)
+- A R script is a text file with a specific extension  `.R`
+- A R script can be written as a program for R to evaluate.
+- We will use the R script to talk about basic R
 
-- Gruppe 1 analysere datasett ved hjelp av punktene 2-5
 
-- Gruppe 2 analysere ved hjelp av 6-8
+- Objects and assignments
+- Data types and vectors
+- Data frames and lists
+- Functions and packages
 
-- Gruppe 3 bruker punktene 10-13
+## Combine code and text in quarto files
 
-Når det er mulig, forandre filen til det bedre. Noter når det er ikke er mulig eller gir uønskede konsekvenser.
+### Markdown
+
+- [Markdown](https://quarto.org/docs/authoring/markdown-basics.html) is the basic syntax for editing text in quarto (`qmd`) files.
+- The syntax let's you format the text in a plain text editor.
+
+        - Headings
+        - Links & Images
+        - Lists
+        - Footnotes
+        - Tables
+        - Equations
+        - Page Breaks
+        - Callout Blocks
+
+
+### Code chunks
+
+        - `echo`
+        - `warning`
+        - `message`
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

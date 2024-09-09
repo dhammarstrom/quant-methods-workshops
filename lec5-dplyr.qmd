@@ -1,0 +1,925 @@
+---
+title: "Lecture 4: `dplyr`"
+author: ""
+format:  
+  revealjs:
+    theme: resources/presentation_theme.scss
+    transition: slide
+    slideNumber: true
+    incremental: true
+    highlightStyle: github
+    highlightLanguage: r
+    backgroundTransition: fade
+    code: true
+embed-resources: true
+title-slide-attributes:
+    data-background-size: contain
+    data-background-opacity: "number"
+bibliography: resources/bib-final.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+## `dplyr` (and friends)
+
+::: {.incremental}
+
+- `dplyr` makes it easy to perform data manipulation...
+- A collection of verbs (do this) helps us translate thought to code
+   - `mutate` (create) new variables
+   - `select` variables
+   - `filter` observations
+   - `summarise` values
+   - `arrange` observations or rows
+- `dplyr` functions are pipeable, the data argument has the first position, and each function returns a data frame 
+
+:::
+
+## Data in our examples
+
+
+```{r}
+#| eval: true
+#| echo: true
+#| message: false
+#| warning: false
+
+library(exscidata) # Load the data package
+library(tidyverse) # tidyverse includes dplyr
+
+glimpse(cyclingstudy) # Overview of variables in the data set
+
+
+
+```
+
+
+## `select()` - Select variables (columns) in a data set
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+```{r}
+#| eval: false
+#| echo: true
+
+
+cyclingstudy %>%
+        select(subject, 
+               group, 
+               timepoint, 
+               cmj.max) %>%
+        print()
+
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+```{r}
+#| eval: true
+#| echo: false
+
+
+cyclingstudy %>%
+        select(subject, group, timepoint, cmj.max) %>%
+        print()
+
+```
+
+:::
+
+::::
+
+## `select()` - Select a range of columns with `:`
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+```{r}
+#| eval: false
+#| echo: true
+
+
+cyclingstudy %>%
+        select(subject:age, 
+               cmj.max) %>%
+        print()
+
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+```{r}
+#| eval: true
+#| echo: false
+
+
+cyclingstudy %>%
+        select(subject:age, 
+               cmj.max) %>%
+        print()
+
+```
+
+:::
+
+::::
+
+
+## `select()` - Select and rename columns
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+```{r}
+#| eval: false
+#| echo: true
+
+
+cyclingstudy %>%
+ select(participant = subject, 
+        group, 
+        timepoint,
+        cmj.max) %>%
+ print()
+
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+```{r}
+#| eval: true
+#| echo: false
+
+
+cyclingstudy %>%
+        select(participant = subject, 
+               group, 
+               timepoint,
+               cmj.max) %>%
+        print()
+
+```
+
+:::
+
+::::
+
+
+## `select()` and selection helpers
+
+- `last_col()`/`everything()`
+- `starts_with()`
+- `ends_with()`
+- `contains()`
+- `all_off()`/`any_off()`
+- `where()`
+
+
+
+## Select by position with `last_col()` or name with `everything()`
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+
+
+- `last_col()` selects the last column in a data set. Adding an offset selects the last column - `n`.
+- `everything()` selects all columns in a data set. 
+
+
+
+```{r}
+#| eval: false
+#| echo: true
+
+
+cyclingstudy %>%
+ select(last_col()) %>%
+ print()
+
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+```{r}
+#| eval: true
+#| echo: false
+
+
+cyclingstudy %>%
+ select(last_col()) %>%
+ print()
+
+```
+
+:::
+
+::::
+
+## Select by position with `last_col()` or name with `everything()`
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+
+
+- `everything()` selects all columns in a data set. 
+- Can also be used with a list of variables (e.g. `everything(vars = c("subject", "age"))`
+
+
+
+```{r}
+#| eval: false
+#| echo: true
+
+
+cyclingstudy %>%
+ select(everything()) %>%
+ print()
+
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+```{r}
+#| eval: true
+#| echo: false
+
+
+cyclingstudy %>%
+ select(everything()) %>%
+ print()
+
+```
+
+:::
+
+::::
+
+
+
+## Select columns based on variable names
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+
+
+- `starts_with()`, `ends_with()` and `contains()` helps us select columns with repeating patterns.
+
+
+
+```{r}
+#| eval: false
+#| echo: true
+
+
+cyclingstudy %>%
+ select(starts_with("lac.")) %>%
+ print()
+
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+```{r}
+#| eval: true
+#| echo: false
+
+
+cyclingstudy %>%
+ select(starts_with("lac.")) %>%
+ print()
+
+```
+
+:::
+
+::::
+
+## Select columns based on variable names
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+
+
+- `starts_with()`, `ends_with()` and `contains()` helps us select columns with repeating patterns.
+
+
+
+```{r}
+#| eval: false
+#| echo: true
+
+
+cyclingstudy %>%
+ select(ends_with("max")) %>%
+ print()
+
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+```{r}
+#| eval: true
+#| echo: false
+
+
+cyclingstudy %>%
+ select(ends_with("max")) %>%
+ print()
+
+```
+
+:::
+
+::::
+
+
+## Select columns based on variable names
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+
+
+- `starts_with()`, `ends_with()` and `contains()` helps us select columns with repeating patterns.
+
+
+
+```{r}
+#| eval: false
+#| echo: true
+
+
+cyclingstudy %>%
+ select(contains("VE")) %>%
+ print()
+
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+```{r}
+#| eval: true
+#| echo: false
+
+
+cyclingstudy %>%
+ select(contains("VE")) %>%
+ print()
+
+```
+
+:::
+
+::::
+
+
+## Select columns based on variable names
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+
+
+- `all_of()` and `any_of()` solves a problem in selecting variables...
+
+
+
+```{r}
+#| eval: false
+#| echo: true
+
+
+
+my_columns <- c("subject", "age", "cmj.max")
+
+# This will not work
+cyclingstudy %>%
+ select(my_columns) %>%
+ print()
+
+# This works!
+cyclingstudy %>%
+ select(all_of(my_columns)) %>%
+ print()
+
+
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+
+
+
+```{r}
+#| eval: true
+#| echo: false
+
+my_columns <- c("subject", "age", "cmj.max")
+# This works!
+cyclingstudy %>%
+ select(all_of(my_columns)) %>%
+ print()
+
+```
+
+:::
+
+::::
+
+
+## Select columns based on variable names
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+
+- `any_of()` does not give an error when a variable in the vector does not exist. 
+
+
+
+```{r}
+#| eval: false
+#| echo: true
+
+
+
+my_columns <- c("subject", 
+                "age", 
+                "cmj.max", 
+                "another_column")
+
+
+cyclingstudy %>%
+ select(any_of(my_columns)) %>%
+ print()
+
+
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+
+
+
+```{r}
+#| eval: true
+#| echo: false
+
+my_columns <- c("subject", 
+                "age", 
+                "cmj.max", 
+                "another_column")
+cyclingstudy %>%
+ select(any_of(my_columns)) %>%
+ print()
+
+```
+
+:::
+
+::::
+
+## Select columns based on variable type
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+
+
+
+```{r}
+#| eval: false
+#| echo: true
+
+
+# Select character vectors
+cyclingstudy %>%
+ select(where(is.character)) %>%
+ print()
+
+# Select numeric vectors
+cyclingstudy %>%
+ select(where(is.numeric)) %>%
+ print()
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+
+::: {.fragment}
+
+```{r}
+#| eval: true
+#| echo: false
+
+
+# Select numeric vectors
+cyclingstudy %>%
+ select(where(is.numeric)) %>%
+ print()
+
+```
+
+
+:::
+
+:::
+
+::::
+
+
+## `mutate()` - Add or overwrite variables
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+
+
+
+```{r}
+#| eval: false
+#| echo: true
+
+
+cyclingstudy %>%
+ select(subject, 
+        weight.T1, 
+        VO2.max) %>%
+ mutate(VO2.max_kg = VO2.max / weight.T1) %>%
+ print()
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+
+::: {.fragment}
+
+```{r}
+#| eval: true
+#| echo: false
+
+
+
+cyclingstudy %>%
+ select(subject, 
+        weight.T1, 
+        VO2.max) %>%
+ mutate(VO2.max_kg = VO2.max / weight.T1) %>%
+ print()
+
+```
+
+
+:::
+
+:::
+
+::::
+
+
+## `mutate()` - Add or overwrite variables using group-wise operations
+
+- `mutate()` can be used to do group-wise operations using `.by = var`
+
+
+
+::: {.r-stack}
+
+::: {.fragment}
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+
+
+
+```{r}
+#| eval: false
+#| echo: true
+
+
+cyclingstudy %>%
+ select(subject, 
+        timepoint,
+        height.T1) %>%
+ filter(timepoint == "meso2") %>%
+ print()
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+
+::: {.fragment}
+
+```{r}
+#| eval: true
+#| echo: false
+
+
+cyclingstudy %>%
+ select(subject, 
+        timepoint,
+        height.T1) %>%
+ filter(timepoint == "meso2") %>%
+ print()
+
+```
+
+
+:::
+
+:::
+
+::::
+
+:::
+
+::: {.fragment}
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+
+
+
+```{r}
+#| eval: false
+#| echo: true
+
+
+cyclingstudy %>%
+ select(subject, 
+        timepoint,
+        height.T1) %>%
+ mutate(height.T1 = mean(height.T1, 
+                         na.rm = TRUE), 
+        .by = subject) %>%
+ filter(timepoint == "meso2") %>%
+ print()
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+
+::: {.fragment}
+
+```{r}
+#| eval: true
+#| echo: false
+
+
+cyclingstudy %>%
+ select(subject, 
+        timepoint,
+        height.T1) %>%
+ mutate(height.T1 = mean(height.T1, na.rm = TRUE), 
+        .by = subject) %>%
+        filter(timepoint == "meso2") %>%
+ print()
+
+```
+
+
+:::
+
+:::
+
+::::
+
+
+:::
+
+:::
+
+
+## How to create variables using `mutate()`?
+
+
+- Using mathematical operations `+`, `-`, `/`, `*`, `exp()`, `log()`
+- Conditional creation of values `if_else(CONDITION, IF, ELSE)`
+- ...
+
+
+## `filter()` variables based on their values
+
+- `filter()` uses logical statements to create a `TRUE`/`FALSE` vector. These are used to retain or filter away values.
+
+
+::: {.r-stack}
+
+
+::: {.fragment}
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+
+
+
+```{r}
+#| eval: false
+#| echo: true
+
+
+my_true_false <- cyclingstudy$group == "INCR" 
+my_true_false
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+
+::: {.fragment}
+
+```{r}
+#| eval: true
+#| echo: false
+
+
+my_true_false <- cyclingstudy$group == "INCR" 
+
+cat(my_true_false)
+```
+
+
+:::
+
+:::
+
+::::
+
+:::
+
+
+::: {.fragment}
+
+:::: {.columns}
+
+
+::: {.column width="48%"}
+
+
+
+```{r}
+#| eval: false
+#| echo: true
+
+
+cyclingstudy %>%
+        filter(my_true_false) %>%
+        select(subject, group) %>%
+        print()
+
+
+```
+
+:::
+
+::: {.column width="52%"}
+
+
+::: {.fragment}
+
+```{r}
+#| eval: true
+#| echo: false
+
+
+cyclingstudy %>%
+        filter(my_true_false) %>%
+        select(subject, group) %>%
+        print()
+```
+
+
+:::
+:::
+
+:::
+
+::::
+
+
+:::
+
+
+## Logical statements
+
+- To create a a vector of `TRUE` and `FALSE` for filter to work with we may use:
+
+|Operator | Interpretation |
+| --- | ---| 
+| `==` | equal to |
+| `!=` | not equal to |
+| `>` | greater than|
+| `<` | less that|
+| `>=`| greater than or equal to |
+| `<=` | less than or equal to |
+
+
+## Logical statement in a filter
+
+```{r}
+#| eval: false
+#| echo: true
+
+
+cyclingstudy %>%
+ filter(timepoint == "pre")        
+        
+
+cyclingstudy %>%
+ filter(timepoint != "pre")
+
+cyclingstudy %>%
+ filter(VO2.max > "5000")
+
+
+cyclingstudy %>%
+ filter(VO2.max >= "5000")
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

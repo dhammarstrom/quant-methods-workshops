@@ -1,0 +1,721 @@
+---
+title: "Lecture 3: Data visualization"
+author: ""
+format:  
+  revealjs:
+    theme: resources/presentation_theme.scss
+    transition: slide
+    slideNumber: true
+    incremental: true
+    highlightStyle: github
+    highlightLanguage: r
+    backgroundTransition: fade
+    code: true
+embed-resources: true
+title-slide-attributes:
+    data-background-image: "/img/02-datavis.png"
+    data-background-size: contain
+    data-background-opacity: "number"
+
+filters:
+  - webr
+bibliography: resources/bib-final.bib
+editor_options: 
+  chunk_output_type: console
+include-in-header:
+  - text: |
+      <style>
+      #title-slide .title {
+        font-size: 2.7em;
+        color: #FFFF00;
+      }
+      </style>
+---
+
+
+## Data visualization
+
+Why graphs?
+
+- *"... to help us perceive broad features of the data"*
+- *"... to let us ... see what else is there."*
+
+[@anscombe_1973]
+
+## Four data sets - Anscombe's quartet
+
+::: {style="font-size: 0.75em; text-align: center"}
+
+```{r}
+#| echo: false
+#| warning: false
+
+library(datasets); library(tidyverse); library(knitr); library(broom)
+
+data("anscombe")
+
+ anscombe %>%
+      mutate(obs = seq(1:11)) %>%
+        pivot_longer(names_to = "var", values_to = "values", 
+                     cols = x1:y4) %>%
+        separate(var, 
+           into = c("var", "pair"), 
+           sep = "(?<=[A-Za-z])(?=[0-9])"
+           ) %>%
+        group_by(pair, var) %>%
+         summarise(mean = mean(values), 
+                   sd = sd(values), 
+                   min = min(values), 
+                   max = max(values)) %>%
+         arrange(var) %>%
+         dplyr::select(Dataset = pair, Variable = var, Mean = mean, SD = sd, Min = min, Max = max) %>%
+         kable(caption = "Summary statistics for Anscombe's data", digits = 1)
+```
+
+:::
+
+[@anscombe_1973]
+
+## Anscombe's quartet (2)
+
+::: {style="font-size: 0.75em; text-align: center"}
+
+```{r}
+anscombe %>%
+      mutate(obs = seq(1:11)) %>%
+        pivot_longer(names_to = "var", values_to = "values", 
+                     cols = x1:y4) %>%
+        separate(var, 
+           into = c("var", "pair"), 
+           sep = "(?<=[A-Za-z])(?=[0-9])"
+           ) %>%
+            pivot_wider(names_from = var, values_from = values) %>%
+         group_by(pair) %>%
+         do(intercept = coef(lm(y ~ x, data = .))[1], 
+            slope = coef(lm(y ~ x, data = .))[2], 
+            cor = round(cor(.$x, .$y), 2)) %>%
+         unnest(cols = c(intercept, slope)) %>%
+         dplyr::select(Dataset = pair, Intercept = intercept, Slope = slope, Correlation = cor) %>%
+         kable(caption = "Regression coeficients for for Anscombe's data", digits = 2)
+
+```
+
+:::
+[@anscombe_1973]
+
+
+
+## A best guess of the data pattern
+
+```{r}
+#| echo: false
+
+
+data.frame(x = c(0, 20), 
+           y = c(0, 13)) %>%
+        ggplot(aes(x,y)) +
+        
+        geom_blank() +
+        
+        geom_abline(intercept = 3, slope = 0.5, color = "steelblue", 
+                    size = 2) +
+
+        geom_point(data = data.frame(x = 9, y = 7.5), 
+                   aes(), size = 3) + 
+        geom_errorbar(aes(y = 7.5,x = 9, ymin = 7.5 - 2, ymax = 7.5 + 2)) +
+        geom_errorbarh(aes(y = 7.5,x = 9, xmin = 9 - 3.3, xmax = 9 + 3.3))
+
+
+
+
+
+```
+
+
+
+## Plotting the actual data
+
+```{r}
+#| echo: false
+
+library(datasets); library(tidyverse)
+
+data("anscombe")
+
+anscombe %>%
+      mutate(obs = seq(1:11)) %>%
+        pivot_longer(names_to = "var", values_to = "values", 
+                     cols = x1:y4) %>%
+        separate(var, 
+           into = c("var", "pair"), 
+           sep = "(?<=[A-Za-z])(?=[0-9])"
+           ) %>%
+        pivot_wider(names_from = var, values_from = values) %>%
+        
+        group_by(pair) %>%
+        mutate(pair = paste0("Data set ", pair)) %>%
+        
+        
+        
+        ggplot(aes(x, y)) + geom_point(shape = 21, size = 3, fill = "steelblue") + 
+        
+        scale_y_continuous(limits = c(0, 13)) + 
+        scale_x_continuous(limits = c(0, 20)) +
+        
+        
+        facet_wrap(~ pair)
+
+
+
+
+
+```
+
+## Another example - The `Datasaurus`
+
+
+::: {style="font-size: 0.5em; text-align: center"}
+
+```{r}
+#| echo: false
+
+library(datasauRus)
+
+datasaurus_dozen %>% 
+    group_by(dataset) %>% 
+    summarize(
+      mean_x    = mean(x),
+      mean_y    = mean(y),
+      std_dev_x = sd(x),
+      std_dev_y = sd(y),
+      corr_x_y  = cor(x, y)
+    ) %>%
+        kable(col.names = c("Dataset", "Mean x", "Mean y", 
+                            "SD x", "SD y", "Correlation"), 
+              caption = "The Datasaurus datasets", digits = 2)
+
+
+
+
+
+```
+
+:::
+
+##
+
+```{r}
+#| echo: false
+#| fig-width: 5
+#| fig-height: 6
+#| fig-align: center
+
+  ggplot(datasaurus_dozen, aes(x = x, y = y, colour = dataset))+
+    geom_point()+
+    theme_void()+
+    theme(legend.position = "none")+
+    facet_wrap(~dataset, ncol = 3)
+
+
+```
+
+
+::: {style="font-size: 0.5em; text-valign: bottom"}
+Source: The [datasauRus package](https://cran.r-project.org/web/packages/datasauRus)
+:::
+
+## A system for creating graphs in R
+
+```{r}
+#| echo: false
+#| fig-width: 9
+#| fig-height: 3
+#| fig-cap: "Three layers of a graph, geometric objects, scales and coordinates and annotations of the plot"
+
+dat <- data.frame(x = c(2, 1, 4, 9), 
+                  y = c(4, 1, 15, 80), 
+                  shape = c("a", "a", "b", "b"))
+
+
+points <- dat %>%
+        ggplot(aes(x, y, shape = shape)) + 
+        geom_point(size = 4) + 
+        theme_void() + 
+        theme(legend.position = "none")
+
+scales <- dat %>%
+        ggplot(aes(x, y, shape = shape)) + 
+        geom_blank() + 
+        theme_bw() + 
+        theme(legend.position = "none")
+
+annot <- dat %>%
+        ggplot(aes(x, y, shape = shape)) + 
+        geom_blank() + 
+        theme_void() + 
+        theme(legend.position = "none") + 
+        labs(title = "Graph title", 
+             caption = "Graph caption")
+
+full <- dat %>%
+        ggplot(aes(x, y, shape = shape)) + 
+        geom_point(size = 4) + 
+        theme_bw() + 
+        theme(legend.position = "none")+ 
+        labs(title = "Graph title", 
+             caption = "Graph caption")
+
+
+library(cowplot)
+
+plot_grid(points, scales, annot, nrow = 1)
+
+
+```
+
+
+
+[@wickham_2010]
+
+
+## A system for creating graphs
+
+```{r}
+#| echo: false
+#| fig-width: 6
+#| fig-height: 6
+#| fig-cap: "Three layers of a graph put together, geometric objects, scales and coordinates and annotations of the plot"
+
+
+full
+
+```
+
+[@wickham_2010]
+
+## `ggplot2` - Grammar of graphics
+
+- `data` &rarr; The dataset containing variables to plot
+- `aes`thetics &rarr; Scales where the data are mapped
+- `geom`etries &rarr; Geometric representations of the data
+- `facet` &rarr; A part of the dataset
+- `stat`istical transformations &rarr; Summaries of data
+- `coord`inates &rarr; The coordinate space
+- `theme`s &rarr; Plot components not linked to data
+
+## Creating a plot
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+<small>
+
+```{r}
+#| eval: false
+#| echo: true
+
+library("palmerpenguins")
+
+data("penguins")
+
+penguins %>%
+        ggplot(aes(x = flipper_length_mm, 
+                   y = body_mass_g)) + 
+        geom_point()
+
+
+
+```
+
+</small>
+
+:::
+
+::: {.column width="50%"}
+```{r}
+#| eval: true
+#| fig-height: 9
+library("palmerpenguins")
+data("penguins")
+
+penguins %>%
+        ggplot(aes(flipper_length_mm, body_mass_g)) + 
+        geom_point(size = 4) +
+        theme(axis.title = element_text(size = 20), 
+              legend.title = element_text(size = 18), 
+              axis.text = element_text(size = 18), 
+              legend.text = element_text(size = 18)) 
+
+
+```
+
+
+:::
+
+::::
+
+## Mapping many variables
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+<small>
+
+```{r}
+#| eval: false
+#| echo: true
+
+library("palmerpenguins")
+
+data("penguins")
+
+penguins %>%
+        ggplot(aes(x = flipper_length_mm, 
+                   y = body_mass_g, 
+                   color = species, 
+                   shape = sex, 
+                   size = bill_length_mm)) + 
+        geom_point()
+
+
+
+```
+
+</small>
+
+:::
+
+::: {.column width="50%"}
+```{r}
+#| eval: true
+#| fig-height: 9
+library("palmerpenguins")
+data("penguins")
+
+penguins %>%
+           ggplot(aes(x = flipper_length_mm, 
+                   y = body_mass_g, 
+                   color = species, 
+                   shape = sex, 
+                   size = bill_length_mm)) + 
+        
+        geom_point() +
+        theme(axis.title = element_text(size = 20), 
+              legend.title = element_text(size = 18), 
+              axis.text = element_text(size = 18), 
+              legend.text = element_text(size = 18)) 
+
+
+```
+
+
+:::
+
+::::
+
+
+## Mapping many variables and adding facets
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+<small>
+
+```{r}
+#| eval: false
+#| echo: true
+
+library("palmerpenguins")
+
+data("penguins")
+
+penguins %>%
+        ggplot(aes(x = flipper_length_mm, 
+                   y = body_mass_g, 
+                   color = species, 
+                   shape = sex,
+                   size = bill_length_mm)) + 
+        geom_point() + 
+        facet_wrap(~ year)
+
+
+
+```
+
+</small>
+
+:::
+
+::: {.column width="50%"}
+```{r}
+#| eval: true
+#| fig-height: 9
+library("palmerpenguins")
+data("penguins")
+
+penguins %>%
+           ggplot(aes(x = flipper_length_mm, 
+                   y = body_mass_g, 
+                   color = species, 
+                   shape = sex, 
+                   size = bill_length_mm)) + 
+        
+        geom_point() +
+        theme(axis.title = element_text(size = 20), 
+              legend.title = element_text(size = 18), 
+              axis.text = element_text(size = 18), 
+              legend.text = element_text(size = 18)) +
+        facet_wrap(~ year)
+
+
+```
+
+
+:::
+
+::::
+
+
+## Changing non-data aspects of the plot (`theme()`)
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+<small>
+
+```{r}
+#| eval: false
+#| echo: true
+
+library("palmerpenguins")
+
+data("penguins")
+
+penguins %>%
+        ggplot(aes(x = flipper_length_mm, 
+                   y = body_mass_g, 
+                   color = species, 
+                   shape = sex, 
+                   size = bill_length_mm)) + 
+        geom_point() + 
+        
+        theme_dark()
+
+
+
+```
+
+</small>
+
+:::
+
+::: {.column width="50%"}
+```{r}
+#| eval: true
+#| fig-height: 9
+library("palmerpenguins")
+data("penguins")
+
+penguins %>%
+           ggplot(aes(x = flipper_length_mm, 
+                   y = body_mass_g, 
+                   color = species, 
+                   shape = sex, 
+                   size = bill_length_mm)) + 
+        
+        geom_point() +
+        
+        theme_dark() +
+        
+        theme(axis.title = element_text(size = 20), 
+              legend.title = element_text(size = 18), 
+              axis.text = element_text(size = 18), 
+              legend.text = element_text(size = 18))
+
+
+```
+
+
+:::
+
+::::
+
+
+## Common types of plots - Frequencies and densities 
+
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "A continuous variable displayed in a Histogram and Density plot"
+
+set.seed(1)
+library(patchwork)
+
+dat <- data.frame(category = c(rep("A", 5), rep("B", 25), rep("C", 125)),
+           value = c(rnorm(5, 25, 10), 
+                     rnorm(25, 25, 10), 
+                     rnorm(125, 25, 10)))
+
+
+a <- dat %>%
+        ggplot(aes(value)) + geom_histogram()
+
+b <-  dat %>% 
+        ggplot(aes(value)) + geom_density()
+
+
+a | b
+
+
+
+```
+
+
+## Common types of plots - Comparing categories
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "Comparison of a continous variable between categories using summary graphics"
+
+
+a <- dat %>%
+        ggplot(aes(category, value)) + geom_boxplot() + 
+        scale_y_continuous(limits = c(0, 50), expand = c(0, 0))
+
+b <- dat %>%
+        group_by(category) %>%
+        summarise(s = sd(value), 
+                  value = mean(value)) %>%
+        ggplot(aes(category, value)) + 
+        geom_errorbar(aes(ymin = value, ymax = value + s), width = 0.4) +
+        geom_bar(stat = "identity", fill = "steelblue", color = "black") +
+
+        scale_y_continuous(limits = c(0, 50), expand = c(0, 0))
+
+
+
+a | b
+
+```
+
+
+
+## Common types of plots - Comparing categories without hiding data
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "Comparison of a continous variable between categories using summary graphics"
+
+
+a <- dat %>%
+        group_by(category) %>%
+        summarise(s = sd(value), 
+                  value = mean(value)) %>%
+        ggplot(aes(category, value)) + 
+        geom_errorbar(aes(ymin = value, ymax = value + s), width = 0.4) +
+        geom_bar(stat = "identity", fill = "steelblue", color = "black") +
+
+        scale_y_continuous(limits = c(0, 50), expand = c(0, 0))
+
+
+
+b <- dat %>%
+        ggplot(aes(category, value)) + geom_point(position = position_jitter(width = 0.2)) + 
+        scale_y_continuous(limits = c(0, 50), expand = c(0, 0))
+
+
+
+a | b
+
+```
+
+
+
+## Common types of plots - Comparing categories highlighting differences
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "Comparison of a continous variable between categories using raw data and summaries"
+
+
+b <- dat %>%
+        ggplot(aes(category, value, fill = category)) + geom_point(position = position_jitter(width = 0.2), 
+                                                  alpha = 0.4, shape = 21) + 
+        scale_y_continuous(limits = c(0, 50), expand = c(0, 0)) +
+        stat_summary(fun=mean, geom="point", shape = 21, aes(fill = category), size = 3)
+
+
+
+b
+
+```
+
+## Common types of plots - Relationships between continuous variables
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-cap: "Highlighting relationships, raw data and summaries"
+
+set.seed(1)
+
+dat <- data.frame(x = rnorm(100, 50, 25)) %>%
+        mutate(y = 10 + 0.5 * x + rnorm(100, 0, 5), 
+               y2 = 10 + 0.5 * x + x^2 * 0.01 + rnorm(100, 0, 25))
+        
+
+a <- dat %>% 
+        ggplot(aes(x = x, y = y)) + geom_point() +
+        
+        scale_y_continuous(limits = c(-10, 90))
+
+
+b <- dat %>% 
+        ggplot(aes(x = x, y = y)) + geom_point() +
+        geom_smooth(method = "lm") +
+        
+        scale_y_continuous(limits = c(-10, 90))
+
+
+c <- dat %>% 
+        ggplot(aes(x = x, y = y2)) + geom_point() +
+        geom_smooth() 
+
+
+
+
+a | b | c
+
+
+
+```
+
+
+
+
+
+
+## References
+
+
+

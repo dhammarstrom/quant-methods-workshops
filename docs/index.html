@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Quantitative Methods - Workshop and Tutorials - Quantitative methods and statistics (In Sport and Exercise Science)</title>
+<title>Quantitative methods and statistics (In Sport and Exercise Science) – Quantitative Methods - Workshop and Tutorials</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -83,7 +103,7 @@ ul.task-list li input[type="checkbox"] {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -93,20 +113,12 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./workshops.html"> 
-<span class="menu-text">Workshops</span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./assignments.html"> 
-<span class="menu-text">Assignments/Arbeidskrav</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./feedback-assignments.html"> 
 <span class="menu-text">Feedback</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -159,7 +171,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="practical-information" class="level2">
 <h2 class="anchored" data-anchor-id="practical-information">Practical information</h2>
-<p>These notes were updated on 2024-08-14 and cover the course held during 2024 autumn semester. Contact <a href="mailto:daniel.hammarstrom@inn.no">Daniel Hammarström</a> if you have any questions regarding this content.</p>
+<p>These notes were updated on 2024-08-19 and cover the course held during 2024 autumn semester. Contact <a href="mailto:daniel.hammarstrom@inn.no">Daniel Hammarström</a> if you have any questions regarding this content.</p>
 <section id="learning-objectives" class="level3">
 <h3 class="anchored" data-anchor-id="learning-objectives">Learning objectives</h3>
 <p>Learning objectives can be read in Norwegian <a href="https://www.inn.no/content/view/full/163709/language/nor-NO">here</a>.</p>
@@ -178,11 +190,11 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="the-whole-course-in-one-table" class="level2">
 <h2 class="anchored" data-anchor-id="the-whole-course-in-one-table">The whole course in one table</h2>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Week</th>
-<th>Workshops</th>
+<th>Workshops/Activities</th>
 <th>Suggested reading</th>
 <th>Lectures</th>
 <th>Assignments</th>
@@ -191,87 +203,87 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td>34</td>
-<td><a href="./ws1-data-science-intro.html">Introduction to data science</a>, <a href="./ws2-installing-r.html">Starting up R</a>, <a href="./ws3-first-graph.html">Creating your first graph</a>, <a href="ws3b-quarto.qmd">The quarto publishing system</a></td>
-<td><a href="https://dhammarstrom.github.io/quant-methods/">Course notes ch.&nbsp;1-5</a>, <span class="citation" data-cites="RN2902">[@RN2902, Ch. 1-2]</span></td>
-<td>Intro to data science (<a href="">video</a>)(<a href="./lec1-intr-to-data-sci.html">slides</a>)</td>
+<td><a href="./ws1-data-science-intro.html">Introduction to data science</a>, <a href="./ws2-installing-r.html">Starting up R</a>, <a href="./ws3-first-graph.html">Creating your first graph</a>, <a href="./ws3b-quarto.html">The quarto publishing system</a></td>
+<td><a href="https://dhammarstrom.github.io/quant-methods/">Course notes ch.&nbsp;1-8</a>, <span class="citation" data-cites="RN2902">(<a href="#ref-RN2902" role="doc-biblioref">Spiegelhalter 2019</a>, Ch. 1-2)</span>, <span class="citation" data-cites="r4ds">(<a href="#ref-r4ds" role="doc-biblioref">Wickham and Grolemund 2017</a>, ch.&nbsp;1-8)</span></td>
+<td>Intro to data science (<a href="https://inn.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=a534874f-b06a-42d3-a49d-b1cc008dbd9a">video</a>)(<a href="./lec1-intr-to-data-sci.html">slides</a>), Software (<a href="./lec2-software.html">slides</a>)</td>
 <td></td>
 </tr>
 <tr class="even">
 <td>35</td>
-<td></td>
-<td></td>
+<td>Physiological testing, group work</td>
+<td><span class="citation" data-cites="RN130 RN1739">(<a href="#ref-RN130" role="doc-biblioref">Hopkins 2000</a>; <a href="#ref-RN1739" role="doc-biblioref">Halperin, Pyne, and Martin 2015</a>)</span>, <a href="https://dhammarstrom.github.io/quant-methods/">Course notes ch.&nbsp;9</a>, <span class="citation" data-cites="RN2511">(<a href="#ref-RN2511" role="doc-biblioref">Tanner and Gore 2012</a>)</span></td>
 <td></td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>36</td>
+<td>Molecular laboratory, extraction and analysis of DNA</td>
+<td><span class="citation" data-cites="delcoso2019">(<a href="#ref-delcoso2019" role="doc-biblioref">Del Coso et al. 2019</a>)</span>, <span class="citation" data-cites="sharplesMEP2022">(<a href="#ref-sharplesMEP2022" role="doc-biblioref">Sharples, Morton, and Wackerhage 2022</a>, ch.&nbsp;1-5)</span>,<a href="https://dhammarstrom.github.io/quant-methods/">Course notes ch.&nbsp;10</a></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><a href="TBA">Assignment: Extraction and Analysis of DNA</a></td>
 </tr>
 <tr class="even">
 <td>37</td>
+<td><a href="./ws4-data-wrangling-tables.html">Wrangling data, creating tables</a>, <a href="./ws4b-tables.html">Tables</a>, <a href="./ws5-writing-reports.html">Writing reports with git and github</a>, <a href="./ws6-summarising-data.html">Summarising data</a></td>
+<td><a href="https://dhammarstrom.github.io/quant-methods/">Course notes ch.&nbsp;1-8</a>,<span class="citation" data-cites="r4ds">(<a href="#ref-r4ds" role="doc-biblioref">Wickham and Grolemund 2017</a>, ch.&nbsp;1-8)</span></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><a href="./assignment-1.html">Assignment 1: Reliability and tools for reproducible data science</a></td>
 </tr>
 <tr class="odd">
 <td>38</td>
+<td><a href="./ws8-linear-model.html">The linear model</a>, <a href="./ws9-linear-model-categorical.html">The linear model, cont</a>, <a href="./ws10-curve-linear.html">Curve-linear relationships</a>, <a href="./ws12-writing-functions.html">R functions</a></td>
+<td><span class="citation" data-cites="RN2902">(<a href="#ref-RN2902" role="doc-biblioref">Spiegelhalter 2019</a>, Ch. 3-6)</span>,<a href="https://dhammarstrom.github.io/quant-methods/">Course notes ch.&nbsp;xx-xx</a></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><a href="./assignment-2.html">Assignment 2: Regression models, predicting from data</a></td>
 </tr>
 <tr class="even">
 <td>39</td>
+<td><a href="./ws13-p-values-simulation.html">P-values and confidence intervals</a>, <a href="./ws14-sampling-power-effects.html">Power and effect sizes</a></td>
+<td><span class="citation" data-cites="RN2902">(<a href="#ref-RN2902" role="doc-biblioref">Spiegelhalter 2019</a>, Ch. 3-6)</span></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><a href="./assignment-3.html">Assignment 3: Drawing inference from statistical models, and statistical power</a></td>
 </tr>
 <tr class="odd">
 <td>40</td>
+<td>Molecular laboratory, extraction and analysis of RNA</td>
+<td><span class="citation" data-cites="kuang2018">(<a href="#ref-kuang2018" role="doc-biblioref">Kuang et al. 2018</a>)</span></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><a href="TBA">Assignment: Extraction and Analysis of RNA</a></td>
 </tr>
 <tr class="even">
 <td>41</td>
+<td>Philosophy of science</td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>See Canvas</td>
+<td>See Canvas</td>
 </tr>
 <tr class="odd">
 <td>42</td>
+<td><a href="./ws15-study-design-1.html">Study designs</a>, <a href="./ws16-causality.html">Causality</a>, <a href="./ws17-simulations.html">Simulations for causal designs</a></td>
+<td><a href="https://dhammarstrom.github.io/quant-methods/">Course notes ch.&nbsp;xx-xx</a>, <span class="citation" data-cites="RN2902">(<a href="#ref-RN2902" role="doc-biblioref">Spiegelhalter 2019</a>, Ch. 7-14)</span></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><a href="./assignment-4.html">Assignment 4: Study designs</a></td>
 </tr>
 <tr class="even">
 <td>43</td>
-<td></td>
+<td><a href="./ws18-pre-post-designs.html">Analyzing studies, pre-post designs</a>, <a href="./ws19-mixed-models.html">Analyzing studies, mixed effects models</a></td>
 <td></td>
 <td></td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>44</td>
+<td>Molecular laboratory, extraction and analysis of Protein</td>
+<td><span class="citation" data-cites="bass2017">Andersen and Aagaard (<a href="#ref-andersen2000" role="doc-biblioref">2000</a>)</span></td>
 <td></td>
-<td></td>
-<td></td>
-<td></td>
+<td><a href="TBA">Assignment: Extraction and Analysis of Protein</a></td>
 </tr>
 <tr class="even">
 <td>45</td>
+<td><a href="./ws-case-studies.html">Case studies</a>, <a href="./ws20-reproducible-science.html">Putting it all together, reproducible science</a></td>
 <td></td>
 <td></td>
-<td></td>
-<td></td>
+<td><a href="assignment-5.html">Analyzing repeated measures experiments</a></td>
 </tr>
 <tr class="odd">
 <td>46</td>
@@ -289,7 +301,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="odd">
 <td>48</td>
-<td></td>
+<td><strong>EKSAMEN: Inspera Fredag 2024-11-22, kl. 14:00</strong></td>
 <td></td>
 <td></td>
 <td></td>
@@ -298,9 +310,41 @@ ul.task-list li input[type="checkbox"] {
 </table>
 
 
+
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-andersen2000" class="csl-entry" role="listitem">
+Andersen, J. L., and P. Aagaard. 2000. <span>“Myosin Heavy Chain <span>IIX</span> Overshoot in Human Skeletal Muscle.”</span> <em>Muscle Nerve</em> 23 (7): 1095–1104.
+</div>
+<div id="ref-bass2017" class="csl-entry" role="listitem">
+Bass, J. J., D. J. Wilkinson, D. Rankin, B. E. Phillips, N. J. Szewczyk, K. Smith, and P. J. Atherton. 2017. <span>“An Overview of Technical Considerations for <span>Western</span> Blotting Applications to Physiological Research.”</span> <em>Scand J Med Sci Sports</em> 27 (1): 4–25. <a href="https://doi.org/10.1111/sms.12702">https://doi.org/10.1111/sms.12702</a>.
+</div>
+<div id="ref-delcoso2019" class="csl-entry" role="listitem">
+Del Coso, J., D. Hiam, P. Houweling, L. M. Perez, N. Eynon, and A. Lucia. 2019. <span>“More Than a ’Speed Gene’: <span>ACTN3 R577X</span> Genotype, Trainability, Muscle Damage, and the Risk for Injuries.”</span> <em>Eur J Appl Physiol</em> 119 (1): 49–60. <a href="https://doi.org/10.1007/s00421-018-4010-0">https://doi.org/10.1007/s00421-018-4010-0</a>.
+</div>
+<div id="ref-RN1739" class="csl-entry" role="listitem">
+Halperin, I., D. B. Pyne, and D. T. Martin. 2015. <span>“Threats to Internal Validity in Exercise Science: A Review of Overlooked Confounding Variables.”</span> Journal Article. <em>Int J Sports Physiol Perform</em> 10 (7): 823–29. <a href="https://doi.org/10.1123/ijspp.2014-0566">https://doi.org/10.1123/ijspp.2014-0566</a>.
+</div>
+<div id="ref-RN130" class="csl-entry" role="listitem">
+Hopkins, W. G. 2000. <span>“Measures of Reliability in Sports Medicine and Science.”</span> Journal Article. <em>Sports Med</em> 30 (1): 1–15. <a href="http://www.ncbi.nlm.nih.gov/pubmed/10907753">http://www.ncbi.nlm.nih.gov/pubmed/10907753</a>.
+</div>
+<div id="ref-kuang2018" class="csl-entry" role="listitem">
+Kuang, J., X. Yan, A. J. Genders, C. Granata, and D. J. Bishop. 2018. <span>“An Overview of Technical Considerations When Using Quantitative Real-Time <span>PCR</span> Analysis of Gene Expression in Human Exercise Research.”</span> <em>PLoS One</em> 13 (5): e0196438. <a href="https://doi.org/10.1371/journal.pone.0196438">https://doi.org/10.1371/journal.pone.0196438</a>.
+</div>
+<div id="ref-sharplesMEP2022" class="csl-entry" role="listitem">
+Sharples, Adam P., James Morton, and Henning Wackerhage, eds. 2022. <em>Molecular Exercise Physiology: An Introduction</em>. Second edition. New York, NY: Routledge.
+</div>
+<div id="ref-RN2902" class="csl-entry" role="listitem">
+Spiegelhalter, D. J. 2019. <em>The Art of Statistics : How to Learn from Data</em>. Book. First US edition. New York: Basic Books.
+</div>
+<div id="ref-RN2511" class="csl-entry" role="listitem">
+Tanner, R. K., and C. J. Gore. 2012. <em>Physiological Tests for Elite Athletes 2nd Edition</em>. Book. Human Kinetics. <a href="https://books.google.no/books?id=0OPIiMks58MC">https://books.google.no/books?id=0OPIiMks58MC</a>.
+</div>
+<div id="ref-r4ds" class="csl-entry" role="listitem">
+Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. 1st ed. Paperback; O’Reilly Media. <a href="http://r4ds.had.co.nz/">http://r4ds.had.co.nz/</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -336,18 +380,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -379,15 +412,37 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/dhammarstrom\.github\.io\/quant-methods-workshops\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

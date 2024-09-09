@@ -11,10 +11,6 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: workshops.qmd
-        text: Workshops
-      - href: assignments.qmd
-        text: Assignments/Arbeidskrav
       - href: feedback-assignments.qmd
         text: Feedback
 

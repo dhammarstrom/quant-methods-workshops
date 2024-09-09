@@ -1,5 +1,6 @@
 ---
 title: "Quantitative methods and statistics (In Sport and Exercise Science)"
+bibliography: resources/bib-final.bib
 ---
 
 ## Introduction
@@ -35,23 +36,23 @@ See this [GitHub repository for an overview](https://github.com/dhammarstrom/idr
 
 ## The whole course in one table
 
-|Week |Workshops| Suggested reading|Lectures|Assignments|
+|Week |Workshops/Activities| Suggested reading|Lectures|Assignments|
 |---|---|---|---|---|
-| 34| [Introduction to data science](ws1-data-science-intro.qmd), [Starting up R](ws2-installing-r.qmd), [Creating your first graph](ws3-first-graph.qmd), [The quarto publishing system](ws3b-quarto.qmd)|[Course notes ch. 1-5](https://dhammarstrom.github.io/quant-methods/), [@RN2902, Ch. 1-2]|Intro to data science ([video]())([slides](lec1-intr-to-data-sci.qmd)) | |
-| 35| | | | |
-| 36| | | | |
-| 37| | | | |
-| 38| | | | |
-| 39| | | | |
-| 40| | | | |
-| 41| | | | |
-| 42| | | | |
-| 43| | | | |
-| 44| | | | |
-| 45| | | | |
+| 34| [Introduction to data science](ws1-data-science-intro.qmd), [Starting up R](ws2-installing-r.qmd), [Creating your first graph](ws3-first-graph.qmd), [The quarto publishing system](ws3b-quarto.qmd)|[Course notes ch. 1-8](https://dhammarstrom.github.io/quant-methods/), [@RN2902, Ch. 1-2], [@r4ds, ch. 1-8]|Intro to data science ([video](https://inn.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=a534874f-b06a-42d3-a49d-b1cc008dbd9a))([slides](lec1-intr-to-data-sci.qmd)), Software ([slides](lec2-software.qmd)) | |
+| 35|Physiological testing, group work|[@RN130; @RN1739], [Course notes ch. 9](https://dhammarstrom.github.io/quant-methods/), [@RN2511]| | |
+| 36|Molecular laboratory, extraction and analysis of DNA|[@delcoso2019], [@sharplesMEP2022, ch. 1-5],[Course notes ch. 10](https://dhammarstrom.github.io/quant-methods/) | |[Assignment: Extraction and Analysis of DNA](TBA) |
+| 37|[Wrangling data, creating tables](ws4-data-wrangling-tables.qmd), [Tables](ws4b-tables.qmd), [Writing reports with git and github](ws5-writing-reports.qmd), [Summarising data](ws6-summarising-data.qmd)|[Course notes ch. 1-8](https://dhammarstrom.github.io/quant-methods/),[@r4ds, ch. 1-8]| |[Assignment 1: Reliability and tools for reproducible data science](assignment-1.qmd)|
+| 38|[The linear model](ws8-linear-model.qmd), [The linear model, cont](ws9-linear-model-categorical.qmd), [Curve-linear relationships](ws10-curve-linear.qmd), [R functions](ws12-writing-functions.qmd)|[@RN2902, Ch. 3-6],[Course notes ch. xx-xx](https://dhammarstrom.github.io/quant-methods/) | |[Assignment 2:  Regression models, predicting from data](assignment-2.qmd)|
+| 39|[P-values and confidence intervals](ws13-p-values-simulation.qmd), [Power and effect sizes](ws14-sampling-power-effects.qmd) |[@RN2902, Ch. 3-6] | |[Assignment 3: Drawing inference from statistical models, and statistical power](assignment-3.qmd)|
+| 40|Molecular laboratory, extraction and analysis of RNA|[@kuang2018] | |[Assignment: Extraction and Analysis of RNA](TBA) |
+| 41|Philosophy of science | |See Canvas |See Canvas |
+| 42|[Study designs](ws15-study-design-1.qmd), [Causality](ws16-causality.qmd), [Simulations for causal designs](ws17-simulations.qmd)  |[Course notes ch. xx-xx](https://dhammarstrom.github.io/quant-methods/), [@RN2902, Ch. 7-14] | |[Assignment 4: Study designs](assignment-4.qmd) |
+| 43|[Analyzing studies, pre-post designs](ws18-pre-post-designs.qmd), [Analyzing studies, mixed effects models](ws19-mixed-models.qmd) | | | |
+| 44|Molecular laboratory, extraction and analysis of Protein|[@bass2017, @andersen2000] | |[Assignment: Extraction and Analysis of Protein](TBA) |
+| 45|[Case studies](ws-case-studies.qmd), [Putting it all together, reproducible science](ws20-reproducible-science.qmd) | | |[Analyzing repeated measures experiments](assignment-5.html) |
 | 46| | | | |
 | 47| | | | |
-| 48| | | | |
+| 48|**EKSAMEN: Inspera Fredag 2024-11-22, kl. 14:00** | | | |
 
 
 

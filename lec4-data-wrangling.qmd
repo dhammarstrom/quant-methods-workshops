@@ -1,0 +1,289 @@
+---
+title: "Lecture 4: Data wrangling"
+author: ""
+format:  
+  revealjs:
+    theme: resources/presentation_theme.scss
+    transition: slide
+    slideNumber: true
+    incremental: true
+    highlightStyle: github
+    highlightLanguage: r
+    backgroundTransition: fade
+    code: true
+embed-resources: true
+title-slide-attributes:
+    data-background-image: "/img/data-wrangling-illustration.png"
+    data-background-size: contain
+    data-background-opacity: "number"
+bibliography: resources/bib-final.bib
+editor_options: 
+  chunk_output_type: console
+include-in-header:
+  - text: |
+      <style>
+      #title-slide .title {
+        font-size: 2.7em;
+        color: #BC0DF2;
+      }
+      </style>
+---
+
+
+## Tidy tabular data
+
+* **Tidy** tabular data has
+    * One *variable* per column
+    * One *observation* per row
+    * One *value* per cell
+    
+## Data wrangling
+
+:::: {.columns}
+
+::: {.column width="60%"}
+<br>
+
+*"Data analysts typically spend the majority of their time in the process of data wrangling compared to the actual analysis of the data."*
+:::
+
+::: {.column width="40%"}
+![](./img/data-wrangling-illustration2.png)
+:::
+
+::::
+
+## 
+
+!["The Herd Quitter." Oil C.M. Russell, Montana Historical Society MacKay Collection [(source)](https://commons.wikimedia.org/wiki/File:HerdQuit.jpg)](./img/the-heard-quitter.jpg)
+
+## Data wrangling
+
+- Aggregation through summaries
+    - E.g. variables are summarized over multiple observations
+
+- Transformation of data
+    - E.g. new variables are created on existing data
+    
+- Arranging data
+    - E.g. sorting data based on values of observations
+    
+## `dplyr`
+
+- `dplyr` provides _**verbs**_ for wrangling data
+- "Translate thoughts to code"
+- Using the package we can 
+   - `mutate` (create) new variables
+   - `select` variables
+   - `filter` observations
+   - `summarise` values
+   - `arrange` observations or rows
+
+## R functions
+
+- Functions are created to perform a specific task
+- Functions exists in packages, or as user specified in your environment
+- Function (can) take arguments as input
+
+```{r}
+#| eval: false
+#| echo: true
+important_function(arg1 = "A", arg2 = "B") # <1>
+important_function("A", "B") # <2>
+important_function() # <3>
+```
+
+1. Arguments are named.
+2. Arguments are used by their position
+3. The function is used with default argument values
+
+
+
+## R functions in **tidyverse**
+
+- Functions that are specifically written for the tidyverse are "pipeable", the data argument has the first position, an example
+
+```{r}
+#| eval: false
+#| echo: true
+pipe_function(data = my.data, arg2 = "a", arg3 = "b", arg4 = "etc") # <1>
+pipe_function(my.data, arg2 = "a", arg3 = "b", arg4 = "etc") # <2>
+pipe_function(my.data) # <3>
+
+```
+
+1. All arguments are named.
+2. The first argument not names, specified by position
+3. The function is used with default argument values, except the first argument `data`
+
+
+## Data pipes
+
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+
+- Using pipes we can execute data verbs in sequence
+- The pipe operator passes the "left hand" data to the first position in the following function.
+
+```{r}
+#| eval: false
+#| echo: true
+
+# This is equivalent...
+data |>
+        pipe_function() 
+# ... to this
+pipe_function(data) 
+```
+
+
+
+:::
+
+::: {.column width="40%"}
+![](./img/pipe-illustration.png)
+:::
+
+::::
+
+## Why pipe?
+
+- Piping makes code more readable, an example
+
+```{r}
+#| echo: true
+#| eval: false
+
+# No pipes
+print(fun_c(fun_b(fun_a(data))))
+
+# Using pipes
+data |>
+        fun_a() |>
+        fun_b() |>
+        fun_c() |>
+        print()
+
+
+
+```
+
+
+
+
+
+
+## Pipes in R
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+- Two "pipe-operators" are available in R
+    - `|>` exists in base R
+    - `%>%` is loaded with `tidyverse` as part of the `magrittr` package
+
+
+:::
+
+::: {.column width="40%"}
+![](./img/pipe-illustration.png)
+:::
+
+::::
+
+## Two pipe operators in action
+
+
+
+
+:::: {.columns}
+
+
+
+::: {.column width="48%"}
+```{r}
+#| eval: false
+#| echo: true
+
+library(dplyr)
+
+data |>
+ filter(var1 > 10) |>
+ mutate(var3 = var1 + var2) |>
+ select(var1, varX) |>
+ print()
+```
+
+:::
+
+::: {.column width="52%"}
+
+```{r}
+#| eval: false
+#| echo: true
+
+library(dplyr)
+
+data %>% 
+ filter(var1 > 10) %>% 
+ mutate(var3 = var1 + var2) %>% 
+ select(var1, varX) %>% 
+ print()
+```
+
+
+:::
+
+::::
+
+## Data placeholder
+
+- If the data argument is not the first argument in a function, use a placeholder
+
+
+```{r}
+#| echo: true
+#| eval: false
+
+data %>% 
+        fun(argument)
+
+## Is equivalent to
+data %>% 
+        fun(., argument)
+
+
+## If the data is to be used in another place we need the placeholder
+data %>% 
+        fun(argument, data = .) 
+
+
+```
+
+
+## Data placeholder a realistic example, and saving output
+
+```{r}
+#| echo: true
+#| eval: false
+library(exscidata); library(tidyverse)
+model1 <- cyclingstudy %>% # <1> 
+        filter(timepoint == "pre") %>% # <2> 
+        mutate(VO2max.kg = VO2.max / weight.T1) %>% # <3> 
+        lm(tte ~ VO2max.kg, data = .)  # <4> 
+summary(model1) # <5> 
+
+
+```
+
+1. Specifying an object for saving output, taking the cycling study data
+2. Filter to keep only pre-intervention data
+3. Creating a new variable, VO<sub>2max</sub> relative to body mass
+4. Fitting a linear regression model explaining time to exhaustion (tte) with VO<sub>2max</sub>
+5. Showing the summary from the model
+
+# Thank you!

@@ -1,0 +1,299 @@
+---
+title: "Lecture 2: Software, software, software!"
+author: "Daniel Hammarström"
+format:  
+  revealjs:
+    theme: resources/presentation_theme.scss
+    transition: slide
+    slideNumber: true
+    incremental: true
+    highlightStyle: github
+    highlightLanguage: r
+    backgroundTransition: fade
+    code: true
+embed-resources: true
+filters:
+  - webr
+bibliography: resources/bib-final.bib
+editor_options: 
+  chunk_output_type: console
+---
+
+## R: A system for statistical computation and graphics
+
+
+::: {.columns}
+
+::: {.column width="40%"}
+
+![](https://cran.r-project.org/Rlogo.svg){width="70%"}
+:::
+
+::: {.column width="60%"}
+
+::: {.incremental}
+- A computer language (with runtime environment)
+- A graphics engine
+- Access to system functions and ability to run user-created R programs.
+:::
+
+:::
+:::
+
+## 
+
+::: {.columns}
+
+
+::: {.column width="50%"}
+
+![](img/lec2/rgui.png)
+
+:::
+
+::: {.column width="50%"}
+::: {.incremetal}
+- We can talk to R through the *console* by running *scripts* or individual commands.
+- The base installation of R comes with a *Graphical User Interface (GUI)*
+- We will use R in an *Integrated development environment*
+
+:::
+
+:::
+
+:::
+
+## 
+<center>
+![](img/lec2/mario1985.jpg){width="60%"}
+</center>
+
+## Basic R: A calculator
+
+```{webr-r}
+
+# Simple calculations
+
+2 + 2
+
+2 * 2
+
+2 ^ 2
+
+4 / 2
+
+4 - 2
+
+
+```
+## Basic R: Everything is an object
+
+
+::: {.columns}
+
+::: {.column width="40%"}
+
+```{webr-r}
+
+# Store an object in the environment
+
+my_object <- 2 + 2
+
+my_object
+```
+
+:::
+
+::: {.column width="60%"}
+- The *assignment operator* (`<-`) assigns values to objects
+- Assignment can be made with `<-`, `->` and `=`.
+- All assignments saves objects in your *environment*
+
+
+:::
+
+:::
+
+## Basic R: Data types
+
+
+::: {.columns}
+
+::: {.column width="40%"}
+
+```{webr-r}
+
+# Store objects of different types in the environment
+
+my_numerics <- c(2, 3, 4, 5)
+
+my_characters <- c("a", "b", "c", "d")
+
+my_logics <- c(TRUE, FALSE, TRUE, FALSE)
+
+```
+
+:::
+
+::: {.column width="60%"}
+- `c` is a function that combines values into vectors
+- Vectors can be of different types, numeric, character, logical...
+
+
+
+:::
+
+:::
+
+## Basic R: Vectorized operations
+
+
+::: {.columns}
+
+::: {.column width="40%"}
+
+```{webr-r}
+
+# Store vectors and combine them...
+
+my_numerics <- c(2, 3, 4, 5)
+
+my_number <- 4
+
+my_numerics2 <- c(1, 1, 5, 5)
+
+
+```
+
+:::
+
+::: {.column width="60%"}
+- Vectorized operations makes computations efficient
+- Single values are re-used
+
+
+
+:::
+
+:::
+
+
+## Basic R: Functions
+
+
+::: {.columns}
+
+::: {.column width="40%"}
+
+```{webr-r}
+
+# A function skeleton
+
+my_function <- function(arguments) {
+        
+       arguments
+        
+        return()
+        
+}
+
+my_function()
+
+
+```
+
+:::
+
+::: {.column width="60%"}
+- Functions are central to R programming
+- Functions are also objects
+
+:::
+
+:::
+
+## RStudio, an integrated development environment
+
+![](img/lec2/rstudio_blank.png)
+
+## RStudio, an integrated development environment
+
+::: {.columns}
+
+::: {.column width="40%"}
+![](https://www.rstudio.com/wp-content/uploads/2018/10/RStudio-Logo-Flat.png)
+:::
+
+::: {.column width="60%"}
+- We will communicate with R using RStudio
+- RStudio puts all part of your workflow in one environment (integrated development environment)
+- RStudio highlights code and finds errors and makes it easy to keep track of files
+
+:::
+
+
+:::
+
+
+## 
+
+```{r}
+#| fig-cap: "From [@peng2011]."
+
+library(tidyverse)
+source("resources/presentations_theme_r.R")
+
+
+
+fig_reprod <- ggplot(data = data.frame(x = c(0,1), y = c(0,1)), 
+       aes(x, y)) + schema_theme() +
+        
+        scale_y_continuous(limits = c(0,1)) + 
+        scale_x_continuous(limits = c(0,1)) +
+        
+        annotate("rect", xmin = 0.8, xmax = 1, ymin = 0.3, ymax = 0.7, fill = colors[5]) +
+        annotate("rect", xmin = 0.2, xmax = 0.79, ymin = 0.3, ymax = 0.7, fill = colors[5], alpha = 0.5) +
+        
+        annotate("rect", xmin = 0.2, xmax = 0.39, ymin = 0.4, ymax = 0.6, fill = colors[1], alpha = 0.9) +
+        annotate("rect", xmin = 0.39, xmax = 0.58, ymin = 0.4, ymax = 0.6, fill = colors[1], alpha = 0.5) +
+        annotate("rect", xmin = 0.58, xmax = 0.8, ymin = 0.4, ymax = 0.6, fill = colors[1], alpha = 0.1) +
+        
+        annotate("rect", xmin = 0.01, xmax = 0.19, ymin = 0.3, ymax = 0.7, fill = colors[1]) +
+        
+        annotate("text", x = 0.05, y = 0.5, label = "Publication\nonly", hjust = 0) + 
+        annotate("text", x = 0.22, y = 0.5, label = "Publication and \ncode", hjust = 0) + 
+        annotate("text", x = 0.4, y = 0.5, label = "Publication, \ncode and data", hjust = 0) + 
+        annotate("text", x = 0.59, y = 0.5, label = "Publication,\ndocumented and available \ncode and data", hjust = 0) +
+   annotate("text", x = 0.81, y = 0.5, label = "Independent\nreplication", hjust = 0) +
+        
+        annotate("label2", x = 0.1, y = 0.25, label = "Not reproducible", hjust = 0, fill = colors[1]) +
+
+        
+        annotate("label2", x = 0.9, y = 0.25, label = "Gold standard", hjust = 0, fill = "gold") +
+        annotate("Text", x = 0.5, y = 0.25, label = "Reproducibility spectrum", hjust = 0.5, color = colors[6], 
+                 size = 5) 
+
+
+
+fig_reprod     
+        
+
+
+```
+
+##
+
+![[@r4ds]](https://r4ds.hadley.nz/diagrams/data-science/whole-game.png)
+
+
+## Reproducible reporting software
+
+![](https://quarto.org/docs/get-started/hello/images/rstudio-qmd-how-it-works.png){#fig-quarto}
+
+
+
+
+
+
+## Thank you!
+
