@@ -38,10 +38,11 @@ The report should be uploaded to github with both a source file (`.Rmd` or `.qmd
 ### Follow this checklist on how to get started:
 
 - Create a [github account](http://www.github.com). All members of the group should have their own account.
-- Once signed in to github.com, create a new repository with an informative name. Make sure that the repository is public. One member of the group can create this repository in their own account.
 - Be sure to [download and install git](https://git-scm.com/downloads) on your computer. 
+- Once signed in to github.com, create a new repository with an informative name. Make sure that the repository is public. One member of the group can create this repository in their own account. Alternatively, fork the portfolio exam template repository [https://github.com/dhammarstrom/idr4000-student-assignments](https://github.com/dhammarstrom/idr4000-student-assignments). Rename the repository and hand in your version of the repository. 
+
 - Start up RStudio, start a new project, select the Version Control option and copy the address to the repository.
-- Add files to your project and upload to github. You need to add files, commit them and push using git. Use the command line in your terminal:
+- Add or modify files to your project and upload to github. You need to add files, commit them and push using git. Use the command line in your terminal:
 
 ```{r, eval = FALSE}
 git add -A

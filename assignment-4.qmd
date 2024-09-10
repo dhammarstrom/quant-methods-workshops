@@ -55,12 +55,4 @@ The second point is potentially different between your studies.
 
 ## Performing your literature review and writing the report
 
-Your report should not contain a detailed summary of all studies for all these questions, instead you should summarize your results. Highlight differences and similarities between studies. *As the main point of this review is study designs and statistical analyses, this should be your main focus*. When doing your literature review, it is however a good idea to structure it in a table with the above mentioned headings:
-
-- Question
-- Alternative
-- Logic
-- Methods 
-- Results
-- Inference
-
+Your report should not contain a detailed summary of all studies for all these questions, instead you should summarize your results. Highlight differences and similarities between studies. *As the main point of this review is study designs and statistical analyses, this should be your main focus*. 

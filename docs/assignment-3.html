@@ -193,10 +193,10 @@ window.Quarto = {
 <section id="assignment3" class="level1">
 <h1>Assignment 3: Drawing inference from statistical models, and statistical power</h1>
 <p>This assignment is set up as a statistical laboratory, we will perform simulations and your assignment is to interpret and explain the results. Create a report based on the code used in the lab and make sure you answer the specified questions (1-8). You can be as creative as you want and explore the results further.</p>
-<p>The report should be handed in on canvas as a link to github repository containing a reproducible <code>.Rmd</code> (or <code>qmd</code>) file.</p>
+<p>The report should be handed in on canvas as a link to github repository containing a reproducible <code>.qmd</code> (or <code>.rmd</code>) file.</p>
 <section id="setting-up-a-simulation" class="level2">
 <h2 class="anchored" data-anchor-id="setting-up-a-simulation">Setting up a simulation</h2>
-<p>In this assignment we will simulate a population of possible values, from this population we will draw random samples, calculate statistics and interpret them. The population of values can be regarded as the possible differences between two treatments in a cross-over study where participants have performed both treatments. The values in the population are calculate as <span class="math inline">\(Treatment - Control\)</span>.</p>
+<p>In this assignment we will simulate a population of possible values, from this population we will draw random samples, calculate statistics and interpret them. The population of values can be regarded as the possible differences between two treatments in a cross-over study where participants have performed both treatments. The values in the population are calculate as <span class="math inline">\(\text{Treatment} - \text{Control}\)</span>.</p>
 <p>We will simulate a population of one million numbers with a mean of 1.5 and a standard deviation of 3. We will make two different set of studies, one set with a sample size of 8 and one set with a sample size of 40. In order to be sure you replicate your results, include and run <code>set.seed()</code> before simulations in your final script.</p>
 <p>We will use the <code>lm</code> function to estimate the average value of the population. We do this in an “intercept-only” model. This model can be written as</p>
 <p><span class="math display">\[Y_i = \beta_0 + \epsilon_i\]</span></p>

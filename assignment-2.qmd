@@ -9,7 +9,7 @@ bibliography: resources/bib-final.bib
 
 There are several suggestions on how to best capture the physiological "essence" of the lactate threshold test [See @RN2511, Chapter 6]. A simple, and very common way to analyze the relationship between exercise intensity and blood lactate is to determine exercise intensity at fixed blood lactate values. This can be done by fitting a regression model that captures the relationship and then "inverse predict" the exercise intensity value. Machado [-Machado_2012] provides a more elaborate method for calculating the lactate threshold. An example of such calculation can be found in [the lecture notes, Linear and curve-linear relationships, and predictions](https://dhammarstrom.github.io/quant-methods).
 
-Your report should use data from the reliability project in the lab. Calculate at least two lactate thresholds (e.g. exercise intensity at 2 and 4 mmol L<sup>-1</sup>) and compare the reliability (typical error as a percentage of the mean) between the two thresholds. If you want to complicate things further you may want to implement other lactate threshold concepts [described in @RN2511; @RN228; Machado_2012] and the course notes.
+Your report could use data from the reliability project in the lab. Calculate at least two lactate thresholds (e.g. exercise intensity at 2 and 4 mmol L<sup>-1</sup>) and compare the reliability (typical error as a percentage of the mean) between the two thresholds. If you want to complicate things further you may want to implement other lactate threshold concepts [described in @RN2511; @RN228; Machado_2012] and the course notes.
 
 If you lack data, you could use data from the `exscidata` package or from a previous year (see this file [Lactate threshold tests](/data/reliability-old/laktatprofil-g2.xlsx)).
 
@@ -32,9 +32,9 @@ Special attention should be made concerning the *p*-value. How do you define and
 
 ## How to hand in the report
 
-The report is a group assignment, it is not to be included in the portfolio (mappeeksamen). However, it is required in order to pass the course (arbeidskrav).
+The report is a group assignment, it is a part of the portfolio (mappeeksamen).
 
-Create a new project on github and collaborate with your group there. The repository with all data and coded needed to create the report, and the report itself (in `html`, `docx` or `pdf` format) should be reported on canvas as a link to the repository. **Each member of the group hand in the link in canvas**. The repository should be the same for all group members.
+Create a new project on github and collaborate with your group there, alternatively, use the posrtfolio exam template. The repository with all data and coded needed to create the report, and the report itself (in `html`, `docx` or `pdf` format) should be reported on canvas as a link to the repository. **Each member of the group hand in the link in canvas**. The repository should be the same for all group members.
 
 
 

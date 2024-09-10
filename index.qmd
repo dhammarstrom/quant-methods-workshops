@@ -32,7 +32,17 @@ The course is based on several assignments. Some of these assignments are to be 
 
 Assignments that are due during the course (arbeidskrav) are expected to be further improved after feedback from fellow students and teachers before inclusion in your portfolio.
 
-See this [GitHub repository for an overview](https://github.com/dhammarstrom/idr4000-student-assignments/)
+You can use the same template for all assignments and further improve this to hand in as your portfolio exam. The template is a quarto book project with each part of the exam structured as a chapter, see and fork this [GitHub repository to get started](https://github.com/dhammarstrom/idr4000-student-assignments/).
+
+The portfolio exam should include: 
+
+- [Assignment 1: Reliability and tools for reproducible data science](assignment-1.qmd)
+- [Assignment 2: Regression models, predicting from data](assignment-2.qmd)
+- [Assignment 3: Drawing inference from statistical models, and statistical power](assignment-3.qmd)
+- [Assignment 4: Study designs](assignment-4.qmd)
+- [Assignment 5: Analyzing repeated measures experiments](assignment-5.qmd)
+- A selected report from the molecular laboratory
+- An assay on philosophy of science (See canvas during week 41)
 
 ## The whole course in one table
 
@@ -41,7 +51,7 @@ See this [GitHub repository for an overview](https://github.com/dhammarstrom/idr
 | 34| [Introduction to data science](ws1-data-science-intro.qmd), [Starting up R](ws2-installing-r.qmd), [Creating your first graph](ws3-first-graph.qmd), [The quarto publishing system](ws3b-quarto.qmd)|[Course notes ch. 1-8](https://dhammarstrom.github.io/quant-methods/), [@RN2902, Ch. 1-2], [@r4ds, ch. 1-8]|Intro to data science ([video](https://inn.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=a534874f-b06a-42d3-a49d-b1cc008dbd9a))([slides](lec1-intr-to-data-sci.qmd)), Software ([slides](lec2-software.qmd)) | |
 | 35|Physiological testing, group work|[@RN130; @RN1739], [Course notes ch. 9](https://dhammarstrom.github.io/quant-methods/), [@RN2511]| | |
 | 36|Molecular laboratory, extraction and analysis of DNA|[@delcoso2019], [@sharplesMEP2022, ch. 1-5],[Course notes ch. 10](https://dhammarstrom.github.io/quant-methods/) | |[Assignment: Extraction and Analysis of DNA](TBA) |
-| 37|[Wrangling data, creating tables](ws4-data-wrangling-tables.qmd), [Tables](ws4b-tables.qmd), [Writing reports with git and github](ws5-writing-reports.qmd), [Summarising data](ws6-summarising-data.qmd)|[Course notes ch. 1-8](https://dhammarstrom.github.io/quant-methods/),[@r4ds, ch. 1-8]| |[Assignment 1: Reliability and tools for reproducible data science](assignment-1.qmd)|
+| 37|[Wrangling data, creating tables](ws4-data-wrangling-tables.qmd), [Tables](ws4b-tables.qmd), [Writing reports with git and github](ws5-writing-reports.qmd), [Summarising data](ws6-summarising-data.qmd)|[Course notes ch. 1-8](https://dhammarstrom.github.io/quant-methods/),[@r4ds, ch. 1-8]|Data visualization ([video](https://inn.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=b5db763d-0713-4403-865b-b1e6011b6bda), [slides](lec3-visualization.qmd), Data wrangling ([video](https://inn.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=f549c4f0-81d9-4c7c-9830-b1e6011bcd98), [slides](lec4-data-wrangling.qmd))) |[Assignment 1: Reliability and tools for reproducible data science](assignment-1.qmd)|
 | 38|[The linear model](ws8-linear-model.qmd), [The linear model, cont](ws9-linear-model-categorical.qmd), [Curve-linear relationships](ws10-curve-linear.qmd), [R functions](ws12-writing-functions.qmd)|[@RN2902, Ch. 3-6],[Course notes ch. xx-xx](https://dhammarstrom.github.io/quant-methods/) | |[Assignment 2:  Regression models, predicting from data](assignment-2.qmd)|
 | 39|[P-values and confidence intervals](ws13-p-values-simulation.qmd), [Power and effect sizes](ws14-sampling-power-effects.qmd) |[@RN2902, Ch. 3-6] | |[Assignment 3: Drawing inference from statistical models, and statistical power](assignment-3.qmd)|
 | 40|Molecular laboratory, extraction and analysis of RNA|[@kuang2018] | |[Assignment: Extraction and Analysis of RNA](TBA) |
@@ -49,7 +59,7 @@ See this [GitHub repository for an overview](https://github.com/dhammarstrom/idr
 | 42|[Study designs](ws15-study-design-1.qmd), [Causality](ws16-causality.qmd), [Simulations for causal designs](ws17-simulations.qmd)  |[Course notes ch. xx-xx](https://dhammarstrom.github.io/quant-methods/), [@RN2902, Ch. 7-14] | |[Assignment 4: Study designs](assignment-4.qmd) |
 | 43|[Analyzing studies, pre-post designs](ws18-pre-post-designs.qmd), [Analyzing studies, mixed effects models](ws19-mixed-models.qmd) | | | |
 | 44|Molecular laboratory, extraction and analysis of Protein|[@bass2017, @andersen2000] | |[Assignment: Extraction and Analysis of Protein](TBA) |
-| 45|[Case studies](ws-case-studies.qmd), [Putting it all together, reproducible science](ws20-reproducible-science.qmd) | | |[Analyzing repeated measures experiments](assignment-5.html) |
+| 45|[Case studies](ws-case-studies.qmd), [Putting it all together, reproducible science](ws20-reproducible-science.qmd) | | |[Assignment 5: Analyzing repeated measures experiments](assignment-5.html) |
 | 46| | | | |
 | 47| | | | |
 | 48|**EKSAMEN: Inspera Fredag 2024-11-22, kl. 14:00** | | | |

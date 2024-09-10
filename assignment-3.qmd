@@ -7,11 +7,11 @@ bibliography: resources/bib-final.bib
 
 This assignment is set up as a statistical laboratory, we will perform simulations and your assignment is to interpret and explain the results. Create a report based on the code used in the lab and make sure you answer the specified questions (1-8). You can be as creative as you want and explore the results further. 
 
-The report should be handed in on canvas as a link to github repository containing a reproducible `.Rmd` (or `qmd`) file.
+The report should be handed in on canvas as a link to github repository containing a reproducible `.qmd` (or `.rmd`) file.
 
 ## Setting up a simulation
 
-In this assignment we will simulate a population of possible values, from this population we will draw random samples, calculate statistics and interpret them. The population of values can be regarded as the possible differences between two treatments in a cross-over study where participants have performed both treatments. The values in the population are calculate as $Treatment - Control$.
+In this assignment we will simulate a population of possible values, from this population we will draw random samples, calculate statistics and interpret them. The population of values can be regarded as the possible differences between two treatments in a cross-over study where participants have performed both treatments. The values in the population are calculate as $\text{Treatment} - \text{Control}$.
 
 We will simulate a population of one million numbers with a mean of 1.5 and a standard deviation of 3. We will make two different set of studies, one set with a sample size of 8 and one set with a sample size of 40. In order to be sure you replicate your results, include and run `set.seed()` before simulations in your final script.
 

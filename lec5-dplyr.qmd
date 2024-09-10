@@ -6,7 +6,6 @@ format:
     theme: resources/presentation_theme.scss
     transition: slide
     slideNumber: true
-    incremental: true
     highlightStyle: github
     highlightLanguage: r
     backgroundTransition: fade
@@ -526,10 +525,7 @@ cyclingstudy %>%
 
 ## Select columns based on variable type
 
-:::: {.columns}
 
-
-::: {.column width="48%"}
 
 
 
@@ -538,10 +534,6 @@ cyclingstudy %>%
 #| echo: true
 
 
-# Select character vectors
-cyclingstudy %>%
- select(where(is.character)) %>%
- print()
 
 # Select numeric vectors
 cyclingstudy %>%
@@ -550,9 +542,7 @@ cyclingstudy %>%
 
 ```
 
-:::
 
-::: {.column width="52%"}
 
 
 ::: {.fragment}
@@ -572,17 +562,11 @@ cyclingstudy %>%
 
 :::
 
-:::
 
-::::
 
 
 ## `mutate()` - Add or overwrite variables
 
-:::: {.columns}
-
-
-::: {.column width="48%"}
 
 
 
@@ -600,9 +584,6 @@ cyclingstudy %>%
 
 ```
 
-:::
-
-::: {.column width="52%"}
 
 
 ::: {.fragment}
@@ -625,14 +606,13 @@ cyclingstudy %>%
 
 :::
 
-:::
 
-::::
 
 
 ## `mutate()` - Add or overwrite variables using group-wise operations
 
 - `mutate()` can be used to do group-wise operations using `.by = var`
+- 
 
 
 
@@ -758,23 +738,14 @@ cyclingstudy %>%
 
 - Using mathematical operations `+`, `-`, `/`, `*`, `exp()`, `log()`
 - Conditional creation of values `if_else(CONDITION, IF, ELSE)`
+- Combine text variables (e.g. `paste(var1, var2)`)
 - ...
 
 
 ## `filter()` variables based on their values
 
-- `filter()` uses logical statements to create a `TRUE`/`FALSE` vector. These are used to retain or filter away values.
+- `filter()` uses logical statements to create a `TRUE`/`FALSE` vector. These are used to retain or filter away observations (rows).
 
-
-::: {.r-stack}
-
-
-::: {.fragment}
-
-:::: {.columns}
-
-
-::: {.column width="48%"}
 
 
 
@@ -788,13 +759,8 @@ my_true_false
 
 ```
 
-:::
-
-::: {.column width="52%"}
-
 
 ::: {.fragment}
-
 ```{r}
 #| eval: true
 #| echo: false
@@ -804,30 +770,21 @@ my_true_false <- cyclingstudy$group == "INCR"
 
 cat(my_true_false)
 ```
-
-
 :::
 
-:::
+## `filter()` variables based on their values
 
-::::
-
-:::
-
-
-::: {.fragment}
+- `filter()` uses logical statements to create a `TRUE`/`FALSE` vector. These are used to retain or filter away observations (rows).
 
 :::: {.columns}
 
-
-::: {.column width="48%"}
-
-
+::: {.column width="70%"}
 
 ```{r}
 #| eval: false
 #| echo: true
 
+my_true_false <- cyclingstudy$group == "INCR" 
 
 cyclingstudy %>%
         filter(my_true_false) %>%
@@ -836,35 +793,27 @@ cyclingstudy %>%
 
 
 ```
-
 :::
 
-::: {.column width="52%"}
-
+::: {.column width="30%"}
 
 ::: {.fragment}
-
 ```{r}
 #| eval: true
 #| echo: false
 
+my_true_false <- cyclingstudy$group == "INCR" 
 
 cyclingstudy %>%
         filter(my_true_false) %>%
         select(subject, group) %>%
         print()
+
 ```
 
-
 :::
 :::
-
-:::
-
 ::::
-
-
-:::
 
 
 ## Logical statements
@@ -891,13 +840,11 @@ cyclingstudy %>%
 cyclingstudy %>%
  filter(timepoint == "pre")        
         
-
 cyclingstudy %>%
  filter(timepoint != "pre")
 
 cyclingstudy %>%
  filter(VO2.max > "5000")
-
 
 cyclingstudy %>%
  filter(VO2.max >= "5000")
@@ -906,16 +853,235 @@ cyclingstudy %>%
 ```
 
 
+## Filtering multiple variables
+
+- To include multiple filtering steps we can use Boolean operators
+
+|Operator | Interpretation | Example |
+|---|---|---|
+|`X & Y` | X and Y|`height > 175 & weight > 90`|
+|`X &#124; Y` | X or Y |`height > 175 &#124; weight > 90`|
+|`X & !Y` | X and not Y |`height > 175 &! weight > 90`|
+|`xor(X,Y)`|X or Y, not X and Y |`xor(height > 175,  weight > 90)`|
+
+
+
+## Filtering multiple variables
+
+- In the `filter()` function, multiple statements separated by `,` is equivalent to using `&`
+
+
+```{r}
+#| eval: false
+#| echo: true
+
+# This..
+cyclingstudy %>%
+        filter(group == "INCR", 
+               VO2.max > 5000, 
+               cmj.max > 30) %>%
+        print()
+
+
+# is the same as
+cyclingstudy %>%
+        filter(group == "INCR" &
+               VO2.max > 5000 & 
+               cmj.max > 30) %>%
+        print()
 
 
 
 
 
 
+```
+
+
+## Sorting a data frame using `arrange()`
+
+- A data frame may be sorted using `arrange()`, all values and meta-data (grouping) will be preserved. 
+
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+
+```{r}
+#| echo: true
+#| eval: false
+
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, age) %>%
+        arrange(age)
+
+```
+
+:::
+
+::: {.column width="40%"}
+
+
+```{r}
+#| echo: false
+#| eval: true
+
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, age) %>%
+        arrange(age)
+
+```
+
+:::
+
+
+::::
 
 
 
 
+
+
+## Sorting a data frame using `arrange()`
+
+- To reverse to sorting from ascending to descending we use a helper function `desc()`
+- The helper function also works on factor and character variables
+
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+
+```{r}
+#| echo: true
+#| eval: false
+
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, age) %>%
+        arrange(desc(age))
+
+```
+
+:::
+
+::: {.column width="40%"}
+
+
+```{r}
+#| echo: false
+#| eval: true
+
+cyclingstudy %>%
+        filter(timepoint == "pre") %>%
+        select(subject, age) %>%
+        arrange(desc(age))
+```
+
+:::
+
+
+::::
+
+
+## Summarising data 
+
+
+- There are several ways to reduce a lot of values to a smaller set of values, sometimes these summarise can be useful!
+
+
+```{r}
+#| echo: false
+#| fig-height: 3
+
+set.seed(1)
+dat <- data.frame(x = c(rnorm(200, 25, 4), runif(50, 25, 75), rnorm(100, 50, 4))) 
+
+
+mean <- mean(dat$x)
+median <- median(dat$x)
+
+s <- sd(dat$x)
+
+mi <- min(dat$x)
+ma <- max(dat$x)
+
+q25 <- quantile(dat$x, 0.25)
+q75 <- quantile(dat$x, 0.75)
+
+
+dat %>%
+        ggplot(aes(x, y = 1)) + geom_jitter(shape = 21, size = 3, alpha = 0.4, fill = "orchid") + 
+         scale_y_continuous(limits = c(0.1, 2)) + 
+        
+        annotate("segment", x = mean, xend = mean, y = 1.65, yend = 1.85, color = "darkgreen") +
+        annotate("text", x = mean, label = "Mean", y = 1.95, hjust = 0, color = "darkgreen") +
+        
+        
+        annotate("segment", x = median, xend = median, y = 1.65, yend = 1.85, color = "steelblue") +
+        annotate("text", x = median, label = "Median", y = 1.95, hjust = 0, color = "steelblue") +
+        
+        
+        annotate("segment", x = mean, xend = mean + s, y = 0.5, yend = 0.5, color = "orange") +
+        annotate("text", x = mean + s + 0.1, y = 0.5, label = "Standard deviation", 
+                 hjust = 0,
+                 color = "orange") +
+        
+        annotate("segment", x = mi, xend = mi, y = 0.4, yend = 0.2, color = "red") +
+        annotate("text", x = mi , y = 0.1, label = "Minimum", 
+                 hjust = 0,
+                 color = "red") +
+        
+        annotate("segment", x = ma, xend = ma, y = 0.4, yend = 0.2, color = "red") +
+        annotate("text", x = ma , y = 0.1, label = "Maximum", 
+                 hjust = 1,
+                 color = "red") +
+        
+        annotate("segment", x = c(q25, q75), xend = c(q25, q75), y = 0.4, yend = 0.2, color = "purple") +
+        annotate("text", x = c(q25, q75) , y = 0.1, label = c("25th quantile", "75th quantile"), 
+                 hjust = c(0,1),
+                 color = "purple") +
+        
+        
+        
+        theme_classic() +
+        
+        theme(axis.text.y = element_blank(), 
+              axis.ticks.y = element_blank(), 
+              axis.line.y = element_blank(), 
+              axis.title.y = element_blank())
+
+```
+
+## Examples of summary functions in R
+
+|Function call |Statistic |
+| --- | --- |
+|`mean()` | Mean |
+|`median()`|Median |
+|`sd()` |Standard deviation |
+|`var()` |Variance |
+|`min()` |Minimum|
+|`max()` |Maximum|
+|`quantile()`|Quantile|
+
+
+## Summarise data using dplyr
+
+- To create a summary we can use the `summarise()` function.
+
+```{r}
+# Mean age in the study
+cyclingstudy %>%
+        summarise(mean_age = mean(age, na.rm = TRUE), 
+                  sd_age = sd(age, na.rm = TRUE))
+```
+
+- `na.rm = TRUE` tells the summary function to ignore missing values (`NA`).
 
 
 
