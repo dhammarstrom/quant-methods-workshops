@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -112,7 +146,13 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#summary-functions" id="toc-summary-functions" class="nav-link active" data-scroll-target="#summary-functions">“Summary” functions</a></li>
+  <li><a href="#summary-functions" id="toc-summary-functions" class="nav-link active" data-scroll-target="#summary-functions">“Summary” functions</a>
+  <ul class="collapse">
+  <li><a href="#missing-values" id="toc-missing-values" class="nav-link" data-scroll-target="#missing-values">Missing values</a></li>
+  <li><a href="#summaries-in-a-pipe" id="toc-summaries-in-a-pipe" class="nav-link" data-scroll-target="#summaries-in-a-pipe">Summaries in a pipe</a></li>
+  <li><a href="#summarise-the-number-of-observations-per-group" id="toc-summarise-the-number-of-observations-per-group" class="nav-link" data-scroll-target="#summarise-the-number-of-observations-per-group">Summarise the number of observations per group</a></li>
+  </ul></li>
+  <li><a href="#re-create-a-summary-table" id="toc-re-create-a-summary-table" class="nav-link" data-scroll-target="#re-create-a-summary-table">Re-create a summary table</a></li>
   </ul>
 </nav>
     </div>
@@ -140,7 +180,7 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="summary-functions" class="level2">
 <h2 class="anchored" data-anchor-id="summary-functions">“Summary” functions</h2>
-<p>R has several “summary” functions used to summarise data into some descriptive characteristic. These could describe the location (mean, median, mode), spread (variance, standard deviation) or rank (minimum, quantile, maximum).</p>
+<p>R has several “summary” functions used to summarise data into descriptive characteristics. These could describe the <em>location</em> (mean, median, mode), <em>spread</em> (variance, standard deviation) or <em>rank</em> (minimum, quantile, maximum).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -148,6 +188,178 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="ws6-summarising-data_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
+</div>
+</div>
+<p>A vector of numeric values (integers or decimal numbers) can be summarised using a set of functions in R that gives us several summary statistics.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set a seed for the random number generator</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate 10 random numbers from a normal distribution with mean 0 and SD 1</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate summary statistics</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(x)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">fivenum</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What statistics?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>What statistics do we get from <code>summary</code> and <code>fivenum</code>? Use the R help pages to explore this!</p>
+</div>
+</div>
+<p>The <code>summary</code> function gives us a multi-statistic summary of vectors (or data frames). We can get these numbers using built in functions also.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Function call</th>
+<th>Statistic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>mean()</code></td>
+<td>Mean</td>
+</tr>
+<tr class="even">
+<td><code>median()</code></td>
+<td>Median</td>
+</tr>
+<tr class="odd">
+<td><code>sd()</code></td>
+<td>Standard deviation</td>
+</tr>
+<tr class="even">
+<td><code>var()</code></td>
+<td>Variance</td>
+</tr>
+<tr class="odd">
+<td><code>min()</code></td>
+<td>Minimum</td>
+</tr>
+<tr class="even">
+<td><code>max()</code></td>
+<td>Maximum</td>
+</tr>
+<tr class="odd">
+<td><code>quantile()</code></td>
+<td>Quantile</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What statistics?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use summary functions above to calculate the summary statistics used in <code>summary(x)</code>.</p>
+</div>
+</div>
+<section id="missing-values" class="level3">
+<h3 class="anchored" data-anchor-id="missing-values">Missing values</h3>
+<p>A common feature of summary functions are the inability to calculate the mean from a set of values that contain missing values.</p>
+<p>To overcome this problem we need to add the <code>na.rm = TRUE</code> argument to our summary function.</p>
+<p>E.g.:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="cn">NA</span>) </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="summaries-in-a-pipe" class="level3">
+<h3 class="anchored" data-anchor-id="summaries-in-a-pipe">Summaries in a pipe</h3>
+<p><code>dplyr</code> has a function designed to create summaries. The <code>summarise</code> function will use “summary” functions that returns a single value to summarise the data set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(exscidata)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">m =</span> <span class="fu">mean</span>(VO2.max, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Summaries can be create on grouped data frames. A grouped data frame has additional meta data that groups the data set and many <code>dplyr</code> verbs will use the grouping when performing its actions (e.g.&nbsp;<code>mutate</code>, <code>filter</code>, <code>summarise</code>).</p>
+<p>To add a grouping to a data frame use <code>group_by(var)</code>, where <code>var</code> is a variable you would want to group on.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Construct a grouped data frame and summarise?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Complete the following code chunk</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>        <span class="co"># select participant, time-point and VO2max</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">select</span>(subject, timepoint, VO2.max) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Group the data frame by timepoint</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Summarise with mean and standard deviation for vo2max</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Print the results</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>        <span class="fu">print</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>Another alternative is to use the <code>.by</code> argument in a summary function. To group a summary by <code>timepoint</code> and <code>group</code> we would do</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">.by =</span> <span class="fu">c</span>(timepoint, group), </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">m =</span> <span class="fu">mean</span>(VO2.max, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">s =</span> <span class="fu">sd</span>(VO2.max, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Summarise data?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>What is the average (mean) <code>cmj.max</code> height in <code>group == "INCR"</code> at <code>timepoint == "meso2"</code>?</li>
+<li>What is the standard deviation of <code>VO2.max</code> at time-point <code>meso3</code>?</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="summarise-the-number-of-observations-per-group" class="level3">
+<h3 class="anchored" data-anchor-id="summarise-the-number-of-observations-per-group">Summarise the number of observations per group</h3>
+<p>The <code>n()</code> function can be used to give us the group size of a grouped summary.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cyclingstudy <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(), </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">.by =</span> <span class="fu">c</span>(group, timepoint))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="re-create-a-summary-table" class="level2">
+<h2 class="anchored" data-anchor-id="re-create-a-summary-table">Re-create a summary table</h2>
+<p>Work in pairs to reproduce this summary data frame:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 8
+  group m.age sd.age m.height sd.height m.weight sd.weight     n
+  &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+1 INCR   34.7   4.79     181       7.87     81.3      7.86     7
+2 DECR   38.4   5.59     178.      4.67     83.5     10.7      7
+3 MIX    37.8   7.94     179       5.90     75.3      9.87     6</code></pre>
 </div>
 </div>
 
