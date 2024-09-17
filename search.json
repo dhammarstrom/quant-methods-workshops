@@ -490,158 +490,193 @@
     "text": "Footnotes\n\n\nSee the list in the R Markdown Cookbook↩︎"
   },
   {
-    "objectID": "lec1-intr-to-data-sci.html#why-data-science-and-statistics",
-    "href": "lec1-intr-to-data-sci.html#why-data-science-and-statistics",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "Why data science and statistics?",
-    "text": "Why data science and statistics?\n\n\n\n\n\n\n\nFrom (Spiegelhalter 2019, 24)\n\n\n\n\n\n\n\n\n\n\n\nFrom (Spiegelhalter 2019, 24)\n\n\n\n\n\n\n\n\n\n\n\nFrom (Spiegelhalter 2019, 24)\n\n\n\n\n\n\n\n\n\n\n\nFrom (Spiegelhalter 2019, 24)\n\n\n\n\n\n\n\n\n\n\n\nFrom (Spiegelhalter 2019, 24)\n\n\n\n\n\n\n\n\n\n\n\nFrom (Spiegelhalter 2019, 24)\n\n\n\n\n\n\n\n\nWe will start by talking about the research process. One way to think about this process is to imagine it as a cycle.\nA definition of a problem comes from first finding something else.\nAfter defining the problem we could move on to plan how to resolve the problem (…).\nThe next step includes collecting, managing and cleaning data (…)\nThe analysis includes steps like summarising and visualizing data, creating models and examine hypotheses…\nIn the “conclusion” step we interpret and communicate what we have found, and the cycle moves on.."
+    "objectID": "lec6-tidyr.html#tidy-data",
+    "href": "lec6-tidyr.html#tidy-data",
+    "title": "Lecture 6: tidyr and pivoting",
+    "section": "Tidy data",
+    "text": "Tidy data\n\n“Like families, tidy datasets are all alike but every messy dataset is messy in its own way.”\n\nWickham (2014)"
   },
   {
-    "objectID": "lec1-intr-to-data-sci.html#why-data-science-and-statistics-1",
-    "href": "lec1-intr-to-data-sci.html#why-data-science-and-statistics-1",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "Why data science and statistics?",
-    "text": "Why data science and statistics?\nData literacy: “the ability to understand the principles behind learning from data, carry out basic data analyses, and critique the quality of claims made on the basis of data” (Spiegelhalter 2019)\n\n\nAll steps in the research cycle helps you develop data literacy.\nHow can we LEARN from data, how can we do analyses, and how may analyses fool us (…)"
+    "objectID": "lec6-tidyr.html#tidy-data-1",
+    "href": "lec6-tidyr.html#tidy-data-1",
+    "title": "Lecture 6: tidyr and pivoting",
+    "section": "Tidy data",
+    "text": "Tidy data\nIn a rectangular, tidy data set:\n\nEach variable forms a column\nEach observation forms a row"
   },
   {
-    "objectID": "lec1-intr-to-data-sci.html#transferable-skills",
-    "href": "lec1-intr-to-data-sci.html#transferable-skills",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "Transferable skills",
-    "text": "Transferable skills\n\nNew York Post\n\nData literacy is a transferable skill, we can apply what we learn here in many different contexts."
+    "objectID": "lec6-tidyr.html#example",
+    "href": "lec6-tidyr.html#example",
+    "title": "Lecture 6: tidyr and pivoting",
+    "section": "Example",
+    "text": "Example\n\n\n\nVariable 1\nVariable 2\nVariable 3\n\n\n\n\na\n1\nx\n\n\nb\n2\ny\n\n\nc\n3\nz"
   },
   {
-    "objectID": "lec1-intr-to-data-sci.html#replication",
-    "href": "lec1-intr-to-data-sci.html#replication",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "Replication",
-    "text": "Replication\n\nA lot of the scientific process is about confirming claims and refining what we think we know\nReplication is a key component in scientific research → can a phenomena be replicated in an independent setting?"
+    "objectID": "lec6-tidyr.html#why-tidy",
+    "href": "lec6-tidyr.html#why-tidy",
+    "title": "Lecture 6: tidyr and pivoting",
+    "section": "Why tidy?",
+    "text": "Why tidy?\n\nTidy data makes it easy to visualize, aggregate and model data."
   },
   {
-    "objectID": "lec1-intr-to-data-sci.html#replication-and-reproducibility",
-    "href": "lec1-intr-to-data-sci.html#replication-and-reproducibility",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "Replication and Reproducibility",
-    "text": "Replication and Reproducibility\n\nFrom (Peng 2011)."
+    "objectID": "lec6-tidyr.html#how-to-make-data-tidy",
+    "href": "lec6-tidyr.html#how-to-make-data-tidy",
+    "title": "Lecture 6: tidyr and pivoting",
+    "section": "How to make data tidy?",
+    "text": "How to make data tidy?\n\nlibrary(exscidata) \nlibrary(tidyverse)\n\ncyclingstudy %&gt;%\n        select(subject, timepoint, lac.125:lac.375) %&gt;%\n        print(n = 4)\n\n# A tibble: 80 × 11\n  subject timepoint lac.125 lac.175 lac.225 lac.250 lac.275 lac.300 lac.325\n    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;\n1       1 pre          1.5     1.86    2.38    3.54    6.21   NA      NA   \n2       2 pre          1.19    1.49    2.34    3.21    5.33   NA      NA   \n3       3 pre          1.17    1.52    1.22    1.54    2.04    3.32    4.72\n4       4 pre          0.88    0.99    2.13    3.25   NA       6.15   NA   \n# ℹ 76 more rows\n# ℹ 2 more variables: lac.350 &lt;dbl&gt;, lac.375 &lt;dbl&gt;"
   },
   {
-    "objectID": "lec1-intr-to-data-sci.html#replication-and-reproducibility-1",
-    "href": "lec1-intr-to-data-sci.html#replication-and-reproducibility-1",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "Replication and Reproducibility",
-    "text": "Replication and Reproducibility\n\nReplication: Confirming scientific claims with independent data.\n\nEssential for verifying research findings.\nChallenges with replication due to study size, cost, and urgency.\n\nReproducibility: Minimum standard in scientific research.\n\nIndependent researchers can replicate the results using the same data."
+    "objectID": "lec6-tidyr.html#pivoting-from-wide-to-long",
+    "href": "lec6-tidyr.html#pivoting-from-wide-to-long",
+    "title": "Lecture 6: tidyr and pivoting",
+    "section": "Pivoting, from wide to long",
+    "text": "Pivoting, from wide to long\n\n\n\ncyclingstudy %&gt;%\n  select(subject, timepoint, \n         lac.125:lac.375) %&gt;%\n  pivot_longer(\n          values_to = \"lactate\", \n          names_to = \"watt\", \n          cols = lac.125:lac.375) %&gt;%\n        print()\n\n\n\n\n# A tibble: 720 × 4\n   subject timepoint watt    lactate\n     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;\n 1       1 pre       lac.125    1.5 \n 2       1 pre       lac.175    1.86\n 3       1 pre       lac.225    2.38\n 4       1 pre       lac.250    3.54\n 5       1 pre       lac.275    6.21\n 6       1 pre       lac.300   NA   \n 7       1 pre       lac.325   NA   \n 8       1 pre       lac.350   NA   \n 9       1 pre       lac.375   NA   \n10       2 pre       lac.125    1.19\n# ℹ 710 more rows"
   },
   {
-    "objectID": "lec1-intr-to-data-sci.html#reproducibility",
-    "href": "lec1-intr-to-data-sci.html#reproducibility",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "Reproducibility",
-    "text": "Reproducibility\n\n\n\n\n\nUnfortunately, reproducibility is one of those things that are not a top priority in the scientific community…"
+    "objectID": "lec6-tidyr.html#pivoting-from-wide-to-long-1",
+    "href": "lec6-tidyr.html#pivoting-from-wide-to-long-1",
+    "title": "Lecture 6: tidyr and pivoting",
+    "section": "Pivoting, from wide to long",
+    "text": "Pivoting, from wide to long\n\n\n\ncyclingstudy %&gt;%\n  select(subject, timepoint, \n         lac.125:lac.375) %&gt;%\n  pivot_longer(\n          values_to = \"lactate\", \n          names_to = \"watt\", \n          cols = lac.125:lac.375, \n          names_prefix = \"lac.\") %&gt;%\n        print()\n\n\n\n\n# A tibble: 720 × 4\n   subject timepoint watt  lactate\n     &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;dbl&gt;\n 1       1 pre       125      1.5 \n 2       1 pre       175      1.86\n 3       1 pre       225      2.38\n 4       1 pre       250      3.54\n 5       1 pre       275      6.21\n 6       1 pre       300     NA   \n 7       1 pre       325     NA   \n 8       1 pre       350     NA   \n 9       1 pre       375     NA   \n10       2 pre       125      1.19\n# ℹ 710 more rows"
   },
   {
-    "objectID": "lec1-intr-to-data-sci.html#reproducibility-1",
-    "href": "lec1-intr-to-data-sci.html#reproducibility-1",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "Reproducibility",
-    "text": "Reproducibility\n\nAvailable data\nComputer code\nDocumentation\nData and code sharing methods\n\n(Peng 2011)"
+    "objectID": "lec6-tidyr.html#pivoting-from-wide-to-long-2",
+    "href": "lec6-tidyr.html#pivoting-from-wide-to-long-2",
+    "title": "Lecture 6: tidyr and pivoting",
+    "section": "Pivoting, from wide to long",
+    "text": "Pivoting, from wide to long\n\n\n\ncyclingstudy %&gt;%\n  select(subject, timepoint, \n         lac.125:lac.375) %&gt;%\n  pivot_longer(\n          values_to = \"lactate\", \n          names_to = \"watt\", \n          cols = lac.125:lac.375, \n          names_prefix = \"lac.\",\n          names_transform = list(watt = as.numeric)) %&gt;%\n        print()\n\n\n\n\n# A tibble: 720 × 4\n   subject timepoint  watt lactate\n     &lt;dbl&gt; &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;\n 1       1 pre         125    1.5 \n 2       1 pre         175    1.86\n 3       1 pre         225    2.38\n 4       1 pre         250    3.54\n 5       1 pre         275    6.21\n 6       1 pre         300   NA   \n 7       1 pre         325   NA   \n 8       1 pre         350   NA   \n 9       1 pre         375   NA   \n10       2 pre         125    1.19\n# ℹ 710 more rows"
   },
   {
-    "objectID": "lec1-intr-to-data-sci.html#how-to-enable-reproducibility",
-    "href": "lec1-intr-to-data-sci.html#how-to-enable-reproducibility",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "How to enable reproducibility",
-    "text": "How to enable reproducibility"
+    "objectID": "lec6-tidyr.html#from-long-to-wide",
+    "href": "lec6-tidyr.html#from-long-to-wide",
+    "title": "Lecture 6: tidyr and pivoting",
+    "section": "From long to wide",
+    "text": "From long to wide\n\n\n\n\n\ncyclingstudy %&gt;%\n  select(subject, timepoint, \n         VO2.max) %&gt;%\n  pivot_wider(names_from = timepoint, \n              values_from = VO2.max) %&gt;%\n        print()\n\n\n\n\ncyclingstudy %&gt;%\n  select(subject, timepoint, \n         VO2.max) %&gt;%\n  pivot_wider(names_from = timepoint, \n              values_from = VO2.max) %&gt;%\n        print()\n\n\n\n\n\n\n# A tibble: 20 × 5\n   subject   pre meso1 meso2 meso3\n     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n 1       1 5629   5209  5485  5330\n 2       2 4471   4792  4662  4886\n 3       3 5598.  5698  5920  6380\n 4       4 4944.  4782  4877  5171\n 5       5 5748   5694    NA    NA\n 6       6 4633.  4706  4695  4864\n 7       7 4250   4562  4165  4402\n 8       8 4760.  5093  5266  5172\n 9       9 4629   5247    NA  4864\n10      10 5226   5360  5666  5755\n11      11 4063   4149  3812  4077\n12      13 4981.  4874    NA  5045\n13      14 4444   4360  4316  4636\n14      15 4486   4780  4637  4991\n15      16 4604   4866  4904  5087\n16      17 4366   4520  4277  4483\n17      18 5135.  4802  5445  5315\n18      19 4018.  4019  3447  4404\n19      20 4739   5125  4899  5119\n20      21 4753.  4436  4228  4730"
   },
   {
-    "objectID": "lec1-intr-to-data-sci.html#what-is-a-computer-program",
-    "href": "lec1-intr-to-data-sci.html#what-is-a-computer-program",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "What is a computer program?",
-    "text": "What is a computer program?\n\n\n\n\n\n(By Wikimedia Foundation, CC BY-SA 3.0, Link)\n\n\n\n“A computer program is a sequence or set of instructions in a programming language for a computer to execute. It is one component of software, which also includes documentation and other intangible components.”"
+    "objectID": "lec6-tidyr.html#summary",
+    "href": "lec6-tidyr.html#summary",
+    "title": "Lecture 6: tidyr and pivoting",
+    "section": "Summary",
+    "text": "Summary\n\n\nTidy data makes e.g. visualisation, aggregation and modelling easy\nTo reshape data from a wide format to a (tidy) long format we use pivot_longer from the tidyr package\nThe reverse operation is performed with pivot_wider"
   },
   {
-    "objectID": "lec1-intr-to-data-sci.html#a-sequence-of-instructions",
-    "href": "lec1-intr-to-data-sci.html#a-sequence-of-instructions",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "A sequence of instructions",
-    "text": "A sequence of instructions\n\n\n\n\n\n\n\n\nCoko, a programmable crocodile"
+    "objectID": "lec6-tidyr.html#references",
+    "href": "lec6-tidyr.html#references",
+    "title": "Lecture 6: tidyr and pivoting",
+    "section": "References",
+    "text": "References\n\n\n\n\n\n\n\n\nWickham, Hadley. 2014. “Tidy Data.” Journal Article. Journal of Statistical Software; Vol 1, Issue 10 (2014). https://www.jstatsoft.org/v059/i10."
   },
   {
-    "objectID": "lec1-intr-to-data-sci.html#data-analysis-as-a-computer-program",
-    "href": "lec1-intr-to-data-sci.html#data-analysis-as-a-computer-program",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "Data analysis as a computer program",
-    "text": "Data analysis as a computer program\n\n(Wickham and Grolemund 2017)"
-  },
-  {
-    "objectID": "lec1-intr-to-data-sci.html#tools-in-data-science",
-    "href": "lec1-intr-to-data-sci.html#tools-in-data-science",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "Tools in Data Science",
-    "text": "Tools in Data Science\n\n\nMicrosoft Excel: Widely used, versatile tool.\nSPSS, Stata, Jamovi: Specialized software for statistical analysis.\nR: Preferred for reproducible data analysis:\n\nFree, open-source, and script-based.\nSteep learning curve."
-  },
-  {
-    "objectID": "lec1-intr-to-data-sci.html#research-software",
-    "href": "lec1-intr-to-data-sci.html#research-software",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "Research software",
-    "text": "Research software\n\n\n\n\nhttps://xkcd.com/2347/"
-  },
-  {
-    "objectID": "lec1-intr-to-data-sci.html#why-r",
-    "href": "lec1-intr-to-data-sci.html#why-r",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "Why R?",
-    "text": "Why R?\n\n\n\nR is a very powerful language (software ecosystem), we want to use it because it makes doing reproducible science easier."
-  },
-  {
-    "objectID": "lec1-intr-to-data-sci.html#why-r-1",
-    "href": "lec1-intr-to-data-sci.html#why-r-1",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "Why R?",
-    "text": "Why R?\n\n\n\nThere are other languages that offer similar capabilities, but R is developed with Data analysis in mind."
-  },
-  {
-    "objectID": "lec1-intr-to-data-sci.html#how-to-learn",
-    "href": "lec1-intr-to-data-sci.html#how-to-learn",
-    "title": "Lecture 1: Introduction to data science",
-    "section": "How to learn?",
-    "text": "How to learn?\n\n\nPractice by imitation\nUnderstand that there are multiple solutions to problems\nUse online resources like Stack Overflow and Google\nStay motivated by using what you learn on problems that interest you\nHave patience: “the capacity to accept or tolerate delay, problems, or suffering without becoming annoyed or anxious.”"
-  },
-  {
-    "objectID": "ws15-study-design-1.html",
-    "href": "ws15-study-design-1.html",
-    "title": "Study designs and statistical tests",
+    "objectID": "ws6-summarising-data.html",
+    "href": "ws6-summarising-data.html",
+    "title": "Summarising data",
     "section": "",
-    "text": "A regression model can be used to assess the differences between treatments in a randomized controlled trial (RCT). But what do we use as the dependent variable in this model?\nVickers (2001) identified and compared four scenarios that might be “tested” from a comparison of two groups:\n\n\nBaseline (\\(b\\)), follow-up (\\(f\\)) and group (\\(g\\)) can be analyzed as\n\nPost-scores only: \\(f\\) is compared between \\(g\\)\nPercentage change: \\(100 \\times \\frac{b-f}{b}\\) is compared between \\(g\\)\nChange: \\(b-f\\) compared between \\(g\\)\nAnalysis of co-variance (ANCOVA): \\(g\\) is compared as the effect in \\(f=\\beta_1 b + \\beta_2 g\\)\n\n\n\nThe choice of method should be based on its efficiency, the ability find true effects using a minimal number of participants.\nVickers show that the use of percentage change from baseline is inefficient (Vickers 2001) and could lead to violations of assumptions for statistical tests.\nThe ANCOVA model (see below) is the preferred model when model assumptions holds (Vickers 2001)\nWe will proceed with comparison of change-scores and later discuss ANCOVA."
+    "text": "R has several “summary” functions used to summarise data into descriptive characteristics. These could describe the location (mean, median, mode), spread (variance, standard deviation) or rank (minimum, quantile, maximum).\n\n\n\n\n\n\n\n\n\nA vector of numeric values (integers or decimal numbers) can be summarised using a set of functions in R that gives us several summary statistics.\n\n# Set a seed for the random number generator\nset.seed(1)\n# Generate 10 random numbers from a normal distribution with mean 0 and SD 1\nx &lt;- rnorm(10)\n# Calculate summary statistics\nsummary(x)\nfivenum(x)\n\n\n\n\n\n\n\nWhat statistics?\n\n\n\nWhat statistics do we get from summary and fivenum? Use the R help pages to explore this!\n\n\nThe summary function gives us a multi-statistic summary of vectors (or data frames). We can get these numbers using built in functions also.\n\n\n\nFunction call\nStatistic\n\n\n\n\nmean()\nMean\n\n\nmedian()\nMedian\n\n\nsd()\nStandard deviation\n\n\nvar()\nVariance\n\n\nmin()\nMinimum\n\n\nmax()\nMaximum\n\n\nquantile()\nQuantile\n\n\n\n\n\n\n\n\n\nWhat statistics?\n\n\n\nUse summary functions above to calculate the summary statistics used in summary(x).\n\n\n\n\nA common feature of summary functions are the inability to calculate the mean from a set of values that contain missing values.\nTo overcome this problem we need to add the na.rm = TRUE argument to our summary function.\nE.g.:\n\nx &lt;- c(rnorm(10), NA) \n\nmean(x)\n\nmean(x, na.rm = TRUE)\n\n\n\n\ndplyr has a function designed to create summaries. The summarise function will use “summary” functions that returns a single value to summarise the data set.\n\nlibrary(tidyverse)\nlibrary(exscidata)\n\n\ncyclingstudy %&gt;%\n        summarise(m = mean(VO2.max, na.rm = TRUE))\n\nSummaries can be create on grouped data frames. A grouped data frame has additional meta data that groups the data set and many dplyr verbs will use the grouping when performing its actions (e.g. mutate, filter, summarise).\nTo add a grouping to a data frame use group_by(var), where var is a variable you would want to group on.\n\n\n\n\n\n\nConstruct a grouped data frame and summarise?\n\n\n\nComplete the following code chunk\n\ncyclingstudy %&gt;%\n        # select participant, time-point and VO2max\n        select(subject, timepoint, VO2.max) %&gt;%\n        # Group the data frame by timepoint\n        \n        # Summarise with mean and standard deviation for vo2max\n        \n        # Print the results\n        print()\n\n\n\nAnother alternative is to use the .by argument in a summary function. To group a summary by timepoint and group we would do\n\ncyclingstudy %&gt;%\n        summarise(.by = c(timepoint, group), \n                  m = mean(VO2.max, na.rm = TRUE), \n                  s = sd(VO2.max, na.rm = TRUE))\n\n\n\n\n\n\n\nSummarise data?\n\n\n\n\nWhat is the average (mean) cmj.max height in group == \"INCR\" at timepoint == \"meso2\"?\nWhat is the standard deviation of VO2.max at time-point meso3?\n\n\n\n\n\n\nThe n() function can be used to give us the group size of a grouped summary.\n\ncyclingstudy %&gt;%\n        summarise(n = n(), \n                  .by = c(group, timepoint))"
   },
   {
-    "objectID": "ws15-study-design-1.html#what-to-analyze",
-    "href": "ws15-study-design-1.html#what-to-analyze",
-    "title": "Study designs and statistical tests",
+    "objectID": "ws6-summarising-data.html#summary-functions",
+    "href": "ws6-summarising-data.html#summary-functions",
+    "title": "Summarising data",
     "section": "",
-    "text": "A regression model can be used to assess the differences between treatments in a randomized controlled trial (RCT). But what do we use as the dependent variable in this model?\nVickers (2001) identified and compared four scenarios that might be “tested” from a comparison of two groups:\n\n\nBaseline (\\(b\\)), follow-up (\\(f\\)) and group (\\(g\\)) can be analyzed as\n\nPost-scores only: \\(f\\) is compared between \\(g\\)\nPercentage change: \\(100 \\times \\frac{b-f}{b}\\) is compared between \\(g\\)\nChange: \\(b-f\\) compared between \\(g\\)\nAnalysis of co-variance (ANCOVA): \\(g\\) is compared as the effect in \\(f=\\beta_1 b + \\beta_2 g\\)\n\n\n\nThe choice of method should be based on its efficiency, the ability find true effects using a minimal number of participants.\nVickers show that the use of percentage change from baseline is inefficient (Vickers 2001) and could lead to violations of assumptions for statistical tests.\nThe ANCOVA model (see below) is the preferred model when model assumptions holds (Vickers 2001)\nWe will proceed with comparison of change-scores and later discuss ANCOVA."
+    "text": "R has several “summary” functions used to summarise data into descriptive characteristics. These could describe the location (mean, median, mode), spread (variance, standard deviation) or rank (minimum, quantile, maximum).\n\n\n\n\n\n\n\n\n\nA vector of numeric values (integers or decimal numbers) can be summarised using a set of functions in R that gives us several summary statistics.\n\n# Set a seed for the random number generator\nset.seed(1)\n# Generate 10 random numbers from a normal distribution with mean 0 and SD 1\nx &lt;- rnorm(10)\n# Calculate summary statistics\nsummary(x)\nfivenum(x)\n\n\n\n\n\n\n\nWhat statistics?\n\n\n\nWhat statistics do we get from summary and fivenum? Use the R help pages to explore this!\n\n\nThe summary function gives us a multi-statistic summary of vectors (or data frames). We can get these numbers using built in functions also.\n\n\n\nFunction call\nStatistic\n\n\n\n\nmean()\nMean\n\n\nmedian()\nMedian\n\n\nsd()\nStandard deviation\n\n\nvar()\nVariance\n\n\nmin()\nMinimum\n\n\nmax()\nMaximum\n\n\nquantile()\nQuantile\n\n\n\n\n\n\n\n\n\nWhat statistics?\n\n\n\nUse summary functions above to calculate the summary statistics used in summary(x).\n\n\n\n\nA common feature of summary functions are the inability to calculate the mean from a set of values that contain missing values.\nTo overcome this problem we need to add the na.rm = TRUE argument to our summary function.\nE.g.:\n\nx &lt;- c(rnorm(10), NA) \n\nmean(x)\n\nmean(x, na.rm = TRUE)\n\n\n\n\ndplyr has a function designed to create summaries. The summarise function will use “summary” functions that returns a single value to summarise the data set.\n\nlibrary(tidyverse)\nlibrary(exscidata)\n\n\ncyclingstudy %&gt;%\n        summarise(m = mean(VO2.max, na.rm = TRUE))\n\nSummaries can be create on grouped data frames. A grouped data frame has additional meta data that groups the data set and many dplyr verbs will use the grouping when performing its actions (e.g. mutate, filter, summarise).\nTo add a grouping to a data frame use group_by(var), where var is a variable you would want to group on.\n\n\n\n\n\n\nConstruct a grouped data frame and summarise?\n\n\n\nComplete the following code chunk\n\ncyclingstudy %&gt;%\n        # select participant, time-point and VO2max\n        select(subject, timepoint, VO2.max) %&gt;%\n        # Group the data frame by timepoint\n        \n        # Summarise with mean and standard deviation for vo2max\n        \n        # Print the results\n        print()\n\n\n\nAnother alternative is to use the .by argument in a summary function. To group a summary by timepoint and group we would do\n\ncyclingstudy %&gt;%\n        summarise(.by = c(timepoint, group), \n                  m = mean(VO2.max, na.rm = TRUE), \n                  s = sd(VO2.max, na.rm = TRUE))\n\n\n\n\n\n\n\nSummarise data?\n\n\n\n\nWhat is the average (mean) cmj.max height in group == \"INCR\" at timepoint == \"meso2\"?\nWhat is the standard deviation of VO2.max at time-point meso3?\n\n\n\n\n\n\nThe n() function can be used to give us the group size of a grouped summary.\n\ncyclingstudy %&gt;%\n        summarise(n = n(), \n                  .by = c(group, timepoint))"
   },
   {
-    "objectID": "ws15-study-design-1.html#analysis-of-change-scores",
-    "href": "ws15-study-design-1.html#analysis-of-change-scores",
-    "title": "Study designs and statistical tests",
-    "section": "Analysis of change scores",
-    "text": "Analysis of change scores\n\n\nCode\nlibrary(tidyverse)\ndata.frame(Time = c(\"Pre\", \"Post\", \"Pre\", \"Post\"), outcome = c(0,1, 0,1)) %&gt;%\n        mutate(Time = factor(Time, levels = c(\"Pre\", \"Post\"))) %&gt;%\n        ggplot(aes(Time, outcome)) + \n        theme_classic() + \n        ylab(\"Outcome\") +\n        theme(axis.text.y = element_blank()) +\n        geom_segment(aes(x = Time, xend = 2, \n                         y = c(0.5,0.5, 0.5,1.5), \n                         yend = c(0.5,0.5, 1.5,1.5))) + \n        scale_y_continuous(limits = c(0,2)) + \n        annotate(geom = \"text\", x = 2.25, y = 1.5, label = \"Treatment\") +\n        annotate(geom = \"text\", x = 2.25, y = 0.5, label = \"Control\") \n\n\n\n\n\n\n\n\n\n\nIn a simple analysis of two parallel groups (experimental and control), the alternative hypothesis is that the two groups are different in terms of change scores.\n\n\\[ \\Delta Y_{Treatment}-\\Delta Y_{Control} \\neq 0 \\]\n\nThe null-hypothesis that we use in our statistical models is\n\n\\[ \\Delta Y_{Treatment}-\\Delta Y_{Control} = 0 \\]\n\nIn the simple case, this equals a t-test.\n\nt.test(delta ~ group, paired = FALSE)\n\nA similar scenario is a comparison between two treatments (A and B)\n\n\n\nCode\ndata.frame(Time = c(\"Pre\", \"Post\", \"Pre\", \"Post\"), outcome = c(0,1, 0,1)) %&gt;%\n        mutate(Time = factor(Time, levels = c(\"Pre\", \"Post\"))) %&gt;%\n        ggplot(aes(Time, outcome)) + \n        theme_classic() + \n        ylab(\"Outcome\") +\n        theme(axis.text.y = element_blank()) +\n        geom_segment(aes(x = Time, xend = 2, \n                         y = c(0.5,0.5, 0.5,1.5), \n                         yend = c(1.1,0.5, 1.5,1.5))) + \n        scale_y_continuous(limits = c(0,2)) + \n        annotate(geom = \"text\", x = 2.25, y = 1.5, label = \"A\") +\n        annotate(geom = \"text\", x = 2.25, y = 1.1, label = \"B\") \n\n\n\n\n\n\n\n\n\n\nThe null-hypothesis is that\n\n\\[ \\Delta Y_{A}-\\Delta Y_{B} = 0 \\]\n\nThe tenthirty data set has similar data as in the above scenario\nWe want to know what treatment to recommend for 1RM improvements.\n\n\n\nGroup work: Ten-thirty\n\nUsing the tenthirty data, use filter to keep time-point “pre” and “post” for the leg-press exercise.\nMake a plot of the averages of each group.\nCalculate a change score as post - pre.\nMake a plot of the average change score for each group.\nFit a regression model (change ~ group) and interpret the results.\n\n\n\nQuestions:\n\nConcerning the sample: Which group has the largest improvement i leg-press 1RM?\nConcerning inference to the population: Which method do you recommend for improving 1RM leg-press?\n\n\n\n\n\nPossible solutions\n## Create a plot of averages over time ----------- ##\n\nlibrary(tidyverse); library(exscidata)\ndata(\"tenthirty\")\n\n# Save the data set in a filtered version\ntenthirty_reduced &lt;- tenthirty %&gt;%\n  filter(time %in% c(\"pre\", \"post\"), \n         exercise == \"legpress\", \n         !is.na(load)) %&gt;% \n  print()\n\n# Create a line plot with one line per group\ntenthirty_reduced %&gt;%  \n  group_by(time, group) %&gt;%\n  summarise(m = mean(load)) %&gt;%\n  mutate(time = factor(time, levels = c(\"pre\", \"post\"))) %&gt;%\n  ggplot(aes(time, m, color = group, \n             group = group)) + geom_line()\n\n\n# Create a plot of average changes per group\ntenthirty_reduced %&gt;%\n  pivot_wider(names_from = time, \n              values_from = load) %&gt;%\n  mutate(change = post - pre) %&gt;%\n  group_by(group) %&gt;%\n  summarise(mean_change = mean(change, na.rm = TRUE)) %&gt;%\n  ggplot(aes(group, mean_change, fill = group)) + \n  geom_bar(stat = \"identity\", width = 0.3)\n  \n\n# Calculate the average change per group, and difference between groups\ntenthirty_reduced %&gt;%\n  pivot_wider(names_from = time, \n              values_from = load) %&gt;%\n  mutate(change = post - pre) %&gt;%\n  group_by(group) %&gt;%\n  summarise(mean_change = mean(change, na.rm = TRUE)) %&gt;%\n  pivot_wider(names_from = group, \n              values_from = mean_change) %&gt;%\n  mutate(diff = RM30 - RM10) %&gt;%\n  print()\n\n\n# Calculate change score and save new data set\ndat &lt;- tenthirty_reduced %&gt;%\n  pivot_wider(names_from = time, \n              values_from = load) %&gt;%\n  mutate(change = post - pre) %&gt;%\n  print()\n\n\n# Fit model with change scores explained by group\nm1 &lt;- lm(change ~ group, data = dat)\n\n# Get the model summary\nsummary(m1)\n\n\n\n\nCode\nlibrary(exscidata)\n\ntenthirty %&gt;%\n  filter(exercise == \"legpress\", \n         time %in% c(\"pre\", \"post\")) %&gt;%\n  mutate(time = factor(time, levels = c(\"pre\", \"post\"))) %&gt;%\n  group_by(time, group) %&gt;%\n  summarise(m = mean(load, na.rm = TRUE)) %&gt;%\n  ggplot(aes(time, m, group = group, color = group)) + geom_line() +\n  labs(x = \"Time\", y = \"Legpress performance (kg)\", color = \"Group\") +\n          theme_classic()\n\n\n\n\n\nGroup averages over time"
+    "objectID": "ws6-summarising-data.html#re-create-a-summary-table",
+    "href": "ws6-summarising-data.html#re-create-a-summary-table",
+    "title": "Summarising data",
+    "section": "Re-create a summary table",
+    "text": "Re-create a summary table\nWork in pairs to reproduce this summary data frame:\n\n\n# A tibble: 3 × 8\n  group m.age sd.age m.height sd.height m.weight sd.weight     n\n  &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;\n1 INCR   34.7   4.79     181       7.87     81.3      7.86     7\n2 DECR   38.4   5.59     178.      4.67     83.5     10.7      7\n3 MIX    37.8   7.94     179       5.90     75.3      9.87     6"
   },
   {
-    "objectID": "ws15-study-design-1.html#from-t-test-to-ancova",
-    "href": "ws15-study-design-1.html#from-t-test-to-ancova",
-    "title": "Study designs and statistical tests",
-    "section": "From t-test to ANCOVA",
-    "text": "From t-test to ANCOVA\n\nAbove we used the simple comparison of change score. A more appropriate model to study outcomes of a RCT is an analysis of co-variance (ANCOVA)\nIn an ANCOVA, change-scores or post values are compared and the estimates tells you the adjusted differences between groups if they had the exact same starting point.\nThe ANCOVA model can be written as\n\n\\[f =\\beta_0 + \\beta_1\\times b + \\beta_2\\times g \\] where \\(f\\) is the follow-up score, \\(b\\) is the baseline and \\(g\\) is the group.\n\nIn R code, this corresponds to\n\npost ~ pre + group\n\n\nGroup work: Ten-thirty ANCOVA\n\nFit an ANCOVA model with change scores as the dependent variable (m1)\nFit an ANCOVA model with the post values as the dependent variable (m2)\nPre-training values and group should be covariates in both models.\nUse the aov command to fit an ANOVA model (m3)\nEvaluate models using summary and anova\n\n\n\nQuestions\n\nConcerning inference to the population: Which method do you recommend for improving 1RM leg-press?\nIn what ways are the models different?\nWhat is happening with the aov command, how is it different to m2?\n\n\n\n\n\nPossible solutions\n# Create a data set with change\n\ndat &lt;- tenthirty %&gt;%\n  filter(exercise == \"legpress\", \n         time %in% c(\"pre\", \"post\")) %&gt;%\n  pivot_wider(names_from = time, \n              values_from = load) %&gt;%\n  mutate(change = post - pre, \n         pre = pre - mean(pre)) %&gt;% # Mean center pre-values\n  print()\n\n\n# Fit models \n\nm1 &lt;- lm(post ~ pre + group, data = dat)\n\nm2 &lt;- lm(change ~ pre + group, data = dat)\n\n\nsummary(m1)\nsummary(m2)\n\n\nm3 &lt;- aov(post ~ pre + group, data = dat)\n\nsummary(m3)\nanova(m1)"
+    "objectID": "lec4-data-wrangling.html#tidy-tabular-data",
+    "href": "lec4-data-wrangling.html#tidy-tabular-data",
+    "title": "Lecture 4: Data wrangling",
+    "section": "Tidy tabular data",
+    "text": "Tidy tabular data\n\nTidy tabular data has\n\nOne variable per column\nOne observation per row\nOne value per cell"
   },
   {
-    "objectID": "ws15-study-design-1.html#understanding-the-ancova-model",
-    "href": "ws15-study-design-1.html#understanding-the-ancova-model",
-    "title": "Study designs and statistical tests",
-    "section": "Understanding the ANCOVA model",
-    "text": "Understanding the ANCOVA model\n\nThe ANCOVA estimates the difference between e.g. post scores given a (estimated) association between pre- and post-scores.\nThis can be visualized in a simple plot where the difference in the paralell lines are the treatment effect\n\n\n\nCode\nm1 &lt;- tenthirty %&gt;%\n  filter(exercise == \"legpress\", \n         time %in% c(\"pre\", \"post\")) %&gt;%\n  pivot_wider(names_from = \"time\", values_from = \"load\") %&gt;%\n  mutate(change = post - pre) %&gt;%\n  lm(post ~ pre + group, data = .) \n\n\ntenthirty %&gt;%\n  filter(exercise == \"legpress\", \n         time %in% c(\"pre\", \"post\")) %&gt;%\n    pivot_wider(names_from = \"time\", values_from = \"load\") %&gt;%\n  ggplot(aes(pre, post, color = group)) + geom_point() + \n  scale_color_manual(values = c(\"red\", \"blue\")) +\n  geom_abline(intercept = coef(m1)[1], slope = coef(m1)[2], color = \"red\")  + \n  geom_abline(intercept = coef(m1)[1] + coef(m1)[3], slope = coef(m1)[2], color = \"blue\") + \n  labs(title = \"Estimates from an ANCOVA model\", \n       subtitle = \"post ~ pre + group\", \n       color = \"Group\") + theme_classic()\n\n\n\n\n\n\n\n\n\n\nBy correcting for baseline values we can expect different estimates for each group, notice also that the standard errors are changing\n\n\n\nCode\nlibrary(emmeans)\n\nm0 &lt;- tenthirty %&gt;%\n  filter(exercise == \"legpress\", \n         time %in% c(\"pre\", \"post\")) %&gt;%\n  pivot_wider(names_from = \"time\", values_from = \"load\") %&gt;%\n  mutate(change = post - pre) %&gt;%\n  lm(post ~ group, data = .) \n\nm2 &lt;- tenthirty %&gt;%\n  filter(exercise == \"legpress\", \n         time %in% c(\"pre\", \"post\")) %&gt;%\n  pivot_wider(names_from = \"time\", values_from = \"load\") %&gt;%\n  mutate(change = post - pre) %&gt;%\n  lm(change ~ group, data = .) \n\n\n\n\n\nbind_rows(data.frame(emmeans(m0, specs = ~ group)) %&gt;%\n        mutate(Model = \"Post only\"), \n        data.frame(emmeans(m1, specs = ~ group)) %&gt;%\n        mutate(Model = \"ANCOVA\")) %&gt;%\n        ggplot(aes(group, emmean, fill = Model)) + \n        geom_errorbar(aes(ymin = emmean, ymax = emmean + SE), \n                      position = position_dodge(), width = 0.5) +\n        geom_bar(stat = \"identity\", position = position_dodge(), \n                 width = 0.5)  \n\n\n\n\n\nGroup estimates from two different models, error bars are standard errors (SE)\n\n\n\n\n\nCalculating the differences between groups we can also see differences, here we also incorporate the change score model.\n\n\n\nCode\nbind_rows(\ndata.frame(confint(contrast(emmeans(m0, specs = ~ group)), adjust = \"none\")) %&gt;%\n        mutate(Model = \"Post only\"),\ndata.frame(confint(contrast(emmeans(m1, specs = ~ group)), adjust = \"none\")) %&gt;%\n        mutate(Model = \"ANCOVA\"),\ndata.frame(confint(contrast(emmeans(m2, specs = ~ group)), adjust = \"none\")) %&gt;%\n        mutate(Model = \"Change score\")) %&gt;%\n        filter(contrast == \"RM10 effect\") %&gt;%\n        ggplot(aes(Model, estimate, fill = Model)) + \n        geom_errorbar(aes(ymin = lower.CL, ymax = upper.CL), width = 0.2) +\n        geom_point(shape = 21, size = 3) + \n        labs(y = \"Estimated mean difference between groups\") + \n        geom_hline(yintercept = 0, lty = 2)\n\n\n\n\n\nGroup estimates from two different models, error bars are 95% confidence intervals.\n\n\n\n\n\nThe change-score model will have lower power compared to the ANCOVA model when the correlation between pre- and post-scores decrease (Vickers 2001)"
+    "objectID": "lec4-data-wrangling.html#data-wrangling",
+    "href": "lec4-data-wrangling.html#data-wrangling",
+    "title": "Lecture 4: Data wrangling",
+    "section": "Data wrangling",
+    "text": "Data wrangling\n\n\n\n“Data analysts typically spend the majority of their time in the process of data wrangling compared to the actual analysis of the data.”"
+  },
+  {
+    "objectID": "lec4-data-wrangling.html#section",
+    "href": "lec4-data-wrangling.html#section",
+    "title": "Lecture 4: Data wrangling",
+    "section": "",
+    "text": "“The Herd Quitter.” Oil C.M. Russell, Montana Historical Society MacKay Collection (source)"
+  },
+  {
+    "objectID": "lec4-data-wrangling.html#data-wrangling-1",
+    "href": "lec4-data-wrangling.html#data-wrangling-1",
+    "title": "Lecture 4: Data wrangling",
+    "section": "Data wrangling",
+    "text": "Data wrangling\n\nAggregation through summaries\n\nE.g. variables are summarized over multiple observations\n\nTransformation of data\n\nE.g. new variables are created on existing data\n\nArranging data\n\nE.g. sorting data based on values of observations"
+  },
+  {
+    "objectID": "lec4-data-wrangling.html#dplyr",
+    "href": "lec4-data-wrangling.html#dplyr",
+    "title": "Lecture 4: Data wrangling",
+    "section": "dplyr",
+    "text": "dplyr\n\ndplyr provides verbs for wrangling data\n“Translate thoughts to code”\nUsing the package we can\n\nmutate (create) new variables\nselect variables\nfilter observations\nsummarise values\narrange observations or rows"
+  },
+  {
+    "objectID": "lec4-data-wrangling.html#r-functions",
+    "href": "lec4-data-wrangling.html#r-functions",
+    "title": "Lecture 4: Data wrangling",
+    "section": "R functions",
+    "text": "R functions\n\nFunctions are created to perform a specific task\nFunctions exists in packages, or as user specified in your environment\nFunction (can) take arguments as input\n\n\n1important_function(arg1 = \"A\", arg2 = \"B\")\n2important_function(\"A\", \"B\")\n3important_function()\n\n\n1\n\nArguments are named.\n\n2\n\nArguments are used by their position\n\n3\n\nThe function is used with default argument values"
+  },
+  {
+    "objectID": "lec4-data-wrangling.html#r-functions-in-tidyverse",
+    "href": "lec4-data-wrangling.html#r-functions-in-tidyverse",
+    "title": "Lecture 4: Data wrangling",
+    "section": "R functions in tidyverse",
+    "text": "R functions in tidyverse\n\nFunctions that are specifically written for the tidyverse are “pipeable”, the data argument has the first position, an example\n\n\n1pipe_function(data = my.data, arg2 = \"a\", arg3 = \"b\", arg4 = \"etc\")\n2pipe_function(my.data, arg2 = \"a\", arg3 = \"b\", arg4 = \"etc\")\n3pipe_function(my.data)\n\n\n1\n\nAll arguments are named.\n\n2\n\nThe first argument not names, specified by position\n\n3\n\nThe function is used with default argument values, except the first argument data"
+  },
+  {
+    "objectID": "lec4-data-wrangling.html#data-pipes",
+    "href": "lec4-data-wrangling.html#data-pipes",
+    "title": "Lecture 4: Data wrangling",
+    "section": "Data pipes",
+    "text": "Data pipes\n\n\n\nUsing pipes we can execute data verbs in sequence\nThe pipe operator passes the “left hand” data to the first position in the following function.\n\n\n# This is equivalent...\ndata |&gt;\n        pipe_function() \n# ... to this\npipe_function(data)"
+  },
+  {
+    "objectID": "lec4-data-wrangling.html#why-pipe",
+    "href": "lec4-data-wrangling.html#why-pipe",
+    "title": "Lecture 4: Data wrangling",
+    "section": "Why pipe?",
+    "text": "Why pipe?\n\nPiping makes code more readable, an example\n\n\n# No pipes\nprint(fun_c(fun_b(fun_a(data))))\n\n# Using pipes\ndata |&gt;\n        fun_a() |&gt;\n        fun_b() |&gt;\n        fun_c() |&gt;\n        print()"
+  },
+  {
+    "objectID": "lec4-data-wrangling.html#pipes-in-r",
+    "href": "lec4-data-wrangling.html#pipes-in-r",
+    "title": "Lecture 4: Data wrangling",
+    "section": "Pipes in R",
+    "text": "Pipes in R\n\n\n\nTwo “pipe-operators” are available in R\n\n|&gt; exists in base R\n%&gt;% is loaded with tidyverse as part of the magrittr package"
+  },
+  {
+    "objectID": "lec4-data-wrangling.html#two-pipe-operators-in-action",
+    "href": "lec4-data-wrangling.html#two-pipe-operators-in-action",
+    "title": "Lecture 4: Data wrangling",
+    "section": "Two pipe operators in action",
+    "text": "Two pipe operators in action\n\n\n\nlibrary(dplyr)\n\ndata |&gt;\n filter(var1 &gt; 10) |&gt;\n mutate(var3 = var1 + var2) |&gt;\n select(var1, varX) |&gt;\n print()\n\n\n\nlibrary(dplyr)\n\ndata %&gt;% \n filter(var1 &gt; 10) %&gt;% \n mutate(var3 = var1 + var2) %&gt;% \n select(var1, varX) %&gt;% \n print()"
+  },
+  {
+    "objectID": "lec4-data-wrangling.html#data-placeholder",
+    "href": "lec4-data-wrangling.html#data-placeholder",
+    "title": "Lecture 4: Data wrangling",
+    "section": "Data placeholder",
+    "text": "Data placeholder\n\nIf the data argument is not the first argument in a function, use a placeholder\n\n\ndata %&gt;% \n        fun(argument)\n\n## Is equivalent to\ndata %&gt;% \n        fun(., argument)\n\n\n## If the data is to be used in another place we need the placeholder\ndata %&gt;% \n        fun(argument, data = .)"
+  },
+  {
+    "objectID": "lec4-data-wrangling.html#data-placeholder-a-realistic-example-and-saving-output",
+    "href": "lec4-data-wrangling.html#data-placeholder-a-realistic-example-and-saving-output",
+    "title": "Lecture 4: Data wrangling",
+    "section": "Data placeholder a realistic example, and saving output",
+    "text": "Data placeholder a realistic example, and saving output\n\nlibrary(exscidata); library(tidyverse)\n1model1 &lt;- cyclingstudy %&gt;%\n2        filter(timepoint == \"pre\") %&gt;%\n3        mutate(VO2max.kg = VO2.max / weight.T1) %&gt;%\n4        lm(tte ~ VO2max.kg, data = .)\n5summary(model1)\n\n\n1\n\nSpecifying an object for saving output, taking the cycling study data\n\n2\n\nFilter to keep only pre-intervention data\n\n3\n\nCreating a new variable, VO2max relative to body mass\n\n4\n\nFitting a linear regression model explaining time to exhaustion (tte) with VO2max\n\n5\n\nShowing the summary from the model"
   },
   {
     "objectID": "notes1-linear-models.html",
@@ -704,7 +739,7 @@
     "href": "index.html#practical-information",
     "title": "Quantitative methods and statistics (In Sport and Exercise Science)",
     "section": "Practical information",
-    "text": "Practical information\nThese notes were updated on 2024-09-13 and cover the course held during 2024 autumn semester. Contact Daniel Hammarström if you have any questions regarding this content.\n\nLearning objectives\nLearning objectives can be read in Norwegian here.\n\n\nLearning strategies\nThe course will include lectures, laboratory exercises, computer exercises and workshops, seminars and student presentations. Workshops will be held in-person.\nComputer exercises will eventually require that you have special computer software installed on your computer. The software is free (see specific chapters in lecture notes)."
+    "text": "Practical information\nThese notes were updated on 2024-09-17 and cover the course held during 2024 autumn semester. Contact Daniel Hammarström if you have any questions regarding this content.\n\nLearning objectives\nLearning objectives can be read in Norwegian here.\n\n\nLearning strategies\nThe course will include lectures, laboratory exercises, computer exercises and workshops, seminars and student presentations. Workshops will be held in-person.\nComputer exercises will eventually require that you have special computer software installed on your computer. The software is free (see specific chapters in lecture notes)."
   },
   {
     "objectID": "index.html#assignments-and-portfolio-exam",
@@ -763,6 +798,48 @@
     "text": "Workshop\nAdditional material\n\n\n\n\nIntroduction to data science (Norwegian)\n\n\n\nInstalling and starting R\n\n\n\nCreating your first graph\n\n\n\nData wrangling\n\n\n\nCreating tables\n\n\n\nWriting reproducible, version controlled reports\n\n\n\nThe linear model\n\n\n\nCategorical predictors\n\n\n\nCurve-linear model\n\n\n\nWriting functions\n\n\n\nP-values and simulations\n\n\n\nSampling, power and effects\n\n\n\nStudy designs"
   },
   {
+    "objectID": "assignment-2.html",
+    "href": "assignment-2.html",
+    "title": "Assignment 2: Regression models, predicting from data",
+    "section": "",
+    "text": "There are several suggestions on how to best capture the physiological “essence” of the lactate threshold test (See Tanner and Gore 2012, chap. 6). A simple, and very common way to analyze the relationship between exercise intensity and blood lactate is to determine exercise intensity at fixed blood lactate values. This can be done by fitting a regression model that captures the relationship and then “inverse predict” the exercise intensity value. Machado (2012) provides a more elaborate method for calculating the lactate threshold. An example of such calculation can be found in the lecture notes, Linear and curve-linear relationships, and predictions.\nYour report could use data from the reliability project in the lab. Calculate at least two lactate thresholds (e.g. exercise intensity at 2 and 4 mmol L-1) and compare the reliability (typical error as a percentage of the mean) between the two thresholds. If you want to complicate things further you may want to implement other lactate threshold concepts (described in Tanner and Gore 2012; Newell et al. 2007; Machado, Nakamura, and Moraes 2012) and the course notes.\nIf you lack data, you could use data from the exscidata package or from a previous year (see this file Lactate threshold tests).\n\n\n\nIn the molecular laboratory you have been tasked to extract and analyze DNA and RNA in two different assignments. In this process we have to determine the size of resulting PCR (polymerase chain reaction) amplified DNA fragments or Ct values in qPCR reactions.\nIn this assignment you can either analyze DNA fragments or qPCR results.\nA tutorial using Image J and R to analyze DNA fragments can be found here. In your report you should show how you arrived to your predicted sizes by including the code chunk in your report.\nThe slope of a calibration curve can inform on the efficiency of qPCR reactions. Use the data that you collected to calculate reaction efficiency.\n\n\n\nUsing the hypertrophy data set, state a question that concerns a linear relationship between two variables in the data set. These variables might be related to muscle size and strength, or two molecular markers or any other variables you are interested in. Include a regression table from your analysis in the report and interpret its components in plain language (e.g. for an unit difference in the independent variable the dependent variable differs by y units). The interpretation should also include a description and explanation of the standard error, the t-value and the p-value. Valuable guidance on how to interpret the table may be found in for example and in (Frigessi and Aalen 2018), (Campbell, Walters, and Machin 2020) and (Spiegelhalter 2019, chap. 5).\nSpecial attention should be made concerning the p-value. How do you define and interpret the p-value in your regression table. What does it mean?.\n\n\n\nThe report is a group assignment, it is a part of the portfolio (mappeeksamen).\nCreate a new project on github and collaborate with your group there, alternatively, use the posrtfolio exam template. The repository with all data and coded needed to create the report, and the report itself (in html, docx or pdf format) should be reported on canvas as a link to the repository. Each member of the group hand in the link in canvas. The repository should be the same for all group members."
+  },
+  {
+    "objectID": "assignment-2.html#part-1-lactate-thresholds",
+    "href": "assignment-2.html#part-1-lactate-thresholds",
+    "title": "Assignment 2: Regression models, predicting from data",
+    "section": "",
+    "text": "There are several suggestions on how to best capture the physiological “essence” of the lactate threshold test (See Tanner and Gore 2012, chap. 6). A simple, and very common way to analyze the relationship between exercise intensity and blood lactate is to determine exercise intensity at fixed blood lactate values. This can be done by fitting a regression model that captures the relationship and then “inverse predict” the exercise intensity value. Machado (2012) provides a more elaborate method for calculating the lactate threshold. An example of such calculation can be found in the lecture notes, Linear and curve-linear relationships, and predictions.\nYour report could use data from the reliability project in the lab. Calculate at least two lactate thresholds (e.g. exercise intensity at 2 and 4 mmol L-1) and compare the reliability (typical error as a percentage of the mean) between the two thresholds. If you want to complicate things further you may want to implement other lactate threshold concepts (described in Tanner and Gore 2012; Newell et al. 2007; Machado, Nakamura, and Moraes 2012) and the course notes.\nIf you lack data, you could use data from the exscidata package or from a previous year (see this file Lactate threshold tests)."
+  },
+  {
+    "objectID": "assignment-2.html#part-2-predicting-sizes-of-dna-fragments-or-slopes-of-a-qpcr-calibration-curve",
+    "href": "assignment-2.html#part-2-predicting-sizes-of-dna-fragments-or-slopes-of-a-qpcr-calibration-curve",
+    "title": "Assignment 2: Regression models, predicting from data",
+    "section": "",
+    "text": "In the molecular laboratory you have been tasked to extract and analyze DNA and RNA in two different assignments. In this process we have to determine the size of resulting PCR (polymerase chain reaction) amplified DNA fragments or Ct values in qPCR reactions.\nIn this assignment you can either analyze DNA fragments or qPCR results.\nA tutorial using Image J and R to analyze DNA fragments can be found here. In your report you should show how you arrived to your predicted sizes by including the code chunk in your report.\nThe slope of a calibration curve can inform on the efficiency of qPCR reactions. Use the data that you collected to calculate reaction efficiency."
+  },
+  {
+    "objectID": "assignment-2.html#part-3-intepreting-a-regression-table",
+    "href": "assignment-2.html#part-3-intepreting-a-regression-table",
+    "title": "Assignment 2: Regression models, predicting from data",
+    "section": "",
+    "text": "Using the hypertrophy data set, state a question that concerns a linear relationship between two variables in the data set. These variables might be related to muscle size and strength, or two molecular markers or any other variables you are interested in. Include a regression table from your analysis in the report and interpret its components in plain language (e.g. for an unit difference in the independent variable the dependent variable differs by y units). The interpretation should also include a description and explanation of the standard error, the t-value and the p-value. Valuable guidance on how to interpret the table may be found in for example and in (Frigessi and Aalen 2018), (Campbell, Walters, and Machin 2020) and (Spiegelhalter 2019, chap. 5).\nSpecial attention should be made concerning the p-value. How do you define and interpret the p-value in your regression table. What does it mean?."
+  },
+  {
+    "objectID": "assignment-2.html#how-to-hand-in-the-report",
+    "href": "assignment-2.html#how-to-hand-in-the-report",
+    "title": "Assignment 2: Regression models, predicting from data",
+    "section": "",
+    "text": "The report is a group assignment, it is a part of the portfolio (mappeeksamen).\nCreate a new project on github and collaborate with your group there, alternatively, use the posrtfolio exam template. The repository with all data and coded needed to create the report, and the report itself (in html, docx or pdf format) should be reported on canvas as a link to the repository. Each member of the group hand in the link in canvas. The repository should be the same for all group members."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
     "objectID": "assignment-4.html",
     "href": "assignment-4.html",
     "title": "Assignment 4: Study designs",
@@ -796,48 +873,6 @@
     "title": "Assignment 4: Study designs",
     "section": "Footnotes",
     "text": "Footnotes\n\n\nAvoid using review articles or meta-analyses↩︎\nSee Teaching undergraduate students to read empirical articles: An evaluation and revision of the QALMRI method, this advice was also heavily influenced by this website↩︎\nHulley, S. B. (2013). Designing clinical research. Philadelphia, Wolters Kluwer/Lippincott Williams & Wilkins.↩︎"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
-  },
-  {
-    "objectID": "assignment-2.html",
-    "href": "assignment-2.html",
-    "title": "Assignment 2: Regression models, predicting from data",
-    "section": "",
-    "text": "There are several suggestions on how to best capture the physiological “essence” of the lactate threshold test (See Tanner and Gore 2012, chap. 6). A simple, and very common way to analyze the relationship between exercise intensity and blood lactate is to determine exercise intensity at fixed blood lactate values. This can be done by fitting a regression model that captures the relationship and then “inverse predict” the exercise intensity value. Machado [-Machado_2012] provides a more elaborate method for calculating the lactate threshold. An example of such calculation can be found in the lecture notes, Linear and curve-linear relationships, and predictions.\nYour report could use data from the reliability project in the lab. Calculate at least two lactate thresholds (e.g. exercise intensity at 2 and 4 mmol L-1) and compare the reliability (typical error as a percentage of the mean) between the two thresholds. If you want to complicate things further you may want to implement other lactate threshold concepts [described in Tanner and Gore (2012); Newell et al. (2007); Machado_2012] and the course notes.\nIf you lack data, you could use data from the exscidata package or from a previous year (see this file Lactate threshold tests).\n\n\n\nIn the molecular laboratory you have been tasked to extract and analyze DNA and RNA in two different assignments. In this process we have to determine the size of resulting PCR (polymerase chain reaction) amplified DNA fragments or Ct values in qPCR reactions.\nIn this assignment you can either analyze DNA fragments or qPCR results.\nA tutorial using Image J and R to analyze DNA fragments can be found here. In your report you should show how you arrived to your predicted sizes by including the code chunk in your report.\nThe slope of a calibration curve can inform on the efficiency of qPCR reactions. Use the data that you collected to calculate reaction efficiency.\n\n\n\nUsing the hypertrophy data set, state a question that concerns a linear relationship between two variables in the data set. These variables might be related to muscle size and strength, or two molecular markers or any other variables you are interested in. Include a regression table from your analysis in the report and interpret its components in plain language (e.g. for an unit difference in the independent variable the dependent variable differs by y units). The interpretation should also include a description and explanation of the standard error, the t-value and the p-value. Valuable guidance on how to interpret the table may be found in for example and in (Frigessi and Aalen 2018), (Campbell, Walters, and Machin 2020) and (Spiegelhalter 2019, chap. 5).\nSpecial attention should be made concerning the p-value. How do you define and interpret the p-value in your regression table. What does it mean?.\n\n\n\nThe report is a group assignment, it is a part of the portfolio (mappeeksamen).\nCreate a new project on github and collaborate with your group there, alternatively, use the posrtfolio exam template. The repository with all data and coded needed to create the report, and the report itself (in html, docx or pdf format) should be reported on canvas as a link to the repository. Each member of the group hand in the link in canvas. The repository should be the same for all group members."
-  },
-  {
-    "objectID": "assignment-2.html#part-1-lactate-thresholds",
-    "href": "assignment-2.html#part-1-lactate-thresholds",
-    "title": "Assignment 2: Regression models, predicting from data",
-    "section": "",
-    "text": "There are several suggestions on how to best capture the physiological “essence” of the lactate threshold test (See Tanner and Gore 2012, chap. 6). A simple, and very common way to analyze the relationship between exercise intensity and blood lactate is to determine exercise intensity at fixed blood lactate values. This can be done by fitting a regression model that captures the relationship and then “inverse predict” the exercise intensity value. Machado [-Machado_2012] provides a more elaborate method for calculating the lactate threshold. An example of such calculation can be found in the lecture notes, Linear and curve-linear relationships, and predictions.\nYour report could use data from the reliability project in the lab. Calculate at least two lactate thresholds (e.g. exercise intensity at 2 and 4 mmol L-1) and compare the reliability (typical error as a percentage of the mean) between the two thresholds. If you want to complicate things further you may want to implement other lactate threshold concepts [described in Tanner and Gore (2012); Newell et al. (2007); Machado_2012] and the course notes.\nIf you lack data, you could use data from the exscidata package or from a previous year (see this file Lactate threshold tests)."
-  },
-  {
-    "objectID": "assignment-2.html#part-2-predicting-sizes-of-dna-fragments-or-slopes-of-a-qpcr-calibration-curve",
-    "href": "assignment-2.html#part-2-predicting-sizes-of-dna-fragments-or-slopes-of-a-qpcr-calibration-curve",
-    "title": "Assignment 2: Regression models, predicting from data",
-    "section": "",
-    "text": "In the molecular laboratory you have been tasked to extract and analyze DNA and RNA in two different assignments. In this process we have to determine the size of resulting PCR (polymerase chain reaction) amplified DNA fragments or Ct values in qPCR reactions.\nIn this assignment you can either analyze DNA fragments or qPCR results.\nA tutorial using Image J and R to analyze DNA fragments can be found here. In your report you should show how you arrived to your predicted sizes by including the code chunk in your report.\nThe slope of a calibration curve can inform on the efficiency of qPCR reactions. Use the data that you collected to calculate reaction efficiency."
-  },
-  {
-    "objectID": "assignment-2.html#part-3-intepreting-a-regression-table",
-    "href": "assignment-2.html#part-3-intepreting-a-regression-table",
-    "title": "Assignment 2: Regression models, predicting from data",
-    "section": "",
-    "text": "Using the hypertrophy data set, state a question that concerns a linear relationship between two variables in the data set. These variables might be related to muscle size and strength, or two molecular markers or any other variables you are interested in. Include a regression table from your analysis in the report and interpret its components in plain language (e.g. for an unit difference in the independent variable the dependent variable differs by y units). The interpretation should also include a description and explanation of the standard error, the t-value and the p-value. Valuable guidance on how to interpret the table may be found in for example and in (Frigessi and Aalen 2018), (Campbell, Walters, and Machin 2020) and (Spiegelhalter 2019, chap. 5).\nSpecial attention should be made concerning the p-value. How do you define and interpret the p-value in your regression table. What does it mean?."
-  },
-  {
-    "objectID": "assignment-2.html#how-to-hand-in-the-report",
-    "href": "assignment-2.html#how-to-hand-in-the-report",
-    "title": "Assignment 2: Regression models, predicting from data",
-    "section": "",
-    "text": "The report is a group assignment, it is a part of the portfolio (mappeeksamen).\nCreate a new project on github and collaborate with your group there, alternatively, use the posrtfolio exam template. The repository with all data and coded needed to create the report, and the report itself (in html, docx or pdf format) should be reported on canvas as a link to the repository. Each member of the group hand in the link in canvas. The repository should be the same for all group members."
   },
   {
     "objectID": "ws1-data-science-intro.html",
@@ -1054,14 +1089,14 @@
     "href": "feedback-assignments.html",
     "title": "Sjekkliste for arbeidskrav og eksamen",
     "section": "",
-    "text": "Følgende punkter er basert på tidligere arbeidskrav som har blitt levert i emnet. Disse kan brukes for å forbedre dine arbeidskrav."
+    "text": "Følgende punkter er basert på leverte arbeidskrav i emnet. Disse kan brukes for å forbedre dine arbeidskrav."
   },
   {
     "objectID": "feedback-assignments.html#å-skrive-rapporter",
     "href": "feedback-assignments.html#å-skrive-rapporter",
     "title": "Sjekkliste for arbeidskrav og eksamen",
     "section": "Å skrive rapporter",
-    "text": "Å skrive rapporter\n\nUnngå å forfatte rapporter i punkter/lister. Denne formen av tekst kan hjelpe leseren men kan også bryte opp og skape unødvendig forvirring. En punktliste kan også få spørsmålet «hvorfor» å forsvinne. Leseren kan være interessert i å vite hvorfor man velger en tilnærming eller metode.\nSkriv for en lesere som er kjent med området men savner informasjon om hvorfor man skal lese rapporten. Du må fylle i «blanks» hos leseren!\nRapporter kan med fordel struktureres som introduksjon, metode, resultat og diskusjon. Man kan velge å ikke ha med disse overskriftene men til tross organisere paragrafene på denne måten. Introduksjonen forteller leseren hva teksten skal belyse, metoden gir et innblikk i hva og hvordan du gjennomført arbeidet, resultatene beskriver og diskusjon tolker.\nVær sikker på at begreper og metoder er definerte! «Typical error», «Coefficient of variation», «laktatterskel» osv. kan være mange ulike ting. Man kan bruke en referanse eller en formel for å definere beregninger og konsepter osv.\nHusk å definer feilstapler (error bars), farger, punkter enheter osv. I tabeller, figurer og tekst."
+    "text": "Å skrive rapporter\n\nUnngå å forfatte rapporter i punkter/lister. Denne formen av tekst kan hjelpe leseren men kan også bryte opp og skape unødvendig forvirring. En punktliste kan også få spørsmålet «hvorfor» å forsvinne. Leseren kan være interessert i å vite hvorfor man velger en tilnærming eller metode.\nSkriv for en lesere som er kjent med området men savner informasjon om hvorfor man skal lese rapporten. Du må fylle i «blanks» hos leseren!\nRapporter kan med fordel struktureres som introduksjon, metode, resultat og diskusjon. Man kan velge å ikke ha med disse overskriftene men til tross organisere paragrafene på denne måten. Introduksjonen forteller leseren hva teksten skal belyse, metoden gir et innblikk i hva og hvordan du gjennomført arbeidet, resultatene beskriver og diskusjon tolker.\nVær sikker på at begreper og metoder er definerte! «Typical error», «Coefficient of variation», «laktatterskel» osv. kan være mange ulike ting. Man kan bruke en referanse eller en formel for å definere beregninger og konsepter osv.\nHusk å definer feilstapler (error bars), farger, punkter enheter osv. I tabeller, figurer og tekst.\nEnheter som V̇O2max kan defineres mer eller mindre presist, her står V for volum og punktet over V indikerer et volum per tidsenhet. Denne skreves som V&#775;O&lt;sub&gt;2max&lt;/sub&gt; hvor &#775; er HTML-kode for å gi en punkt over bokstaven som skreves før tegnet. Når vi angir enheten kan vi bruke ml×kg-1×min-1 eller ml kg-1 min-1, denne notasjonen er mer vanlig i vitenskapelig kommunikasjon."
   },
   {
     "objectID": "feedback-assignments.html#å-bruke-r",
@@ -1085,116 +1120,193 @@
     "text": "Innlevering av eksamen\n\nEksamen skal leveres som en pdf på inspera.\nI pdf:en skal det stå beskrevet hvor man kan finne data og kod (beskriv dette under preface i mallen).\nJeg har skapt en mal for innlevering av eksamen, for å bruke denne:\n- Lag en `fork` av `https://github.com/dhammarstrom/innlevering-idr4000-qmd` til din egen github bruker.\n- Last ned din `fork` til R Studio og oppdatere qmd-filene med dine tekster og repository med dine data.\n- For å lage pdf:en, tryck på render. Det kan kreves flere render for å løse problemer som oppstår. Se til å levere den endlige versjonen!\n- Den pdf som skapes finner du i mappen `_book`\n- Legg til endringer (gi add -A) og commit (git commit -m ‘a message’) og push (git push). Din versjon av innleveringsmappen er nå oppdatert på din github profil\nFor å bruke denne løsningen kreves at du har quarto installert (https://quarto.org/docs/get-started/).\nDet kreves også en installasjon av TeX, quarto sier at TinyTeX er et godt alternativ (se https://quarto.org/docs/output-formats/pdf-engine.html)\nDu kan være interessert av å forandre automatisk generert tekst i rapporten, eks. figurtekster, overskrifter. Se i .yml-filen for å endre disse innstillingene."
   },
   {
-    "objectID": "lec4-data-wrangling.html#tidy-tabular-data",
-    "href": "lec4-data-wrangling.html#tidy-tabular-data",
-    "title": "Lecture 4: Data wrangling",
-    "section": "Tidy tabular data",
-    "text": "Tidy tabular data\n\nTidy tabular data has\n\nOne variable per column\nOne observation per row\nOne value per cell"
+    "objectID": "lec7-regression-intro.html#describing-associations",
+    "href": "lec7-regression-intro.html#describing-associations",
+    "title": "Lecture 7: A short introduction to regression",
+    "section": "Describing associations",
+    "text": "Describing associations"
   },
   {
-    "objectID": "lec4-data-wrangling.html#data-wrangling",
-    "href": "lec4-data-wrangling.html#data-wrangling",
-    "title": "Lecture 4: Data wrangling",
-    "section": "Data wrangling",
-    "text": "Data wrangling\n\n\n\n“Data analysts typically spend the majority of their time in the process of data wrangling compared to the actual analysis of the data.”"
+    "objectID": "lec7-regression-intro.html#measures-of-associations",
+    "href": "lec7-regression-intro.html#measures-of-associations",
+    "title": "Lecture 7: A short introduction to regression",
+    "section": "Measures of associations",
+    "text": "Measures of associations\n\n\nA common goal in statistical analysis is to describe associations\nStatistics are full of specific methods to describe and test for statistical associations\n\nE.g. t-test, ANOVA, ANCOVA, Pearson’s correlation, Spearman’s correlation, Chi Square test, etc.\n\nMost of the commonly used methods can be re-framed as regression models"
   },
   {
-    "objectID": "lec4-data-wrangling.html#section",
-    "href": "lec4-data-wrangling.html#section",
-    "title": "Lecture 4: Data wrangling",
+    "objectID": "lec7-regression-intro.html#difference-between-two-groups-in-outcome-or-the-association-between-group-and-outcome",
+    "href": "lec7-regression-intro.html#difference-between-two-groups-in-outcome-or-the-association-between-group-and-outcome",
+    "title": "Lecture 7: A short introduction to regression",
+    "section": "Difference between two groups in outcome, or the association between group and outcome",
+    "text": "Difference between two groups in outcome, or the association between group and outcome\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\\(\\text{Outcome} = \\beta_0 + \\beta_1 \\times \\text{Group}_{\\text{B}}\\)\n\n\nWhere  \\(\\text{Group}_{\\text{B}} = 1\\) when group==B \\(\\text{Group}_{\\text{B}} = 0\\) when group==A"
+  },
+  {
+    "objectID": "lec7-regression-intro.html#association-between-height-and-vo2max",
+    "href": "lec7-regression-intro.html#association-between-height-and-vo2max",
+    "title": "Lecture 7: A short introduction to regression",
+    "section": "Association between height and VO2max",
+    "text": "Association between height and VO2max\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nFor every 1-unit increase in height, the outcome increase by \\(\\beta_1\\) units. \n\n\n\\(\\text{Outcome} = \\beta_0 + \\beta_1 \\times \\text{Height}\\)"
+  },
+  {
+    "objectID": "lec7-regression-intro.html#a-two-dimensional-system",
+    "href": "lec7-regression-intro.html#a-two-dimensional-system",
+    "title": "Lecture 7: A short introduction to regression",
+    "section": "A two dimensional system",
+    "text": "A two dimensional system"
+  },
+  {
+    "objectID": "ws15-study-design-1.html",
+    "href": "ws15-study-design-1.html",
+    "title": "Study designs and statistical tests",
     "section": "",
-    "text": "“The Herd Quitter.” Oil C.M. Russell, Montana Historical Society MacKay Collection (source)"
+    "text": "A regression model can be used to assess the differences between treatments in a randomized controlled trial (RCT). But what do we use as the dependent variable in this model?\nVickers (2001) identified and compared four scenarios that might be “tested” from a comparison of two groups:\n\n\nBaseline (\\(b\\)), follow-up (\\(f\\)) and group (\\(g\\)) can be analyzed as\n\nPost-scores only: \\(f\\) is compared between \\(g\\)\nPercentage change: \\(100 \\times \\frac{b-f}{b}\\) is compared between \\(g\\)\nChange: \\(b-f\\) compared between \\(g\\)\nAnalysis of co-variance (ANCOVA): \\(g\\) is compared as the effect in \\(f=\\beta_1 b + \\beta_2 g\\)\n\n\n\nThe choice of method should be based on its efficiency, the ability find true effects using a minimal number of participants.\nVickers show that the use of percentage change from baseline is inefficient (Vickers 2001) and could lead to violations of assumptions for statistical tests.\nThe ANCOVA model (see below) is the preferred model when model assumptions holds (Vickers 2001)\nWe will proceed with comparison of change-scores and later discuss ANCOVA."
   },
   {
-    "objectID": "lec4-data-wrangling.html#data-wrangling-1",
-    "href": "lec4-data-wrangling.html#data-wrangling-1",
-    "title": "Lecture 4: Data wrangling",
-    "section": "Data wrangling",
-    "text": "Data wrangling\n\nAggregation through summaries\n\nE.g. variables are summarized over multiple observations\n\nTransformation of data\n\nE.g. new variables are created on existing data\n\nArranging data\n\nE.g. sorting data based on values of observations"
-  },
-  {
-    "objectID": "lec4-data-wrangling.html#dplyr",
-    "href": "lec4-data-wrangling.html#dplyr",
-    "title": "Lecture 4: Data wrangling",
-    "section": "dplyr",
-    "text": "dplyr\n\ndplyr provides verbs for wrangling data\n“Translate thoughts to code”\nUsing the package we can\n\nmutate (create) new variables\nselect variables\nfilter observations\nsummarise values\narrange observations or rows"
-  },
-  {
-    "objectID": "lec4-data-wrangling.html#r-functions",
-    "href": "lec4-data-wrangling.html#r-functions",
-    "title": "Lecture 4: Data wrangling",
-    "section": "R functions",
-    "text": "R functions\n\nFunctions are created to perform a specific task\nFunctions exists in packages, or as user specified in your environment\nFunction (can) take arguments as input\n\n\n1important_function(arg1 = \"A\", arg2 = \"B\")\n2important_function(\"A\", \"B\")\n3important_function()\n\n\n1\n\nArguments are named.\n\n2\n\nArguments are used by their position\n\n3\n\nThe function is used with default argument values"
-  },
-  {
-    "objectID": "lec4-data-wrangling.html#r-functions-in-tidyverse",
-    "href": "lec4-data-wrangling.html#r-functions-in-tidyverse",
-    "title": "Lecture 4: Data wrangling",
-    "section": "R functions in tidyverse",
-    "text": "R functions in tidyverse\n\nFunctions that are specifically written for the tidyverse are “pipeable”, the data argument has the first position, an example\n\n\n1pipe_function(data = my.data, arg2 = \"a\", arg3 = \"b\", arg4 = \"etc\")\n2pipe_function(my.data, arg2 = \"a\", arg3 = \"b\", arg4 = \"etc\")\n3pipe_function(my.data)\n\n\n1\n\nAll arguments are named.\n\n2\n\nThe first argument not names, specified by position\n\n3\n\nThe function is used with default argument values, except the first argument data"
-  },
-  {
-    "objectID": "lec4-data-wrangling.html#data-pipes",
-    "href": "lec4-data-wrangling.html#data-pipes",
-    "title": "Lecture 4: Data wrangling",
-    "section": "Data pipes",
-    "text": "Data pipes\n\n\n\nUsing pipes we can execute data verbs in sequence\nThe pipe operator passes the “left hand” data to the first position in the following function.\n\n\n# This is equivalent...\ndata |&gt;\n        pipe_function() \n# ... to this\npipe_function(data)"
-  },
-  {
-    "objectID": "lec4-data-wrangling.html#why-pipe",
-    "href": "lec4-data-wrangling.html#why-pipe",
-    "title": "Lecture 4: Data wrangling",
-    "section": "Why pipe?",
-    "text": "Why pipe?\n\nPiping makes code more readable, an example\n\n\n# No pipes\nprint(fun_c(fun_b(fun_a(data))))\n\n# Using pipes\ndata |&gt;\n        fun_a() |&gt;\n        fun_b() |&gt;\n        fun_c() |&gt;\n        print()"
-  },
-  {
-    "objectID": "lec4-data-wrangling.html#pipes-in-r",
-    "href": "lec4-data-wrangling.html#pipes-in-r",
-    "title": "Lecture 4: Data wrangling",
-    "section": "Pipes in R",
-    "text": "Pipes in R\n\n\n\nTwo “pipe-operators” are available in R\n\n|&gt; exists in base R\n%&gt;% is loaded with tidyverse as part of the magrittr package"
-  },
-  {
-    "objectID": "lec4-data-wrangling.html#two-pipe-operators-in-action",
-    "href": "lec4-data-wrangling.html#two-pipe-operators-in-action",
-    "title": "Lecture 4: Data wrangling",
-    "section": "Two pipe operators in action",
-    "text": "Two pipe operators in action\n\n\n\nlibrary(dplyr)\n\ndata |&gt;\n filter(var1 &gt; 10) |&gt;\n mutate(var3 = var1 + var2) |&gt;\n select(var1, varX) |&gt;\n print()\n\n\n\nlibrary(dplyr)\n\ndata %&gt;% \n filter(var1 &gt; 10) %&gt;% \n mutate(var3 = var1 + var2) %&gt;% \n select(var1, varX) %&gt;% \n print()"
-  },
-  {
-    "objectID": "lec4-data-wrangling.html#data-placeholder",
-    "href": "lec4-data-wrangling.html#data-placeholder",
-    "title": "Lecture 4: Data wrangling",
-    "section": "Data placeholder",
-    "text": "Data placeholder\n\nIf the data argument is not the first argument in a function, use a placeholder\n\n\ndata %&gt;% \n        fun(argument)\n\n## Is equivalent to\ndata %&gt;% \n        fun(., argument)\n\n\n## If the data is to be used in another place we need the placeholder\ndata %&gt;% \n        fun(argument, data = .)"
-  },
-  {
-    "objectID": "lec4-data-wrangling.html#data-placeholder-a-realistic-example-and-saving-output",
-    "href": "lec4-data-wrangling.html#data-placeholder-a-realistic-example-and-saving-output",
-    "title": "Lecture 4: Data wrangling",
-    "section": "Data placeholder a realistic example, and saving output",
-    "text": "Data placeholder a realistic example, and saving output\n\nlibrary(exscidata); library(tidyverse)\n1model1 &lt;- cyclingstudy %&gt;%\n2        filter(timepoint == \"pre\") %&gt;%\n3        mutate(VO2max.kg = VO2.max / weight.T1) %&gt;%\n4        lm(tte ~ VO2max.kg, data = .)\n5summary(model1)\n\n\n1\n\nSpecifying an object for saving output, taking the cycling study data\n\n2\n\nFilter to keep only pre-intervention data\n\n3\n\nCreating a new variable, VO2max relative to body mass\n\n4\n\nFitting a linear regression model explaining time to exhaustion (tte) with VO2max\n\n5\n\nShowing the summary from the model"
-  },
-  {
-    "objectID": "ws6-summarising-data.html",
-    "href": "ws6-summarising-data.html",
-    "title": "Summarising data",
+    "objectID": "ws15-study-design-1.html#what-to-analyze",
+    "href": "ws15-study-design-1.html#what-to-analyze",
+    "title": "Study designs and statistical tests",
     "section": "",
-    "text": "R has several “summary” functions used to summarise data into descriptive characteristics. These could describe the location (mean, median, mode), spread (variance, standard deviation) or rank (minimum, quantile, maximum).\n\n\n\n\n\n\n\n\n\nA vector of numeric values (integers or decimal numbers) can be summarised using a set of functions in R that gives us several summary statistics.\n\n# Set a seed for the random number generator\nset.seed(1)\n# Generate 10 random numbers from a normal distribution with mean 0 and SD 1\nx &lt;- rnorm(10)\n# Calculate summary statistics\nsummary(x)\nfivenum(x)\n\n\n\n\n\n\n\nWhat statistics?\n\n\n\nWhat statistics do we get from summary and fivenum? Use the R help pages to explore this!\n\n\nThe summary function gives us a multi-statistic summary of vectors (or data frames). We can get these numbers using built in functions also.\n\n\n\nFunction call\nStatistic\n\n\n\n\nmean()\nMean\n\n\nmedian()\nMedian\n\n\nsd()\nStandard deviation\n\n\nvar()\nVariance\n\n\nmin()\nMinimum\n\n\nmax()\nMaximum\n\n\nquantile()\nQuantile\n\n\n\n\n\n\n\n\n\nWhat statistics?\n\n\n\nUse summary functions above to calculate the summary statistics used in summary(x).\n\n\n\n\nA common feature of summary functions are the inability to calculate the mean from a set of values that contain missing values.\nTo overcome this problem we need to add the na.rm = TRUE argument to our summary function.\nE.g.:\n\nx &lt;- c(rnorm(10), NA) \n\nmean(x)\n\nmean(x, na.rm = TRUE)\n\n\n\n\ndplyr has a function designed to create summaries. The summarise function will use “summary” functions that returns a single value to summarise the data set.\n\nlibrary(tidyverse)\nlibrary(exscidata)\n\n\ncyclingstudy %&gt;%\n        summarise(m = mean(VO2.max, na.rm = TRUE))\n\nSummaries can be create on grouped data frames. A grouped data frame has additional meta data that groups the data set and many dplyr verbs will use the grouping when performing its actions (e.g. mutate, filter, summarise).\nTo add a grouping to a data frame use group_by(var), where var is a variable you would want to group on.\n\n\n\n\n\n\nConstruct a grouped data frame and summarise?\n\n\n\nComplete the following code chunk\n\ncyclingstudy %&gt;%\n        # select participant, time-point and VO2max\n        select(subject, timepoint, VO2.max) %&gt;%\n        # Group the data frame by timepoint\n        \n        # Summarise with mean and standard deviation for vo2max\n        \n        # Print the results\n        print()\n\n\n\nAnother alternative is to use the .by argument in a summary function. To group a summary by timepoint and group we would do\n\ncyclingstudy %&gt;%\n        summarise(.by = c(timepoint, group), \n                  m = mean(VO2.max, na.rm = TRUE), \n                  s = sd(VO2.max, na.rm = TRUE))\n\n\n\n\n\n\n\nSummarise data?\n\n\n\n\nWhat is the average (mean) cmj.max height in group == \"INCR\" at timepoint == \"meso2\"?\nWhat is the standard deviation of VO2.max at time-point meso3?\n\n\n\n\n\n\nThe n() function can be used to give us the group size of a grouped summary.\n\ncyclingstudy %&gt;%\n        summarise(n = n(), \n                  .by = c(group, timepoint))"
+    "text": "A regression model can be used to assess the differences between treatments in a randomized controlled trial (RCT). But what do we use as the dependent variable in this model?\nVickers (2001) identified and compared four scenarios that might be “tested” from a comparison of two groups:\n\n\nBaseline (\\(b\\)), follow-up (\\(f\\)) and group (\\(g\\)) can be analyzed as\n\nPost-scores only: \\(f\\) is compared between \\(g\\)\nPercentage change: \\(100 \\times \\frac{b-f}{b}\\) is compared between \\(g\\)\nChange: \\(b-f\\) compared between \\(g\\)\nAnalysis of co-variance (ANCOVA): \\(g\\) is compared as the effect in \\(f=\\beta_1 b + \\beta_2 g\\)\n\n\n\nThe choice of method should be based on its efficiency, the ability find true effects using a minimal number of participants.\nVickers show that the use of percentage change from baseline is inefficient (Vickers 2001) and could lead to violations of assumptions for statistical tests.\nThe ANCOVA model (see below) is the preferred model when model assumptions holds (Vickers 2001)\nWe will proceed with comparison of change-scores and later discuss ANCOVA."
   },
   {
-    "objectID": "ws6-summarising-data.html#summary-functions",
-    "href": "ws6-summarising-data.html#summary-functions",
-    "title": "Summarising data",
-    "section": "",
-    "text": "R has several “summary” functions used to summarise data into descriptive characteristics. These could describe the location (mean, median, mode), spread (variance, standard deviation) or rank (minimum, quantile, maximum).\n\n\n\n\n\n\n\n\n\nA vector of numeric values (integers or decimal numbers) can be summarised using a set of functions in R that gives us several summary statistics.\n\n# Set a seed for the random number generator\nset.seed(1)\n# Generate 10 random numbers from a normal distribution with mean 0 and SD 1\nx &lt;- rnorm(10)\n# Calculate summary statistics\nsummary(x)\nfivenum(x)\n\n\n\n\n\n\n\nWhat statistics?\n\n\n\nWhat statistics do we get from summary and fivenum? Use the R help pages to explore this!\n\n\nThe summary function gives us a multi-statistic summary of vectors (or data frames). We can get these numbers using built in functions also.\n\n\n\nFunction call\nStatistic\n\n\n\n\nmean()\nMean\n\n\nmedian()\nMedian\n\n\nsd()\nStandard deviation\n\n\nvar()\nVariance\n\n\nmin()\nMinimum\n\n\nmax()\nMaximum\n\n\nquantile()\nQuantile\n\n\n\n\n\n\n\n\n\nWhat statistics?\n\n\n\nUse summary functions above to calculate the summary statistics used in summary(x).\n\n\n\n\nA common feature of summary functions are the inability to calculate the mean from a set of values that contain missing values.\nTo overcome this problem we need to add the na.rm = TRUE argument to our summary function.\nE.g.:\n\nx &lt;- c(rnorm(10), NA) \n\nmean(x)\n\nmean(x, na.rm = TRUE)\n\n\n\n\ndplyr has a function designed to create summaries. The summarise function will use “summary” functions that returns a single value to summarise the data set.\n\nlibrary(tidyverse)\nlibrary(exscidata)\n\n\ncyclingstudy %&gt;%\n        summarise(m = mean(VO2.max, na.rm = TRUE))\n\nSummaries can be create on grouped data frames. A grouped data frame has additional meta data that groups the data set and many dplyr verbs will use the grouping when performing its actions (e.g. mutate, filter, summarise).\nTo add a grouping to a data frame use group_by(var), where var is a variable you would want to group on.\n\n\n\n\n\n\nConstruct a grouped data frame and summarise?\n\n\n\nComplete the following code chunk\n\ncyclingstudy %&gt;%\n        # select participant, time-point and VO2max\n        select(subject, timepoint, VO2.max) %&gt;%\n        # Group the data frame by timepoint\n        \n        # Summarise with mean and standard deviation for vo2max\n        \n        # Print the results\n        print()\n\n\n\nAnother alternative is to use the .by argument in a summary function. To group a summary by timepoint and group we would do\n\ncyclingstudy %&gt;%\n        summarise(.by = c(timepoint, group), \n                  m = mean(VO2.max, na.rm = TRUE), \n                  s = sd(VO2.max, na.rm = TRUE))\n\n\n\n\n\n\n\nSummarise data?\n\n\n\n\nWhat is the average (mean) cmj.max height in group == \"INCR\" at timepoint == \"meso2\"?\nWhat is the standard deviation of VO2.max at time-point meso3?\n\n\n\n\n\n\nThe n() function can be used to give us the group size of a grouped summary.\n\ncyclingstudy %&gt;%\n        summarise(n = n(), \n                  .by = c(group, timepoint))"
+    "objectID": "ws15-study-design-1.html#analysis-of-change-scores",
+    "href": "ws15-study-design-1.html#analysis-of-change-scores",
+    "title": "Study designs and statistical tests",
+    "section": "Analysis of change scores",
+    "text": "Analysis of change scores\n\n\nCode\nlibrary(tidyverse)\ndata.frame(Time = c(\"Pre\", \"Post\", \"Pre\", \"Post\"), outcome = c(0,1, 0,1)) %&gt;%\n        mutate(Time = factor(Time, levels = c(\"Pre\", \"Post\"))) %&gt;%\n        ggplot(aes(Time, outcome)) + \n        theme_classic() + \n        ylab(\"Outcome\") +\n        theme(axis.text.y = element_blank()) +\n        geom_segment(aes(x = Time, xend = 2, \n                         y = c(0.5,0.5, 0.5,1.5), \n                         yend = c(0.5,0.5, 1.5,1.5))) + \n        scale_y_continuous(limits = c(0,2)) + \n        annotate(geom = \"text\", x = 2.25, y = 1.5, label = \"Treatment\") +\n        annotate(geom = \"text\", x = 2.25, y = 0.5, label = \"Control\") \n\n\n\n\n\n\n\n\n\n\nIn a simple analysis of two parallel groups (experimental and control), the alternative hypothesis is that the two groups are different in terms of change scores.\n\n\\[ \\Delta Y_{Treatment}-\\Delta Y_{Control} \\neq 0 \\]\n\nThe null-hypothesis that we use in our statistical models is\n\n\\[ \\Delta Y_{Treatment}-\\Delta Y_{Control} = 0 \\]\n\nIn the simple case, this equals a t-test.\n\nt.test(delta ~ group, paired = FALSE)\n\nA similar scenario is a comparison between two treatments (A and B)\n\n\n\nCode\ndata.frame(Time = c(\"Pre\", \"Post\", \"Pre\", \"Post\"), outcome = c(0,1, 0,1)) %&gt;%\n        mutate(Time = factor(Time, levels = c(\"Pre\", \"Post\"))) %&gt;%\n        ggplot(aes(Time, outcome)) + \n        theme_classic() + \n        ylab(\"Outcome\") +\n        theme(axis.text.y = element_blank()) +\n        geom_segment(aes(x = Time, xend = 2, \n                         y = c(0.5,0.5, 0.5,1.5), \n                         yend = c(1.1,0.5, 1.5,1.5))) + \n        scale_y_continuous(limits = c(0,2)) + \n        annotate(geom = \"text\", x = 2.25, y = 1.5, label = \"A\") +\n        annotate(geom = \"text\", x = 2.25, y = 1.1, label = \"B\") \n\n\n\n\n\n\n\n\n\n\nThe null-hypothesis is that\n\n\\[ \\Delta Y_{A}-\\Delta Y_{B} = 0 \\]\n\nThe tenthirty data set has similar data as in the above scenario\nWe want to know what treatment to recommend for 1RM improvements.\n\n\n\nGroup work: Ten-thirty\n\nUsing the tenthirty data, use filter to keep time-point “pre” and “post” for the leg-press exercise.\nMake a plot of the averages of each group.\nCalculate a change score as post - pre.\nMake a plot of the average change score for each group.\nFit a regression model (change ~ group) and interpret the results.\n\n\n\nQuestions:\n\nConcerning the sample: Which group has the largest improvement i leg-press 1RM?\nConcerning inference to the population: Which method do you recommend for improving 1RM leg-press?\n\n\n\n\n\nPossible solutions\n## Create a plot of averages over time ----------- ##\n\nlibrary(tidyverse); library(exscidata)\ndata(\"tenthirty\")\n\n# Save the data set in a filtered version\ntenthirty_reduced &lt;- tenthirty %&gt;%\n  filter(time %in% c(\"pre\", \"post\"), \n         exercise == \"legpress\", \n         !is.na(load)) %&gt;% \n  print()\n\n# Create a line plot with one line per group\ntenthirty_reduced %&gt;%  \n  group_by(time, group) %&gt;%\n  summarise(m = mean(load)) %&gt;%\n  mutate(time = factor(time, levels = c(\"pre\", \"post\"))) %&gt;%\n  ggplot(aes(time, m, color = group, \n             group = group)) + geom_line()\n\n\n# Create a plot of average changes per group\ntenthirty_reduced %&gt;%\n  pivot_wider(names_from = time, \n              values_from = load) %&gt;%\n  mutate(change = post - pre) %&gt;%\n  group_by(group) %&gt;%\n  summarise(mean_change = mean(change, na.rm = TRUE)) %&gt;%\n  ggplot(aes(group, mean_change, fill = group)) + \n  geom_bar(stat = \"identity\", width = 0.3)\n  \n\n# Calculate the average change per group, and difference between groups\ntenthirty_reduced %&gt;%\n  pivot_wider(names_from = time, \n              values_from = load) %&gt;%\n  mutate(change = post - pre) %&gt;%\n  group_by(group) %&gt;%\n  summarise(mean_change = mean(change, na.rm = TRUE)) %&gt;%\n  pivot_wider(names_from = group, \n              values_from = mean_change) %&gt;%\n  mutate(diff = RM30 - RM10) %&gt;%\n  print()\n\n\n# Calculate change score and save new data set\ndat &lt;- tenthirty_reduced %&gt;%\n  pivot_wider(names_from = time, \n              values_from = load) %&gt;%\n  mutate(change = post - pre) %&gt;%\n  print()\n\n\n# Fit model with change scores explained by group\nm1 &lt;- lm(change ~ group, data = dat)\n\n# Get the model summary\nsummary(m1)\n\n\n\n\nCode\nlibrary(exscidata)\n\ntenthirty %&gt;%\n  filter(exercise == \"legpress\", \n         time %in% c(\"pre\", \"post\")) %&gt;%\n  mutate(time = factor(time, levels = c(\"pre\", \"post\"))) %&gt;%\n  group_by(time, group) %&gt;%\n  summarise(m = mean(load, na.rm = TRUE)) %&gt;%\n  ggplot(aes(time, m, group = group, color = group)) + geom_line() +\n  labs(x = \"Time\", y = \"Legpress performance (kg)\", color = \"Group\") +\n          theme_classic()\n\n\n\n\n\nGroup averages over time"
   },
   {
-    "objectID": "ws6-summarising-data.html#re-create-a-summary-table",
-    "href": "ws6-summarising-data.html#re-create-a-summary-table",
-    "title": "Summarising data",
-    "section": "Re-create a summary table",
-    "text": "Re-create a summary table\nWork in pairs to reproduce this summary data frame:\n\n\n# A tibble: 3 × 8\n  group m.age sd.age m.height sd.height m.weight sd.weight     n\n  &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;\n1 INCR   34.7   4.79     181       7.87     81.3      7.86     7\n2 DECR   38.4   5.59     178.      4.67     83.5     10.7      7\n3 MIX    37.8   7.94     179       5.90     75.3      9.87     6"
+    "objectID": "ws15-study-design-1.html#from-t-test-to-ancova",
+    "href": "ws15-study-design-1.html#from-t-test-to-ancova",
+    "title": "Study designs and statistical tests",
+    "section": "From t-test to ANCOVA",
+    "text": "From t-test to ANCOVA\n\nAbove we used the simple comparison of change score. A more appropriate model to study outcomes of a RCT is an analysis of co-variance (ANCOVA)\nIn an ANCOVA, change-scores or post values are compared and the estimates tells you the adjusted differences between groups if they had the exact same starting point.\nThe ANCOVA model can be written as\n\n\\[f =\\beta_0 + \\beta_1\\times b + \\beta_2\\times g \\] where \\(f\\) is the follow-up score, \\(b\\) is the baseline and \\(g\\) is the group.\n\nIn R code, this corresponds to\n\npost ~ pre + group\n\n\nGroup work: Ten-thirty ANCOVA\n\nFit an ANCOVA model with change scores as the dependent variable (m1)\nFit an ANCOVA model with the post values as the dependent variable (m2)\nPre-training values and group should be covariates in both models.\nUse the aov command to fit an ANOVA model (m3)\nEvaluate models using summary and anova\n\n\n\nQuestions\n\nConcerning inference to the population: Which method do you recommend for improving 1RM leg-press?\nIn what ways are the models different?\nWhat is happening with the aov command, how is it different to m2?\n\n\n\n\n\nPossible solutions\n# Create a data set with change\n\ndat &lt;- tenthirty %&gt;%\n  filter(exercise == \"legpress\", \n         time %in% c(\"pre\", \"post\")) %&gt;%\n  pivot_wider(names_from = time, \n              values_from = load) %&gt;%\n  mutate(change = post - pre, \n         pre = pre - mean(pre)) %&gt;% # Mean center pre-values\n  print()\n\n\n# Fit models \n\nm1 &lt;- lm(post ~ pre + group, data = dat)\n\nm2 &lt;- lm(change ~ pre + group, data = dat)\n\n\nsummary(m1)\nsummary(m2)\n\n\nm3 &lt;- aov(post ~ pre + group, data = dat)\n\nsummary(m3)\nanova(m1)"
+  },
+  {
+    "objectID": "ws15-study-design-1.html#understanding-the-ancova-model",
+    "href": "ws15-study-design-1.html#understanding-the-ancova-model",
+    "title": "Study designs and statistical tests",
+    "section": "Understanding the ANCOVA model",
+    "text": "Understanding the ANCOVA model\n\nThe ANCOVA estimates the difference between e.g. post scores given a (estimated) association between pre- and post-scores.\nThis can be visualized in a simple plot where the difference in the paralell lines are the treatment effect\n\n\n\nCode\nm1 &lt;- tenthirty %&gt;%\n  filter(exercise == \"legpress\", \n         time %in% c(\"pre\", \"post\")) %&gt;%\n  pivot_wider(names_from = \"time\", values_from = \"load\") %&gt;%\n  mutate(change = post - pre) %&gt;%\n  lm(post ~ pre + group, data = .) \n\n\ntenthirty %&gt;%\n  filter(exercise == \"legpress\", \n         time %in% c(\"pre\", \"post\")) %&gt;%\n    pivot_wider(names_from = \"time\", values_from = \"load\") %&gt;%\n  ggplot(aes(pre, post, color = group)) + geom_point() + \n  scale_color_manual(values = c(\"red\", \"blue\")) +\n  geom_abline(intercept = coef(m1)[1], slope = coef(m1)[2], color = \"red\")  + \n  geom_abline(intercept = coef(m1)[1] + coef(m1)[3], slope = coef(m1)[2], color = \"blue\") + \n  labs(title = \"Estimates from an ANCOVA model\", \n       subtitle = \"post ~ pre + group\", \n       color = \"Group\") + theme_classic()\n\n\n\n\n\n\n\n\n\n\nBy correcting for baseline values we can expect different estimates for each group, notice also that the standard errors are changing\n\n\n\nCode\nlibrary(emmeans)\n\nm0 &lt;- tenthirty %&gt;%\n  filter(exercise == \"legpress\", \n         time %in% c(\"pre\", \"post\")) %&gt;%\n  pivot_wider(names_from = \"time\", values_from = \"load\") %&gt;%\n  mutate(change = post - pre) %&gt;%\n  lm(post ~ group, data = .) \n\nm2 &lt;- tenthirty %&gt;%\n  filter(exercise == \"legpress\", \n         time %in% c(\"pre\", \"post\")) %&gt;%\n  pivot_wider(names_from = \"time\", values_from = \"load\") %&gt;%\n  mutate(change = post - pre) %&gt;%\n  lm(change ~ group, data = .) \n\n\n\n\n\nbind_rows(data.frame(emmeans(m0, specs = ~ group)) %&gt;%\n        mutate(Model = \"Post only\"), \n        data.frame(emmeans(m1, specs = ~ group)) %&gt;%\n        mutate(Model = \"ANCOVA\")) %&gt;%\n        ggplot(aes(group, emmean, fill = Model)) + \n        geom_errorbar(aes(ymin = emmean, ymax = emmean + SE), \n                      position = position_dodge(), width = 0.5) +\n        geom_bar(stat = \"identity\", position = position_dodge(), \n                 width = 0.5)  \n\n\n\n\n\nGroup estimates from two different models, error bars are standard errors (SE)\n\n\n\n\n\nCalculating the differences between groups we can also see differences, here we also incorporate the change score model.\n\n\n\nCode\nbind_rows(\ndata.frame(confint(contrast(emmeans(m0, specs = ~ group)), adjust = \"none\")) %&gt;%\n        mutate(Model = \"Post only\"),\ndata.frame(confint(contrast(emmeans(m1, specs = ~ group)), adjust = \"none\")) %&gt;%\n        mutate(Model = \"ANCOVA\"),\ndata.frame(confint(contrast(emmeans(m2, specs = ~ group)), adjust = \"none\")) %&gt;%\n        mutate(Model = \"Change score\")) %&gt;%\n        filter(contrast == \"RM10 effect\") %&gt;%\n        ggplot(aes(Model, estimate, fill = Model)) + \n        geom_errorbar(aes(ymin = lower.CL, ymax = upper.CL), width = 0.2) +\n        geom_point(shape = 21, size = 3) + \n        labs(y = \"Estimated mean difference between groups\") + \n        geom_hline(yintercept = 0, lty = 2)\n\n\n\n\n\nGroup estimates from two different models, error bars are 95% confidence intervals.\n\n\n\n\n\nThe change-score model will have lower power compared to the ANCOVA model when the correlation between pre- and post-scores decrease (Vickers 2001)"
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#why-data-science-and-statistics",
+    "href": "lec1-intr-to-data-sci.html#why-data-science-and-statistics",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "Why data science and statistics?",
+    "text": "Why data science and statistics?\n\n\n\n\n\n\n\nFrom (Spiegelhalter 2019, 24)\n\n\n\n\n\n\n\n\n\n\n\nFrom (Spiegelhalter 2019, 24)\n\n\n\n\n\n\n\n\n\n\n\nFrom (Spiegelhalter 2019, 24)\n\n\n\n\n\n\n\n\n\n\n\nFrom (Spiegelhalter 2019, 24)\n\n\n\n\n\n\n\n\n\n\n\nFrom (Spiegelhalter 2019, 24)\n\n\n\n\n\n\n\n\n\n\n\nFrom (Spiegelhalter 2019, 24)\n\n\n\n\n\n\n\n\nWe will start by talking about the research process. One way to think about this process is to imagine it as a cycle.\nA definition of a problem comes from first finding something else.\nAfter defining the problem we could move on to plan how to resolve the problem (…).\nThe next step includes collecting, managing and cleaning data (…)\nThe analysis includes steps like summarising and visualizing data, creating models and examine hypotheses…\nIn the “conclusion” step we interpret and communicate what we have found, and the cycle moves on.."
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#why-data-science-and-statistics-1",
+    "href": "lec1-intr-to-data-sci.html#why-data-science-and-statistics-1",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "Why data science and statistics?",
+    "text": "Why data science and statistics?\nData literacy: “the ability to understand the principles behind learning from data, carry out basic data analyses, and critique the quality of claims made on the basis of data” (Spiegelhalter 2019)\n\n\nAll steps in the research cycle helps you develop data literacy.\nHow can we LEARN from data, how can we do analyses, and how may analyses fool us (…)"
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#transferable-skills",
+    "href": "lec1-intr-to-data-sci.html#transferable-skills",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "Transferable skills",
+    "text": "Transferable skills\n\nNew York Post\n\nData literacy is a transferable skill, we can apply what we learn here in many different contexts."
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#replication",
+    "href": "lec1-intr-to-data-sci.html#replication",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "Replication",
+    "text": "Replication\n\nA lot of the scientific process is about confirming claims and refining what we think we know\nReplication is a key component in scientific research → can a phenomena be replicated in an independent setting?"
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#replication-and-reproducibility",
+    "href": "lec1-intr-to-data-sci.html#replication-and-reproducibility",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "Replication and Reproducibility",
+    "text": "Replication and Reproducibility\n\nFrom (Peng 2011)."
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#replication-and-reproducibility-1",
+    "href": "lec1-intr-to-data-sci.html#replication-and-reproducibility-1",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "Replication and Reproducibility",
+    "text": "Replication and Reproducibility\n\nReplication: Confirming scientific claims with independent data.\n\nEssential for verifying research findings.\nChallenges with replication due to study size, cost, and urgency.\n\nReproducibility: Minimum standard in scientific research.\n\nIndependent researchers can replicate the results using the same data."
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#reproducibility",
+    "href": "lec1-intr-to-data-sci.html#reproducibility",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "Reproducibility",
+    "text": "Reproducibility\n\n\n\n\n\nUnfortunately, reproducibility is one of those things that are not a top priority in the scientific community…"
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#reproducibility-1",
+    "href": "lec1-intr-to-data-sci.html#reproducibility-1",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "Reproducibility",
+    "text": "Reproducibility\n\nAvailable data\nComputer code\nDocumentation\nData and code sharing methods\n\n(Peng 2011)"
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#how-to-enable-reproducibility",
+    "href": "lec1-intr-to-data-sci.html#how-to-enable-reproducibility",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "How to enable reproducibility",
+    "text": "How to enable reproducibility"
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#what-is-a-computer-program",
+    "href": "lec1-intr-to-data-sci.html#what-is-a-computer-program",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "What is a computer program?",
+    "text": "What is a computer program?\n\n\n\n\n\n(By Wikimedia Foundation, CC BY-SA 3.0, Link)\n\n\n\n“A computer program is a sequence or set of instructions in a programming language for a computer to execute. It is one component of software, which also includes documentation and other intangible components.”"
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#a-sequence-of-instructions",
+    "href": "lec1-intr-to-data-sci.html#a-sequence-of-instructions",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "A sequence of instructions",
+    "text": "A sequence of instructions\n\n\n\n\n\n\n\n\nCoko, a programmable crocodile"
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#data-analysis-as-a-computer-program",
+    "href": "lec1-intr-to-data-sci.html#data-analysis-as-a-computer-program",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "Data analysis as a computer program",
+    "text": "Data analysis as a computer program\n\n(Wickham and Grolemund 2017)"
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#tools-in-data-science",
+    "href": "lec1-intr-to-data-sci.html#tools-in-data-science",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "Tools in Data Science",
+    "text": "Tools in Data Science\n\n\nMicrosoft Excel: Widely used, versatile tool.\nSPSS, Stata, Jamovi: Specialized software for statistical analysis.\nR: Preferred for reproducible data analysis:\n\nFree, open-source, and script-based.\nSteep learning curve."
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#research-software",
+    "href": "lec1-intr-to-data-sci.html#research-software",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "Research software",
+    "text": "Research software\n\n\n\n\nhttps://xkcd.com/2347/"
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#why-r",
+    "href": "lec1-intr-to-data-sci.html#why-r",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "Why R?",
+    "text": "Why R?\n\n\n\nR is a very powerful language (software ecosystem), we want to use it because it makes doing reproducible science easier."
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#why-r-1",
+    "href": "lec1-intr-to-data-sci.html#why-r-1",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "Why R?",
+    "text": "Why R?\n\n\n\nThere are other languages that offer similar capabilities, but R is developed with Data analysis in mind."
+  },
+  {
+    "objectID": "lec1-intr-to-data-sci.html#how-to-learn",
+    "href": "lec1-intr-to-data-sci.html#how-to-learn",
+    "title": "Lecture 1: Introduction to data science",
+    "section": "How to learn?",
+    "text": "How to learn?\n\n\nPractice by imitation\nUnderstand that there are multiple solutions to problems\nUse online resources like Stack Overflow and Google\nStay motivated by using what you learn on problems that interest you\nHave patience: “the capacity to accept or tolerate delay, problems, or suffering without becoming annoyed or anxious.”"
   },
   {
     "objectID": "ws14-sampling-power-effects.html",

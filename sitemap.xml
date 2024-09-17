@@ -21,12 +21,16 @@
     <lastmod>2024-08-05T07:23:27.126Z</lastmod>
   </url>
   <url>
-    <loc>https://dhammarstrom.github.io/quant-methods-workshops/lec1-intr-to-data-sci.html</loc>
-    <lastmod>2024-08-14T07:35:04.818Z</lastmod>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/lec6-tidyr.html</loc>
+    <lastmod>2024-09-16T08:23:13.371Z</lastmod>
   </url>
   <url>
-    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws15-study-design-1.html</loc>
-    <lastmod>2024-08-05T07:23:27.122Z</lastmod>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws6-summarising-data.html</loc>
+    <lastmod>2024-09-12T07:10:06.148Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/lec4-data-wrangling.html</loc>
+    <lastmod>2024-09-09T08:30:10.198Z</lastmod>
   </url>
   <url>
     <loc>https://dhammarstrom.github.io/quant-methods-workshops/notes1-linear-models.html</loc>
@@ -53,48 +57,44 @@
     <lastmod>2024-08-05T07:23:27.120Z</lastmod>
   </url>
   <url>
-    <loc>https://dhammarstrom.github.io/quant-methods-workshops/assignment-4.html</loc>
-    <lastmod>2024-09-10T06:27:26.797Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhammarstrom.github.io/quant-methods-workshops/about.html</loc>
-    <lastmod>2024-08-05T07:23:27.054Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws20-reproducible-science.html</loc>
-    <lastmod>2024-08-18T17:07:30.505Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws18-pre-post-designs.html</loc>
-    <lastmod>2024-08-18T17:07:52.480Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws16-causality.html</loc>
-    <lastmod>2024-08-18T16:56:28.288Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws-case-studies.html</loc>
-    <lastmod>2024-08-18T17:06:40.267Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws17-simulations.html</loc>
-    <lastmod>2024-08-18T16:57:19.768Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws19-mixed-models.html</loc>
-    <lastmod>2024-08-18T17:08:07.745Z</lastmod>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/assignment-2.html</loc>
+    <lastmod>2024-09-17T12:55:36.709Z</lastmod>
   </url>
   <url>
     <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws3b-quarto.html</loc>
     <lastmod>2024-08-18T16:16:54.176Z</lastmod>
   </url>
   <url>
-    <loc>https://dhammarstrom.github.io/quant-methods-workshops/assignment-2.html</loc>
-    <lastmod>2024-09-10T06:23:54.692Z</lastmod>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws19-mixed-models.html</loc>
+    <lastmod>2024-08-18T17:08:07.745Z</lastmod>
   </url>
   <url>
-    <loc>https://dhammarstrom.github.io/quant-methods-workshops/lec6-tidyr.html</loc>
-    <lastmod>2024-09-11T11:22:29.452Z</lastmod>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws17-simulations.html</loc>
+    <lastmod>2024-08-18T16:57:19.768Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws-case-studies.html</loc>
+    <lastmod>2024-08-18T17:06:40.267Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws16-causality.html</loc>
+    <lastmod>2024-08-18T16:56:28.288Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws18-pre-post-designs.html</loc>
+    <lastmod>2024-08-18T17:07:52.480Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws20-reproducible-science.html</loc>
+    <lastmod>2024-08-18T17:07:30.505Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/about.html</loc>
+    <lastmod>2024-08-05T07:23:27.054Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/assignment-4.html</loc>
+    <lastmod>2024-09-10T06:27:26.797Z</lastmod>
   </url>
   <url>
     <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws1-data-science-intro.html</loc>
@@ -118,15 +118,19 @@
   </url>
   <url>
     <loc>https://dhammarstrom.github.io/quant-methods-workshops/feedback-assignments.html</loc>
-    <lastmod>2024-08-05T07:23:27.113Z</lastmod>
+    <lastmod>2024-09-17T12:52:08.255Z</lastmod>
   </url>
   <url>
-    <loc>https://dhammarstrom.github.io/quant-methods-workshops/lec4-data-wrangling.html</loc>
-    <lastmod>2024-09-09T08:30:10.198Z</lastmod>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/lec7-regression-intro.html</loc>
+    <lastmod>2024-09-16T12:43:20.223Z</lastmod>
   </url>
   <url>
-    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws6-summarising-data.html</loc>
-    <lastmod>2024-09-12T07:10:06.148Z</lastmod>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws15-study-design-1.html</loc>
+    <lastmod>2024-08-05T07:23:27.122Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dhammarstrom.github.io/quant-methods-workshops/lec1-intr-to-data-sci.html</loc>
+    <lastmod>2024-08-14T07:35:04.818Z</lastmod>
   </url>
   <url>
     <loc>https://dhammarstrom.github.io/quant-methods-workshops/ws14-sampling-power-effects.html</loc>
